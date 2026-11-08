@@ -1,0 +1,1441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a73e8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Atlas">
+<meta name="description" content="Axpert Atlas: read-only developer console for Axpert ERP">
+<link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Axpert Atlas</title>
+<meta name="robots" content="noindex, nofollow">
+<!-- Axpert Atlas build 202611080700. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<style>
+:root{
+  --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
+  --blue:#1a73e8;--blueb:#e8f0fe;--green:#188038;--greenb:#e6f4ea;--amber:#b06000;--amberb:#fef7e0;--red:#d93025;--redb:#fce8e6;
+  --purple:#9334e6;--purpleb:#f3e8fd;--teal:#007b83;--tealb:#e4f7fb;--grey:#5f6368;--greyb:#f1f3f4;
+  --e1:0 1px 2px rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);--e2:0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);
+  --e3:0 4px 8px 3px rgba(60,64,67,.15),0 1px 3px rgba(60,64,67,.3);
+  --r:16px;--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.56,.64,1);
+  --font:"Google Sans Text","Google Sans","Roboto","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --disp:"Google Sans Display","Google Sans","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+  --mono:"Roboto Mono","Cascadia Mono",ui-monospace,Consolas,monospace;
+  --nav:256px;
+}
+:root[data-theme="dark"]{
+  --bg:#131314;--surf:#1e1f20;--surf2:#282a2c;--surf3:#2d3035;--ink:#e3e3e3;--ink2:#c4c7c5;--ink3:#8e918f;--line:#333537;--line2:#4a4d50;
+  --blue:#8ab4f8;--blueb:#25334a;--green:#81c995;--greenb:#1f3326;--amber:#fdd663;--amberb:#3a321a;--red:#f28b82;--redb:#432523;
+  --purple:#c58af9;--purpleb:#36284a;--teal:#78d9ec;--tealb:#1b3a40;--grey:#9aa0a6;--greyb:#2a2c2e;
+  --e1:0 1px 2px rgba(0,0,0,.5);--e2:0 2px 6px rgba(0,0,0,.5);--e3:0 8px 22px rgba(0,0,0,.55);color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+svg.i{width:20px;height:20px;fill:currentColor;flex:none}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+::selection{background:var(--blueb)}
+::-webkit-scrollbar{width:12px;height:12px}::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px;border:3px solid var(--bg)}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:var(--nav) minmax(0,1fr);min-height:100vh}
+.nav{position:sticky;top:0;height:100vh;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:4px;background:var(--bg)}
+.brand{display:flex;align-items:center;gap:12px;padding:6px 10px 14px}
+.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;background:conic-gradient(from 210deg,#4285f4,#34a853,#fbbc04,#ea4335,#4285f4)}
+.logo span{width:30px;height:30px;border-radius:9px;background:#1a73e8;display:grid;place-items:center}
+.logo svg{width:18px;height:18px;fill:#fff}
+.brand b{display:block;font:500 18px/1.1 var(--disp);letter-spacing:-.2px}
+.brand small{color:var(--ink3);font-size:12px}
+.modsw{margin:0 4px 12px;border:1px solid var(--line2);border-radius:12px;background:var(--surf);padding:6px}
+.modsw .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding:2px 8px 4px;font-weight:500}
+.mod{display:flex;align-items:center;gap:10px;width:100%;padding:7px 8px;border-radius:8px;font-size:13.5px;color:var(--ink2);text-decoration:none;transition:background .2s}
+a.mod:hover{background:var(--surf2)}
+.mod.on{background:var(--blueb);color:var(--blue);font-weight:500}
+.mod i{width:8px;height:8px;border-radius:50%;background:var(--line2);flex:none}
+.mod.on i{background:var(--blue)}
+.mod small{margin-left:auto;font-size:11px;color:var(--ink3)}
+.ni{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;border:0;background:none;width:100%;height:44px;padding:0 16px;border-radius:999px;cursor:pointer;
+  font-weight:500;font-size:14px;color:var(--ink2);text-align:left;transition:background .2s var(--ease)}
+.ni:hover{background:var(--surf2)}
+.ni.on{background:var(--blueb);color:var(--blue)}
+.ni .b{margin-left:auto;font-size:12px;font-weight:500;color:var(--ink3);font-variant-numeric:tabular-nums}
+.ni .b.r{background:var(--red);color:#fff;border-radius:999px;padding:0 8px;line-height:20px}
+.navfoot{margin-top:auto;padding:14px 12px 4px;font-size:11.5px;color:var(--ink3);border-top:1px solid var(--line)}
+.navfoot b{color:var(--ink2);font-weight:500}
+.live{display:inline-flex;align-items:center;gap:6px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:live 2.4s infinite}
+@keyframes live{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--green) 55%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.appbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:10px 28px;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+.appbar.lift{border-color:var(--line);box-shadow:0 1px 6px rgba(60,64,67,.12)}
+.hamb{display:none!important}
+.search{flex:1;max-width:720px;display:flex;align-items:center;gap:12px;height:48px;padding:0 8px 0 16px;border-radius:999px;background:var(--surf3);border:0;cursor:text;color:var(--ink3);
+  transition:background .2s,box-shadow .2s;text-align:left;min-width:0}
+.search:hover{background:var(--surf);box-shadow:var(--e1)}
+.search span{flex:1;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+kbd{font:500 11px var(--mono);border:1px solid var(--line2);border-radius:6px;padding:2px 7px;color:var(--ink3);background:var(--surf)}
+.sp{flex:1}
+.ib{position:relative;overflow:hidden;width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:var(--ink2);display:grid;place-items:center;cursor:pointer;transition:background .2s;flex:none}
+.ib:hover{background:var(--surf2)}
+.ro{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--greenb);color:var(--green);font-size:12.5px;font-weight:500;white-space:nowrap}
+.ro svg{width:16px;height:16px}
+.view{padding:6px 28px 80px;max-width:1520px;width:100%;margin:0 auto}
+.view>*{animation:fadeup .35s var(--ease) both}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}}
+
+/* ---------- page head ---------- */
+.ph{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:14px 0 18px}
+.ph h1{font:400 30px/1.15 var(--disp);letter-spacing:-.4px;margin:0}
+.ph p{margin:4px 0 0;color:var(--ink2);max-width:780px}
+.crumbs{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--ink3);flex-wrap:wrap;margin-top:10px}
+.crumbs a,.lnk{color:var(--blue);cursor:pointer;text-decoration:none}.crumbs a:hover,.lnk:hover{text-decoration:underline}
+.crumbs svg{width:16px;height:16px;fill:var(--ink3)}
+
+/* ---------- cards / bento ---------- */
+.card{position:relative;background:var(--surf);border-radius:var(--r);box-shadow:var(--e1);min-width:0;transition:box-shadow .25s var(--ease),transform .3s var(--ease)}
+.card.hov:hover{box-shadow:var(--e3)}
+.spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--k,var(--blue)) 9%,transparent),transparent 60%)}
+.spot:hover::after{opacity:1}
+.ch{display:flex;align-items:center;gap:10px;padding:16px 20px 6px;flex-wrap:wrap}
+.ch h3{font:500 16px/1.3 var(--font);margin:0;display:flex;align-items:center;gap:8px}
+.ch .hint{font-size:12.5px;color:var(--ink3);width:100%;margin-top:-4px;order:3}
+.ch .act{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.cb{padding:8px 20px 18px}
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.bento>div{min-width:0}
+.bento>div>.card{height:100%}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+
+/* KPI scorecards */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:16px}
+.kpi{position:relative;overflow:hidden;background:var(--surf);border-radius:var(--r);box-shadow:var(--e1);padding:16px 18px 14px;border:0;text-align:left;cursor:pointer;
+  transition:transform .35s var(--spring),box-shadow .3s var(--ease)}
+.kpi:hover{transform:translateY(-3px);box-shadow:var(--e3)}
+.kpi::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(240px circle at var(--mx,50%) var(--my,-40%),color-mix(in srgb,var(--k,var(--blue)) 14%,transparent),transparent 60%)}
+.kpi:hover::before{opacity:1}
+.kpi .top{display:flex;align-items:center;gap:10px;color:var(--ink2);font-size:13px;font-weight:500}
+.ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;background:color-mix(in srgb,var(--k,var(--blue)) 14%,transparent);color:var(--k,var(--blue))}
+.ic svg{width:19px;height:19px;fill:currentColor}
+.kpi .v{font:400 34px/1.1 var(--disp);letter-spacing:-.5px;margin:12px 0 2px;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:12.5px;color:var(--ink3)}
+.kpi .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--k,var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.kpi:hover .bar{transform:scaleX(1)}
+
+/* chips, buttons, fields */
+.tool{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{position:relative;overflow:hidden;border:1px solid var(--line2);background:var(--surf);border-radius:8px;padding:5px 12px;font-weight:500;font-size:13px;color:var(--ink2);cursor:pointer;
+  display:inline-flex;gap:6px;align-items:center;transition:background .2s}
+.chip:hover{background:var(--surf2)}
+.chip.on{background:var(--blueb);border-color:transparent;color:var(--blue)}
+.chip.on::before{content:"";width:4px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px);margin:0 3px 0 2px}
+.chip .n{font-variant-numeric:tabular-nums;color:var(--ink3)}.chip.on .n{color:inherit}
+.field{display:flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:999px;padding:0 14px;background:var(--surf);height:40px;transition:border-color .2s,box-shadow .2s;min-width:0}
+.field:focus-within{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.field input,.field select{border:0;outline:0;background:transparent;color:var(--ink);font:14px var(--font);min-width:0}
+.field input{width:240px}
+.field select{max-width:260px;cursor:pointer}
+.field svg{width:18px;height:18px;fill:var(--ink3)}
+.btn{position:relative;overflow:hidden;border:1px solid var(--line2);background:var(--surf);color:var(--blue);border-radius:999px;padding:7px 16px;font-weight:500;font-size:13.5px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;transition:background .2s,box-shadow .2s;white-space:nowrap}
+.btn:hover{background:var(--blueb)}
+.btn svg{width:18px;height:18px;fill:currentColor}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:var(--surf)}
+.btn.pri:hover{box-shadow:var(--e1)}
+.cnt{margin-left:auto;font-size:12.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);background:currentColor;opacity:.18;animation:rip .6s linear;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+
+/* status pills */
+.st{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:500;white-space:nowrap;line-height:1.5}
+.st svg{width:14px;height:14px;fill:currentColor}
+.st-green{background:var(--greenb);color:var(--green)}.st-blue{background:var(--blueb);color:var(--blue)}.st-amber{background:var(--amberb);color:var(--amber)}
+.st-red{background:var(--redb);color:var(--red)}.st-grey{background:var(--greyb);color:var(--grey)}.st-purple{background:var(--purpleb);color:var(--purple)}.st-teal{background:var(--tealb);color:var(--teal)}
+.tg{display:inline-block;border-radius:6px;padding:0 6px;font:500 10.5px/18px var(--mono);letter-spacing:.03em;white-space:nowrap}
+.tg-hid{background:var(--greyb);color:var(--grey)}.tg-ro{background:var(--blueb);color:var(--blue)}.tg-req{background:var(--amberb);color:var(--amber)}
+.tg-fx{background:var(--purpleb);color:var(--purple)}.tg-uq{background:var(--tealb);color:var(--teal)}
+
+/* tables */
+.tw{overflow:auto;max-height:70vh;border-radius:0 0 var(--r) var(--r)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5px}
+th{position:sticky;top:0;z-index:2;background:var(--surf);color:var(--ink2);font-weight:500;font-size:12.5px;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;user-select:none}
+th.s{cursor:pointer}th.s:hover{color:var(--ink)}
+th .ar{display:inline-block;width:14px;opacity:.3;margin-left:2px}th.sorted .ar{opacity:1;color:var(--blue)}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr{transition:background .15s}
+tbody tr.go{cursor:pointer}
+tbody tr:hover{background:color-mix(in srgb,var(--blue) 6%,transparent)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td .sub{display:block;font:12px var(--mono);color:var(--ink3)}
+td b{font-weight:500}
+.dim{color:var(--ink3)}
+.ishid td{opacity:.6}
+.person{display:flex;align-items:center;gap:10px;min-width:190px}
+.person b{font-weight:500;display:block;line-height:1.25}.person small{color:var(--ink3);font:12px var(--mono)}
+.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:500;font-size:12px;flex:none}
+.avs{display:flex}.avs .av{width:26px;height:26px;font-size:10.5px;border:2px solid var(--surf);margin-left:-8px}.avs .av:first-child{margin-left:0}
+.avs .more{background:var(--surf2);color:var(--ink2)}
+.more-row{display:flex;justify-content:center;padding:12px}
+.empty{padding:44px 20px;text-align:center;color:var(--ink3)}
+.empty svg{width:48px;height:48px;fill:var(--line2);display:block;margin:0 auto 8px}
+
+/* charts */
+.donutwrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.donut{flex:none}
+.donut circle.seg{fill:none;cursor:pointer;transition:stroke-width .2s var(--ease);animation:sweep 1.1s var(--ease) both}
+.donut circle.seg:hover{stroke-width:24}
+@keyframes sweep{from{stroke-dasharray:0 1000}}
+.donut .c1{font:400 30px var(--disp);fill:var(--ink)}.donut .c2{font:12px var(--font);fill:var(--ink3)}
+.dl{display:flex;flex-direction:column;gap:2px;min-width:170px;flex:1}
+.dl .r{display:grid;grid-template-columns:12px 1fr auto auto;gap:10px;align-items:center;padding:6px 8px;border-radius:8px;transition:background .15s}
+.dl .r[data-go^="#"]{cursor:pointer}
+.dl .r:hover{background:var(--surf2)}
+.dl .r b{font-weight:500;font-variant-numeric:tabular-nums}.dl .r small{color:var(--ink3);min-width:38px;text-align:right}
+.sw{width:10px;height:10px;border-radius:3px;display:inline-block}
+.hb{display:grid;grid-template-columns:minmax(120px,220px) 1fr 52px;gap:10px;align-items:center;padding:5px 6px;border-radius:8px;transition:background .15s}
+.hb[data-go^="#"]{cursor:pointer}
+.hb:hover{background:var(--surf2)}
+.hb .l{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;min-width:0}
+.hb .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:500;font-size:13px}
+.track{height:10px;border-radius:99px;background:var(--surf2);overflow:hidden;display:flex}
+.track span{display:block;height:100%;transform-origin:left;animation:grow .9s var(--ease) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend b{font-weight:500}
+.stack100{height:14px;border-radius:99px;overflow:hidden;display:flex;background:var(--surf2)}
+.stack100 span{height:100%;transform-origin:left;animation:grow .9s var(--ease) both}
+.sec{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin:18px 0 8px}
+
+/* tabs */
+.tabs{position:relative;display:flex;gap:2px;border-bottom:1px solid var(--line);margin:8px 0 20px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{position:relative;overflow:hidden;border:0;background:none;padding:12px 18px 13px;font-weight:500;font-size:14px;color:var(--ink2);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;flex:none}
+.tab:hover{background:var(--surf2)}.tab.on{color:var(--blue)}
+.tab .n{font-size:12px;color:var(--ink3);background:var(--surf2);border-radius:999px;padding:0 7px}
+.tab.on .n{background:var(--blueb);color:var(--blue)}
+.ind{position:absolute;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--blue);transition:left .35s var(--ease),width .35s var(--ease)}
+
+/* hero */
+.hero{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;padding:22px 24px}
+.hero .big{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;flex:none;background:color-mix(in srgb,var(--k,var(--blue)) 14%,transparent);color:var(--k,var(--blue))}
+.hero .big svg{width:28px;height:28px;fill:currentColor}
+.hero h2{font:400 28px/1.15 var(--disp);margin:0;letter-spacing:-.3px;overflow-wrap:anywhere}
+.hero .meta{display:flex;gap:6px 18px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--ink2);align-items:center}
+.hero .meta code{font:500 12.5px var(--mono);background:var(--surf2);padding:1px 7px;border-radius:6px;overflow-wrap:anywhere}
+.hero .right{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* rule flow */
+.rule{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:var(--surf)}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:stretch;margin-top:10px}
+.step{border-radius:10px;background:var(--surf2);padding:10px 12px;position:relative;min-width:0}
+.step+.step::before{content:"";position:absolute;left:-10px;top:50%;width:10px;height:2px;background:var(--line2)}
+.step .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:500}
+.step .v{font-size:13.5px;margin-top:2px;overflow-wrap:anywhere}
+.step code,.rule code{font:12.5px var(--mono);overflow-wrap:anywhere}
+.rule .rm{font-size:12.5px;color:var(--ink3);margin-top:8px}
+.rule .hd{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rule .hd b{font-weight:500}
+
+/* settings */
+.sets{display:flex;gap:8px;flex-wrap:wrap}
+.setp{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:500;border:1px solid var(--line2);color:var(--ink3)}
+.setp.on{border-color:transparent;background:var(--greenb);color:var(--green)}
+.setp svg{width:14px;height:14px;fill:currentColor}
+
+/* DC anatomy */
+.dcr{display:grid;grid-template-columns:minmax(140px,1.2fr) minmax(110px,1fr) minmax(150px,2fr) 50px;gap:14px;align-items:center;padding:10px 8px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px;transition:background .15s}
+.dcr:last-of-type{border-bottom:0}
+.dcr:hover{background:var(--surf2)}
+.dcr b{font-weight:500;display:block}
+.dcr small{font:12px var(--mono);color:var(--ink3);overflow-wrap:anywhere}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(540px,100vw);background:var(--surf);z-index:61;box-shadow:var(--e3);transform:translateX(105%);transition:transform .35s var(--ease);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dh{display:flex;align-items:flex-start;gap:8px;padding:18px 16px 16px 22px;border-bottom:1px solid var(--line)}
+.dh h3{margin:2px 0;font:400 22px/1.2 var(--disp);overflow-wrap:anywhere}
+.dh small{font:12.5px var(--mono);color:var(--ink3)}
+.db{padding:16px 22px 30px;overflow:auto}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:8px 14px;font-size:13.5px}
+.kv dt{color:var(--ink3);font-size:12.5px}
+.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+pre.code{margin:6px 0 0;font:12.5px/1.55 var(--mono);background:var(--surf2);border-radius:10px;padding:10px 12px;white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* command palette */
+.pal{position:fixed;left:50%;top:10vh;width:min(680px,94vw);transform:translateX(-50%) scale(.97);opacity:0;pointer-events:none;z-index:71;background:var(--surf);border-radius:20px;box-shadow:var(--e3);
+  transition:opacity .2s,transform .25s var(--spring);overflow:hidden}
+.pal.on{opacity:1;pointer-events:auto;transform:translateX(-50%) scale(1)}
+.palscrim{z-index:70}
+.pal .in{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.pal .in svg{fill:var(--ink3)}
+.pal input{flex:1;border:0;outline:0;background:transparent;color:var(--ink);font:17px var(--font);min-width:0}
+.pal .res{max-height:56vh;overflow:auto;padding:6px}
+.pal .grp{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:10px 12px 4px}
+.pal .it{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:10px;cursor:pointer}
+.pal .it .ic{width:30px;height:30px;border-radius:8px}
+.pal .it .ic svg{width:17px;height:17px}
+.pal .it b{font-weight:500;display:block}
+.pal .it small{color:var(--ink3);font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pal .it.sel{background:var(--blueb)}
+.pal .ft{display:flex;gap:16px;padding:10px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink3);flex-wrap:wrap}
+mark{background:color-mix(in srgb,var(--amber) 28%,transparent);color:inherit;border-radius:3px}
+
+/* matrix */
+.mxwrap{position:relative;overflow:auto;max-height:76vh;border-radius:var(--r)}
+#mx{display:block}
+.tip{position:fixed;z-index:80;pointer-events:none;background:var(--ink);color:var(--surf);border-radius:8px;padding:8px 10px;font-size:12.5px;max-width:320px;box-shadow:var(--e2);opacity:0;transition:opacity .12s}
+.tip b{font-weight:500}
+.tip.on{opacity:1}
+
+/* access path */
+.path svg{display:block;width:100%}
+.path .edge{fill:none;stroke:var(--blue);stroke-opacity:.2;stroke-width:1.4;transition:stroke-opacity .2s,stroke-width .2s}
+.path.hot .edge{stroke-opacity:.05}.path.hot .edge.on{stroke-opacity:.85;stroke-width:2.2}
+.path .nd rect{fill:var(--surf2);stroke:var(--line2)}
+.path .nd text{font:12.5px var(--font);fill:var(--ink)}
+.path .nd.role rect{fill:var(--blueb);stroke:transparent}
+.path .nd.role text{fill:var(--blue);font-weight:500}
+.path .nd.role,.path .nd.scr{cursor:pointer}
+.path .nd.scr:hover rect,.path .nd.role:hover rect{stroke:var(--blue)}
+
+/* health */
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.hc{padding:18px 20px;cursor:pointer;overflow:hidden}
+.hc .row1{display:flex;align-items:center;gap:12px}
+.hc .v{font:400 38px/1 var(--disp);margin:14px 0 6px;font-variant-numeric:tabular-nums;color:var(--k)}
+.hc h3{margin:0;font:500 15px/1.3 var(--font)}
+.hc p{margin:6px 0 0;font-size:12.5px;color:var(--ink3)}
+.hc.sel{box-shadow:0 0 0 2px var(--k),var(--e2)}
+.sev{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;margin-left:auto;color:var(--k)}
+.note{display:flex;gap:10px;align-items:flex-start;padding:12px 16px;border-radius:12px;background:var(--amberb);color:var(--ink2);font-size:13px;margin-bottom:16px}
+.note svg{fill:var(--amber);flex:none;margin-top:1px}
+.note b{font-weight:500;color:var(--ink)}
+.note.blue{background:var(--blueb)}.note.blue svg{fill:var(--blue)}
+.note.red{background:var(--redb)}.note.red svg{fill:var(--red)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--surf);padding:10px 18px;border-radius:8px;font-size:13.5px;opacity:0;transition:.25s;z-index:90;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* ---------- web app additions (07/11/2026) ---------- */
+.navsec{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:12px 16px 4px}
+.mod .bdg{margin-left:auto;font-size:11px;font-weight:500;border-radius:999px;padding:0 7px;line-height:18px;background:var(--redb);color:var(--red)}
+.mod .bdg.z{background:var(--greenb);color:var(--green)}
+.loading{display:grid;place-items:center;min-height:50vh;color:var(--ink3);gap:14px}
+.spin{width:36px;height:36px;border-radius:50%;border:3px solid var(--surf2);border-top-color:var(--blue);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.mcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.mcard{padding:20px;cursor:pointer;overflow:hidden;transition:transform .35s var(--spring),box-shadow .3s var(--ease)}
+.mcard:hover{transform:translateY(-3px);box-shadow:var(--e3)}
+.mcard .top{display:flex;align-items:center;gap:12px}
+.mcard h3{margin:0;font:400 22px/1.2 var(--disp)}
+.mcard .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 12px}
+.mcard .nums b{display:block;font:400 22px/1.1 var(--disp);font-variant-numeric:tabular-nums}
+.mcard .nums span{font-size:12px;color:var(--ink3)}
+.mcard .iss{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.hero-home{padding:26px 28px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,var(--blueb),var(--surf) 70%)}
+.hero-home h1{margin:0;font:400 34px/1.15 var(--disp);letter-spacing:-.5px}
+.hero-home p{margin:6px 0 0;color:var(--ink2);max-width:640px}
+.code-wrap{position:relative}
+.code-wrap .btn{position:absolute;top:8px;right:8px}
+pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radius:12px;padding:14px 16px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:70vh;overflow:auto}
+.chg-old{color:var(--red);text-decoration:line-through;text-decoration-thickness:1px}
+.chg-new{color:var(--green)}
+.rl{display:flex;gap:4px;flex-wrap:wrap}
+.bnav{display:none}
+.modchips{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- laptop / tablet / phone ---------- */
+@media (max-width:1280px){.c3,.c4{grid-column:span 6}.c5,.c6,.c7,.c8{grid-column:span 12}}
+@media (max-width:1100px){
+  .shell{grid-template-columns:1fr}
+  .nav{position:fixed;left:0;top:0;bottom:0;width:290px;z-index:65;background:var(--surf);box-shadow:var(--e3);transform:translateX(-105%);transition:transform .3s var(--ease)}
+  .nav.on{transform:none}
+  .navscrim.on{opacity:1;pointer-events:auto}
+  .hamb{display:grid!important}
+  .appbar{padding:8px 16px}.view{padding:6px 20px 60px}
+}
+@media (max-width:700px){
+  body{font-size:14px}
+  .ro,.search kbd{display:none}
+  .view{padding:4px 14px calc(84px + env(safe-area-inset-bottom,0px))}
+  .c3,.c4,.c5,.c6,.c7,.c8{grid-column:span 12}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .kpi{padding:12px 14px}.kpi .v{font-size:26px;margin-top:8px}.kpi .top{font-size:12px}.kpi .ic{width:28px;height:28px}
+  .flow{grid-template-columns:1fr}.step+.step::before{display:none}
+  .dcr{grid-template-columns:1fr 50px}.dcr>small,.dcr>div:nth-child(3){grid-column:1/-1}
+  .kv{grid-template-columns:1fr;gap:2px 0}.kv dd{margin-bottom:8px}
+  .tool{gap:8px}.field{flex:1 1 100%}.field input{width:100%}
+  .hb{grid-template-columns:minmax(90px,120px) 1fr 44px}
+  .ph h1,.hero-home h1{font-size:24px}.ph{margin:10px 0 14px}
+  .hero{padding:16px}.hero h2{font-size:22px}.hero .right{margin-left:0}
+  .ch{padding:14px 14px 4px}.cb{padding:6px 14px 14px}
+  .mcards{grid-template-columns:1fr}
+  .donutwrap{justify-content:center}
+  .pal{top:0;width:100vw;border-radius:0 0 20px 20px}
+  .drawer{width:100vw}
+  /* tables become cards */
+  .tw{max-height:none}
+  .tw table,.tw tbody,.tw tr,.tw td{display:block;width:100%}
+  .tw thead{display:none}
+  .tw tr{padding:10px 14px;border-bottom:1px solid var(--line)}
+  .tw tbody tr:last-child{border-bottom:0}
+  .tw td{border:0;padding:3px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:right;min-height:26px}
+  .tw td::before{content:attr(data-l);color:var(--ink3);font-size:12px;text-align:left;flex:none}
+  .tw td:first-child{display:block;text-align:left;padding-bottom:6px}
+  .tw td:first-child::before{display:none}
+  .tw td.num{text-align:right}
+  .tw .person{min-width:0}
+  .tw td[colspan]{display:block}.tw td[colspan]::before{display:none}
+  /* bottom navigation */
+  .bnav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--surf);box-shadow:0 -1px 6px rgba(60,64,67,.18);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+  .bnav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:500;color:var(--ink2);padding:4px 0;cursor:pointer;position:relative}
+  .bnav button span.pillbg{width:56px;height:30px;border-radius:999px;display:grid;place-items:center;transition:background .2s}
+  .bnav button.on{color:var(--blue)}.bnav button.on span.pillbg{background:var(--blueb)}
+  .bnav button i{position:absolute;top:0;right:calc(50% - 26px);background:var(--red);color:#fff;font-style:normal;font-size:10px;border-radius:999px;padding:0 5px;line-height:15px}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+}
+@media (hover:none){.kpi:hover,.mcard:hover{transform:none}.tw tbody tr:hover{background:none}}
+
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="nav" id="nav"></aside>
+  <div class="main">
+    <header class="appbar" id="appbar">
+      <button class="ib hamb" id="hamb" title="Menu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></button>
+      <button class="search" id="openPal"><svg class="i" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg><span id="searchHint">Search</span><kbd>Ctrl K</kbd></button>
+      <span class="sp"></span>
+      <span class="ro" title="This app never writes to Axpert"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z"/></svg>Read-only</span>
+      <button class="ib" id="theme" title="Light / dark" aria-label="Light or dark"></button>
+    </header>
+    <main class="view" id="view"><div class="loading"><div class="spin"></div>Loading Axpert Atlas…</div></main>
+  </div>
+</div>
+<nav class="bnav" id="bnav"></nav>
+<div class="scrim navscrim" id="navscrim"></div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"></aside>
+<div class="scrim palscrim" id="palscrim"></div>
+<div class="pal" id="pal" role="dialog" aria-label="Search">
+  <div class="in"><svg class="i" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <input id="palq" placeholder="Screen, field, role, employee ID or name" autocomplete="off" spellcheck="false"><button class="ib" id="palx" aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div>
+  <div class="res" id="palres"></div>
+  <div class="ft"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span><span><kbd>/</kbd> or <kbd>Ctrl K</kbd> anywhere</span></div>
+</div>
+<div class="tip" id="tip"></div>
+<div class="toast" id="toast"></div>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "tcVD8bWpqxwpXT5mJL7mPH7+dsH4LY73FEw+LJrmJANS8fbq"};</script>
+<script>
+"use strict";
+/* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
+const BUILD="202611080700";
+const ATLAS={mods:null,meta:null,data:{},people:null,
+  modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
+  moduleLoaded(d){this.data[d.meta.slug]=d;},
+  peopleLoaded(p){this.people=p;},
+  projectsLoaded(p){this.proj=p;}};
+window.ATLAS=ATLAS;
+const loading={};
+/* Encrypted copy (GitHub Pages): window.ATLAS_LOCK is set and data/<name>.bin = 12-byte IV + AES-256-GCM(deflate(js)).
+   The key comes from the password (PBKDF2-SHA256) and never leaves this browser. */
+let LOCKKEY=null;
+function load(name){if(loading[name])return loading[name];
+  if(window.ATLAS_LOCK)return loading[name]=fetch("data/"+name+".bin?v="+BUILD).then(r=>{if(!r.ok)throw new Error("data/"+name+".bin");return r.arrayBuffer();})
+    .then(b=>decryptText(b)).then(t=>{new Function(t)();}).catch(e=>{delete loading[name];throw e;});
+  return loading[name]=new Promise((res,rej)=>{const s=document.createElement("script");s.src="data/"+name+".js?v="+BUILD;s.onload=res;s.onerror=()=>{delete loading[name];rej(new Error("data/"+name+".js"));};document.head.appendChild(s);});}
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function deriveKey(pw){const L=window.ATLAS_LOCK;
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt:b64(L.salt),iterations:L.iter,hash:"SHA-256"},base,{name:"AES-GCM",length:256},true,["decrypt"]);}
+async function decryptRaw(buf,key){const u=new Uint8Array(buf);return crypto.subtle.decrypt({name:"AES-GCM",iv:u.slice(0,12)},key||LOCKKEY,u.slice(12));}
+async function decryptText(buf){const plain=await decryptRaw(buf);
+  const ds=new Blob([plain]).stream().pipeThrough(new DecompressionStream("deflate"));return await new Response(ds).text();}
+function lockScreen(msg){
+  $("#view").innerHTML='<section class="card hero-home" style="max-width:460px;margin:8vh auto 0;flex-direction:column;align-items:stretch;text-align:center">'+
+    '<span class="logo" style="width:64px;height:64px;border-radius:18px;margin:0 auto"><span style="width:48px;height:48px;border-radius:14px"><svg viewBox="0 0 24 24" style="width:28px;height:28px"><path d="'+P.lock+'"/><\/svg><\/span><\/span>'+
+    '<h1 style="font-size:26px">Axpert Atlas<\/h1><p style="margin:0 auto">This copy is encrypted. Enter the password to open it. Nothing is readable without it.<\/p>'+
+    '<form id="lockf" style="display:flex;flex-direction:column;gap:12px;margin-top:8px"><label class="field" style="height:48px">'+ico("lock")+'<input id="lockpw" type="password" autocomplete="current-password" placeholder="Password" style="width:100%"><\/label>'+
+    '<label style="display:flex;gap:8px;align-items:center;justify-content:center;font-size:13px;color:var(--ink2)"><input type="checkbox" id="lockrem"> Remember on this device for 30 days<\/label>'+
+    '<button class="btn pri" style="justify-content:center;height:44px">Unlock<\/button><div id="lockmsg" style="color:var(--red);font-size:13px;min-height:18px">'+esc(msg||"")+'<\/div><\/form><\/section>';
+  $("#lockf").onsubmit=async e=>{e.preventDefault();const pw=$("#lockpw").value;if(!pw)return;$("#lockmsg").textContent="Checking…";
+    try{const k=await deriveKey(pw);await decryptRaw(b64(window.ATLAS_LOCK.check),k);LOCKKEY=k;
+      if($("#lockrem").checked){try{const raw=await crypto.subtle.exportKey("raw",k);localStorage.setItem("atlas-key",JSON.stringify({k:btoa(String.fromCharCode(...new Uint8Array(raw))),s:window.ATLAS_LOCK.salt,t:Date.now()+30*864e5}));}catch(x){}}
+      start();}
+    catch(x){$("#lockmsg").textContent="Wrong password.";}};
+  setTimeout(()=>{const i=$("#lockpw");i&&i.focus();},50);
+}
+async function unlockSaved(){try{const j=JSON.parse(localStorage.getItem("atlas-key")||"null");if(!j||j.s!==window.ATLAS_LOCK.salt||j.t<Date.now())return false;
+  const k=await crypto.subtle.importKey("raw",b64(j.k),{name:"AES-GCM"},false,["decrypt"]);await decryptRaw(b64(window.ATLAS_LOCK.check),k);LOCKKEY=k;return true;}catch(e){return false;}}
+
+const $=s=>document.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=n=>Number(n).toLocaleString("en-IN");
+const pct=(a,b)=>b?Math.round(a*100/b):0;
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const enc=encodeURIComponent;
+
+/* ---------- icons (Material paths) ---------- */
+const P={
+ dash:"M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z",
+ home:"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z",
+ tree:"M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z",
+ form:"M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z",
+ report:"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z",
+ page:"M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z",
+ grid:"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z",
+ people:"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z",
+ key:"M12.65 10A5.99 5.99 0 0 0 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 0 0 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z",
+ health:"M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27L15.73 3zM12 17.3c-.72 0-1.3-.58-1.3-1.3 0-.72.58-1.3 1.3-1.3.72 0 1.3.58 1.3 1.3 0 .72-.58 1.3-1.3 1.3zm1-4.3h-2V7h2v6z",
+ cancel:"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.902 7.902 0 0 1 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.902 7.902 0 0 1 20 12c0 4.42-3.58 8-8 8z",
+ del:"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z",
+ leave:"M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z",
+ ok:"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+ fx:"M18 4H6v2l6.5 6L6 18v2h12v-3h-7l5-5-5-5h7z",
+ field:"M3 14h4v-4H3v4zm0 5h4v-4H3v4zM3 9h4V5H3v4zm5 5h13v-4H8v4zm0 5h13v-4H8v4zM8 5v4h13V5H8z",
+ close:"M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z",
+ chev:"M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z",
+ dl:"M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z",
+ copy:"M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z",
+ info:"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z",
+ moon:"M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z",
+ sun:"M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0zM5.99 4.58a1 1 0 0 0-1.41 1.41l1.06 1.06a1 1 0 0 0 1.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 0 0-1.41 1.41l1.06 1.06a1 1 0 0 0 1.41-1.41l-1.06-1.06zm1.06-10.96a1 1 0 0 0-1.41-1.41l-1.06 1.06a1 1 0 0 0 1.41 1.41l1.06-1.06zM7.05 18.36a1 1 0 0 0-1.41-1.41l-1.06 1.06a1 1 0 0 0 1.41 1.41l1.06-1.06z",
+ hidden:"M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.804 11.804 0 0 0 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27z",
+ warn:"M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",
+ hist:"M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z",
+ lock:"M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z",
+ code:"M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z",
+ tune:"M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z",
+ apps:"M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z",
+};
+const ico=(k,c="i")=>'<svg class="'+c+'" viewBox="0 0 24 24"><path d="'+P[k]+'"/><\/svg>';
+const KIND={t:{n:"Form",ic:"form",k:"var(--blue)",st:"st-blue"},i:{n:"Report",ic:"report",k:"var(--green)",st:"st-green"},p:{n:"Page",ic:"page",k:"var(--grey)",st:"st-grey"}};
+const MODICON={payroll:"people",purchase:"form",finance:"report",inventory:"apps",hr:"people",tools:"tune",qaqc:"ok",hidden_pages:"hidden"};
+
+/* ---------- people / HR helpers (verified 07/11/2026: one EMPMAST row per EMPID; these statuses all carry a DOR) ---------- */
+const LEFT=["RESIGNATION","TERMINATION","ABSCONDING","CANCEL"];
+const HRC={act:["Active","st-green","var(--green)"],leave:["On leave","st-amber","var(--amber)"],left:["Left","st-red","var(--red)"],nohr:["No HR record","st-grey","var(--grey)"],other:["Other","st-grey","var(--grey)"]};
+const hrOf=h=>{if(!h||h==="-")return"nohr";if(h==="ACTIVE")return"act";if(h==="Leave")return"leave";if(LEFT.includes(h))return"left";return"other";};
+const hrLabel=h=>{const c=hrOf(h);return c==="left"?(h==="CANCEL"?"Left (cancelled)":h.charAt(0)+h.slice(1).toLowerCase()):HRC[c][0];};
+const hrPill=h=>'<span class="st '+HRC[hrOf(h)][1]+'">'+esc(hrLabel(h))+'<\/span>';
+const avColors=["#1a73e8","#188038","#d93025","#e37400","#9334e6","#007b83","#c5221f","#1967d2","#137333","#b06000","#a142f4","#129eaf"];
+const avc=t=>{let h=0;for(const c of String(t))h=(h*31+c.charCodeAt(0))>>>0;return avColors[h%avColors.length];};
+const ini=n=>String(n||"?").replace(/[^A-Za-z ]/g," ").trim().split(/\s+/).slice(0,2).map(w=>w[0]).join("").toUpperCase()||"?";
+
+/* ---------- module context (globals swapped when the module changes) ---------- */
+let CUR="",M,S,R,U,SID,userRoles,roleScreens,forms,reps,nFields,workU,uScr,mismatch,H,HI,highCount,NAV,FIND,PROPR,CHG;
+const CTX={};
+const hasLive=u=>(userRoles[u]||[]).some(x=>x.live);
+const hrCat=u=>hrOf((U[u]||{}).hr);
+const working=u=>!!(U[u]&&U[u].ax&&hasLive(u));
+const isLeaver=u=>working(u)&&hrCat(u)==="left";
+const liveUsers=r=>(R[r]?R[r].live:[]).filter(u=>U[u]&&U[u].ax);
+const liveR=u=>(userRoles[u]||[]).filter(x=>x.live).map(x=>x.r);
+const hasBtn=v=>v&&!["nobtn","none"].includes(v.key);
+function verdict(rows,hasK,ctlK,btn){
+  if(!rows||!rows.length)return{v:"Not mapped",st:"st-grey",key:"none"};
+  if(!rows.some(x=>x[hasK]==="Yes"))return{v:"No "+btn+" button",st:"st-grey",key:"nobtn"};
+  if(rows.some(x=>x[hasK]==="Yes"&&x[ctlK]==="No"))return{v:"Open · no control",st:"st-red",key:"open"};
+  if(rows.some(x=>x[ctlK]==="TBC"))return{v:"To be tested",st:"st-amber",key:"tbc"};
+  return{v:"Controlled",st:"st-green",key:"ok"};
+}
+const KEYS=["M","S","R","U","SID","userRoles","roleScreens","forms","reps","nFields","workU","uScr","mismatch","H","HI","highCount","NAV","FIND","PROPR","CHG"];
+function useModule(slug){
+  if(CTX[slug]){const c=CTX[slug];[M,S,R,U,SID,userRoles,roleScreens,forms,reps,nFields,workU,uScr,mismatch,H,HI,highCount,NAV,FIND,PROPR,CHG]=KEYS.map(k=>c[k]);CUR=slug;return;}
+  const D=ATLAS.data[slug];CUR=slug;
+  M=D.meta;S=D.screens;R=D.roles;U=D.users;SID={};S.forEach(s=>SID[s.id]=s);
+  userRoles={};roleScreens={};
+  for(const r in R){R[r].live.forEach(u=>(userRoles[u]=userRoles[u]||[]).push({r,live:true}));R[r].ended.forEach(u=>(userRoles[u]=userRoles[u]||[]).push({r,live:false}));}
+  S.forEach(s=>Object.keys(s.roles).forEach(r=>(roleScreens[r]=roleScreens[r]||[]).push(s)));
+  S.forEach(s=>{
+    s.cs=s.k==="t"?verdict(s.cancel,"has_cancel","cancel_control","Cancel"):null;
+    s.rs=s.k==="t"?verdict(s.remove,"has_remove_button","remove_control","Remove"):null;
+    const set=new Set();Object.keys(s.roles).forEach(r=>liveUsers(r).forEach(u=>set.add(u)));s.users=[...set];
+    s.folder=(s.menus[0].path.split(" > ").slice(1).join(" › "))||s.menus[0].path;
+    s.hidden=s.menus.every(m=>!m.vis);s.find=[];
+  });
+  const allU=Object.keys(U);workU=allU.filter(working);
+  uScr={};allU.forEach(u=>{const m=new Map();(userRoles[u]||[]).filter(x=>x.live).forEach(x=>(roleScreens[x.r]||[]).forEach(s=>m.set(s.id,s)));uScr[u]=[...m.values()];});
+  forms=S.filter(s=>s.k==="t");reps=S.filter(s=>s.k!=="t");nFields=forms.reduce((a,s)=>a+s.f.length,0);
+  mismatch=[];S.filter(s=>s.k!=="p").forEach(s=>Object.entries(s.roles).forEach(([r,a])=>{if(!!a.menu!==!!a.obj)mismatch.push({r,s,t:a.menu?"Menu only":"Screen only"});}));
+  FIND=(D.findings||[]).filter(f=>SID[f.s]).map(f=>Object.assign(f,{sc:SID[f.s]}));FIND.forEach(f=>f.sc.find.push(f));
+  PROPR=(D.props_rules||[]).filter(p=>SID[p.s]).map(p=>Object.assign(p,{sc:SID[p.s]}));
+  CHG=D.changes;
+  H=[
+   {id:"leavers",sev:"High",k:"var(--red)",ic:"leave",kind:"users",ttl:"Left the company, login still on",
+    why:"HR status Resignation / Termination / Absconding / Cancel (all have a relieving date), but the Axpert login is active and in a live role with access here.",list:workU.filter(isLeaver)},
+   {id:"remove-open",sev:"High",k:"var(--red)",ic:"del",kind:"screens",ttl:"Remove button with no control",
+    why:"Your Remove map: the form has a Remove button and no rule hides or disables it.",list:forms.filter(s=>s.rs.key==="open")},
+   {id:"cancel-open",sev:"High",k:"var(--red)",ic:"cancel",kind:"screens",ttl:"Cancel button with no control",
+    why:"Your Cancel map: Cancel button exists and nothing controls it.",list:forms.filter(s=>s.cs.key==="open")},
+   {id:"hardcode",sev:"Medium",k:"var(--amber)",ic:"code",kind:"findings",ttl:"Hard-coded user IDs, keys or server addresses",
+    why:"Found inside field expressions, field SQL, Cancel / Remove rules and report SQL. Secret values are masked here.",list:FIND},
+   {id:"cancel-tbc",sev:"Medium",k:"var(--amber)",ic:"cancel",kind:"screens",ttl:"Cancel control not yet tested",
+    why:"A read-only rule exists, but nobody has checked that it also blocks Cancel (TBC in your map).",list:forms.filter(s=>s.cs.key==="tbc")},
+   {id:"mismatch",sev:"Medium",k:"var(--amber)",ic:"key",kind:"pairs",ttl:"Menu and screen access do not match",
+    why:"Role has the menu entry but not the screen, or the other way round. Usually a half-done access setup.",list:mismatch},
+   {id:"props",sev:"Low",k:"var(--blue)",ic:"lock",kind:"props",ttl:"Role-level field / button rules",
+    why:"Extra rules stored on a role's access row (AXUSERACCESS.PROPS): a field, DC or button disabled or hidden for that role only.",list:PROPR},
+   {id:"emptyroles",sev:"Low",k:"var(--grey)",ic:"key",kind:"roles",ttl:"Roles with access but no working user",
+    why:"Role opens screens here, but no active login sits in it today. Candidates for clean-up.",list:Object.keys(R).filter(r=>!liveUsers(r).length).sort()},
+   {id:"hidden",sev:"Low",k:"var(--grey)",ic:"hidden",kind:"screens",ttl:"Screens hidden from the menu",
+    why:"Menu entry VISIBLE = F. People with access can still reach them by link.",list:S.filter(s=>s.hidden)},
+   {id:"noaccess",sev:"Low",k:"var(--grey)",ic:"warn",kind:"screens",ttl:"Screens no role can open",
+    why:"In the menu, but no role has an access row for it.",list:S.filter(s=>!Object.keys(s.roles).length)},
+  ];
+  HI={};H.forEach(h=>HI[h.id]=h);highCount=H.filter(h=>h.sev==="High").reduce((a,h)=>a+h.list.length,0);
+  NAV=[["overview","Overview","dash",""],["screens","Screens","tree",S.length],["matrix","Access matrix","grid",""],["people","People","people",workU.length],["roles","Roles","key",Object.keys(R).length],["health","Health","health",highCount,1],["changes","Changes","hist",CHG?CHG.length:""]];
+  const c={};[M,S,R,U,SID,userRoles,roleScreens,forms,reps,nFields,workU,uScr,mismatch,H,HI,highCount,NAV,FIND,PROPR,CHG].forEach((v,i)=>c[KEYS[i]]=v);CTX[slug]=c;
+}
+
+/* ---------- render helpers ---------- */
+const av=u=>{const x=(U&&U[u])||(ATLAS.people&&ATLAS.people[u])||{};return '<span class="av" style="background:'+avc(u)+'" title="'+esc(x.nm||u)+'">'+ini(x.nm||u)+'<\/span>';};
+const who=u=>'<div class="person">'+av(u)+'<div><b>'+esc(U[u].nm||u)+'<\/b><small>'+esc(u)+'<\/small><\/div><\/div>';
+const scr=s=>'<div class="person"><span class="ic" style="--k:'+KIND[s.k].k+'">'+ico(KIND[s.k].ic)+'<\/span><div><b>'+esc(s.cap)+'<\/b><small>'+esc(s.n)+(s.hidden?" · hidden":"")+'<\/small><\/div><\/div>';
+const hrSt=u=>hrPill((U[u]||{}).hr);
+const vs=v=>v?'<span class="st '+v.st+'">'+v.v+'<\/span>':'<span class="dim">–<\/span>';
+const dept=u=>'<span class="dim">'+esc(U[u].dept||"–")+'<\/span>';
+const rulesTxt=rs=>(rs||[]).map(x=>x.a+" "+x.c.toLowerCase()+" "+x.n).join(", ");
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1800);}
+function copy(text,what){const done=()=>toast(what+" copied");
+  const fallback=()=>{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();try{document.execCommand("copy");done();}catch(e){toast("Copy not allowed here");}t.remove();};
+  try{navigator.clipboard.writeText(text).then(done,fallback);}catch(e){fallback();}}
+function csv(name,head,rows){
+  const q=v=>{v=v==null?"":String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+  const blob=new Blob(["﻿"+[head].concat(rows).map(r=>r.map(q).join(",")).join("\r\n")],{type:"text/csv"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name+".csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);toast(name+".csv saved");}
+function countUp(root){$$("[data-count]",root).forEach(el=>{if(el._c)return;el._c=1;const to=+el.dataset.count,t0=performance.now(),d=900;
+  const step=t=>{const p=Math.min(1,(t-t0)/d),e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(to*e));if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);});}
+document.addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;const c=e.target.closest&&e.target.closest(".spot,.kpi");if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px");});
+document.addEventListener("pointerdown",e=>{const b=e.target.closest&&e.target.closest(".btn,.chip,.ni,.tab,.ib,.kpi,.bnav button");if(!b)return;const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),s=document.createElement("span");
+  s.className="ripple";s.style.cssText="width:"+d+"px;height:"+d+"px;left:"+(e.clientX-r.left-d/2)+"px;top:"+(e.clientY-r.top-d/2)+"px";b.appendChild(s);setTimeout(()=>s.remove(),600);});
+function slideInd(tabs){const on=$(".tab.on",tabs),ind=$(".ind",tabs);if(on&&ind){ind.style.left=on.offsetLeft+"px";ind.style.width=on.offsetWidth+"px";}}
+const card=(title,hint,body,act)=>'<section class="card spot"><div class="ch"><h3>'+title+'<\/h3>'+(act?'<div class="act">'+act+'<\/div>':"")+(hint?'<div class="hint">'+hint+'<\/div>':"")+'<\/div><div class="cb">'+body+'<\/div><\/section>';
+const kpi=(icon,k,label,val,sub,go)=>'<button class="kpi" style="--k:'+k+'"'+(go?' data-go="'+go+'"':"")+'><div class="top"><span class="ic">'+ico(icon)+'<\/span>'+label+'<\/div><div class="v" data-count="'+val+'">0<\/div><div class="s">'+sub+'<\/div><span class="bar"><\/span><\/button>';
+function donut(segs,center,sub){
+  const tot=segs.reduce((a,s)=>a+s.v,0)||1,r=56,C=2*Math.PI*r;let off=0;
+  const arcs=segs.filter(s=>s.v).map((s,i)=>{const len=s.v/tot*C;const g='<circle class="seg" r="'+r+'" cx="80" cy="80" stroke="'+s.c+'" stroke-width="20" stroke-dasharray="'+len.toFixed(2)+' '+(C-len).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'" transform="rotate(-90 80 80)" style="animation-delay:'+(i*.08)+'s"'+(s.go?' data-go="'+s.go+'"':"")+'><title>'+esc(s.l)+': '+s.v+'<\/title><\/circle>';off+=len;return g;}).join("");
+  const svg='<svg class="donut" width="160" height="160" viewBox="0 0 160 160"><circle r="'+r+'" cx="80" cy="80" fill="none" stroke="var(--surf2)" stroke-width="20"/>'+arcs+'<text x="80" y="84" text-anchor="middle" class="c1">'+fmt(center)+'<\/text><text x="80" y="104" text-anchor="middle" class="c2">'+esc(sub)+'<\/text><\/svg>';
+  return '<div class="donutwrap">'+svg+'<div class="dl">'+segs.map(s=>'<div class="r"'+(s.go?' data-go="'+s.go+'"':"")+'><span class="sw" style="background:'+s.c+'"><\/span><span>'+esc(s.l)+'<\/span><b>'+fmt(s.v)+'<\/b><small>'+pct(s.v,tot)+'%<\/small><\/div>').join("")+'<\/div><\/div>';
+}
+function hbars(items,max){max=max||Math.max(1,...items.map(x=>x.v));
+  return items.map((x,i)=>'<div class="hb"'+(x.go?' data-go="'+x.go+'"':"")+' title="'+esc(x.l)+'"><span class="l">'+esc(x.l)+'<\/span><span class="track">'+
+    (x.parts||[{v:x.v,c:x.c||"var(--blue)"}]).map(p=>'<span style="width:'+(p.v/max*100)+'%;background:'+p.c+';animation-delay:'+(i*.03)+'s"><\/span>').join("")+'<\/span><span class="v">'+fmt(x.v)+'<\/span><\/div>').join("");}
+function stack100(parts){const t=parts.reduce((a,p)=>a+p.v,0)||1;
+  return '<div class="stack100">'+parts.map(p=>'<span title="'+esc(p.l)+': '+p.v+'" style="width:'+(p.v/t*100)+'%;background:'+p.c+'"><\/span>').join("")+'<\/div><div class="legend">'+parts.map(p=>'<span><i class="sw" style="background:'+p.c+'"><\/i>'+esc(p.l)+' <b>'+fmt(p.v)+'<\/b> <span class="dim">'+pct(p.v,t)+'%<\/span><\/span>').join("")+'<\/div>';}
+
+/* sortable table: cols=[{h,k(row)->sort value,r(row)->html,num}] ; on phones every row becomes a card */
+const TS={};
+const strip=h=>String(h).replace(/<[^>]+>/g,"");
+function table(id,cols,rows,opt={}){
+  id=(CUR||"home")+":"+id;
+  const st=TS[id]||(TS[id]={k:opt.sort||0,d:opt.dir||-1,lim:opt.lim||150});
+  const c=cols[st.k];const sorted=rows.slice().sort((a,b)=>{const x=c.k(a),y=c.k(b);return (x>y?1:x<y?-1:0)*st.d;});
+  const shown=sorted.slice(0,st.lim);
+  return '<div class="tw"><table data-t="'+esc(id)+'"><thead><tr>'+cols.map((c,i)=>'<th class="s'+(c.num?" num":"")+(i===st.k?" sorted":"")+'" data-i="'+i+'">'+c.h+'<span class="ar">'+(i===st.k?(st.d>0?"↑":"↓"):"↕")+'<\/span><\/th>').join("")+'<\/tr><\/thead><tbody>'+
+    (shown.length?shown.map(r=>'<tr class="'+(opt.go?"go ":"")+(opt.cls?opt.cls(r):"")+'"'+(opt.go?' data-go="'+esc(opt.go(r))+'"':"")+'>'+cols.map(c=>'<td data-l="'+esc(strip(c.h))+'"'+(c.num?' class="num"':"")+'>'+c.r(r)+'<\/td>').join("")+'<\/tr>').join(""):'<tr><td colspan="'+cols.length+'"><div class="empty">'+ico("info")+'Nothing matches this filter.<\/div><\/td><\/tr>')+'<\/tbody><\/table>'+
+    (sorted.length>st.lim?'<div class="more-row"><button class="btn" data-more="'+esc(id)+'">Show more · '+fmt(sorted.length-st.lim)+' left<\/button><\/div>':"")+'<\/div>';
+}
+function bindTables(root,redraw){
+  $$("table[data-t] th.s",root).forEach(th=>th.onclick=()=>{const st=TS[th.closest("table").dataset.t],i=+th.dataset.i;if(st.k===i)st.d*=-1;else{st.k=i;st.d=-1;}redraw();});
+  $$("[data-more]",root).forEach(b=>b.onclick=()=>{TS[b.dataset.more].lim+=200;redraw();});
+  bindGo(root);
+}
+/* links: "#/x" = inside the current module, "#@/x" = absolute (home, all modules) */
+const href=h=>h.startsWith("#@/")?"#/"+h.slice(3):h.startsWith("#/")?"#/"+CUR+"/"+h.slice(2):h;
+const go=h=>{location.hash=href(h);};
+function bindGo(root){$$("[data-go]",root).forEach(e=>{if(e.dataset.go&&!e._g){e._g=1;e.addEventListener("click",()=>go(e.dataset.go));}});}
+function keepFocus(id){const n=$("#"+id);if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length);}}
+const issues=m=>m.leavers+m.remove_open+m.cancel_open;
+
+/* ---------- nav + router ---------- */
+function renderNav(cur){
+  const mods=ATLAS.mods||[];
+  let h='<div class="brand"><span class="logo"><span><svg viewBox="0 0 24 24"><path d="'+P.tree+'"/><\/svg><\/span><\/span><div><b>Axpert Atlas<\/b><small>Developer console<\/small><\/div><\/div>';
+  h+='<button class="ni'+(cur==="home"?" on":"")+'" data-go="#@/">'+ico("home")+'All modules<\/button>';
+  h+='<button class="ni'+(cur==="allpeople"?" on":"")+'" data-go="#@/all/people">'+ico("people")+'People · all modules<span class="b">'+(ATLAS.people?fmt(Object.keys(ATLAS.people).length):"")+'<\/span><\/button>';
+  h+='<button class="ni'+(cur==="projects"?" on":"")+'" data-go="#@/all/projects">'+ico("tree")+'Project access<span class="b">'+(ATLAS.proj?fmt(Object.keys(ATLAS.proj.proj).length):"")+'<\/span><\/button>';
+  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>';
+  h+='<div class="modsw" style="margin-top:10px"><div class="lbl">Module<\/div>'+mods.map(m=>'<a class="mod'+(m.slug===CUR&&!["home","allpeople","projects","companies"].includes(cur)?" on":"")+'" href="#/'+m.slug+'/overview" data-mod="'+m.slug+'"><i><\/i>'+esc(m.name)+'<span class="bdg'+(issues(m)?"":" z")+'" title="High-priority issues">'+fmt(issues(m))+'<\/span><\/a>').join("")+'<\/div>';
+  if(CUR&&!["home","allpeople","projects","companies"].includes(cur)){
+    h+='<div class="navsec">'+esc(M.module)+'<\/div>'+NAV.map(n=>'<button class="ni'+(cur===n[0]?" on":"")+'" data-go="#/'+n[0]+'">'+ico(n[2])+n[1]+(n[3]!==""&&n[3]!=null?'<span class="b'+(n[4]&&n[3]?" r":"")+'">'+fmt(n[3])+'<\/span>':"")+'<\/button>').join("");
+  }
+  const mt=ATLAS.meta||{};
+  h+='<div class="navfoot"><div class="live"><i><\/i>Snapshot <b>'+esc(mt.scanned||"")+'<\/b><\/div><div>'+esc(mt.source||"")+'<\/div><div>Compared with '+esc(mt.baseline||"–")+'<\/div><div>Build '+esc(BUILD)+'<\/div>'+(window.ATLAS_LOCK?'<button class="btn" id="lockout" style="margin-top:10px">'+ico("lock")+'Lock<\/button>':"")+'<\/div>';
+  $("#nav").innerHTML=h;
+  if($("#lockout"))$("#lockout").onclick=lockOut;
+  bindGo($("#nav"));
+  $$("a.mod",$("#nav")).forEach(a=>a.onclick=e=>{e.preventDefault();const h=hashParts(),v=h[0]||"overview";
+    const keep=["home","allpeople","projects","companies"].includes(cur)?"overview":({screen:"screens",person:"people",role:"roles"}[v]||v);
+    location.hash="#/"+a.dataset.mod+"/"+(v==="health"&&h[1]?"health/"+h[1]:keep);closeNav();});
+  $$(".ni",$("#nav")).forEach(b=>b.addEventListener("click",closeNav));
+  renderBottom(cur);
+}
+function renderBottom(cur){
+  const m=CUR||(ATLAS.mods&&ATLAS.mods[0]&&ATLAS.mods[0].slug)||"";
+  const items=[["home","All","home","#/"],["overview","Overview","dash","#/"+m+"/overview"],["screens","Screens","tree","#/"+m+"/screens"],["people","People","people","#/"+m+"/people"],["health","Health","health","#/"+m+"/health"]];
+  $("#bnav").innerHTML=items.map(x=>'<button class="'+(cur===x[0]?"on":"")+'" data-h="'+x[3]+'"><span class="pillbg">'+ico(x[2])+'<\/span>'+x[1]+(x[0]==="health"&&CUR&&highCount?'<i>'+fmt(highCount)+'<\/i>':"")+'<\/button>').join("");
+  $$("#bnav button").forEach(b=>b.onclick=()=>{location.hash=b.dataset.h;});
+}
+function closeNav(){$("#nav").classList.remove("on");$("#navscrim").classList.remove("on");}
+$("#hamb").onclick=()=>{$("#nav").classList.add("on");$("#navscrim").classList.add("on");};
+$("#navscrim").onclick=closeNav;
+function rawParts(){return location.hash.replace(/^#\/?/,"").split("/").map(x=>{try{return decodeURIComponent(x);}catch(e){return x;}});}
+function hashParts(){const p=rawParts();return p[0]&&p[0]!=="all"?p.slice(1):p;}
+let lastView="",navNow="home";
+function showLoading(t){$("#view").innerHTML='<div class="loading"><div class="spin"><\/div>'+esc(t)+'<\/div>';}
+function route(){
+  if(window.ATLAS_LOCK&&!LOCKKEY)return;
+  const p=rawParts(),m=p[0]||"";
+  closeDrawer();closePal();
+  if(!ATLAS.mods){showLoading("Loading…");return;}
+  let fn,navKey,key;
+  if(!m){navKey="home";fn=vHome;key="home";}
+  else if(m==="all"){
+    if(!ATLAS.people){showLoading("Loading people…");load("people").then(route,()=>showErr("people"));return;}
+    const needP=["projects","project","companies","company","person"].includes(p[1]);
+    if(needP&&!ATLAS.proj){showLoading("Loading projects and companies…");load("projects").then(route,()=>showErr("projects"));return;}
+    navKey={projects:"projects",project:"projects",companies:"companies",company:"companies"}[p[1]]||"allpeople";key="all/"+(p[1]||"")+"/"+(p[2]||"");
+    fn={person:()=>vAllPerson(p[2]),projects:vProjects,project:()=>vProject(p[2]),companies:vCompanies,company:()=>vCompany(p[2])}[p[1]]||vAllPeople;
+  } else {
+    const mod=ATLAS.mods.find(x=>x.slug===m);if(!mod){location.hash="#/";return;}
+    if(!ATLAS.data[m]){showLoading("Loading "+mod.name+"…");load(m).then(route,()=>showErr(m));return;}
+    useModule(m);
+    const h=p.slice(1),v=h[0]||"overview";
+    navKey={screen:"screens",person:"people",role:"roles"}[v]||v;key=m+"/"+v+"/"+(h[1]||"")+"/"+(h[2]||"");
+    fn={overview:vOverview,screens:()=>vScreens(h[1]||""),screen:()=>vScreen(h[1],h[2],h[3]),matrix:vMatrix,people:vPeople,person:()=>vPerson(h[1]),
+        roles:vRoles,role:()=>vRole(h[1]),health:()=>vHealth(h[1]),changes:vChanges}[v]||vOverview;
+  }
+  navNow=navKey;renderNav(navKey);
+  const glob=["home","allpeople","projects","companies"].includes(navKey);
+  $("#searchHint").textContent=glob?"Search modules, people, projects, companies":"Search "+M.module+": screens, fields, roles, people";
+  fn();if(key!==lastView)window.scrollTo(0,0);lastView=key;
+  countUp($("#view"));bindGo($("#view"));
+}
+function showErr(name){$("#view").innerHTML='<div class="empty">'+ico("warn")+'Could not load <b>data/'+esc(name)+'.js<\/b>. Keep the <span class="mono">data<\/span> folder next to index.html.<\/div>';}
+window.addEventListener("hashchange",route);
+window.addEventListener("scroll",()=>$("#appbar").classList.toggle("lift",scrollY>4),{passive:true});
+window.addEventListener("resize",()=>{const t=$("#stabs");t&&slideInd(t);});
+
+/* ---------- HOME (all modules) ---------- */
+function vHome(){
+  const mods=ATLAS.mods,mt=ATLAS.meta,pp=ATLAS.people;
+  const tot=k=>mods.reduce((a,m)=>a+(m[k]||0),0);
+  const ppl=pp?Object.keys(pp):[],left=ppl.filter(u=>hrOf(pp[u].hr)==="left");
+  let h='<section class="card hero-home spot" style="margin-top:14px"><span class="logo" style="width:64px;height:64px;border-radius:18px"><span style="width:48px;height:48px;border-radius:14px"><svg viewBox="0 0 24 24" style="width:28px;height:28px"><path d="'+P.tree+'"/><\/svg><\/span><\/span>'+
+     '<div style="flex:1;min-width:0"><h1>Axpert Atlas<\/h1><p>Every screen, field, button rule and person with access, across '+mods.length+' modules. Read from live Axpert ('+esc(mt.source)+') on '+esc(mt.scanned)+'. Nothing here writes to Axpert.<\/p><\/div><\/section>';
+  h+='<div class="kpis" style="margin-top:16px">'+kpi("apps","var(--blue)","Modules",mods.length,tot("menu")+" menu items","")+kpi("form","var(--purple)","Forms",tot("forms"),fmt(tot("fields"))+" fields","")+
+     kpi("report","var(--green)","Reports",tot("reps"),"columns, parameters, SQL","")+kpi("people","var(--teal)","People with access",ppl.length,"active logins, any module","#@/all/people")+
+     kpi("leave","var(--red)","Left, login on",left.length,"across all modules","#@/all/people")+
+     (ATLAS.proj?kpi("tree","var(--amber)","Projects",Object.keys(projIndex().by).length,fmt(ATLAS.proj.pu.filter(r=>r[4]&&pLeft(r[0])).length)+" active rows for leavers","#@/all/projects")+
+       kpi("apps","var(--teal)","Companies",Object.keys(projIndex().co).length,fmt(Object.keys(ATLAS.proj.ca).filter(pLeft).length)+" leavers still have access","#@/all/companies"):"")+'<\/div>';
+  h+='<div class="ph" style="margin:22px 0 12px"><div><h1 style="font-size:22px">Modules<\/h1><p>Pick a module. Red = high-priority issues (leavers with login, Remove / Cancel with no control).<\/p><\/div><\/div>';
+  h+='<div class="mcards">'+mods.map(m=>{const c=m.cancel||{};return '<div class="card spot mcard" data-go="#@/'+m.slug+'/overview" style="--k:var(--blue)"><div class="top"><span class="ic">'+ico(MODICON[m.slug]||"apps")+'<\/span><h3>'+esc(m.name)+'<\/h3>'+
+     '<span class="st '+(issues(m)?"st-red":"st-green")+'" style="margin-left:auto">'+(issues(m)?fmt(issues(m))+" issues":"clear")+'<\/span><\/div>'+
+     '<div class="nums"><div><b>'+m.forms+'<\/b><span>forms<\/span><\/div><div><b>'+m.reps+'<\/b><span>reports<\/span><\/div><div><b>'+fmt(m.people)+'<\/b><span>people<\/span><\/div><\/div>'+
+     '<div class="stack100" title="Cancel control per form">'+[["ok","var(--green)"],["tbc","var(--amber)"],["open","var(--red)"],["nobtn","var(--line2)"],["none","var(--grey)"]].map(x=>'<span style="width:'+pct(c[x[0]]||0,m.forms)+'%;background:'+x[1]+'"><\/span>').join("")+'<\/div>'+
+     '<div class="iss">'+(m.leavers?'<span class="st st-red">'+m.leavers+' left, login on<\/span>':"")+(m.remove_open?'<span class="st st-red">'+m.remove_open+' Remove open<\/span>':"")+(m.cancel_open?'<span class="st st-red">'+m.cancel_open+' Cancel open<\/span>':"")+
+     (m.cancel_tbc?'<span class="st st-amber">'+m.cancel_tbc+' Cancel TBC<\/span>':"")+(m.findings?'<span class="st st-amber">'+m.findings+' hard-coded<\/span>':"")+
+     (m.changes==null?'<span class="st st-grey">first scan<\/span>':m.changes?'<span class="st st-blue">'+m.changes+' changes<\/span>':'<span class="st st-grey">no changes<\/span>')+'<\/div><\/div>';}).join("")+'<\/div>';
+  $("#view").innerHTML=h;
+}
+
+/* ---------- PEOPLE ACROSS MODULES ---------- */
+let apF="all",apQ="";
+function vAllPeople(){
+  const pp=ATLAS.people,mods=ATLAS.mods,ids=Object.keys(pp);
+  const chips=[["all","Everyone",()=>true],["left","Left, login on",u=>hrOf(pp[u].hr)==="left"],["multi","In 3+ modules",u=>Object.keys(pp[u].m).length>=3],["act","Active in HR",u=>hrOf(pp[u].hr)==="act"]];
+  const draw=()=>{
+    const fn=chips.find(c=>c[0]===apF)[2];
+    const L=ids.filter(u=>fn(u)&&(!apQ||(u+" "+(pp[u].nm||"")+" "+(pp[u].dept||"")).toLowerCase().includes(apQ)));
+    let h='<div class="ph"><div><h1>People · all modules<\/h1><p>One line per person: in which modules their login reaches screens today. Click a person for the full picture.<\/p><\/div><\/div>';
+    h+='<div class="tool"><div class="chips">'+chips.map(c=>'<button class="chip'+(apF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+fmt(ids.filter(c[2]).length)+'<\/span><\/button>').join("")+'<\/div>'+
+      '<label class="field">'+ico("people")+'<input id="apq" placeholder="ID, name or department" value="'+esc(apQ)+'"><\/label><span class="cnt">'+fmt(L.length)+'<\/span><button class="btn" id="apx">'+ico("dl")+'CSV<\/button><\/div>';
+    const cols=[{h:"Person",k:u=>(pp[u].nm||u).toLowerCase(),r:u=>'<div class="person">'+av(u)+'<div><b>'+esc(pp[u].nm||u)+'<\/b><small>'+esc(u)+'<\/small><\/div><\/div>'},
+      {h:"Department",k:u=>pp[u].dept||"",r:u=>'<span class="dim">'+esc(pp[u].dept||"–")+'<\/span>'},
+      {h:"HR status",k:u=>hrOf(pp[u].hr),r:u=>hrPill(pp[u].hr)},
+      {h:"Modules",num:1,k:u=>Object.keys(pp[u].m).length,r:u=>Object.keys(pp[u].m).length}]
+      .concat(mods.map(m=>({h:esc(m.name),num:1,k:u=>pp[u].m[m.slug]?pp[u].m[m.slug][1]+pp[u].m[m.slug][2]:-1,r:u=>pp[u].m[m.slug]?(pp[u].m[m.slug][1]+pp[u].m[m.slug][2]):'<span class="dim">–<\/span>'})));
+    h+='<section class="card">'+table("allpeople",cols,L,{sort:3,go:u=>"#@/all/person/"+enc(u)})+'<\/section>';
+    $("#view").innerHTML=h;
+    $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{apF=b.dataset.f;draw();});
+    $("#apq").oninput=e=>{apQ=e.target.value.trim().toLowerCase();draw();keepFocus("apq");};
+    $("#apx").onclick=()=>csv("atlas_people_all_modules",["EmpID","Name","Department","HR status"].concat(mods.map(m=>m.name+" screens")),L.map(u=>[u,pp[u].nm,pp[u].dept,pp[u].hr].concat(mods.map(m=>pp[u].m[m.slug]?pp[u].m[m.slug][1]+pp[u].m[m.slug][2]:""))));
+    bindTables($("#view"),draw);
+  };
+  draw();
+}
+function vAllPerson(u){
+  const x=ATLAS.people[u]||(ATLAS.proj&&ATLAS.proj.ppl[u]&&Object.assign({m:{}},ATLAS.proj.ppl[u]));if(!x){$("#view").innerHTML='<div class="empty">'+ico("info")+'This person has no live access in any module, project or company.<\/div>';return;}
+  const mods=ATLAS.mods.filter(m=>x.m[m.slug]),tot=i=>mods.reduce((a,m)=>a+x.m[m.slug][i],0);
+  let h='<div class="crumbs"><a data-go="#@/all/people">People · all modules<\/a>'+ico("chev")+'<span>'+esc(x.nm||u)+'<\/span><\/div>';
+  h+='<section class="card hero spot" style="margin-top:12px"><span class="av" style="width:64px;height:64px;font-size:22px;background:'+avc(u)+'">'+ini(x.nm||u)+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(x.nm||u)+'<\/h2><div class="meta"><code>'+esc(u)+'<\/code><span>'+esc(x.dept||"–")+'<\/span>'+hrPill(x.hr)+
+     '<span class="st '+(x.ax?"st-green":"st-grey")+'">Login '+(x.ax?"on":"off")+'<\/span>'+(x.dor&&hrOf(x.hr)==="left"?'<span>left on <b style="font-weight:500">'+esc(x.dor.slice(0,10))+'<\/b><\/span>':"")+'<\/div><\/div><div class="right"><button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
+  if(hrOf(x.hr)==="left"&&(mods.length||x.ax))h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>Action needed:<\/b> HR status is '+esc(hrLabel(x.hr))+', but this login '+(x.ax?"is still on":"still has rows")+(mods.length?" and reaches screens in "+mods.length+" module(s)":"")+'.<\/div><\/div>';
+  h+='<div class="kpis" style="margin-top:16px">'+kpi("apps","var(--blue)","Modules",mods.length,"with live access","")+kpi("form","var(--purple)","Forms",tot(1),"can open","")+kpi("report","var(--green)","Reports",tot(2),"can open","")+
+     kpi("cancel","var(--amber)","Cancel buttons",tot(3),"forms that have one","")+kpi("del","var(--red)","Remove buttons",tot(4),"forms that have one","")+'<\/div>';
+  h+='<div class="mcards">'+mods.map(m=>{const v=x.m[m.slug];return '<div class="card spot mcard" data-go="#@/'+m.slug+'/person/'+enc(u)+'"><div class="top"><span class="ic">'+ico(MODICON[m.slug]||"apps")+'<\/span><h3>'+esc(m.name)+'<\/h3><span class="st st-blue" style="margin-left:auto">open '+ico("chev")+'<\/span><\/div>'+
+     '<div class="nums"><div><b>'+v[1]+'<\/b><span>forms<\/span><\/div><div><b>'+v[2]+'<\/b><span>reports<\/span><\/div><div><b>'+v[3]+'<\/b><span>Cancel<\/span><\/div><\/div><div class="rl">'+v[0].map(r=>'<span class="st st-teal">'+esc(r)+'<\/span>').join("")+'<\/div><\/div>';}).join("")+'<\/div>';
+  h+=projCards(u);
+  $("#view").innerHTML=h;$("#cpu").onclick=()=>copy(u,u);bindTables($("#view"),()=>vAllPerson(u));
+}
+
+/* ---------- OVERVIEW ---------- */
+function vOverview(){
+  const cs=k=>forms.filter(s=>s.cs.key===k).length, rs=k=>forms.filter(s=>s.rs.key===k).length;
+  const hid=forms.reduce((a,s)=>a+s.f.filter(f=>f.hid).length,0),ro=forms.reduce((a,s)=>a+s.f.filter(f=>f.ro&&!f.hid).length,0);
+  const req=forms.reduce((a,s)=>a+s.f.filter(f=>f.req).length,0),fx=forms.reduce((a,s)=>a+s.f.filter(f=>f.ex||f.vx).length,0);
+  const folders={};S.forEach(s=>{const f=folders[s.folder]=folders[s.folder]||{t:0,o:0,path:s.folder};s.k==="t"?f.t++:f.o++;});
+  const fl=Object.values(folders).sort((a,b)=>(b.t+b.o)-(a.t+a.o)).slice(0,12);
+  const top=S.slice().sort((a,b)=>b.users.length-a.users.length).slice(0,10);
+  const hrc={};workU.forEach(u=>{const c=hrCat(u);hrc[c]=(hrc[c]||0)+1;});
+  let h='<div class="ph"><div><h1>'+esc(M.module)+' at a glance<\/h1><p>Every screen, field, button rule and person with access, read from live Axpert. Tap any number, bar or slice to drill in.<\/p><\/div><\/div>';
+  h+='<div class="kpis">'+kpi("tree","var(--blue)","Screens",S.length,forms.length+" forms · "+reps.length+" reports / pages","#/screens")+
+     kpi("field","var(--purple)","Fields",nFields,fmt(hid)+" hidden · "+fmt(req)+" mandatory","#/screens")+
+     kpi("key","var(--teal)","Roles",Object.keys(R).length,(Object.keys(R).length-HI.emptyroles.list.length)+" have people in them","#/roles")+
+     kpi("people","var(--green)","People with access",workU.length,"active logins in live roles","#/people")+
+     kpi("leave","var(--red)","Left, login on",HI.leavers.list.length,pct(HI.leavers.list.length,workU.length)+"% of people with access","#/health/leavers")+'<\/div>';
+  h+='<div class="bento">';
+  h+='<div class="c4">'+card("Cancel button control","Per form, from your AXP_CANCEL_CONTROL_MAP",donut([
+      {l:"Controlled",v:cs("ok"),c:"var(--green)"},{l:"To be tested",v:cs("tbc"),c:"var(--amber)",go:"#/health/cancel-tbc"},{l:"Open · no control",v:cs("open"),c:"var(--red)",go:"#/health/cancel-open"},
+      {l:"No Cancel button",v:cs("nobtn"),c:"var(--line2)"},{l:"Not mapped",v:cs("none"),c:"var(--grey)"}],forms.length,"forms"))+'<\/div>';
+  h+='<div class="c4">'+card("Remove button control","Per form, from your AXP_REMOVE_CONTROL_MAP",donut([
+      {l:"Controlled",v:rs("ok"),c:"var(--green)"},{l:"To be tested",v:rs("tbc"),c:"var(--amber)"},{l:"Open · no control",v:rs("open"),c:"var(--red)",go:"#/health/remove-open"},
+      {l:"No Remove button",v:rs("nobtn"),c:"var(--line2)"},{l:"Not mapped",v:rs("none"),c:"var(--grey)"}],forms.length,"forms"))+'<\/div>';
+  h+='<div class="c4">'+card("Who has access today","HR status of everyone who can open a "+esc(M.module)+" screen",donut(
+      ["act","leave","left","nohr","other"].filter(c=>hrc[c]).map(c=>({l:HRC[c][0],v:hrc[c],c:HRC[c][2],go:c==="left"?"#/health/leavers":""})),workU.length,"people"))+'<\/div>';
+  h+='<div class="c7">'+card("Menu folders","Forms and reports / pages in each folder · tap to list them",hbars(fl.map(f=>({l:f.path,v:f.t+f.o,parts:[{v:f.t,c:"var(--blue)"},{v:f.o,c:"var(--green)"}],go:"#/screens/"+enc(f.path)})))+
+      '<div class="legend"><span><i class="sw" style="background:var(--blue)"><\/i>Forms<\/span><span><i class="sw" style="background:var(--green)"><\/i>Reports / pages<\/span><\/div>')+'<\/div>';
+  h+='<div class="c5">'+card("Field anatomy","All "+fmt(nFields)+" fields of the "+forms.length+" forms",stack100([{l:"Editable",v:nFields-hid-ro,c:"var(--blue)"},{l:"Read-only",v:ro,c:"var(--teal)"},{l:"Hidden",v:hid,c:"var(--line2)"}])+
+      '<div class="sec">Field behaviour<\/div>'+hbars([{l:"Mandatory",v:req,c:"var(--amber)"},{l:"Has formula",v:fx,c:"var(--purple)"},{l:"Hidden",v:hid,c:"var(--grey)"}],nFields))+'<\/div>';
+  h+='<div class="c6">'+card("Most-used screens","People who can open it today",hbars(top.map(s=>({l:s.cap,v:s.users.length,c:KIND[s.k].k,go:"#/screen/"+s.id+"/access"}))))+'<\/div>';
+  h+='<div class="c6">'+card("Needs attention","Found automatically · open Health for the full list",
+      H.filter(x=>x.list.length&&x.sev!=="Low").slice(0,6).map(x=>'<div class="hb" data-go="#/health/'+x.id+'" style="grid-template-columns:34px 1fr auto"><span class="ic" style="--k:'+x.k+'">'+ico(x.ic)+'<\/span><span style="min-width:0"><b style="font-weight:500">'+esc(x.ttl)+'<\/b><br><small class="dim">'+x.sev+' priority<\/small><\/span><span class="v" style="color:'+x.k+';font-size:20px">'+fmt(x.list.length)+'<\/span><\/div>').join("")||'<div class="empty">'+ico("ok")+'Nothing urgent.<\/div>')+'<\/div>';
+  h+='<\/div>';
+  $("#view").innerHTML=h;
+}
+
+/* ---------- SCREENS ---------- */
+let scF="all",scQ="";
+function vScreens(folder){
+  const chips=[["all","All",()=>true],["t","Forms",s=>s.k==="t"],["i","Reports",s=>s.k==="i"],["p","Pages",s=>s.k==="p"],["ctbc","Cancel TBC",s=>s.cs&&s.cs.key==="tbc"],["ropen","Remove open",s=>s.rs&&s.rs.key==="open"],["hc","Hard-coded",s=>s.find.length],["hid","Hidden in menu",s=>s.hidden]];
+  const base=S.filter(s=>!folder||s.folder===folder);
+  const draw=()=>{
+    const f=(chips.find(c=>c[0]===scF)||chips[0])[2];
+    const L=base.filter(s=>f(s)&&(!scQ||(s.cap+" "+s.n+" "+s.folder).toLowerCase().includes(scQ)));
+    let h=(folder?'<div class="crumbs"><a data-go="#/screens">Screens<\/a>'+ico("chev")+'<span>'+esc(folder)+'<\/span><\/div>':"")+
+      '<div class="ph"><div><h1>'+(folder?esc(folder):"Screens")+'<\/h1><p>Every form, report and page'+(folder?" in this folder":" in the "+esc(M.module)+" menu")+'. Tap a row for its full X-ray.<\/p><\/div><\/div>';
+    h+='<div class="tool"><div class="chips">'+chips.map(c=>'<button class="chip'+(scF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+base.filter(c[2]).length+'<\/span><\/button>').join("")+'<\/div>'+
+       '<label class="field">'+ico("field")+'<input id="scq" placeholder="Filter screens" value="'+esc(scQ)+'"><\/label><span class="cnt">'+L.length+' of '+base.length+'<\/span>'+
+       '<button class="btn" id="scx">'+ico("dl")+'CSV<\/button><\/div>';
+    h+='<section class="card">'+table("screens",[
+      {h:"Screen",k:s=>s.cap.toLowerCase(),r:scr},
+      {h:"Folder",k:s=>s.folder,r:s=>'<span class="dim">'+esc(s.folder)+'<\/span>'},
+      {h:"Fields / cols",num:1,k:s=>s.f?s.f.length:s.iv?s.iv.cols.length:-1,r:s=>s.f?fmt(s.f.length):s.iv?s.iv.cols.length:"–"},
+      {h:"Roles",num:1,k:s=>Object.keys(s.roles).length,r:s=>Object.keys(s.roles).length},
+      {h:"People",num:1,k:s=>s.users.length,r:s=>s.users.length},
+      {h:"Cancel",k:s=>s.cs?s.cs.key:"",r:s=>vs(s.cs)},
+      {h:"Remove",k:s=>s.rs?s.rs.key:"",r:s=>vs(s.rs)}],L,{sort:4,go:s=>"#/screen/"+s.id})+'<\/section>';
+    $("#view").innerHTML=h;
+    $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{scF=b.dataset.f;draw();});
+    $("#scq").oninput=e=>{scQ=e.target.value.trim().toLowerCase();draw();keepFocus("scq");};
+    $("#scx").onclick=()=>csv("atlas_"+CUR+"_screens",["Type","Screen","Name","Folder","Fields","Roles","People","Cancel","Remove"],L.map(s=>[KIND[s.k].n,s.cap,s.n,s.folder,s.f?s.f.length:"",Object.keys(s.roles).length,s.users.length,s.cs?s.cs.v:"",s.rs?s.rs.v:""]));
+    bindTables($("#view"),draw);
+  };
+  draw();
+}
+
+/* ---------- SCREEN X-RAY ---------- */
+let fF="all",fQ="",fDC="";
+function vScreen(id,sub,fld){
+  const s=SID[id];if(!s){$("#view").innerHTML='<div class="empty">'+ico("info")+'Screen not found in '+esc(M.module)+'.<\/div>';return;}
+  const kd=KIND[s.k],roles=Object.keys(s.roles).sort();
+  let tabs=[["overview","Overview"]];
+  if(s.k==="t")tabs=tabs.concat([["fields","Fields",s.f.length],["buttons","Cancel & Remove",s.cancel.length+s.remove.length]]);
+  if(s.iv)tabs=tabs.concat([["columns","Columns",s.iv.cols.length],["params","Parameters",s.iv.params.length],["sql","SQL"]]);
+  tabs.push(["access","Who can open",s.users.length]);
+  if(!tabs.some(t=>t[0]===sub))sub="overview";
+  let h='<div class="crumbs"><a data-go="#/screens">Screens<\/a>'+ico("chev")+'<a data-go="#/screens/'+enc(s.folder)+'">'+esc(s.folder)+'<\/a>'+ico("chev")+'<span>'+esc(s.cap)+'<\/span><\/div>';
+  h+='<section class="card hero spot" style="--k:'+kd.k+';margin-top:12px"><span class="big">'+ico(kd.ic)+'<\/span><div style="min-width:0;flex:1"><h2>'+esc(s.cap)+'<\/h2><div class="meta"><span class="st '+kd.st+'">'+kd.n+'<\/span><span>'+(s.k==="t"?"transid":s.k==="i"?"iview":"page")+' <code>'+esc(s.n)+'<\/code><\/span><span>menu <code>'+esc(s.menus.map(m=>m.page).join(", "))+'<\/code><\/span>'+
+     (s.tables&&s.tables.length?'<span>tables <code>'+esc(s.tables.join(", "))+'<\/code><\/span>':"")+(s.chg&&s.chg.on?'<span>'+ico("hist","i")+' changed <b style="font-weight:500">'+esc(s.chg.on.slice(0,10))+'<\/b> by <code>'+esc(s.chg.by||"?")+'<\/code><\/span>':"")+'<\/div><\/div><div class="right">'+(s.cs?'<span class="st '+s.cs.st+'">'+ico("cancel")+'Cancel · '+s.cs.v+'<\/span>':"")+(s.rs?'<span class="st '+s.rs.st+'">'+ico("del")+'Remove · '+s.rs.v+'<\/span>':"")+
+     '<button class="btn" id="cpid">'+ico("copy")+'Copy '+(s.k==="t"?"transid":"name")+'<\/button><\/div><\/section>';
+  h+='<nav class="tabs" id="stabs">'+tabs.map(t=>'<button class="tab'+(sub===t[0]?" on":"")+'" data-go="#/screen/'+s.id+'/'+t[0]+'">'+t[1]+(t[2]!=null?' <span class="n">'+t[2]+'<\/span>':"")+'<\/button>').join("")+'<span class="ind"><\/span><\/nav><div id="sbody"><\/div>';
+  $("#view").innerHTML=h;
+  $("#cpid").onclick=()=>copy(s.n,s.n);
+  requestAnimationFrame(()=>{slideInd($("#stabs"));const on=$("#stabs .tab.on");on&&on.scrollIntoView({block:"nearest",inline:"nearest"});});
+  const body=$("#sbody");
+  ({overview:()=>scOverview(s,body,roles),fields:()=>scFields(s,body,fld),buttons:()=>scButtons(s,body),columns:()=>ivCols(s,body),params:()=>ivParams(s,body),sql:()=>ivSql(s,body),access:()=>scAccess(s,body,roles)})[sub]();
+  bindGo(body);
+}
+function findCard(s){
+  if(!s.find.length)return"";
+  return '<div style="height:16px"><\/div>'+card(ico("code")+"Hard-coded in this screen · "+s.find.length,"User IDs, keys or server addresses written into the logic. Secret values are masked.",
+    table("find_"+s.id,[{h:"What",k:f=>f.kind,r:f=>'<span class="st '+(f.kind==="Secret in logic"?"st-red":"st-amber")+'">'+esc(f.kind)+'<\/span>'},{h:"Where",k:f=>f.where,r:f=>esc(f.where)},{h:"Found",k:f=>f.hit,r:f=>'<code class="mono">'+esc(f.hit)+'<\/code>'}],s.find,{sort:0}));
+}
+function scOverview(s,body,roles){
+  let h="";
+  if(s.k==="t"){
+    const f=s.f,hid=f.filter(x=>x.hid).length;
+    h+='<div class="kpis">'+kpi("field","var(--purple)","Fields",f.length,s.dcs.length+" data containers (DC)","#/screen/"+s.id+"/fields")+kpi("hidden","var(--grey)","Hidden",hid,pct(hid,f.length)+"% of fields","")+
+      kpi("form","var(--amber)","Mandatory",f.filter(x=>x.req).length,"allow empty = F","")+kpi("fx","var(--purple)","With formula",f.filter(x=>x.ex||x.vx).length,"expression or validation","")+
+      kpi("people","var(--green)","People",s.users.length,"via "+roles.length+" roles","#/screen/"+s.id+"/access")+'<\/div>';
+    const se=s.set||{};
+    h+='<div class="bento"><div class="c7">'+card("Form anatomy","Each DC and the table it saves to. Bar = editable / read-only / hidden fields. Tap a DC to see its fields.",
+      s.dcs.map(dc=>{const L=f.filter(x=>(x.dc||"").toLowerCase()===(dc.n||"").toLowerCase()),hh=L.filter(x=>x.hid).length,rr=L.filter(x=>x.ro&&!x.hid).length;
+        return '<div class="dcr" data-dc="'+esc(dc.n)+'"><div><b>'+esc(dc.cap||dc.n)+'<\/b><small>'+esc(dc.n)+'<\/small><\/div><small>'+esc(dc.tbl||"–")+'<\/small><div><div class="track"><span style="width:'+pct(L.length-hh-rr,L.length)+'%;background:var(--blue)"><\/span><span style="width:'+pct(rr,L.length)+'%;background:var(--teal)"><\/span><span style="width:'+pct(hh,L.length)+'%;background:var(--line2)"><\/span><\/div>'+
+          '<div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">'+(dc.grid?'<span class="tg tg-uq">GRID<\/span>':"")+(dc.grid&&dc.add?'<span class="tg tg-ro">ADD ROW<\/span>':"")+(dc.grid&&dc.dele?'<span class="tg tg-req">DELETE ROW<\/span>':"")+(dc.chg===false?'<span class="tg tg-hid">NO CHANGE<\/span>':"")+'<\/div><\/div><span class="num" style="text-align:right;font-weight:500">'+L.length+'<\/span><\/div>';}).join("")+
+      '<div class="legend"><span><i class="sw" style="background:var(--blue)"><\/i>Editable<\/span><span><i class="sw" style="background:var(--teal)"><\/i>Read-only<\/span><span><i class="sw" style="background:var(--line2)"><\/i>Hidden<\/span><\/div>')+'<\/div>';
+    h+='<div class="c5">'+card("Form settings","From AXPTSTRUCTS and TSTRUCTS",'<div class="sets">'+[["Workflow",se.workflow],["Track changes",se.track],["Attachments",se.attach],["List view",se.listview],["Traceability",se.trace]].map(x=>'<span class="setp'+(x[1]?" on":"")+'">'+(x[1]?ico("ok"):"")+x[0]+'<\/span>').join("")+'<\/div>'+
+      '<div class="sec">Control fields<\/div><dl class="kv"><dt>Save control<\/dt><dd class="mono">'+esc(se.savectrl||"–")+'<\/dd><dt>Delete control<\/dt><dd class="mono">'+esc(se.delctrl||"–")+'<\/dd><\/dl>'+
+      '<div class="sec">Buttons<\/div><dl class="kv"><dt>Cancel<\/dt><dd>'+vs(s.cs)+'<\/dd><dt>Remove<\/dt><dd>'+vs(s.rs)+'<\/dd><\/dl><div style="margin-top:8px"><a class="lnk" data-go="#/screen/'+s.id+'/buttons">See the rules →<\/a><\/div>'+
+      (s.chg?'<div class="sec">History<\/div><dl class="kv"><dt>Created<\/dt><dd>'+esc((s.chg.con||"–").slice(0,10))+' · <span class="mono">'+esc(s.chg.cby||"–")+'<\/span><\/dd><dt>Last changed<\/dt><dd>'+esc((s.chg.on||"–").slice(0,16))+' · <span class="mono">'+esc(s.chg.by||"–")+'<\/span><\/dd><\/dl>':"")+
+      '<div class="sec">In the menu<\/div>'+s.menus.map(m=>'<div style="font-size:13px">'+esc(m.path)+' › <b style="font-weight:500">'+esc(s.cap)+'<\/b>'+(m.vis?"":' <span class="st st-grey">hidden<\/span>')+'<\/div>').join(""))+'<\/div><\/div>';
+  } else {
+    if(s.iv){const c=s.iv.cols,p=s.iv.params;
+      h+='<div class="kpis">'+kpi("field","var(--purple)","Columns",c.length,c.filter(x=>x.hid).length+" hidden","#/screen/"+s.id+"/columns")+kpi("tune","var(--amber)","Parameters",p.length,p.filter(x=>x.req.toLowerCase()==="true").length+" mandatory","#/screen/"+s.id+"/params")+
+        kpi("code","var(--blue)","SQL lines",s.iv.sql.split("\n").length,"view or copy","#/screen/"+s.id+"/sql")+kpi("people","var(--green)","People",s.users.length,"via "+roles.length+" roles","#/screen/"+s.id+"/access")+'<\/div>';
+      h+='<div class="bento"><div class="c7">'+card("Columns on screen","In screen order · hidden columns greyed",'<div class="rl">'+c.map(x=>'<span class="st '+(x.hid?"st-grey":"st-blue")+'" title="'+esc(x.a)+'">'+esc(x.cap||x.a)+'<\/span>').join("")+'<\/div>')+'<\/div>'+
+        '<div class="c5">'+card("Details","From IVIEWS",'<dl class="kv"><dt>Parameters<\/dt><dd>'+(p.map(x=>'<code class="mono">:'+esc(x.n)+'<\/code>').join(" ")||"–")+'<\/dd>'+(s.chg?'<dt>Created<\/dt><dd>'+esc((s.chg.con||"–").slice(0,10))+' · <span class="mono">'+esc(s.chg.cby||"–")+'<\/span><\/dd><dt>Last changed<\/dt><dd>'+esc((s.chg.on||"–").slice(0,16))+' · <span class="mono">'+esc(s.chg.by||"–")+'<\/span><\/dd>':"")+'<\/dl>'+
+        '<div class="sec">In the menu<\/div>'+s.menus.map(m=>'<div style="font-size:13px">'+esc(m.path)+' › <b style="font-weight:500">'+esc(s.cap)+'<\/b>'+(m.vis?"":' <span class="st st-grey">hidden<\/span>')+'<\/div>').join(""))+'<\/div><\/div>';
+    } else {
+      h+='<div class="note blue">'+ico("info")+'<div><b>'+KIND[s.k].n+'.<\/b> '+(s.k==="p"?"A custom web page or link, not a form or report; no definition to read.":"No IVIEWS definition found for this name.")+'<\/div><\/div>';
+      h+='<div class="kpis">'+kpi("key","var(--teal)","Roles",roles.length,"with an access row","#/screen/"+s.id+"/access")+kpi("people","var(--green)","People",s.users.length,"active logins","#/screen/"+s.id+"/access")+'<\/div>';
+    }
+  }
+  h+=findCard(s);
+  if(s.k==="i"&&ATLAS.proj&&projIndex().fbScr[s.n.toLowerCase()])h+='<div style="height:16px"><\/div>'+card(ico("apps")+"Company-wise access to this report","From User Wise Branch Access (Finance), transid ruba: these users may run it only for the companies listed",fbTable("ivfb_"+s.id,projIndex().fbScr[s.n.toLowerCase()],true));
+  body.innerHTML=h;countUp(body);bindTables(body,()=>scOverview(s,body,roles));
+  $$(".dcr",body).forEach(e=>e.onclick=()=>{fDC=e.dataset.dc;fF="all";fQ="";go("#/screen/"+s.id+"/fields");});
+}
+function ivCols(s,body){
+  const c=s.iv.cols.map((x,i)=>Object.assign({i:i+1},x));
+  body.innerHTML='<div class="tool"><span class="cnt" style="margin-left:0">'+c.length+' columns in screen order · '+c.filter(x=>x.hid).length+' hidden<\/span><button class="btn" id="icx" style="margin-left:auto">'+ico("dl")+'CSV<\/button><\/div><section class="card">'+table("ivc_"+s.id,[
+    {h:"#",num:1,k:x=>x.i,r:x=>x.i},{h:"Caption / alias",k:x=>(x.cap||x.a).toLowerCase(),r:x=>'<b>'+esc(x.cap||"–")+'<\/b><span class="sub">'+esc(x.a)+'<\/span>'},
+    {h:"Type",k:x=>x.ty,r:x=>esc(x.ty)+(x.dec&&x.dec!=="0"?'<span class="sub">'+esc(x.dec)+' decimals<\/span>':"")},
+    {h:"Width",num:1,k:x=>+x.w||0,r:x=>esc(x.w)},
+    {h:"Flags",k:x=>(x.hid?"a":"")+(x.tot==="True"?"b":""),r:x=>(x.hid?'<span class="tg tg-hid">HIDDEN<\/span> ':"")+(x.tot==="True"?'<span class="tg tg-uq">TOTAL<\/span> ':"")+(x.al==="Right"?'<span class="tg tg-ro">RIGHT<\/span>':"")},
+    {h:"Format",k:x=>x.fmt,r:x=>x.fmt?'<code class="mono" style="font-size:12px">'+esc(x.fmt)+'<\/code>':'<span class="dim">–<\/span>'}],c,{sort:0,dir:1,lim:500,cls:x=>x.hid?"ishid":""})+'<\/section>';
+  $("#icx").onclick=()=>csv("atlas_"+s.n+"_columns",["Order","Alias","Caption","Type","Decimals","Width","Hidden","Total","Format"],c.map(x=>[x.i,x.a,x.cap,x.ty,x.dec,x.w,x.hid?"Y":"",x.tot==="True"?"Y":"",x.fmt]));
+  bindTables(body,()=>ivCols(s,body));
+}
+function ivParams(s,body){
+  const p=s.iv.params;
+  body.innerHTML=p.length?p.map(x=>'<div class="rule"><div class="hd"><code class="mono" style="font-size:14px">:'+esc(x.n)+'<\/code><b>'+esc(x.cap)+'<\/b><span class="st st-grey">'+esc(x.mode||"Accept")+'<\/span><span class="st st-grey">'+esc(x.ty)+'<\/span>'+
+    (x.req.toLowerCase()==="true"?'<span class="st st-amber">Mandatory<\/span>':"")+(x.hid?'<span class="st st-grey">Hidden<\/span>':"")+(x.dflt?'<span class="st st-blue">default '+esc(x.dflt)+'<\/span>':"")+(x.dep?'<span class="st st-teal">drives '+esc(x.dep)+'<\/span>':"")+'<\/div>'+
+    (x.sql?'<div class="sec">List SQL<\/div><pre class="sql">'+esc(x.sql)+'<\/pre>':"")+'<\/div>').join(""):'<div class="empty">'+ico("info")+'This report has no parameters.<\/div>';
+}
+function ivSql(s,body){
+  body.innerHTML='<div class="code-wrap card" style="padding:4px"><button class="btn" id="cpsql">'+ico("copy")+'Copy SQL<\/button><pre class="sql">'+esc(s.iv.sql||"(empty)")+'<\/pre><\/div>'+
+    '<div class="note blue" style="margin-top:14px">'+ico("info")+'<div>Parameters appear as <code class="mono">:name<\/code>. Secret values are masked. Run it in Toad as SELECT only.<\/div><\/div>';
+  $("#cpsql").onclick=()=>copy(s.iv.sql,"SQL");
+}
+function scFields(s,body,fld){
+  const f=s.f,chips=[["all","All",()=>true],["vis","On screen",x=>!x.hid],["hid","Hidden",x=>x.hid],["ro","Read-only",x=>x.ro],["req","Mandatory",x=>x.req],["fx","Has formula",x=>x.ex||x.vx],["uq","No duplicates",x=>x.nodup]];
+  if(fDC&&!s.dcs.some(d=>(d.n||"").toLowerCase()===fDC.toLowerCase()))fDC="";
+  const draw=()=>{
+    const fn=chips.find(c=>c[0]===fF)[2];
+    const L=f.filter(x=>fn(x)&&(!fDC||(x.dc||"").toLowerCase()===fDC.toLowerCase())&&(!fQ||(x.n+" "+(x.cap||"")+" "+(x.ex||"")+" "+(x.vx||"")).toLowerCase().includes(fQ)));
+    let h='<div class="tool"><div class="chips">'+chips.map(c=>'<button class="chip'+(fF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+f.filter(c[2]).length+'<\/span><\/button>').join("")+'<\/div><\/div>'+
+      '<div class="tool"><label class="field"><select id="fdc"><option value="">All DCs ('+s.dcs.length+')<\/option>'+s.dcs.map(d=>'<option value="'+esc(d.n)+'"'+((fDC||"").toLowerCase()===(d.n||"").toLowerCase()?" selected":"")+'>'+esc(d.n+" · "+(d.cap||""))+'<\/option>').join("")+'<\/select><\/label>'+
+      '<label class="field">'+ico("field")+'<input id="fq" placeholder="Field, caption or formula" value="'+esc(fQ)+'"><\/label><span class="cnt">'+L.length+' of '+f.length+' · tap a row for details<\/span><button class="btn" id="fx">'+ico("dl")+'CSV<\/button><\/div>';
+    h+='<section class="card">'+table("fields_"+s.id,[
+      {h:"DC",k:x=>(x.dc||"").padStart(6,"0")+String(x.o).padStart(4,"0"),r:x=>'<span class="mono dim" style="font-size:12px">'+esc(x.dc||"")+'<\/span>'},
+      {h:"#",num:1,k:x=>x.o||0,r:x=>x.o==null?"":x.o},
+      {h:"Caption / field",k:x=>(x.cap||x.n).toLowerCase(),r:x=>'<b>'+esc(x.cap||"–")+'<\/b><span class="sub">'+esc(x.n)+'<\/span>'},
+      {h:"Type",k:x=>x.m||"",r:x=>esc(x.m||"")+'<span class="sub">'+esc((x.ty||"")+(x.w?"("+x.w+")":""))+'<\/span>'},
+      {h:"Flags",k:x=>(x.hid?"a":"")+(x.ro?"b":"")+(x.req?"c":""),r:x=>'<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end">'+(x.hid?'<span class="tg tg-hid">HIDDEN<\/span>':"")+(x.ro?'<span class="tg tg-ro">READ-ONLY<\/span>':"")+(x.req?'<span class="tg tg-req">MANDATORY<\/span>':"")+(x.nodup?'<span class="tg tg-uq">UNIQUE<\/span>':"")+((x.ex||x.vx)?'<span class="tg tg-fx">FX<\/span>':"")+'<\/div>'},
+      {h:"Logic",k:x=>x.ex||x.vx||x.src||"",r:x=>{const t=x.ex||x.vx||(x.src?"from "+x.src:"")||(x.lst?"list: "+x.lst:"");return t?'<span class="mono" style="font-size:12px;color:var(--ink2);display:block;max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(t)+'<\/span>':'<span class="dim">–<\/span>';}}],
+      L,{sort:0,dir:1,lim:500,cls:x=>x.hid?"ishid":"",go:x=>"#/screen/"+s.id+"/fields/"+enc(x.n)})+'<\/section>';
+    body.innerHTML=h;
+    $$(".chip",body).forEach(b=>b.onclick=()=>{fF=b.dataset.f;draw();});
+    $("#fdc").onchange=e=>{fDC=e.target.value;draw();};
+    $("#fq").oninput=e=>{fQ=e.target.value.trim().toLowerCase();draw();keepFocus("fq");};
+    $("#fx").onclick=()=>csv("atlas_"+s.n+"_fields",["DC","Order","Field","Caption","Mode","Type","Width","Hidden","ReadOnly","Mandatory","Unique","Table","Expression","Validation","Source","Recalculates","List"],
+      L.map(x=>[x.dc,x.o,x.n,x.cap,x.m,x.ty,x.w,x.hid?"Y":"",x.ro?"Y":"",x.req?"Y":"",x.nodup?"Y":"",x.tbl,x.ex,x.vx,x.src,x.dep,x.lst]));
+    bindTables(body,draw);
+  };
+  draw();
+  if(fld)openField(s,fld);
+}
+function openField(s,name){
+  const x=s.f.find(z=>z.n===name);if(!x)return;
+  const dc=s.dcs.find(d=>(d.n||"").toLowerCase()===(x.dc||"").toLowerCase())||{};
+  const nm=x.n.toLowerCase(),words=t=>(t||"").toLowerCase().split(/[^a-z0-9_]+/);
+  const drivenBy=s.f.filter(z=>z.dep&&words(z.dep).includes(nm)).map(z=>z.n);
+  const usedIn=s.f.filter(z=>z!==x&&words((z.ex||"")+" "+(z.vx||"")).includes(nm)).map(z=>z.n);
+  const flag=(b,t,c)=>b?'<span class="tg '+c+'">'+t+'<\/span>':"";
+  const link=n=>{const t=s.f.find(z=>z.n.toLowerCase()===n.toLowerCase());return t?'<a class="lnk mono" data-go="#/screen/'+s.id+'/fields/'+enc(t.n)+'">'+esc(n)+'<\/a>':'<span class="mono">'+esc(n)+'<\/span>';};
+  let h='<div class="dh"><div style="flex:1;min-width:0"><small>'+esc(s.cap)+' · '+esc(x.dc||"")+(dc.cap?" · "+esc(dc.cap):"")+'<\/small><h3>'+esc(x.cap||x.n)+'<\/h3><small>'+esc(x.n)+'<\/small><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:10px">'+
+    flag(x.hid,"HIDDEN","tg-hid")+flag(x.ro,"READ-ONLY","tg-ro")+flag(x.req,"MANDATORY","tg-req")+flag(x.nodup,"UNIQUE","tg-uq")+flag(x.ex||x.vx,"FX","tg-fx")+(!x.hid&&!x.ro?'<span class="tg" style="background:var(--greenb);color:var(--green)">EDITABLE<\/span>':"")+'<\/div><\/div>'+
+    '<button class="ib" id="cpf" title="Copy field name">'+ico("copy")+'<\/button><button class="ib" id="dclose" title="Close (Esc)">'+ico("close")+'<\/button><\/div><div class="db">';
+  h+='<dl class="kv"><dt>Mode of entry<\/dt><dd>'+esc(x.m||"–")+'<\/dd><dt>Data type<\/dt><dd class="mono">'+esc((x.ty||"")+(x.w?" ("+x.w+")":""))+'<\/dd><dt>Data container<\/dt><dd>'+esc(x.dc||"")+(dc.grid?' <span class="tg tg-uq">GRID<\/span>':"")+'<\/dd>'+
+     '<dt>Saved to<\/dt><dd class="mono">'+esc((x.tbl||dc.tbl||"–")+"."+x.n)+'<\/dd><dt>Order in DC<\/dt><dd>'+esc(x.o)+'<\/dd>'+(x.src?'<dt>Source<\/dt><dd class="mono">'+esc(x.src)+'<\/dd>':"")+(x.par?'<dt>Parent fields<\/dt><dd class="mono">'+esc(x.par)+'<\/dd>':"")+'<\/dl>';
+  if(x.ex)h+='<div class="sec">Expression<\/div><pre class="code">'+esc(x.ex)+'<\/pre>';
+  if(x.vx)h+='<div class="sec">Validation<\/div><pre class="code">'+esc(x.vx)+'<\/pre>';
+  if(x.lst)h+='<div class="sec">List values<\/div><div style="display:flex;gap:6px;flex-wrap:wrap">'+x.lst.split("|").map(v=>'<span class="st st-grey">'+esc(v)+'<\/span>').join("")+'<\/div>';
+  h+='<div class="sec">Connections<\/div><dl class="kv"><dt>Recalculates<\/dt><dd>'+(x.dep?x.dep.split(/[,\s]+/).filter(Boolean).map(link).join(", "):"–")+'<\/dd><dt>Recalculated by<\/dt><dd>'+(drivenBy.length?drivenBy.map(link).join(", "):"–")+'<\/dd><dt>Used in formula of<\/dt><dd>'+(usedIn.length?usedIn.map(link).join(", "):"–")+'<\/dd><\/dl>';
+  const ctl=(s.cancel||[]).concat(s.remove||[]).filter(r=>(r.control_field||"").toLowerCase()===nm);
+  if(ctl.length)h+='<div class="sec">Button control<\/div><div class="note">'+ico("warn")+'<div>This field drives <b>'+ctl.length+'<\/b> Cancel / Remove rule(s): '+esc([...new Set(ctl.map(r=>r.mechanism||""))].join(", "))+'<\/div><\/div>';
+  const fh=s.find.filter(f=>f.where.toLowerCase().startsWith("field "+nm+" "));
+  if(fh.length)h+='<div class="sec">Hard-coded<\/div>'+fh.map(f=>'<div class="note">'+ico("code")+'<div><b>'+esc(f.kind)+'<\/b> in '+esc(f.where)+': <code class="mono">'+esc(f.hit)+'<\/code><\/div><\/div>').join("");
+  const rr=Object.entries(s.roles).filter(([r,a])=>(a.rules||[]).some(z=>z.n.toLowerCase()===nm));
+  if(rr.length)h+='<div class="sec">Role-level rules<\/div>'+rr.map(([r,a])=>'<div class="note blue">'+ico("lock")+'<div>Role <b>'+esc(r)+'<\/b>: '+esc(rulesTxt(a.rules.filter(z=>z.n.toLowerCase()===nm)))+'<\/div><\/div>').join("");
+  h+='<\/div>';
+  $("#drawer").innerHTML=h;openDrawer();
+  $("#dclose").onclick=()=>go("#/screen/"+s.id+"/fields");
+  $("#cpf").onclick=()=>copy(x.n,x.n);
+  bindGo($("#drawer"));
+}
+function openDrawer(){$("#drawer").classList.add("on");$("#scrim").classList.add("on");}
+function closeDrawer(){$("#drawer").classList.remove("on");$("#scrim").classList.remove("on");}
+$("#scrim").onclick=()=>{const h=hashParts();if(h[0]==="screen"&&h[3])go("#/screen/"+h[1]+"/"+h[2]);else closeDrawer();};
+
+function ruleCard(x,kind){
+  const has=kind==="Cancel"?x.has_cancel:x.has_remove_button,ctl=kind==="Cancel"?x.cancel_control:x.remove_control;
+  const st=has!=="Yes"?["st-grey","No "+kind+" button"]:ctl==="Yes"?["st-green","Controlled"]:ctl==="TBC"?["st-amber","To be tested"]:["st-red","Not controlled"];
+  return '<div class="rule"><div class="hd"><span class="st '+st[0]+'">'+st[1]+'<\/span>'+(x.mechanism?'<b>'+esc(x.mechanism)+'<\/b>':"")+(x.source?'<span class="st st-grey">'+esc(x.source)+'<\/span>':"")+'<span class="mono dim" style="margin-left:auto;font-size:12px">'+esc(x.page_name||"")+'<\/span><\/div>'+
+    (has==="Yes"&&(x.condition||x.apply_when||x.action)?'<div class="flow"><div class="step"><div class="k">When<\/div><div class="v">'+esc(x.apply_when||"–")+'<\/div><\/div><div class="step"><div class="k">If<\/div><div class="v"><code>'+esc(x.condition||"–")+'<\/code><\/div><\/div><div class="step"><div class="k">Then<\/div><div class="v">'+esc(x.action||"–")+(x.control_field?' via <code>'+esc(x.control_field)+'<\/code>':"")+'<\/div><\/div><\/div>':"")+
+    (x.remarks?'<div class="rm">'+esc(x.remarks)+'<\/div>':"")+'<\/div>';
+}
+function scButtons(s,body){
+  body.innerHTML='<div class="bento"><div class="c6">'+card(ico("cancel")+"Cancel button",s.cancel.length+" rule row(s) in AXP_CANCEL_CONTROL_MAP",s.cancel.length?s.cancel.map(x=>ruleCard(x,"Cancel")).join(""):'<div class="empty">Not in the Cancel map.<\/div>',vs(s.cs))+'<\/div>'+
+    '<div class="c6">'+card(ico("del")+"Remove button",s.remove.length+" rule row(s) in AXP_REMOVE_CONTROL_MAP",s.remove.length?s.remove.map(x=>ruleCard(x,"Remove")).join(""):'<div class="empty">Not in the Remove map.<\/div>',vs(s.rs))+'<\/div><\/div>'+
+    '<div class="note blue" style="margin-top:16px">'+ico("info")+'<div><b>Who sees the button:<\/b> everyone who can open this form (tab "Who can open", '+s.users.length+' people), unless a rule above hides or disables it for them. Conditions that check <code class="mono">pusername<\/code> or a role are the per-person part.<\/div><\/div>';
+}
+function scAccess(s,body,roles){
+  const lv=s.users.filter(isLeaver).length;
+  let h='<div class="note blue">'+ico("info")+'<div><b>Menu<\/b> = role has the menu page (AXUSERACCESS stype p). <b>Screen<\/b> = role has the '+KIND[s.k].n.toLowerCase()+' itself (stype t / i). Not yet proven which one Axpert needs: here either one counts as access. <b>Role rule<\/b> = a field / DC / button the role gets disabled or hidden (decoded from PROPS: c = d DC · f field · b button, a = d disable · h hide, read from the names).<\/div><\/div>';
+  h+='<div class="bento"><div class="c5">'+card("Roles · "+roles.length,"Tap a role for its people and screens",roles.length?table("sroles_"+s.id,[
+    {h:"Role",k:r=>r.toLowerCase(),r:r=>'<b>'+esc(r)+'<\/b>'+(s.roles[r].rules?'<span class="sub" style="color:var(--blue)">'+esc(rulesTxt(s.roles[r].rules))+'<\/span>':"")},
+    {h:"Menu",k:r=>s.roles[r].menu?1:0,r:r=>s.roles[r].menu?'<span class="st st-green">Yes<\/span>':'<span class="st st-grey">No<\/span>'},
+    {h:"Screen",k:r=>s.roles[r].obj?1:0,r:r=>s.roles[r].obj?'<span class="st st-green">Yes<\/span>':'<span class="st st-grey">No<\/span>'},
+    {h:"People",num:1,k:r=>liveUsers(r).length,r:r=>liveUsers(r).length}],roles,{sort:3,go:r=>"#/role/"+enc(r)}):'<div class="empty">No role has access.<\/div>')+'<\/div>';
+  h+='<div class="c7">'+card("People · "+s.users.length,lv?'<span style="color:var(--red)">'+lv+' of them left the company<\/span>':"Everyone with a live role and login on",table("susers_"+s.id,[
+    {h:"Person",k:u=>(U[u].nm||u).toLowerCase(),r:who},
+    {h:"Department",k:u=>U[u].dept||"",r:dept},
+    {h:"HR",k:u=>hrCat(u)==="left"?0:1,r:hrSt},
+    {h:"Via role",k:u=>"",r:u=>'<span class="dim" style="font-size:12.5px">'+esc(liveR(u).filter(r=>s.roles[r]).join(", "))+'<\/span>'}],s.users,{sort:2,dir:1,go:u=>"#/person/"+enc(u)}),"<button class='btn' id='sux'>"+ico("dl")+"CSV<\/button>")+'<\/div><\/div>';
+  body.innerHTML=h;
+  $("#sux").onclick=()=>csv("atlas_"+s.n+"_people",["EmpID","Name","Department","HR status","Roles"],s.users.map(u=>[u,U[u].nm,U[u].dept,U[u].hr,liveR(u).filter(r=>s.roles[r]).join(" ")]));
+  bindTables(body,()=>scAccess(s,body,roles));
+}
+
+/* ---------- ACCESS MATRIX ---------- */
+let mxMode="t";
+function vMatrix(){
+  let h='<div class="ph"><div><h1>Access matrix<\/h1><p>Every role against every screen of '+esc(M.module)+', grouped by menu folder. Hover or tap a cell; click opens that screen. On a phone, scroll the grid sideways.<\/p><\/div><\/div>';
+  h+='<div class="tool"><div class="chips"><button class="chip'+(mxMode==="t"?" on":"")+'" data-m="t">Forms <span class="n">'+forms.length+'<\/span><\/button><button class="chip'+(mxMode==="all"?" on":"")+'" data-m="all">Forms + reports <span class="n">'+S.filter(s=>s.k!=="p").length+'<\/span><\/button><\/div>'+
+    '<div class="legend" style="margin:0"><span><i class="sw" style="background:var(--blue)"><\/i>Menu + screen<\/span><span><i class="sw" style="background:var(--teal)"><\/i>Screen only<\/span><span><i class="sw" style="background:var(--amber)"><\/i>Menu only<\/span><span><i class="sw" style="background:var(--surf2);outline:1px solid var(--line2)"><\/i>No access<\/span><\/div><\/div>';
+  h+='<section class="card"><div class="mxwrap" id="mxw"><canvas id="mx"><\/canvas><\/div><\/section>';
+  $("#view").innerHTML=h;
+  $$(".chip[data-m]").forEach(b=>b.onclick=()=>{mxMode=b.dataset.m;vMatrix();});
+  drawMatrix();
+}
+function drawMatrix(){
+  const cv=$("#mx");if(!cv||!S)return;
+  const cols=S.filter(s=>mxMode==="t"?s.k==="t":s.k!=="p").sort((a,b)=>a.folder.localeCompare(b.folder)||a.cap.localeCompare(b.cap));
+  const rows=Object.keys(R).map(r=>({r,n:cols.filter(s=>s.roles[r]).length})).filter(x=>x.n).sort((a,b)=>b.n-a.n||a.r.localeCompare(b.r));
+  const small=innerWidth<700,cell=small?14:12,gap=2,LW=small?130:200,TH=small?130:160,dpr=window.devicePixelRatio||1,st=cell+gap;
+  const W=LW+cols.length*st+30,Hh=TH+rows.length*st+12;
+  cv.width=W*dpr;cv.height=Hh*dpr;cv.style.width=W+"px";cv.style.height=Hh+"px";
+  const g=cv.getContext("2d");g.setTransform(dpr,0,0,dpr,0,0);
+  const C={blue:css("--blue"),teal:css("--teal"),amber:css("--amber"),e:css("--surf2"),ink:css("--ink"),ink3:css("--ink3"),line2:css("--line2")};
+  const font=css("--font");g.textBaseline="middle";
+  let i0=0,b=0;while(i0<cols.length){let i1=i0;while(i1<cols.length&&cols[i1].folder===cols[i0].folder)i1++;g.fillStyle=b++%2?C.line2:C.blue;g.fillRect(LW+i0*st,TH-8,(i1-i0)*st-gap,4);i0=i1;}
+  const cut=(t,n)=>t.length>n?t.slice(0,n-1)+"…":t;
+  cols.forEach((s,i)=>{g.save();g.translate(LW+i*st+cell/2+3,TH-14);g.rotate(-Math.PI/3);g.fillStyle=C.ink3;g.font="11px "+font;g.fillText(cut(s.cap,small?18:26),0,0);g.restore();});
+  rows.forEach((row,j)=>{const y=TH+j*st;g.fillStyle=C.ink;g.font="12px "+font;g.textAlign="right";g.fillText(cut(row.r,small?15:24),LW-36,y+cell/2);
+    g.fillStyle=C.ink3;g.font="11px "+css("--mono");g.fillText(row.n,LW-10,y+cell/2);g.textAlign="left";
+    cols.forEach((s,i)=>{const a=s.roles[row.r];g.fillStyle=!a?C.e:a.menu&&a.obj?C.blue:a.obj?C.teal:C.amber;g.beginPath();
+      if(g.roundRect)g.roundRect(LW+i*st,y,cell,cell,3);else g.rect(LW+i*st,y,cell,cell);g.fill();});});
+  const tip=$("#tip");let lastTap=null;
+  const hit=e=>{const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,i=Math.floor((x-LW)/st),j=Math.floor((y-TH)/st);
+    return (x>=LW&&y>=TH&&i>=0&&j>=0&&i<cols.length&&j<rows.length)?{s:cols[i],r:rows[j].r}:null;};
+  const show=(e,h)=>{const a=h.s.roles[h.r];tip.innerHTML='<b>'+esc(h.r)+'<\/b> → <b>'+esc(h.s.cap)+'<\/b><br>'+(a?(a.menu&&a.obj?"Menu + screen access":a.obj?"Screen access, no menu entry":"Menu entry, no screen access"):"No access")+'<br>'+liveUsers(h.r).length+' people in role · '+esc(h.s.folder)+(e.pointerType==="touch"?'<br><i>tap again to open<\/i>':"");
+    tip.style.left=Math.max(8,Math.min(e.clientX+14,innerWidth-330))+"px";tip.style.top=(e.clientY+14)+"px";tip.classList.add("on");};
+  cv.onpointermove=e=>{if(e.pointerType!=="mouse")return;const h=hit(e);if(!h){tip.classList.remove("on");cv.style.cursor="default";return;}cv.style.cursor="pointer";show(e,h);};
+  cv.onpointerleave=()=>tip.classList.remove("on");
+  cv.onpointerup=e=>{const h=hit(e);if(!h)return;
+    if(e.pointerType!=="mouse"){const k=h.r+"|"+h.s.id;if(lastTap!==k){lastTap=k;show(e,h);return;}}
+    tip.classList.remove("on");go("#/screen/"+h.s.id+"/access");};
+}
+
+/* ---------- PEOPLE (module) ---------- */
+let pF="all",pQ="";
+function vPeople(){
+  const chips=[["all","Everyone with access",u=>true],["left","Left, login on",isLeaver],["act","Active in HR",u=>hrCat(u)==="act"]];
+  const draw=()=>{
+    const fn=chips.find(c=>c[0]===pF)[2];
+    const L=workU.filter(u=>fn(u)&&(!pQ||(u+" "+(U[u].nm||"")+" "+(U[u].dept||"")).toLowerCase().includes(pQ)));
+    let h='<div class="ph"><div><h1>People<\/h1><p>Everyone whose Axpert login is on and who sits in a live role with access to '+esc(M.module)+'. Tap a person to see exactly what they can open and which buttons they get. <a class="lnk" data-go="#@/all/people">All modules →<\/a><\/p><\/div><\/div>';
+    h+='<div class="tool"><div class="chips">'+chips.map(c=>'<button class="chip'+(pF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+workU.filter(c[2]).length+'<\/span><\/button>').join("")+'<\/div>'+
+      '<label class="field">'+ico("people")+'<input id="pq" placeholder="ID, name or department" value="'+esc(pQ)+'"><\/label><span class="cnt">'+L.length+'<\/span><button class="btn" id="px">'+ico("dl")+'CSV<\/button><\/div>';
+    h+='<section class="card">'+table("people",[
+      {h:"Person",k:u=>(U[u].nm||u).toLowerCase(),r:who},
+      {h:"Department",k:u=>U[u].dept||"",r:dept},
+      {h:"HR status",k:u=>hrCat(u),r:hrSt},
+      {h:"Roles",num:1,k:u=>liveR(u).length,r:u=>liveR(u).length},
+      {h:"Forms",num:1,k:u=>uScr[u].filter(s=>s.k==="t").length,r:u=>uScr[u].filter(s=>s.k==="t").length},
+      {h:"Reports",num:1,k:u=>uScr[u].filter(s=>s.k!=="t").length,r:u=>uScr[u].filter(s=>s.k!=="t").length},
+      {h:"Cancel buttons",num:1,k:u=>uScr[u].filter(s=>hasBtn(s.cs)).length,r:u=>uScr[u].filter(s=>hasBtn(s.cs)).length},
+      {h:"Remove buttons",num:1,k:u=>uScr[u].filter(s=>hasBtn(s.rs)).length,r:u=>uScr[u].filter(s=>hasBtn(s.rs)).length}],
+      L,{sort:4,go:u=>"#/person/"+enc(u)})+'<\/section>';
+    $("#view").innerHTML=h;
+    $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{pF=b.dataset.f;draw();});
+    $("#pq").oninput=e=>{pQ=e.target.value.trim().toLowerCase();draw();keepFocus("pq");};
+    $("#px").onclick=()=>csv("atlas_"+CUR+"_people",["EmpID","Name","Department","HR status","Roles","Forms","Reports"],L.map(u=>[u,U[u].nm,U[u].dept,U[u].hr,liveR(u).join(" "),uScr[u].filter(s=>s.k==="t").length,uScr[u].filter(s=>s.k!=="t").length]));
+    bindTables($("#view"),draw);
+  };
+  draw();
+}
+function vPerson(u){
+  const x=U[u];if(!x){$("#view").innerHTML='<div class="empty">'+ico("info")+'This person has no role in '+esc(M.module)+'. <a class="lnk" data-go="#@/all/person/'+enc(u)+'">See all modules<\/a><\/div>';return;}
+  const rs=(userRoles[u]||[]).slice().sort((a,b)=>b.live-a.live),live=rs.filter(r=>r.live).map(r=>r.r);
+  const sc=uScr[u]||[],fm=sc.filter(s=>s.k==="t").sort((a,b)=>a.cap.localeCompare(b.cap)),rp=sc.filter(s=>s.k!=="t");
+  const cb=fm.filter(s=>hasBtn(s.cs)),rb=fm.filter(s=>hasBtn(s.rs));
+  const other=ATLAS.people&&ATLAS.people[u]?ATLAS.mods.filter(m=>ATLAS.people[u].m[m.slug]&&m.slug!==CUR):[];
+  let h='<div class="crumbs"><a data-go="#/people">People<\/a>'+ico("chev")+'<span>'+esc(x.nm||u)+'<\/span><\/div>';
+  h+='<section class="card hero spot" style="margin-top:12px"><span class="av" style="width:64px;height:64px;font-size:22px;background:'+avc(u)+'">'+ini(x.nm||u)+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(x.nm||u)+'<\/h2><div class="meta"><code>'+esc(u)+'<\/code><span>'+esc(x.dept||"–")+'<\/span>'+hrSt(u)+'<span class="st '+(x.ax?"st-green":"st-grey")+'">Login '+(x.ax?"on":"off")+'<\/span>'+(x.dor&&hrCat(u)!=="act"?'<span>left on <b style="font-weight:500">'+esc(x.dor.slice(0,10))+'<\/b><\/span>':"")+'<\/div>'+
+     (other.length?'<div class="modchips" style="margin-top:10px"><span class="dim" style="font-size:12.5px">Also in:<\/span>'+other.map(m=>'<a class="st st-blue" style="text-decoration:none;cursor:pointer" data-go="#@/'+m.slug+'/person/'+enc(u)+'">'+esc(m.name)+'<\/a>').join("")+'<a class="lnk" style="font-size:12.5px" data-go="#@/all/person/'+enc(u)+'">all modules, projects, companies →<\/a><\/div>':"")+'<\/div>'+
+     '<div class="right"><button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
+  if(isLeaver(u))h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>Action needed:<\/b> HR says '+esc(hrLabel(x.hr))+', but this Axpert login is on and can open everything below.<\/div><\/div>';
+  if(!working(u))h+='<div class="note blue" style="margin-top:16px">'+ico("info")+'<div>'+(x.ax?"No live role in this module.":"Axpert login is off.")+' Nothing below is reachable today.<\/div><\/div>';
+  h+='<div class="kpis" style="margin-top:16px">'+kpi("key","var(--teal)","Live roles",live.length,(rs.length-live.length)+" ended","")+kpi("form","var(--blue)","Forms",fm.length,"can open","")+kpi("report","var(--green)","Reports / pages",rp.length,"can open","")+
+     kpi("cancel","var(--amber)","Cancel buttons",cb.length,cb.filter(s=>s.cs.key==="tbc").length+" not yet tested","")+kpi("del","var(--red)","Remove buttons",rb.length,rb.filter(s=>s.rs.key==="open").length+" with no control","")+'<\/div>';
+  h+=card("Access path","Person → role → form. Hover a role to trace it; tap a role or a form to open it.",accessPath(u,live,fm));
+  h+='<div style="height:16px"><\/div><div class="bento"><div class="c4">'+card("Roles","Live and ended links (AXUSERLEVELGROUPS)",rs.length?rs.map(r=>'<div class="hb" data-go="#/role/'+enc(r.r)+'" style="grid-template-columns:1fr auto"><span class="l" style="'+(r.live?"":"text-decoration:line-through;color:var(--ink3)")+'">'+esc(r.r)+'<\/span><span class="st '+(r.live?"st-green":"st-grey")+'">'+(r.live?"live":"ended")+'<\/span><\/div>').join(""):'<div class="empty">No role.<\/div>')+'<\/div>';
+  h+='<div class="c8">'+card("Screens","Everything reachable through live roles",table("pscr_"+u,[
+    {h:"Screen",k:s=>s.cap.toLowerCase(),r:scr},
+    {h:"Cancel",k:s=>s.cs?s.cs.key:"",r:s=>vs(s.cs)},{h:"Remove",k:s=>s.rs?s.rs.key:"",r:s=>vs(s.rs)},
+    {h:"Via",k:s=>"",r:s=>'<span class="dim" style="font-size:12.5px">'+esc(live.filter(r=>s.roles[r]).join(", "))+'<\/span>'}],fm.concat(rp),{sort:1,go:s=>"#/screen/"+s.id}))+'<\/div><\/div>';
+  $("#view").innerHTML=h;
+  $("#cpu").onclick=()=>copy(u,u);
+  const pth=$(".path");
+  if(pth){$$(".nd.role",pth).forEach(n=>{n.onmouseenter=()=>{pth.classList.add("hot");$$(".edge",pth).forEach(e=>e.classList.toggle("on",e.dataset.r===n.dataset.r));};n.onmouseleave=()=>{pth.classList.remove("hot");$$(".edge.on",pth).forEach(e=>e.classList.remove("on"));};});
+    $$(".nd[data-href]",pth).forEach(n=>n.onclick=()=>go(n.dataset.href));}
+  bindTables($("#view"),()=>vPerson(u));
+}
+function accessPath(u,live,fm){
+  if(!live.length||!fm.length)return'<div class="empty">'+ico("info")+'No form reachable.<\/div>';
+  const rowH=26,top=10,W=1000,x0=10,x1=330,x2=640,nw=240,n=Math.max(fm.length,live.length),H2=top*2+n*rowH;
+  const ry=i=>top+(i+.5)*(H2-top*2)/live.length, fy=i=>top+(i+.5)*(H2-top*2)/fm.length;
+  const pY=H2/2;let e="",nd="";
+  live.forEach((r,i)=>{e+='<path class="edge" data-r="'+esc(r)+'" d="M'+(x0+210)+' '+pY+' C'+(x0+270)+' '+pY+' '+(x1-60)+' '+ry(i)+' '+x1+' '+ry(i)+'"/>';});
+  fm.forEach((s,j)=>live.forEach((r,i)=>{if(s.roles[r])e+='<path class="edge" data-r="'+esc(r)+'" d="M'+(x1+nw)+' '+ry(i)+' C'+(x1+nw+60)+' '+ry(i)+' '+(x2-60)+' '+fy(j)+' '+x2+' '+fy(j)+'"/>';}));
+  nd+='<g class="nd"><rect x="'+x0+'" y="'+(pY-18)+'" width="210" height="36" rx="18" style="fill:'+avc(u)+';stroke:none"/><text x="'+(x0+105)+'" y="'+(pY+4)+'" text-anchor="middle" style="fill:#fff;font-weight:500">'+esc((U[u].nm||u).slice(0,28))+'<\/text><\/g>';
+  live.forEach((r,i)=>{nd+='<g class="nd role" data-r="'+esc(r)+'" data-href="#/role/'+esc(enc(r))+'"><rect x="'+x1+'" y="'+(ry(i)-12)+'" width="'+nw+'" height="24" rx="12"/><text x="'+(x1+14)+'" y="'+(ry(i)+4)+'">'+esc(r.slice(0,30))+'<\/text><\/g>';});
+  fm.forEach((s,j)=>{const c=s.rs.key==="open"?"var(--red)":s.cs.key==="tbc"?"var(--amber)":"var(--green)";
+    nd+='<g class="nd scr" data-href="#/screen/'+s.id+'"><rect x="'+x2+'" y="'+(fy(j)-11)+'" width="'+(W-x2-10)+'" height="22" rx="6"/><circle cx="'+(x2+12)+'" cy="'+fy(j)+'" r="4" fill="'+c+'"/><text x="'+(x2+24)+'" y="'+(fy(j)+4)+'">'+esc(s.cap.slice(0,42))+'<\/text><title>'+esc(s.cap+" · Cancel: "+s.cs.v+" · Remove: "+s.rs.v)+'<\/title><\/g>';});
+  return '<div class="path" style="overflow-x:auto"><svg viewBox="0 0 '+W+' '+H2+'" style="min-width:760px">'+e+nd+'<\/svg><\/div><div class="legend"><span><i class="sw" style="background:var(--green)"><\/i>Buttons controlled or none<\/span><span><i class="sw" style="background:var(--amber)"><\/i>Cancel to be tested<\/span><span><i class="sw" style="background:var(--red)"><\/i>Remove open<\/span><\/div>';
+}
+
+/* ---------- ROLES ---------- */
+let rQ="";
+function vRoles(){
+  const all=Object.keys(R);
+  const draw=()=>{
+    const L=all.filter(r=>!rQ||r.toLowerCase().includes(rQ));
+    let h='<div class="ph"><div><h1>Roles<\/h1><p>Every role (AXUSERGROUPS) with at least one '+esc(M.module)+' screen. People = active logins in the role today.<\/p><\/div><\/div>';
+    h+='<div class="tool"><label class="field">'+ico("key")+'<input id="rq" placeholder="Filter roles" value="'+esc(rQ)+'"><\/label><span class="cnt">'+L.length+'<\/span><button class="btn" id="rx">'+ico("dl")+'CSV<\/button><\/div>';
+    h+='<section class="card">'+table("roles",[
+      {h:"Role",k:r=>r.toLowerCase(),r:r=>'<b>'+esc(r)+'<\/b>'},
+      {h:"People",num:1,k:r=>liveUsers(r).length,r:r=>{const lu=liveUsers(r);return '<div style="display:flex;align-items:center;gap:10px;justify-content:flex-end"><span class="avs">'+lu.slice(0,4).map(av).join("")+(lu.length>4?'<span class="av more">+'+(lu.length-4)+'<\/span>':"")+'<\/span>'+lu.length+'<\/div>';}},
+      {h:"Left, login on",num:1,k:r=>liveUsers(r).filter(isLeaver).length,r:r=>{const n=liveUsers(r).filter(isLeaver).length;return n?'<span class="st st-red">'+n+'<\/span>':'<span class="dim">0<\/span>';}},
+      {h:"Forms",num:1,k:r=>(roleScreens[r]||[]).filter(s=>s.k==="t").length,r:r=>(roleScreens[r]||[]).filter(s=>s.k==="t").length},
+      {h:"Reports",num:1,k:r=>(roleScreens[r]||[]).filter(s=>s.k!=="t").length,r:r=>(roleScreens[r]||[]).filter(s=>s.k!=="t").length},
+      {h:"Ended links",num:1,k:r=>R[r].ended.length,r:r=>R[r].ended.length}],L,{sort:1,go:r=>"#/role/"+enc(r)})+'<\/section>';
+    $("#view").innerHTML=h;
+    $("#rq").oninput=e=>{rQ=e.target.value.trim().toLowerCase();draw();keepFocus("rq");};
+    $("#rx").onclick=()=>csv("atlas_"+CUR+"_roles",["Role","People","Left login on","Forms","Reports","Ended links"],L.map(r=>[r,liveUsers(r).length,liveUsers(r).filter(isLeaver).length,(roleScreens[r]||[]).filter(s=>s.k==="t").length,(roleScreens[r]||[]).filter(s=>s.k!=="t").length,R[r].ended.length]));
+    bindTables($("#view"),draw);
+  };
+  draw();
+}
+function vRole(r){
+  if(!R[r]){$("#view").innerHTML='<div class="empty">'+ico("info")+'Role not found in '+esc(M.module)+'.<\/div>';return;}
+  const lu=liveUsers(r),sc=roleScreens[r]||[],fm=sc.filter(s=>s.k==="t");
+  let h='<div class="crumbs"><a data-go="#/roles">Roles<\/a>'+ico("chev")+'<span>'+esc(r)+'<\/span><\/div>';
+  h+='<section class="card hero spot" style="--k:var(--teal);margin-top:12px"><span class="big">'+ico("key")+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(r)+'<\/h2><div class="meta"><span>'+lu.length+' people<\/span><span>'+fm.length+' forms<\/span><span>'+(sc.length-fm.length)+' reports / pages<\/span><span>'+R[r].ended.length+' ended links<\/span><\/div><\/div><div class="right"><button class="btn" id="cpr">'+ico("copy")+'Copy role<\/button><\/div><\/section>';
+  h+='<div class="kpis" style="margin-top:16px">'+kpi("people","var(--green)","People",lu.length,"active logins","")+kpi("leave","var(--red)","Left, login on",lu.filter(isLeaver).length,"still in this role","")+kpi("cancel","var(--amber)","Forms with Cancel",fm.filter(s=>hasBtn(s.cs)).length,"open to this role","")+kpi("del","var(--red)","Remove open",fm.filter(s=>s.rs.key==="open").length,"no control","")+'<\/div>';
+  h+='<div class="bento"><div class="c6">'+card("People in this role","",table("rusers_"+r,[
+    {h:"Person",k:u=>(U[u].nm||u).toLowerCase(),r:who},{h:"Department",k:u=>U[u].dept||"",r:dept},{h:"HR",k:u=>hrCat(u)==="left"?0:1,r:hrSt}],lu,{sort:2,dir:1,go:u=>"#/person/"+enc(u)}))+'<\/div>';
+  h+='<div class="c6">'+card("Screens this role opens","",table("rscr_"+r,[
+    {h:"Screen",k:s=>s.cap.toLowerCase(),r:scr},
+    {h:"Access",k:s=>s.roles[r].menu&&s.roles[r].obj?2:1,r:s=>{const a=s.roles[r];return (a.menu&&a.obj?'<span class="st st-blue">Menu + screen<\/span>':a.obj?'<span class="st st-teal">Screen only<\/span>':'<span class="st st-amber">Menu only<\/span>')+(a.rules?'<span class="sub" style="color:var(--blue)">'+esc(rulesTxt(a.rules))+'<\/span>':"");}},
+    {h:"Cancel",k:s=>s.cs?s.cs.key:"",r:s=>vs(s.cs)},{h:"Remove",k:s=>s.rs?s.rs.key:"",r:s=>vs(s.rs)}],sc,{sort:0,dir:1,go:s=>"#/screen/"+s.id}))+'<\/div><\/div>';
+  $("#view").innerHTML=h;$("#cpr").onclick=()=>copy(r,r);bindTables($("#view"),()=>vRole(r));
+}
+
+/* ---------- HEALTH ---------- */
+function vHealth(sel){
+  const c=HI[sel]||H.find(x=>x.list.length)||H[0];
+  let h='<div class="ph"><div><h1>Health · '+esc(M.module)+'<\/h1><p>Problems found automatically in the snapshot. Pick a card to see the list, copy the IDs or export it.<\/p><\/div><\/div>';
+  h+='<div class="note blue">'+ico("info")+'<div><b>HR status (verified 07/11/2026):<\/b> EMPMAST has one row per employee. Resignation, Termination, Absconding and Cancel rows all carry a relieving date (DOR), so all four count as "left".<\/div><\/div>';
+  h+='<div class="hgrid">'+H.map(x=>'<div class="card hov spot hc'+(x.id===c.id?" sel":"")+'" style="--k:'+(x.list.length?x.k:"var(--green)")+'" data-go="#/health/'+x.id+'"><div class="row1"><span class="ic">'+ico(x.list.length?x.ic:"ok")+'<\/span><span class="sev">'+(x.list.length?x.sev:"Clear")+'<\/span><\/div><div class="v" data-count="'+x.list.length+'">0<\/div><h3>'+esc(x.ttl)+'<\/h3><p>'+esc(x.why)+'<\/p><\/div>').join("")+'<\/div>';
+  let tbl="",ids=[],rows=[],head=[];
+  if(c.kind==="users"){ids=c.list;head=["EmpID","Name","Department","HR status","Left on","Roles"];rows=c.list.map(u=>[u,U[u].nm,U[u].dept,U[u].hr,U[u].dor,liveR(u).join(" ")]);
+    tbl=table("h_"+c.id,[{h:"Person",k:u=>(U[u].nm||u).toLowerCase(),r:who},{h:"Department",k:u=>U[u].dept||"",r:dept},{h:"HR",k:u=>U[u].hr||"",r:hrSt},
+      {h:"Left on",k:u=>(U[u].dor||"").slice(0,10).split("/").reverse().join(""),r:u=>'<span class="mono" style="font-size:12.5px">'+esc((U[u].dor||"–").slice(0,10))+'<\/span>'},
+      {h:"Live roles",k:u=>liveR(u).length,r:u=>'<span class="dim" style="font-size:12.5px">'+esc(liveR(u).join(", "))+'<\/span>'},
+      {h:"Screens",num:1,k:u=>uScr[u].length,r:u=>uScr[u].length}],c.list,{sort:3,go:u=>"#/person/"+enc(u)});}
+  else if(c.kind==="screens"){ids=c.list.map(s=>s.n);head=["Screen","Name","Folder","Cancel","Remove","People"];rows=c.list.map(s=>[s.cap,s.n,s.folder,s.cs?s.cs.v:"",s.rs?s.rs.v:"",s.users.length]);
+    tbl=table("h_"+c.id,[{h:"Screen",k:s=>s.cap.toLowerCase(),r:scr},{h:"Folder",k:s=>s.folder,r:s=>'<span class="dim">'+esc(s.folder)+'<\/span>'},{h:"Cancel",k:s=>s.cs?s.cs.key:"",r:s=>vs(s.cs)},{h:"Remove",k:s=>s.rs?s.rs.key:"",r:s=>vs(s.rs)},
+      {h:"People",num:1,k:s=>s.users.length,r:s=>s.users.length}],c.list,{sort:4,go:s=>"#/screen/"+s.id+"/"+(/cancel|remove/.test(c.id)?"buttons":"access")});}
+  else if(c.kind==="roles"){ids=c.list;head=["Role","Screens","Ended links"];rows=c.list.map(r=>[r,(roleScreens[r]||[]).length,R[r].ended.length]);
+    tbl=table("h_"+c.id,[{h:"Role",k:r=>r.toLowerCase(),r:r=>'<b>'+esc(r)+'<\/b>'},{h:"Screens",num:1,k:r=>(roleScreens[r]||[]).length,r:r=>(roleScreens[r]||[]).length},{h:"Ended links",num:1,k:r=>R[r].ended.length,r:r=>R[r].ended.length}],c.list,{sort:1,go:r=>"#/role/"+enc(r)});}
+  else if(c.kind==="findings"){ids=c.list.map(f=>f.sc.n+"\t"+f.where+"\t"+f.hit);head=["Screen","Name","Kind","Where","Found"];rows=c.list.map(f=>[f.sc.cap,f.sc.n,f.kind,f.where,f.hit]);
+    tbl=table("h_"+c.id,[{h:"Screen",k:f=>f.sc.cap.toLowerCase(),r:f=>scr(f.sc)},{h:"Kind",k:f=>f.kind,r:f=>'<span class="st '+(f.kind==="Secret in logic"?"st-red":f.kind==="Server address"?"st-purple":"st-amber")+'">'+esc(f.kind)+'<\/span>'},
+      {h:"Where",k:f=>f.where,r:f=>esc(f.where)},{h:"Found",k:f=>f.hit,r:f=>'<code class="mono" style="font-size:12px">'+esc(f.hit)+'<\/code>'}],c.list,{sort:1,go:f=>"#/screen/"+f.s+(f.where.startsWith("field ")?"/fields/"+enc(f.where.split(" ")[1]):"")});}
+  else if(c.kind==="props"){ids=c.list.map(p=>p.r+"\t"+p.sc.n);head=["Role","Screen","Name","Rules"];rows=c.list.map(p=>[p.r,p.sc.cap,p.sc.n,rulesTxt(p.rules)]);
+    tbl=table("h_"+c.id,[{h:"Role",k:p=>p.r.toLowerCase(),r:p=>'<b>'+esc(p.r)+'<\/b>'},{h:"Screen",k:p=>p.sc.cap.toLowerCase(),r:p=>scr(p.sc)},{h:"Rule",k:p=>rulesTxt(p.rules),r:p=>'<div class="rl">'+p.rules.map(z=>'<span class="st '+(z.a==="Hide"?"st-purple":"st-blue")+'">'+esc(z.a+" "+z.c.toLowerCase())+' <code class="mono">'+esc(z.n)+'<\/code><\/span>').join("")+'<\/div>'}],c.list,{sort:0,dir:1,go:p=>"#/screen/"+p.s+"/access"});}
+  else {ids=c.list.map(p=>p.r+"\t"+p.s.n);head=["Role","Screen","Name","Has"];rows=c.list.map(p=>[p.r,p.s.cap,p.s.n,p.t]);
+    tbl=table("h_"+c.id,[{h:"Role",k:p=>p.r.toLowerCase(),r:p=>'<b>'+esc(p.r)+'<\/b>'},{h:"Screen",k:p=>p.s.cap.toLowerCase(),r:p=>scr(p.s)},
+      {h:"Has",k:p=>p.t,r:p=>'<span class="st '+(p.t==="Menu only"?"st-amber":"st-teal")+'">'+p.t+'<\/span>'},{h:"People in role",num:1,k:p=>liveUsers(p.r).length,r:p=>liveUsers(p.r).length}],c.list,{sort:3,go:p=>"#/screen/"+p.s.id+"/access"});}
+  h+='<div style="height:20px"><\/div>'+card(esc(c.ttl)+' · '+fmt(c.list.length),esc(c.why),c.list.length?tbl:'<div class="empty">'+ico("ok")+'Nothing here. All clear.<\/div>',
+     c.list.length?'<button class="btn" id="hcp">'+ico("copy")+'Copy IDs<\/button><button class="btn pri" id="hcx">'+ico("dl")+'Export CSV<\/button>':"");
+  $("#view").innerHTML=h;
+  if(c.list.length){$("#hcp").onclick=()=>copy(ids.join("\n"),fmt(ids.length)+" rows");$("#hcx").onclick=()=>csv("atlas_"+CUR+"_"+c.id,head,rows);}
+  bindTables($("#view"),()=>{vHealth(c.id);countUp($("#view"));});
+}
+
+/* ---------- CHANGES since the previous scan ---------- */
+let chF="all",chQ="";
+function vChanges(){
+  let h='<div class="ph"><div><h1>Changes · '+esc(M.module)+'<\/h1><p>'+(CHG?'What changed in Axpert between the scan of <b>'+esc(M.baseline)+'<\/b> and <b>'+esc(M.scanned)+'<\/b>.':'')+'<\/p><\/div><\/div>';
+  if(!CHG){$("#view").innerHTML=h+'<div class="empty">'+ico("hist")+'No earlier scan of '+esc(M.module)+' to compare with. Changes show from the next daily scan.<\/div>';return;}
+  const types=[...new Set(CHG.map(c=>c.t))].sort();
+  const icon=t=>/added|granted/i.test(t)?"st-green":/removed|left/i.test(t)?"st-red":"st-amber";
+  const draw=()=>{
+    const L=CHG.filter(c=>(chF==="all"||c.t===chF)&&(!chQ||JSON.stringify(c).toLowerCase().includes(chQ)));
+    let x=h+'<div class="kpis">'+[["Screens","Screen"],["Fields","Field"],["Access","Access"],["People in roles","Person"],["Button rules","rule"]].map(k=>kpi("hist","var(--blue)",k[0],CHG.filter(c=>c.t.includes(k[1])).length,"changes","")).join("")+'<\/div>';
+    x+='<div class="tool"><div class="chips"><button class="chip'+(chF==="all"?" on":"")+'" data-f="all">All <span class="n">'+CHG.length+'<\/span><\/button>'+types.map(t=>'<button class="chip'+(chF===t?" on":"")+'" data-f="'+esc(t)+'">'+esc(t)+' <span class="n">'+CHG.filter(c=>c.t===t).length+'<\/span><\/button>').join("")+'<\/div>'+
+       '<label class="field">'+ico("hist")+'<input id="chq" placeholder="Filter changes" value="'+esc(chQ)+'"><\/label><span class="cnt">'+L.length+'<\/span><button class="btn" id="chx">'+ico("dl")+'CSV<\/button><\/div>';
+    x+='<section class="card">'+(CHG.length?table("changes",[
+      {h:"Change",k:c=>c.t,r:c=>'<span class="st '+icon(c.t)+'">'+esc(c.t)+'<\/span>'},
+      {h:"What",k:c=>c.what||"",r:c=>'<b>'+esc(c.what||"")+'<\/b>'+(c.scr?'<span class="sub">'+esc((SID["t:"+c.scr]||{}).cap||c.scr)+'<\/span>':"")},
+      {h:"Before",k:c=>c.old||"",r:c=>c.old?'<span class="chg-old mono" style="font-size:12px">'+esc(c.old)+'<\/span>':'<span class="dim">–<\/span>'},
+      {h:"Now",k:c=>c.new||"",r:c=>c.new?'<span class="chg-new mono" style="font-size:12px">'+esc(c.new)+'<\/span>':'<span class="dim">–<\/span>'}],L,{sort:0,dir:1,go:c=>c.scr&&SID["t:"+c.scr]?"#/screen/t:"+c.scr:c.u&&U[c.u]?"#/person/"+enc(c.u):c.id&&SID[c.id]?"#/screen/"+c.id:""})
+      :'<div class="empty">'+ico("ok")+'Nothing changed in '+esc(M.module)+' since '+esc(M.baseline)+'.<\/div>')+'<\/section>';
+    $("#view").innerHTML=x;countUp($("#view"));
+    $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{chF=b.dataset.f;draw();});
+    $("#chq").oninput=e=>{chQ=e.target.value.trim().toLowerCase();draw();keepFocus("chq");};
+    $("#chx").onclick=()=>csv("atlas_"+CUR+"_changes",["Change","What","Screen","Before","Now"],L.map(c=>[c.t,c.what,c.scr||c.id||"",c.old||"",c.new||""]));
+    bindTables($("#view"),draw);
+  };
+  draw();
+}
+
+/* ---------- command palette ---------- */
+const IDXC={};
+function index(){
+  const key=CUR&&!/^#\/(all\/|$)/.test(location.hash||"#/")?CUR:"home"+(ATLAS.proj?"p":"")+(ATLAS.people?"u":"");
+  if(IDXC[key])return IDXC[key];
+  const I=[];
+  (ATLAS.mods||[]).forEach(m=>I.push({g:"Modules",ic:MODICON[m.slug]||"apps",k:"var(--blue)",t:m.name,m:m.forms+" forms · "+m.reps+" reports · "+m.people+" people",s:m.name.toLowerCase(),go:"#@/"+m.slug+"/overview"}));
+  if(key.startsWith("home")){
+    if(ATLAS.proj){Object.entries(ATLAS.proj.proj).forEach(([id,p])=>{if(projIndex().by[id])I.push({g:"Projects",ic:"tree",k:"var(--amber)",t:p[0],m:p[1]+" · "+(p[2]||""),s:(p[0]+" "+p[1]).toLowerCase(),go:"#@/all/project/"+id});});
+      Object.keys(projIndex().co).forEach(c=>I.push({g:"Companies",ic:"apps",k:"var(--teal)",t:c,m:projIndex().co[c].length+" users",s:c.toLowerCase(),go:"#@/all/company/"+enc(c)}));}
+    if(ATLAS.people)Object.entries(ATLAS.people).forEach(([u,x])=>I.push({g:"People",ic:"people",k:"var(--green)",t:x.nm||u,m:u+" · "+(x.dept||"")+" · "+Object.keys(x.m).length+" modules",s:(u+" "+(x.nm||"")).toLowerCase(),go:"#@/all/person/"+enc(u)}));
+  } else {
+    S.forEach(s=>I.push({g:"Screens",ic:KIND[s.k].ic,k:KIND[s.k].k,t:s.cap,m:KIND[s.k].n+" · "+s.n+" · "+s.folder,s:(s.cap+" "+s.n).toLowerCase(),go:"#/screen/"+s.id}));
+    workU.forEach(u=>I.push({g:"People",ic:"people",k:"var(--green)",t:U[u].nm||u,m:u+" · "+(U[u].dept||"")+" · "+hrLabel(U[u].hr),s:(u+" "+(U[u].nm||"")).toLowerCase(),go:"#/person/"+enc(u)}));
+    Object.keys(R).forEach(r=>I.push({g:"Roles",ic:"key",k:"var(--teal)",t:r,m:liveUsers(r).length+" people · "+(roleScreens[r]||[]).length+" screens",s:r.toLowerCase(),go:"#/role/"+enc(r)}));
+    forms.forEach(s=>s.f.forEach(f=>I.push({g:"Fields",ic:"field",k:"var(--purple)",t:f.cap||f.n,m:f.n+" · "+s.cap,s:(f.n+" "+(f.cap||"")).toLowerCase(),go:"#/screen/"+s.id+"/fields/"+enc(f.n)})));
+    S.filter(s=>s.iv).forEach(s=>s.iv.cols.forEach(c=>I.push({g:"Report columns",ic:"report",k:"var(--green)",t:c.cap||c.a,m:c.a+" · "+s.cap,s:(c.a+" "+(c.cap||"")).toLowerCase(),go:"#/screen/"+s.id+"/columns"})));
+    H.forEach(x=>I.push({g:"Health",ic:x.ic,k:x.k,t:x.ttl,m:x.list.length+" found",s:x.ttl.toLowerCase(),go:"#/health/"+x.id}));
+  }
+  return IDXC[key]=I;
+}
+let hits=[],hi=0;
+const hl=(t,q)=>{t=String(t);const i=q?t.toLowerCase().indexOf(q):-1;return i<0?esc(t):esc(t.slice(0,i))+"<mark>"+esc(t.slice(i,i+q.length))+"<\/mark>"+esc(t.slice(i+q.length));};
+const ORDER=["Modules","Projects","Companies","Screens","People","Roles","Fields","Report columns","Health"];
+function palSearch(){
+  const q=$("#palq").value.trim().toLowerCase(),res=$("#palres"),I=index();
+  if(!q){const jump=(CUR&&NAV&&!/^#\/(all\/|$)/.test(location.hash||"#/")?NAV.map(n=>({ic:n[2],t:n[1],go:"#/"+n[0]})):[]).concat([{ic:"home",t:"All modules",go:"#@/"},{ic:"people",t:"People · all modules",go:"#@/all/people"},{ic:"tree",t:"Project access",go:"#@/all/projects"},{ic:"apps",t:"Company access",go:"#@/all/companies"}]);
+    hits=jump;hi=0;res.innerHTML='<div class="grp">Jump to<\/div>'+jump.map((n,i)=>'<div class="it" data-i="'+i+'"><span class="ic">'+ico(n.ic)+'<\/span><div><b>'+esc(n.t)+'<\/b><\/div><\/div>').join("");mark();return;}
+  const w=q.split(/\s+/),all=I.filter(x=>w.every(z=>x.s.includes(z))).sort((a,b)=>(a.s.startsWith(q)?0:1)-(b.s.startsWith(q)?0:1));
+  const by={};all.forEach(x=>{by[x.g]=by[x.g]||[];if(by[x.g].length<6)by[x.g].push(x);});
+  hits=[].concat(...ORDER.map(g=>by[g]||[]));hi=0;
+  res.innerHTML=hits.length?ORDER.filter(g=>by[g]).map(g=>'<div class="grp">'+g+' · '+all.filter(x=>x.g===g).length+'<\/div>'+by[g].map(x=>'<div class="it" data-i="'+hits.indexOf(x)+'"><span class="ic" style="--k:'+x.k+'">'+ico(x.ic)+'<\/span><div style="min-width:0"><b>'+hl(x.t,w[0])+'<\/b><small>'+hl(x.m,w[0])+'<\/small><\/div><\/div>').join("")).join("")
+    :'<div class="empty">'+ico("info")+'Nothing found for "'+esc(q)+'"<\/div>';
+  mark();
+}
+function mark(){$$("#palres .it").forEach(e=>e.classList.toggle("sel",+e.dataset.i===hi));const s=$("#palres .it.sel");s&&s.scrollIntoView({block:"nearest"});}
+function openPal(){if(!ATLAS.mods)return;$("#pal").classList.add("on");$("#palscrim").classList.add("on");$("#palq").value="";palSearch();setTimeout(()=>$("#palq").focus(),30);}
+function closePal(){$("#pal").classList.remove("on");$("#palscrim").classList.remove("on");}
+function pick(i){const x=hits[i];if(!x)return;closePal();go(x.go);}
+$("#openPal").onclick=openPal;$("#palscrim").onclick=closePal;$("#palx").onclick=closePal;
+$("#palq").oninput=palSearch;
+$("#palq").onkeydown=e=>{if(e.key==="ArrowDown"){hi=Math.min(hi+1,hits.length-1);mark();e.preventDefault();}else if(e.key==="ArrowUp"){hi=Math.max(hi-1,0);mark();e.preventDefault();}else if(e.key==="Enter")pick(hi);else if(e.key==="Escape")closePal();};
+$("#palres").onclick=e=>{const it=e.target.closest(".it");if(it)pick(+it.dataset.i);};
+document.addEventListener("keydown",e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openPal();}
+  else if(e.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();openPal();}
+  else if(e.key==="Escape"&&!$("#pal").classList.contains("on")&&$("#drawer").classList.contains("on"))$("#scrim").click();});
+
+/* ---------- theme ---------- */
+function lockOut(){try{localStorage.removeItem("atlas-key");}catch(e){}location.reload();}
+function setTheme(t){document.documentElement.dataset.theme=t;$("#theme").innerHTML=ico(t==="dark"?"sun":"moon");
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==="dark"?"#131314":"#1a73e8";
+  try{localStorage.setItem("atlas-theme",t);}catch(e){}drawMatrix();}
+let th="light";try{th=localStorage.getItem("atlas-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){}
+setTheme(th);$("#theme").onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
+
+/* ---------- start ---------- */
+if("serviceWorker" in navigator&&(location.protocol==="https:"||["localhost","127.0.0.1"].includes(location.hostname))){navigator.serviceWorker.register("sw.js").catch(()=>{});}
+function start(){load("modules").then(()=>{route();load("people").then(()=>{for(const k in IDXC)delete IDXC[k];if(!location.hash||location.hash==="#/"||location.hash.startsWith("#/all"))route();else renderNav(navNow);
+  load("projects").then(()=>{for(const k in IDXC)delete IDXC[k];if(!location.hash||location.hash==="#/")route();else renderNav(navNow);}).catch(()=>{});}).catch(()=>{});},()=>showErr("modules"));}
+if(window.ATLAS_LOCK){
+  if(!window.crypto||!crypto.subtle||typeof DecompressionStream==="undefined")$("#view").innerHTML='<div class="empty">'+ico("warn")+'This browser cannot open the encrypted copy. Use a current Chrome, Edge or Safari over https.<\/div>';
+  else unlockSaved().then(ok=>ok?start():lockScreen());
+} else start();
+
+/* ---------- PROJECT ACCESS (Project User Details, transid puser · PROJECTUSERDET) and
+              COMPANY ACCESS (User Access Company, transid uabra · UABRANCHDETAIL) ----------
+   pu rows: [user, projectmasterid, role, category id, active 1/0, approval level (APPLEVEL), applicable date, doc id] */
+function pp(u){return (ATLAS.proj&&ATLAS.proj.ppl[u])||(ATLAS.people&&ATLAS.people[u])||{};}
+const ppHr=u=>hrOf(pp(u).hr);
+const pLeft=u=>ppHr(u)==="left";
+let PJ=null;
+function projIndex(){
+  if(PJ)return PJ;const X=ATLAS.proj;PJ={by:{},byUser:{},co:{},fbCo:{},fbScr:{}};
+  for(const u in (X.fb||{}))X.fb[u].forEach(r=>{const o={u,co:r[0],scr:r[1],cap:r[2],act:r[3]};(PJ.fbCo[r[0]]=PJ.fbCo[r[0]]||[]).push(o);(PJ.fbScr[r[1]]=PJ.fbScr[r[1]]||[]).push(o);});
+  X.pu.forEach(r=>{(PJ.by[r[1]]=PJ.by[r[1]]||[]).push(r);(PJ.byUser[r[0]]=PJ.byUser[r[0]]||[]).push(r);});
+  for(const u in X.ca)X.ca[u].forEach(c=>(PJ.co[c]=PJ.co[c]||[]).push(u));
+  return PJ;
+}
+const pname=id=>{const p=ATLAS.proj.proj[id];return p?p[0]:"#"+id;};
+const plong=id=>{const p=ATLAS.proj.proj[id];return p?p[1]:"Project "+id;};
+const lvl=n=>n?'<span class="st st-blue">Level '+n+'<\/span>':'<span class="st st-grey">No level<\/span>';
+const actPill=a=>a?'<span class="st st-green">Active<\/span>':'<span class="st st-grey">Inactive<\/span>';
+const pwho=u=>{const x=pp(u);return '<div class="person">'+av(u)+'<div><b>'+esc(x.nm||u)+'<\/b><small>'+esc(u)+'<\/small><\/div><\/div>';};
+
+function fbTable(id,rows,showCo){
+  return table(id,[{h:"Person",k:o=>String(pp(o.u).nm||o.u).toLowerCase(),r:o=>pwho(o.u)},
+    showCo?{h:"Company",k:o=>o.co,r:o=>esc(o.co)}:{h:"Report",k:o=>o.cap,r:o=>'<b>'+esc(o.cap)+'<\/b><span class="sub">'+esc(o.scr)+'<\/span>'},
+    {h:"Row",k:o=>o.act,r:o=>o.act?'<span class="st st-green">Active<\/span>':'<span class="st st-grey">Inactive<\/span>'},{h:"HR",k:o=>ppHr(o.u),r:o=>hrPill(pp(o.u).hr)}],rows,{sort:0,dir:1,go:o=>"#@/all/person/"+enc(o.u)});
+}
+let prF="all",prQ="";
+function vProjects(){
+  const I=projIndex(),X=ATLAS.proj,ids=Object.keys(X.proj).filter(id=>I.by[id]);
+  const act=id=>I.by[id].filter(r=>r[4]),lft=id=>act(id).filter(r=>pLeft(r[0]));
+  const hasRole=(id,role)=>act(id).some(r=>r[2]===role&&!pLeft(r[0]));
+  const chips=[["all","All projects",()=>true],["left","Leavers still active",id=>lft(id).length],["nopm","No working PM",id=>!hasRole(id,"PM")],["noqs","No working QS",id=>!hasRole(id,"QS")]];
+  const allAct=X.pu.filter(r=>r[4]),allLeft=allAct.filter(r=>pLeft(r[0]));
+  const draw=()=>{
+    const fn=chips.find(c=>c[0]===prF)[2];
+    const L=ids.filter(id=>fn(id)&&(!prQ||(X.proj[id].join(" ")).toLowerCase().includes(prQ)));
+    let h='<div class="ph"><div><h1>Project access<\/h1><p>From <b>Project User Details<\/b> (<span class="mono">puser<\/span> · PROJECTUSERDET): which user sees which project, in which role, at which approval level. Approvals follow these rows.<\/p><\/div><\/div>';
+    h+='<div class="kpis">'+kpi("tree","var(--blue)","Projects with users",ids.length,fmt(Object.keys(X.proj).length)+" in PROJECTMASTER","")+kpi("people","var(--green)","Active assignments",allAct.length,fmt(new Set(allAct.map(r=>r[0])).size)+" users","")+
+       kpi("leave","var(--red)","Left, still active",allLeft.length,fmt(new Set(allLeft.map(r=>r[0])).size)+" people, project rows","")+kpi("key","var(--purple)","Approval levels",new Set(allAct.map(r=>r[5]).filter(Boolean)).size,"APPLEVEL 1 to "+Math.max(0,...allAct.map(r=>r[5]||0)),"")+'<\/div>';
+    h+='<div class="tool"><div class="chips">'+chips.map(c=>'<button class="chip'+(prF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+fmt(ids.filter(c[2]).length)+'<\/span><\/button>').join("")+'<\/div>'+
+       '<label class="field">'+ico("tree")+'<input id="prq" placeholder="Project code, name or company" value="'+esc(prQ)+'"><\/label><span class="cnt">'+fmt(L.length)+'<\/span><button class="btn" id="prx">'+ico("dl")+'CSV<\/button><\/div>';
+    h+='<section class="card">'+table("projects",[
+      {h:"Project",k:id=>X.proj[id][0],r:id=>'<b>'+esc(X.proj[id][0])+'<\/b><span class="sub" style="font-family:var(--font)">'+esc(X.proj[id][1])+'<\/span>'},
+      {h:"Company",k:id=>X.proj[id][2]||"",r:id=>'<span class="dim">'+esc(X.proj[id][2]||"–")+'<\/span>'},
+      {h:"Active users",num:1,k:id=>act(id).length,r:id=>act(id).length},
+      {h:"Leavers active",num:1,k:id=>lft(id).length,r:id=>lft(id).length?'<span class="st st-red">'+lft(id).length+'<\/span>':'<span class="dim">0<\/span>'},
+      {h:"Working PM",k:id=>hasRole(id,"PM")?1:0,r:id=>hasRole(id,"PM")?'<span class="st st-green">Yes<\/span>':'<span class="st st-amber">No<\/span>'},
+      {h:"Top level",num:1,k:id=>Math.max(0,...act(id).map(r=>r[5]||0)),r:id=>Math.max(0,...act(id).map(r=>r[5]||0))||"–"}],L,{sort:2,go:id=>"#@/all/project/"+id})+'<\/section>';
+    $("#view").innerHTML=h;countUp($("#view"));
+    $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{prF=b.dataset.f;draw();});
+    $("#prq").oninput=e=>{prQ=e.target.value.trim().toLowerCase();draw();keepFocus("prq");};
+    $("#prx").onclick=()=>csv("atlas_projects",["Code","Project","Company","Active users","Leavers active","Working PM"],L.map(id=>[X.proj[id][0],X.proj[id][1],X.proj[id][2],act(id).length,lft(id).length,hasRole(id,"PM")?"Y":""]));
+    bindTables($("#view"),draw);
+  };
+  draw();
+}
+
+let pjF="act";
+function vProject(id){
+  const I=projIndex(),X=ATLAS.proj,P=X.proj[id],rows=I.by[id]||[];
+  if(!P&&!rows.length){$("#view").innerHTML='<div class="empty">'+ico("info")+'Project not found.<\/div>';return;}
+  const act=rows.filter(r=>r[4]),lft=act.filter(r=>pLeft(r[0]));
+  const levels=[...new Set(act.map(r=>r[5]||0))].sort((a,b)=>a-b);
+  let h='<div class="crumbs"><a data-go="#@/all/projects">Project access<\/a>'+ico("chev")+'<span>'+esc(pname(id))+'<\/span><\/div>';
+  h+='<section class="card hero spot" style="--k:var(--blue);margin-top:12px"><span class="big">'+ico("tree")+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(plong(id))+'<\/h2><div class="meta"><code>'+esc(pname(id))+'<\/code><span>'+esc(P?P[2]||"–":"–")+'<\/span><span>PROJECTMASTERID <code>'+esc(id)+'<\/code><\/span><\/div><\/div><\/section>';
+  if(lft.length)h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>'+lft.length+' people who left the company<\/b> are still ACTIVE on this project. Approvals routed to them will wait.<\/div><\/div>';
+  h+='<div class="kpis" style="margin-top:16px">'+kpi("people","var(--green)","Active users",act.length,(rows.length-act.length)+" inactive rows","")+kpi("leave","var(--red)","Left, still active",lft.length,"approvals may wait","")+
+     kpi("key","var(--purple)","Approval levels",levels.filter(Boolean).length,"levels in use","")+kpi("tree","var(--blue)","Roles",new Set(act.map(r=>r[2])).size,"distinct roles","")+'<\/div>';
+  h+=card("Approval chain","Active users grouped by Work Flow Level (APPLEVEL). Level 0 = no approval step. Red = left the company.",
+    levels.map(L=>'<div class="rule"><div class="hd">'+lvl(L)+'<span class="dim">'+act.filter(r=>(r[5]||0)===L).length+' people<\/span><\/div><div class="rl" style="margin-top:8px">'+
+      act.filter(r=>(r[5]||0)===L).sort((a,b)=>String(a[2]).localeCompare(String(b[2]))).map(r=>'<a class="st '+(pLeft(r[0])?"st-red":"st-teal")+'" style="text-decoration:none;cursor:pointer" data-go="#@/all/person/'+enc(r[0])+'" title="'+esc((pp(r[0]).nm||r[0])+" · "+r[0])+'">'+esc(r[2])+' · '+esc(String(pp(r[0]).nm||r[0]).split(" ").slice(0,2).join(" "))+'<\/a>').join("")+'<\/div><\/div>').join("")||'<div class="empty">No active users.<\/div>');
+  h+='<div style="height:16px"><\/div>';
+  const chips=[["act","Active",r=>r[4]],["all","All rows",()=>true],["left","Left company",r=>r[4]&&pLeft(r[0])]];
+  const fn=chips.find(c=>c[0]===pjF)[2],L=rows.filter(fn);
+  h+=card("Users on this project","Rows of Project User Details",
+    '<div class="tool"><div class="chips">'+chips.map(c=>'<button class="chip'+(pjF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+rows.filter(c[2]).length+'<\/span><\/button>').join("")+'<\/div><\/div>'+
+    table("prj_"+id,[{h:"Person",k:r=>String(pp(r[0]).nm||r[0]).toLowerCase(),r:r=>pwho(r[0])},{h:"Role",k:r=>r[2]||"",r:r=>'<b>'+esc(r[2]||"–")+'<\/b>'},{h:"Approval level",num:1,k:r=>r[5]||0,r:r=>lvl(r[5])},
+      {h:"Category",k:r=>String(r[3]==null?"":r[3]),r:r=>typeof r[3]==="number"?'<span class="mono dim" title="Category name not available yet (ITEMCATEGORY)">#'+r[3]+'<\/span>':esc(r[3]||"–")},{h:"Row",k:r=>r[4],r:r=>actPill(r[4])},{h:"HR",k:r=>ppHr(r[0]),r:r=>hrPill(pp(r[0]).hr)},
+      {h:"Doc",k:r=>r[7]||"",r:r=>'<span class="mono dim" style="font-size:12px">'+esc(r[7]||"")+'<\/span>'}],L,{sort:2,dir:1,go:r=>"#@/all/person/"+enc(r[0])}),
+    '<button class="btn" id="pjx">'+ico("dl")+'CSV<\/button>');
+  $("#view").innerHTML=h;countUp($("#view"));
+  $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{pjF=b.dataset.f;vProject(id);});
+  $("#pjx").onclick=()=>csv("atlas_project_"+pname(id),["EmpID","Name","Role","Level","Category","Active","HR status","Doc"],L.map(r=>[r[0],pp(r[0]).nm,r[2],r[5],r[3],r[4]?"ACTIVE":"INACTIVE",pp(r[0]).hr,r[7]]));
+  bindTables($("#view"),()=>vProject(id));
+}
+
+let coQ="";
+function vCompanies(){
+  const I=projIndex(),cos=[...new Set(Object.keys(I.co).concat(Object.keys(I.fbCo)))];
+  const L=cos.filter(c=>!coQ||c.toLowerCase().includes(coQ));
+  const users=Object.keys(ATLAS.proj.ca),left=users.filter(pLeft);
+  let h='<div class="ph"><div><h1>Company access<\/h1><p>From <b>User Access Company<\/b> (<span class="mono">uabra<\/span> · UABRANCHDETAIL): which companies each user can work in.<\/p><\/div><\/div>';
+  h+='<div class="kpis">'+kpi("apps","var(--blue)","Companies",cos.length,"with at least one user","")+kpi("people","var(--green)","Users",users.length,"with company access","")+kpi("leave","var(--red)","Left, still have access",left.length,"company rows not removed","")+'<\/div>';
+  h+='<div class="tool"><label class="field">'+ico("apps")+'<input id="coq" placeholder="Company" value="'+esc(coQ)+'"><\/label><span class="cnt">'+L.length+'<\/span><\/div>';
+  const cu=c=>I.co[c]||[];
+  h+='<section class="card">'+table("companies",[{h:"Company",k:c=>c,r:c=>'<b>'+esc(c)+'<\/b>'},{h:"Users",num:1,k:c=>cu(c).length,r:c=>cu(c).length},
+    {h:"Left, still have access",num:1,k:c=>cu(c).filter(pLeft).length,r:c=>{const n=cu(c).filter(pLeft).length;return n?'<span class="st st-red">'+n+'<\/span>':'<span class="dim">0<\/span>';}},
+    {h:"Finance report rows",num:1,k:c=>(I.fbCo[c]||[]).length,r:c=>(I.fbCo[c]||[]).length||'<span class="dim">0<\/span>'}],L,{sort:1,go:c=>"#@/all/company/"+enc(c)})+'<\/section>';
+  $("#view").innerHTML=h;countUp($("#view"));
+  $("#coq").oninput=e=>{coQ=e.target.value.trim().toLowerCase();vCompanies();keepFocus("coq");};
+  bindTables($("#view"),vCompanies);
+}
+
+let cuF="all";
+function vCompany(c){
+  const I=projIndex(),us=I.co[c]||[];
+  const chips=[["all","Everyone",()=>true],["left","Left company",pLeft],["off","Login off",u=>!pp(u).ax]];
+  const L=us.filter(chips.find(x=>x[0]===cuF)[2]);
+  let h='<div class="crumbs"><a data-go="#@/all/companies">Company access<\/a>'+ico("chev")+'<span>'+esc(c)+'<\/span><\/div>';
+  h+='<section class="card hero spot" style="--k:var(--teal);margin-top:12px"><span class="big">'+ico("apps")+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(c)+'<\/h2><div class="meta"><span>'+us.length+' users<\/span><span>'+us.filter(pLeft).length+' left the company<\/span><\/div><\/div><\/section><div style="height:16px"><\/div>';
+  h+=card("Users with access","",'<div class="tool"><div class="chips">'+chips.map(x=>'<button class="chip'+(cuF===x[0]?" on":"")+'" data-f="'+x[0]+'">'+x[1]+' <span class="n">'+us.filter(x[2]).length+'<\/span><\/button>').join("")+'<\/div><\/div>'+
+    table("co_"+c,[{h:"Person",k:u=>String(pp(u).nm||u).toLowerCase(),r:pwho},{h:"Department",k:u=>pp(u).dept||"",r:u=>'<span class="dim">'+esc(pp(u).dept||"–")+'<\/span>'},{h:"HR",k:ppHr,r:u=>hrPill(pp(u).hr)},
+      {h:"Login",k:u=>pp(u).ax?1:0,r:u=>pp(u).ax?'<span class="st st-green">On<\/span>':'<span class="st st-grey">Off<\/span>'},{h:"Companies",num:1,k:u=>ATLAS.proj.ca[u].length,r:u=>ATLAS.proj.ca[u].length},
+      {h:"Doc / changed",k:u=>((ATLAS.proj.cad||{})[u]||[])[1]||"",r:u=>{const d=(ATLAS.proj.cad||{})[u];return d?'<span class="mono" style="font-size:12px">'+esc(d[0])+'<\/span><span class="sub">'+esc(d[1].slice(0,10))+' · '+esc(d[2]||"?")+'<\/span>':'<span class="dim">–<\/span>';}}],L,{sort:2,dir:1,go:u=>"#@/all/person/"+enc(u)}),
+    '<button class="btn" id="cux">'+ico("dl")+'CSV<\/button>');
+  const fbr=I.fbCo[c]||[];
+  if(fbr.length)h+='<div style="height:16px"><\/div>'+card(ico("report")+"Finance reports for this company · "+fbr.length,"From User Wise Branch Access (Finance), transid ruba: which user may run which Finance report for this company",fbTable("cofb_"+c,fbr,false));
+  $("#view").innerHTML=h;
+  $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{cuF=b.dataset.f;vCompany(c);});
+  $("#cux").onclick=()=>csv("atlas_company_"+c.slice(0,30),["EmpID","Name","Department","HR status","Login"],L.map(u=>[u,pp(u).nm,pp(u).dept,pp(u).hr,pp(u).ax?"on":"off"]));
+  bindTables($("#view"),()=>vCompany(c));
+}
+
+function projCards(u){
+  if(!ATLAS.proj)return"";
+  const I=projIndex(),rows=(I.byUser[u]||[]).slice().sort((a,b)=>b[4]-a[4]||String(pname(a[1])).localeCompare(pname(b[1]))),cos=ATLAS.proj.ca[u]||[];
+  const act=rows.filter(r=>r[4]);
+  return '<div style="height:16px"><\/div><div class="bento"><div class="c8">'+card(ico("tree")+"Projects · "+act.length+" active","From Project User Details: role and approval level on each project",rows.length?table("uproj_"+u,[
+      {h:"Project",k:r=>pname(r[1]),r:r=>'<b>'+esc(pname(r[1]))+'<\/b><span class="sub" style="font-family:var(--font)">'+esc(plong(r[1]))+'<\/span>'},{h:"Role",k:r=>r[2]||"",r:r=>esc(r[2]||"–")+(r[3]!=null?'<span class="sub" style="font-family:var(--font)">'+esc(typeof r[3]==="number"?"category #"+r[3]:r[3])+'<\/span>':"")},
+      {h:"Approval level",num:1,k:r=>r[5]||0,r:r=>lvl(r[5])},{h:"Row",k:r=>r[4],r:r=>actPill(r[4])}],rows,{sort:3,go:r=>"#@/all/project/"+r[1]}):'<div class="empty">Not in Project User Details.<\/div>')+'<\/div>'+
+    '<div class="c4">'+card(ico("apps")+"Companies · "+cos.length,"From User Access Company"+(((ATLAS.proj.cad||{})[u])?" · doc "+esc(ATLAS.proj.cad[u][0])+", changed "+esc(ATLAS.proj.cad[u][1].slice(0,10))+" by "+esc(ATLAS.proj.cad[u][2]||"?"):""),(cos.length?cos.map(c=>'<div class="hb" data-go="#@/all/company/'+enc(c)+'" style="grid-template-columns:1fr auto"><span class="l">'+esc(c)+'<\/span>'+ico("chev")+'<\/div>').join(""):'<div class="empty">No company rows.<\/div>')+
+      (((ATLAS.proj.fb||{})[u]||[]).length?'<div class="sec">Finance reports by company (ruba)<\/div>'+ATLAS.proj.fb[u].map(r=>'<div class="hb" data-go="#@/all/company/'+enc(r[0])+'" style="grid-template-columns:1fr auto"><span class="l" title="'+esc(r[2])+'">'+esc(r[2])+'<br><small class="dim">'+esc(r[0])+'<\/small><\/span>'+(r[3]?'<span class="st st-green">Active<\/span>':'<span class="st st-grey">Inactive<\/span>')+'<\/div>').join(""):""))+'<\/div><\/div>';
+}
+
+</script>
+</body>
+</html>

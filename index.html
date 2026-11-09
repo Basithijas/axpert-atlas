@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611091543. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611091621. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -438,11 +438,11 @@ pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radi
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "OY7eInDkKiS35R3sL5iINkggOcjE3EOMVjnKgU0PBXaja5vO"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "FxgGaE76KMjagI6pmPA4XhhmpMFcfad8liqEqvLDqBT1N+bC"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611091543";
+const BUILD="202611091621";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -705,14 +705,14 @@ function route(){
   let fn,navKey,key;
   if(!m){navKey="home";fn=vHome;key="home";}
   else if(m==="all"){
-    if(!ATLAS.people){showLoading("Loading people…");load("people").then(route,()=>showErr("people"));return;}
+    if(!ATLAS.people){showLoading("Loading people…");load("people").then(()=>ATLAS.people?route():showErr("people"),()=>showErr("people"));return;}
     const needP=["projects","project","companies","company","person"].includes(p[1]);
-    if(needP&&!ATLAS.proj){showLoading("Loading projects and companies…");load("projects").then(route,()=>showErr("projects"));return;}
+    if(needP&&!ATLAS.proj){showLoading("Loading projects and companies…");load("projects").then(()=>ATLAS.proj?route():showErr("projects"),()=>showErr("projects"));return;}
     navKey={projects:"projects",project:"projects",companies:"companies",company:"companies"}[p[1]]||"allpeople";key="all/"+(p[1]||"")+"/"+(p[2]||"");
     fn={person:()=>vAllPerson(p[2]),projects:vProjects,project:()=>vProject(p[2]),companies:vCompanies,company:()=>vCompany(p[2])}[p[1]]||vAllPeople;
   } else {
     const mod=ATLAS.mods.find(x=>x.slug===m);if(!mod){location.hash="#/";return;}
-    if(!ATLAS.data[m]){showLoading("Loading "+mod.name+"…");load(m).then(route,()=>showErr(m));return;}
+    if(!ATLAS.data[m]){showLoading("Loading "+mod.name+"…");load(m).then(()=>ATLAS.data[m]?route():showErr(m),()=>showErr(m));return;}
     useModule(m);
     const h=p.slice(1),v=h[0]||"overview";
     navKey={screen:"screens",person:"people",role:"roles"}[v]||v;key=m+"/"+v+"/"+(h[1]||"")+"/"+(h[2]||"");

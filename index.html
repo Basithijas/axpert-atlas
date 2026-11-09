@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611080700. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611091543. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -438,11 +438,11 @@ pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radi
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "tcVD8bWpqxwpXT5mJL7mPH7+dsH4LY73FEw+LJrmJANS8fbq"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "OY7eInDkKiS35R3sL5iINkggOcjE3EOMVjnKgU0PBXaja5vO"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611080700";
+const BUILD="202611091543";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -469,12 +469,12 @@ function lockScreen(msg){
     '<span class="logo" style="width:64px;height:64px;border-radius:18px;margin:0 auto"><span style="width:48px;height:48px;border-radius:14px"><svg viewBox="0 0 24 24" style="width:28px;height:28px"><path d="'+P.lock+'"/><\/svg><\/span><\/span>'+
     '<h1 style="font-size:26px">Axpert Atlas<\/h1><p style="margin:0 auto">This copy is encrypted. Enter the password to open it. Nothing is readable without it.<\/p>'+
     '<form id="lockf" style="display:flex;flex-direction:column;gap:12px;margin-top:8px"><label class="field" style="height:48px">'+ico("lock")+'<input id="lockpw" type="password" autocomplete="current-password" placeholder="Password" style="width:100%"><\/label>'+
-    '<label style="display:flex;gap:8px;align-items:center;justify-content:center;font-size:13px;color:var(--ink2)"><input type="checkbox" id="lockrem"> Remember on this device for 30 days<\/label>'+
+    '<label style="display:flex;gap:8px;align-items:center;justify-content:center;font-size:13px;color:var(--ink2)"><input type="checkbox" id="lockrem"> Remember on this device for '+REMEMBER_H+' hours<\/label>'+
     '<button class="btn pri" style="justify-content:center;height:44px">Unlock<\/button><div id="lockmsg" style="color:var(--red);font-size:13px;min-height:18px">'+esc(msg||"")+'<\/div><\/form><\/section>';
   $("#lockf").onsubmit=async e=>{e.preventDefault();const pw=$("#lockpw").value;if(!pw)return;$("#lockmsg").textContent="Checking…";
     try{const k=await deriveKey(pw);await decryptRaw(b64(window.ATLAS_LOCK.check),k);LOCKKEY=k;
-      if($("#lockrem").checked){try{const raw=await crypto.subtle.exportKey("raw",k);localStorage.setItem("atlas-key",JSON.stringify({k:btoa(String.fromCharCode(...new Uint8Array(raw))),s:window.ATLAS_LOCK.salt,t:Date.now()+30*864e5}));}catch(x){}}
-      start();}
+      if($("#lockrem").checked){try{const raw=await crypto.subtle.exportKey("raw",k);localStorage.setItem("atlas-key",JSON.stringify({k:btoa(String.fromCharCode(...new Uint8Array(raw))),s:window.ATLAS_LOCK.salt,t:Date.now()+REMEMBER_H*36e5}));}catch(x){}}
+      startIdleWatch();start();}
     catch(x){$("#lockmsg").textContent="Wrong password.";}};
   setTimeout(()=>{const i=$("#lockpw");i&&i.focus();},50);
 }
@@ -1287,7 +1287,15 @@ document.addEventListener("keydown",e=>{
   else if(e.key==="Escape"&&!$("#pal").classList.contains("on")&&$("#drawer").classList.contains("on"))$("#scrim").click();});
 
 /* ---------- theme ---------- */
-function lockOut(){try{localStorage.removeItem("atlas-key");}catch(e){}location.reload();}
+/* session timeout (09/11/2026): the encrypted copy locks itself after IDLE_MIN minutes without activity,
+   forgets any remembered key, and asks for the password again. "Remember" now lasts REMEMBER_H hours, not 30 days. */
+const IDLE_MIN=(()=>{try{const v=+localStorage.getItem("atlas-idle-min");return v>0?v:15;}catch(e){return 15;}})(),REMEMBER_H=8;
+function lockOut(msg){try{localStorage.removeItem("atlas-key");if(msg)sessionStorage.setItem("atlas-lockmsg",msg);}catch(e){}location.reload();}
+let idleWatch=null;
+function startIdleWatch(){if(!window.ATLAS_LOCK||idleWatch)return;let last=Date.now();
+  const touch=()=>{last=Date.now();};["pointerdown","pointermove","keydown","wheel","touchstart","scroll"].forEach(ev=>addEventListener(ev,touch,{passive:true,capture:true}));
+  const check=()=>{if(Date.now()-last>IDLE_MIN*60000)lockOut("Locked after "+IDLE_MIN+" minutes without activity. Enter the password again.");};
+  idleWatch=setInterval(check,15000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)check();});}
 function setTheme(t){document.documentElement.dataset.theme=t;$("#theme").innerHTML=ico(t==="dark"?"sun":"moon");
   const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==="dark"?"#131314":"#1a73e8";
   try{localStorage.setItem("atlas-theme",t);}catch(e){}drawMatrix();}
@@ -1300,7 +1308,8 @@ function start(){load("modules").then(()=>{route();load("people").then(()=>{for(
   load("projects").then(()=>{for(const k in IDXC)delete IDXC[k];if(!location.hash||location.hash==="#/")route();else renderNav(navNow);}).catch(()=>{});}).catch(()=>{});},()=>showErr("modules"));}
 if(window.ATLAS_LOCK){
   if(!window.crypto||!crypto.subtle||typeof DecompressionStream==="undefined")$("#view").innerHTML='<div class="empty">'+ico("warn")+'This browser cannot open the encrypted copy. Use a current Chrome, Edge or Safari over https.<\/div>';
-  else unlockSaved().then(ok=>ok?start():lockScreen());
+  else{let m="";try{m=sessionStorage.getItem("atlas-lockmsg")||"";sessionStorage.removeItem("atlas-lockmsg");}catch(e){}
+    unlockSaved().then(ok=>{if(ok){startIdleWatch();start();}else lockScreen(m);});}
 } else start();
 
 /* ---------- PROJECT ACCESS (Project User Details, transid puser · PROJECTUSERDET) and

@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611091712. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611101132. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -409,6 +409,41 @@ pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radi
 }
 @media (hover:none){.kpi:hover,.mcard:hover{transform:none}.tw tbody tr:hover{background:none}}
 
+/* ---------- Galaxy (screen tab + module page) ---------- */
+.gx3d{width:100%;height:auto;display:block}
+.gx3d .gxpl{fill:color-mix(in srgb,var(--c) 7%,var(--surf));stroke:color-mix(in srgb,var(--c) 45%,var(--line));stroke-width:1.2}
+.gx3d .gxlt{font:500 15px var(--disp);fill:var(--ink)}.gx3d .gxls{font:11.5px var(--font);fill:var(--ink3)}
+.gx3d .gxln{fill:none;stroke-width:1.6;opacity:.55}
+.gxch{cursor:pointer}.gxch rect{fill:var(--surf);stroke:var(--line2);stroke-width:1.2;transition:.15s}
+.gxch text{font:500 11.5px var(--font);fill:var(--ink)}.gxch text.s{font:10px var(--mono);fill:var(--ink3)}
+.gxch:hover rect{stroke:var(--blue);fill:var(--blueb)}
+.gxch.c1 rect{stroke:color-mix(in srgb,var(--blue) 55%,var(--line2))}.gxch.c3 rect{stroke:color-mix(in srgb,var(--green) 55%,var(--line2))}
+.gxch.c3.w rect{stroke-dasharray:4 3}.gxch.bad rect{stroke:var(--red);fill:var(--redb)}
+.gxp1{margin:0 0 10px;font-size:14px;line-height:1.6;color:var(--ink2)}.gxp1 b{color:var(--ink);font-weight:500}
+.gxq{display:flex;gap:8px;align-items:center;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:7px 0;cursor:pointer;color:var(--ink2);font:13px var(--font)}
+.gxq:hover{color:var(--ink)}.gxq .st{flex:none}
+.gxtool{gap:8px}.gxtool .chip .st{margin-right:6px}
+.gxin{flex:1;min-width:200px;border:1px solid var(--line2);background:var(--surf);color:var(--ink);border-radius:999px;padding:8px 14px;font:13.5px var(--font);outline:0}
+.gxin:focus{border-color:var(--blue)}.gxin.big{width:100%;padding:11px 16px;font-size:15px}
+.gxsec{margin-top:14px}.gxsh{display:flex;justify-content:space-between;gap:10px;align-items:baseline;border-bottom:1px solid var(--line);padding:4px 0 6px;margin-bottom:6px}
+.gxsh b{font:500 15px var(--disp)}.gxsh span{font-size:12px;color:var(--ink3)}
+.gxr{border:1px solid var(--line);border-radius:12px;margin-bottom:6px;background:var(--surf);transition:box-shadow .15s}
+.gxr.open{box-shadow:var(--e2);border-color:transparent}.gxr.lit{border-color:var(--blue);background:var(--blueb)}
+.gxrh{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;padding:9px 12px;cursor:pointer;color:var(--ink);font:13.5px var(--font)}
+.gxrh .st{flex:none}.gxt{flex:1;min-width:0}.gxt small{display:block;font-size:12px;color:var(--amber);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gxrh svg{width:18px;height:18px;fill:var(--ink3);transition:transform .2s;flex:none}.gxr.open .gxrh svg{transform:rotate(90deg)}
+.gxrb{padding:2px 14px 14px}.gxrb>p{margin:4px 0 10px;color:var(--ink2);font-size:13.5px}
+.gx4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:8px 0}
+.gx4 div{background:var(--surf2);border-radius:10px;padding:9px 11px;font-size:13px;line-height:1.5;color:var(--ink2)}
+.gx4 small{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.gx4 b{color:var(--ink);font-weight:500}
+.gxcond{margin:0;padding-left:18px;font:12.5px/1.7 var(--mono);color:var(--ink2)}.gxp{color:var(--blue);font-weight:500}
+.gxsl{display:flex;flex-direction:column}.gxsl>*{padding:6px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.gxsl small{display:block;font-size:11.5px;color:var(--ink3)}
+.gxwalk{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--blueb);border-radius:14px;padding:12px 16px;margin:12px 0}
+.gxwalk small{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.gxwalk b{display:block;font:500 17px var(--disp);margin:2px 0}
+.gxwalk p{margin:0;font-size:13.5px;color:var(--ink2)}.gxwb{display:flex;gap:6px}
+
 </style>
 </head>
 <body>
@@ -439,11 +474,11 @@ pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radi
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "pfn5ARUXLF4NTWF9TEZZLeiUxTJc+0BCRWslENyyGW5wzpuW"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "Y/CYozJt5Njb0JTvgQB28abKOs/9GX80yjDT6plASNJ0G8PR"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611091712";
+const BUILD="202611101132";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -606,7 +641,7 @@ function useModule(slug){
     why:"In the menu, but no role has an access row for it.",list:S.filter(s=>!Object.keys(s.roles).length)},
   ];
   HI={};H.forEach(h=>HI[h.id]=h);highCount=H.filter(h=>h.sev==="High").reduce((a,h)=>a+h.list.length,0);
-  NAV=[["overview","Overview","dash",""],["screens","Screens","tree",S.length],["matrix","Access matrix","grid",""],["people","People","people",workU.length],["roles","Roles","key",Object.keys(R).length],["health","Health","health",highCount,1],["changes","Changes","hist",CHG?CHG.length:""]];
+  NAV=[["overview","Overview","dash",""],["galaxy","Galaxy","orbit",""],["screens","Screens","tree",S.length],["matrix","Access matrix","grid",""],["people","People","people",workU.length],["roles","Roles","key",Object.keys(R).length],["health","Health","health",highCount,1],["changes","Changes","hist",CHG?CHG.length:""]];
   const c={};[M,S,R,U,SID,userRoles,roleScreens,forms,reps,nFields,workU,uScr,mismatch,H,HI,highCount,NAV,FIND,PROPR,CHG].forEach((v,i)=>c[KEYS[i]]=v);CTX[slug]=c;
 }
 
@@ -726,7 +761,7 @@ function route(){
     const h=p.slice(1),v=h[0]||"overview";
     navKey={screen:"screens",person:"people",role:"roles"}[v]||v;key=m+"/"+v+"/"+(h[1]||"")+"/"+(h[2]||"");
     fn={overview:vOverview,screens:()=>vScreens(h[1]||""),screen:()=>vScreen(h[1],h[2],h[3]),matrix:vMatrix,people:vPeople,person:()=>vPerson(h[1]),
-        roles:vRoles,role:()=>vRole(h[1]),health:()=>vHealth(h[1]),changes:vChanges}[v]||vOverview;
+        roles:vRoles,role:()=>vRole(h[1]),health:()=>vHealth(h[1]),changes:vChanges,galaxy:vGalaxy}[v]||vOverview;
   }
   navNow=navKey;renderNav(navKey);
   const glob=["home","allpeople","projects","companies"].includes(navKey);
@@ -873,7 +908,7 @@ function vScreen(id,sub,fld){
   const s=SID[id];if(!s){$("#view").innerHTML='<div class="empty">'+ico("info")+'Screen not found in '+esc(M.module)+'.<\/div>';return;}
   const kd=KIND[s.k],roles=Object.keys(s.roles).sort();
   let tabs=[["overview","Overview"]];
-  if(s.k==="t")tabs=tabs.concat([["fields","Fields",s.f.length],["buttons","Cancel & Remove",s.cancel.length+s.remove.length]]);
+  if(s.k==="t")tabs=tabs.concat([["galaxy","Galaxy"],["fields","Fields",s.f.length],["buttons","Cancel & Remove",s.cancel.length+s.remove.length]]);
   if(s.iv)tabs=tabs.concat([["columns","Columns",s.iv.cols.length],["params","Parameters",s.iv.params.length],["sql","SQL"]]);
   tabs.push(["access","Who can open",s.users.length]);
   if(!tabs.some(t=>t[0]===sub))sub="overview";
@@ -886,7 +921,7 @@ function vScreen(id,sub,fld){
   $("#cpid").onclick=()=>copy(s.n,s.n);
   requestAnimationFrame(()=>{slideInd($("#stabs"));const on=$("#stabs .tab.on");on&&on.scrollIntoView({block:"nearest",inline:"nearest"});});
   const body=$("#sbody");
-  ({overview:()=>scOverview(s,body,roles),fields:()=>scFields(s,body,fld),buttons:()=>scButtons(s,body),columns:()=>ivCols(s,body),params:()=>ivParams(s,body),sql:()=>ivSql(s,body),access:()=>scAccess(s,body,roles)})[sub]();
+  ({overview:()=>scOverview(s,body,roles),fields:()=>scFields(s,body,fld),buttons:()=>scButtons(s,body),columns:()=>ivCols(s,body),params:()=>ivParams(s,body),sql:()=>ivSql(s,body),access:()=>scAccess(s,body,roles),galaxy:()=>scGalaxy(s,body)})[sub]();
   bindGo(body);
 }
 function findCard(s){
@@ -1452,6 +1487,215 @@ function projCards(u){
       {h:"Approval level",num:1,k:r=>r[5]||0,r:r=>lvl(r[5])},{h:"Row",k:r=>r[4],r:r=>actPill(r[4])}],rows,{sort:3,go:r=>"#@/all/project/"+r[1]}):'<div class="empty">Not in Project User Details.<\/div>')+'<\/div>'+
     '<div class="c4">'+card(ico("apps")+"Companies · "+cos.length,"From User Access Company"+(((ATLAS.proj.cad||{})[u])?" · doc "+esc(ATLAS.proj.cad[u][0])+", changed "+esc(ATLAS.proj.cad[u][1].slice(0,10))+" by "+esc(ATLAS.proj.cad[u][2]||"?"):""),(cos.length?cos.map(c=>'<div class="hb" data-go="#@/all/company/'+enc(c)+'" style="grid-template-columns:1fr auto"><span class="l">'+esc(c)+'<\/span>'+ico("chev")+'<\/div>').join(""):'<div class="empty">No company rows.<\/div>')+
       (((ATLAS.proj.fb||{})[u]||[]).length?'<div class="sec">Finance reports by company (ruba)<\/div>'+ATLAS.proj.fb[u].map(r=>'<div class="hb" data-go="#@/all/company/'+enc(r[0])+'" style="grid-template-columns:1fr auto"><span class="l" title="'+esc(r[2])+'">'+esc(r[2])+'<br><small class="dim">'+esc(r[0])+'<\/small><\/span>'+(r[3]?'<span class="st st-green">Active<\/span>':'<span class="st st-grey">Inactive<\/span>')+'<\/div>').join(""):""))+'<\/div><\/div>';
+}
+
+/* =====================================================================
+   GALAXY inside Atlas  (read-only)
+   - Screen tab  #/<mod>/screen/t:<name>/galaxy : how the screen WORKS
+   - Module page #/<mod>/galaxy                 : what to look at first
+   Data: data/gx/<name>.js and data/gx_index.js, written by galaxy/build_gx.py
+   from the live structures. Nothing here is hand-written per screen.
+   ===================================================================== */
+P.orbit="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm0-13a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3z";
+const GXD={idx:null,scr:{},wait:{}};
+const gq=(s,r)=>(r||document).querySelector(s);   /* Atlas $ ignores a root; this one does not */
+window.GX={
+  indexLoaded:d=>{GXD.idx=d;(GXD.wait.__idx||[]).forEach(f=>f());GXD.wait.__idx=[];},
+  loaded:g=>{GXD.scr[g.t]=g;(GXD.wait[g.t]||[]).forEach(f=>f());GXD.wait[g.t]=[];}
+};
+/* Uses Atlas's own load(): plain data/<name>.js on the server, encrypted data/<name>.bin on the GitHub copy. */
+function gxLoad(key){
+  const have=()=>key==="__idx"?GXD.idx:GXD.scr[key];
+  if(have())return Promise.resolve();
+  return load(key==="__idx"?"gx_index":"gx/"+key).then(()=>{if(!have())throw new Error("galaxy data "+key);});
+}
+let GXSK={};try{GXSK=JSON.parse(localStorage.getItem("gx-skill")||"{}");}catch(e){}
+const gxSkSave=()=>{try{localStorage.setItem("gx-skill",JSON.stringify(GXSK));}catch(e){}};
+const GXK={FLOW:["st-green","Flow","what normally happens"],VALIDATION:["st-amber","Validation","what stops the user, with the exact message"],CHECK:["st-red","Check","weak point: look here first when it goes wrong"]};
+const GXW=[["field","On a field","while the user types or picks"],["fillgrid","Fill grid","rows pulled in from other tables"],["save","On Save","last checks, then what is written"],["delete","On Cancel / Remove","what guards it and what is reversed"],["action","Actions & buttons","bound to an event or a button"],["db","Inside Oracle","triggers on the tables, outside the screen"]];
+let GXS={show:{FLOW:1,VALIDATION:1,CHECK:1},q:"",open:null,walk:null};
+
+/* ---------- the four answers, specific to this rule's own code ---------- */
+function gxCond(r){
+  if(!r.cond||!r.cond.length)return"";
+  const pm={};(r.p||[]).forEach(x=>pm[x[0]]=x[1]);
+  const show=c=>esc(c).replace(/:([a-z_][a-z0-9_]*)/gi,(m,n)=>'<b class="gxp" title="value of field '+esc(n)+' on the screen">'+esc(pm[n.toLowerCase()]||n)+'<\/b>');
+  return '<div class="sec">A row must satisfy all of these<\/div><ul class="gxcond">'+r.cond.map(c=>'<li>'+show(c)+'<\/li>').join("")+'<\/ul>';
+}
+function gxParams(r){
+  if(!r.p||!r.p.length)return"";
+  return '<div class="sec">Values it takes from the screen<\/div><div class="rl">'+r.p.map(x=>'<span class="st st-blue" title="'+esc(x[0])+'">'+esc(x[1]||x[0])+' <code class="mono">:'+esc(x[0])+'<\/code><\/span>').join("")+'<\/div>';
+}
+function gx4(r,g){
+  const f=r.f?'<code class="mono">'+esc(r.f)+'<\/code>':"", tb=(r.tb||[]).filter(Boolean), T=tb.length?'<code class="mono">'+esc(tb.join(", "))+'<\/code>':"the tables below";
+  const P=(r.p||[]).map(x=>x[1]||x[0]).filter(Boolean), PV=P.length?" with the same "+esc(P.slice(0,5).join(", ")):"";
+  let a=[];
+  if(r.w==="field"&&/empty/.test(r.t))a=["Field property <b>Allow empty = No<\/b> on "+f+".","The record means nothing without it.","Fill it. If it is greyed out, its value comes from another field: fill that one first.","Save moves on to the next check."];
+  else if(r.w==="field"&&/unique/.test(r.t))a=["Field property <b>Allow duplicate = No<\/b> on "+f+".","Stops the same value being saved twice (for example the same item twice in one grid).","Find the row that already has this value and change that row.","Save moves on."];
+  else if(r.w==="field"&&/list comes from SQL/.test(r.t))a=["The SQL of field "+f+", reading "+T+".","So the user can only pick valid, active, permitted values.","<b>Not in list / empty list<\/b> = this SQL returned no row"+PV+". Check the conditions below one by one against the row in "+T+": the first one that fails is the reason.","Once the source row satisfies every condition it appears. No code change."];
+  else if(r.w==="field"&&r.k==="VALIDATION")a=["Validation of field "+f+(tb.length?", reading "+T:"")+".","A business rule enforced while typing.",(r.m?"The message shows when the condition is false. ":"")+"Change the input"+(P.length?" ("+esc(P.slice(0,4).join(", "))+")":"")+" until the condition is true. If the rule itself is wrong, that is a structure change: TEST first.","The value is accepted and the fields that use it recalculate."];
+  else if(r.w==="field")a=["Expression / SQL of field "+f+".","The value is derived so nobody types it wrong.","If it looks wrong, check its inputs"+(P.length?" ("+esc(P.slice(0,5).join(", "))+")":"")+", not this field.","Every field that uses it recalculates."];
+  else if(r.w==="save"&&r.k==="VALIDATION")a=["Save control field "+f+".","The last gate before anything is written.","The message names the condition. Fix the data it checks"+(tb.length?" in "+T:"")+", then Save again.","The record and its genmap / mdmap rows are written."];
+  else if(r.w==="delete"&&r.k==="VALIDATION")a=["Delete control field "+f+", counting rows in "+T+".","Blocks Cancel / Remove once later documents depend on this one.","Find the rows it counts (conditions below)"+PV+". Undo those later documents first. Never delete them straight in the database.","Cancel runs: genmap rows are taken back, mdmap values reduced."];
+  else if(r.w==="delete")a=["Structure settings.","Not a rule: a gap the scan noticed.","Before cancelling, check by hand which later documents used this one.","Without a guard, Cancel goes through even if later documents still point at it."];
+  else if(r.w==="save"&&r.k==="FLOW")a=["Genmap / mdmap of this structure, writing "+T+".","So stock, accounts or balances update without a second entry.","If "+T+" looks wrong, compare it with this document's grid using the mapping below.","Cancel reverses exactly these rows."];
+  else if(r.w==="fillgrid")a=["Fill grid SQL, reading "+T+".","Brings rows in so the user does not type them.","Missing or wrong rows = run the SQL in Toad"+PV+" and check the conditions below.","Values are copied at fill time. Save does not re-read them."];
+  else if(r.w==="action")a=["Action in the structure"+(tb.length?", touching "+T:"")+".","An extra step bound to an event or a button.",r.k==="CHECK"?"It writes directly, so Cancel does not reverse it on its own. Check how this row is undone.":"Nothing to fix unless the step misbehaves.","Runs every time its event fires."];
+  else if(r.w==="db")a=["Oracle trigger on "+T+".","Enforced even outside the screen.",/disabled/.test(r.t)?"Disabled: it does nothing today. Do not rely on it.":"The trigger raises the message: fix the data condition it tests.","The statement completes, or is rolled back with the message."];
+  if(!a.length)return"";
+  return '<div class="gx4">'+["Where it comes from","Why the developer put it","How to handle it","What happens after"].map((h,i)=>'<div><small>'+h+'<\/small>'+a[i]+'<\/div>').join("")+'<\/div>';
+}
+
+/* ---------- 3D: the screen as three stacked layers ---------- */
+function gxLayers(g,R){
+  const W=1180,H=430,pl=(y,lab,sub,col)=>{const p=[[190,y],[1160,y],[1090,y+92],[120,y+92]];
+    return '<polygon class="gxpl" points="'+p.map(x=>x.join(",")).join(" ")+'" style="--c:'+col+'"/><text class="gxlt" x="104" y="'+(y+50)+'" text-anchor="end">'+lab+'<\/text><text class="gxls" x="104" y="'+(y+68)+'" text-anchor="end">'+sub+'<\/text>';};
+  const pos=(i,n,y)=>{const t=(i+1)/(n+1);return[155+t*970,y+46];};
+  let s='<svg class="gx3d" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Screen, logic and tables as layers">';
+  s+=pl(20,"Screen","what the user sees","var(--blue)")+pl(170,"Logic","when it runs","var(--amber)")+pl(320,"Tables","what it reads / writes","var(--green)");
+  const dcs=g.dcs.slice(0,6), grp=GXW.filter(w=>R.some(r=>r.w===w[0])), own=[...new Set(g.dcs.map(d=>d.tb).filter(Boolean))], wr=[...new Set(g.maps.map(m=>m.table).filter(Boolean))];
+  const tabs=own.map(t=>[t,"own"]).concat(wr.filter(t=>!own.includes(t)).map(t=>[t,"writes"])).slice(0,6);
+  const P1={},P2={},P3={};
+  dcs.forEach((d,i)=>P1[d.n]=pos(i,dcs.length,20));grp.forEach((w,i)=>P2[w[0]]=pos(i,grp.length,170));tabs.forEach((t,i)=>P3[t[0]]=pos(i,tabs.length,320));
+  const ln=(a,b,c)=>a&&b?'<path class="gxln" d="M'+a[0]+','+a[1]+' C'+a[0]+','+(a[1]+70)+' '+b[0]+','+(b[1]-70)+' '+b[0]+','+b[1]+'" style="stroke:'+c+'"/>':"";
+  dcs.forEach(d=>{if(P3[d.tb])s+=ln(P1[d.n],P3[d.tb],"var(--blue)");});
+  if(P2.field)dcs.forEach(d=>s+=ln(P1[d.n],P2.field,"var(--line2)"));
+  if(P2.save)wr.forEach(t=>s+=ln(P2.save,P3[t],"var(--green)"));
+  if(P2.delete)wr.forEach(t=>s+=ln(P2.delete,P3[t],"var(--red)"));
+  if(P2.db)g.triggers.forEach(t=>s+=ln(P2.db,P3[t.tb],"var(--red)"));
+  const chip=(p,txt,sub,cls,go)=>{const w=Math.max(70,Math.min(170,txt.length*7.4+22));return '<g class="gxch '+cls+'" data-gx="'+esc(go)+'" transform="translate('+(p[0]-w/2)+','+(p[1]-17)+')"><rect width="'+w+'" height="34" rx="10"/><text x="'+w/2+'" y="15" text-anchor="middle">'+esc(txt.slice(0,22))+'<\/text><text class="s" x="'+w/2+'" y="27" text-anchor="middle">'+esc(sub)+'<\/text><\/g>';};
+  dcs.forEach(d=>s+=chip(P1[d.n],d.cap||d.n,(d.grid?"grid · ":"")+(d.tb||""),"c1","dc:"+d.n));
+  grp.forEach(w=>{const rs=R.filter(r=>r.w===w[0]),k=rs.filter(r=>r.k==="CHECK").length;s+=chip(P2[w[0]],w[1],rs.length+" rules"+(k?" · "+k+" check":""),k?"c2 bad":"c2","w:"+w[0]);});
+  tabs.forEach(t=>{const tr=g.triggers.filter(x=>x.tb===t[0]).length;s+=chip(P3[t[0]],t[0],(t[1]==="own"?"saves here":"also written")+(tr?" · "+tr+" trigger":""),"c3"+(t[1]==="writes"?" w":""),"t:"+t[0]);});
+  return s+'<\/svg>';
+}
+
+/* ---------- walks ---------- */
+function gxWalk(g,R,kind){
+  const S=[],ids=rs=>rs.map(r=>r.i),st=(t,x,l)=>{if(l.length)S.push({t,x,ids:l});};
+  const own=[...new Set(g.dcs.map(d=>d.tb).filter(Boolean))].join(", ");
+  if(kind==="save"){
+    st("Lists come from SQL","Each drop-down shows only rows its SQL returns.",ids(R.filter(r=>r.w==="field"&&/list comes/.test(r.t))));
+    st("Fill grid","Rows are pulled in from other tables at this moment.",ids(R.filter(r=>r.w==="fillgrid")));
+    st("Field checks","Validated while typing. These are the messages a user can see.",ids(R.filter(r=>r.w==="field"&&r.k==="VALIDATION")));
+    st("Save control",g.settings.save?"Last gate before writing.":"No save control: nothing stops Save at structure level.",ids(R.filter(r=>r.w==="save"&&r.k!=="FLOW")));
+    st("Written","The record goes into "+own+". Genmap / mdmap then write into other tables.",ids(R.filter(r=>r.w==="save"&&r.k==="FLOW")));
+    st("Inside Oracle","Triggers on those tables run now, outside Axpert.",ids(R.filter(r=>r.w==="db")));
+    st("After save","Actions bound to 'After save transaction'.",ids(R.filter(r=>r.w==="action"&&/after save/i.test(r.t))));
+  }else{
+    st("Delete control",g.settings.delete?"Runs first. If it returns a message, Cancel / Remove stops here.":"No delete control: Cancel / Remove is not guarded.",ids(R.filter(r=>r.w==="delete")));
+    st("Cancel action","Cancel steps defined in the structure.",ids(R.filter(r=>r.w==="action"&&/cancel/i.test(r.t))));
+    st("Reverse what Save wrote","Every genmap row is taken back, every mdmap value reduced.",ids(R.filter(r=>r.w==="save"&&r.k==="FLOW")));
+    st("Inside Oracle","Triggers run on the reversal too (for example the negative stock check).",ids(R.filter(r=>r.w==="db")));
+  }
+  return S;
+}
+
+/* ---------- the Galaxy tab of one screen ---------- */
+function scGalaxy(s,body){
+  body.innerHTML='<div class="loading"><div class="spin"><\/div>Loading Galaxy…<\/div>';
+  const n=s.n.toLowerCase();
+  gxLoad(n,"data/gx/"+n+".js").then(()=>gxRender(s,body,GXD.scr[n]),()=>{body.innerHTML='<div class="empty">'+ico("info")+'No Galaxy data for <code class="mono">'+esc(s.n)+'<\/code> yet. On the server run <code class="mono">python galaxy\\build_gx.py '+esc(n)+'<\/code>.<\/div>';});
+}
+function gxRender(s,body,g){
+  if(!GXSK[g.t]){GXSK[g.t]="seen";gxSkSave();}
+  const R=g.rules.map((r,i)=>Object.assign(r,{i})),c={FLOW:0,VALIDATION:0,CHECK:0};R.forEach(r=>c[r.k]++);
+  const u=g.usage||{},own=[...new Set(g.dcs.map(d=>d.tb).filter(Boolean))],wr=[...new Set(g.maps.map(m=>m.table).filter(Boolean))];
+  const chk=R.filter(r=>r.k==="CHECK");
+  const msg=sessionStorage.getItem("gx-msg");if(msg){sessionStorage.removeItem("gx-msg");const hit=R.find(r=>(r.m||"").includes(msg));if(hit)GXS.open=hit.i;}
+  let h='<div class="kpis">'+kpi("ok","var(--green)","Flow",c.FLOW,"what normally happens","")+kpi("warn","var(--amber)","Validation",c.VALIDATION,"can stop the user","")+kpi("health","var(--red)","Check",c.CHECK,"look here first","")+
+    (u.docs12!=null?kpi("form","var(--blue)","Documents",u.docs12,(u.cancel12||0)+" cancelled · 12 months",""):"")+kpi("apps","var(--purple)","Read by",g.readers.length,"other screens use its data","")+'<\/div>';
+  h+=card(ico("orbit")+"The screen in 3 layers","Screen → logic → tables. Blue line = saves into, green = also writes on Save, red = reversed on Cancel / trigger. Tap a block.",gxLayers(g,R));
+  h+='<div style="height:16px"><\/div><div class="bento"><div class="c12">'+
+    card("In one minute","Generated "+esc(g.built)+" from the live structure",
+      '<p class="gxp1">Saves into <b>'+esc(own.join(", ")||"–")+'<\/b>.'+(wr.length?' On Save it also writes <b>'+esc(wr.join(", "))+'<\/b>, so Cancel must take those back.':' It writes nothing into other screens.')+'<\/p>'+
+      '<p class="gxp1">'+(g.settings.save?'Save is guarded by <code class="mono">'+esc(g.settings.save)+'<\/code>. ':'<b>No save control.<\/b> ')+(g.settings.delete?'Cancel / Remove is guarded by <code class="mono">'+esc(g.settings.delete)+'<\/code>.':'<b>Nothing guards Cancel / Remove.<\/b>')+'<\/p>'+
+      (chk.length?'<div class="sec">Look here first when it goes wrong<\/div>'+chk.map(r=>'<button class="gxq" data-r="'+r.i+'"><span class="st st-red">Check<\/span>'+esc(r.t)+'<\/button>').join(""):'')+
+      '<div class="sec">Your understanding<\/div><div class="tool" style="margin:0"><button class="btn'+(GXSK[g.t]==="ok"?" pri":"")+'" data-sk="ok">'+ico("ok")+'I understand it<\/button><button class="btn'+(GXSK[g.t]==="no"?" pri":"")+'" data-sk="no">Not clear yet<\/button><\/div>')+'<\/div><\/div>';
+  h+='<div style="height:16px"><\/div><section class="card"><div class="ch"><h3>How it works<\/h3><div class="hint">Every rule of this screen, grouped by <b>when<\/b> it runs. Tap one for where it comes from, why, how to handle it and what happens after.<\/div><\/div><div class="cb">'+
+    '<div class="tool gxtool">'+Object.keys(GXK).map(k=>'<button class="chip'+(GXS.show[k]?" on":"")+'" data-k="'+k+'"><span class="st '+GXK[k][0]+'">'+GXK[k][1]+'<\/span>'+c[k]+'<\/button>').join("")+
+      '<input class="gxin" id="gxq" placeholder="Filter rules or paste an error message" value="'+esc(GXS.q)+'">'+
+      '<button class="btn" data-walk="save">▶ Walk: Save<\/button><button class="btn" data-walk="cancel">▶ Walk: Cancel<\/button><\/div><div id="gxwalk"><\/div><div id="gxlist"><\/div><\/div><\/section>';
+  h+='<div style="height:16px"><\/div><div class="bento"><div class="c6">'+card("Other screens that read its data",g.readers.length+" screens · if a value here is wrong, they show it wrong too",gxScreens(g.readers))+'<\/div><div class="c6">'+
+    card("Screens that write into it",g.writers.length+" via genmap / mdmap",gxScreens(g.writers))+'<\/div><\/div>';
+  body.innerHTML=h;countUp(body);bindGo(body);
+  const list=()=>gxList(g,R,gq("#gxlist",body));
+  $$(".chip[data-k]",body).forEach(b=>b.onclick=()=>{GXS.show[b.dataset.k]=!GXS.show[b.dataset.k];b.classList.toggle("on");list();});
+  gq("#gxq",body).oninput=e=>{GXS.q=e.target.value;GXS.walk=null;gq("#gxwalk",body).innerHTML="";list();};
+  $$("[data-sk]",body).forEach(b=>b.onclick=()=>{GXSK[g.t]=b.dataset.sk;gxSkSave();gxRender(s,body,g);toast("Saved on this browser");});
+  $$("[data-walk]",body).forEach(b=>b.onclick=()=>{const S=gxWalk(g,R,b.dataset.walk);if(!S.length)return;GXS.walk={k:b.dataset.walk,S,i:0};gxWalkDraw(g,R,body);});
+  $$(".gxq",body).forEach(b=>b.onclick=()=>{GXS.open=+b.dataset.r;GXS.walk=null;list();gxScrollOpen(body);});
+  $$(".gxch",body).forEach(e=>e.onclick=()=>{const v=e.dataset.gx;GXS.walk=null;gq("#gxwalk",body).innerHTML="";
+    if(v.startsWith("w:")){const w=v.slice(2);GXS.q="";GXS.open=null;list();const sec=gq('[data-sec="'+w+'"]',body);sec&&sec.scrollIntoView({behavior:"smooth",block:"start"});}
+    else{GXS.q=v.slice(v.indexOf(":")+1);gq("#gxq",body).value=GXS.q;list();gq("#gxlist",body).scrollIntoView({behavior:"smooth",block:"start"});}});
+  list();
+  if(GXS.open!=null)gxScrollOpen(body);
+}
+function gxScrollOpen(body){requestAnimationFrame(()=>{const e=gq(".gxr.open",body);e&&e.scrollIntoView({behavior:"smooth",block:"center"});});}
+function gxScreens(L){
+  if(!L.length)return'<div class="dim" style="font-size:13px">None<\/div>';
+  return '<div class="gxsl">'+L.map(x=>{const id="t:"+x[0],here=SID[id];return '<'+(here?'a class="lnk" data-go="#/screen/'+esc(id)+'/galaxy"':'span')+'>'+esc(x[1]||x[0])+' <small class="mono">'+esc(x[0])+(x[2]?" · "+esc(x[3]+" "+x[2]):"")+'<\/small><\/'+(here?"a":"span")+'>';}).join("")+'<\/div>';
+}
+function gxList(g,R,el){
+  const q=GXS.q.trim().toLowerCase(),lit=GXS.walk?new Set(GXS.walk.S[GXS.walk.i].ids):null;
+  const hit=r=>!q||[r.t,r.m,r.c,r.f,(r.tb||[]).join(" ")].join(" ").toLowerCase().includes(q);
+  let h="";
+  GXW.forEach(w=>{
+    const rs=R.filter(r=>r.w===w[0]&&(lit?lit.has(r.i):GXS.show[r.k]&&hit(r)));if(!rs.length)return;
+    h+='<div class="gxsec" data-sec="'+w[0]+'"><div class="gxsh"><b>'+w[1]+'<\/b><span>'+w[2]+' · '+rs.length+'<\/span><\/div>'+rs.map(r=>{
+      const o=GXS.open===r.i;
+      return '<div class="gxr'+(o?" open":"")+(lit?" lit":"")+'" data-i="'+r.i+'"><button class="gxrh"><span class="st '+GXK[r.k][0]+'">'+GXK[r.k][1]+'<\/span><span class="gxt">'+esc(r.t)+(r.m?'<small>“'+esc(r.m.split(" | ")[0])+'”<\/small>':"")+'<\/span>'+ico("chev")+'<\/button>'+
+        (o?'<div class="gxrb">'+(r.m?r.m.split(" | ").map(m=>'<div class="note">'+ico("warn")+'<div><b>User sees:<\/b> “'+esc(m)+'”<\/div><\/div>').join(""):"")+'<p>'+esc(r.s)+'<\/p>'+gx4(r,g)+gxCond(r)+gxParams(r)+
+          (r.c?'<div class="sec">The real code<\/div><div class="code-wrap"><pre class="code">'+esc(r.c)+'<\/pre><\/div>':"")+(r.tb&&r.tb.length?'<div class="sec">Tables<\/div><div class="rl">'+r.tb.map(t=>'<span class="st st-teal">'+esc(t)+'<\/span>').join("")+'<\/div>':"")+'<\/div>':"")+'<\/div>';}).join("")+'<\/div>';
+  });
+  el.innerHTML=h||'<div class="empty">'+ico("info")+'Nothing matches. If this is a new error message, ask in chat: it gets traced and added.<\/div>';
+  $$(".gxrh",el).forEach(b=>b.onclick=()=>{const i=+b.parentNode.dataset.i;GXS.open=GXS.open===i?null:i;gxList(g,R,el);});
+}
+function gxWalkDraw(g,R,body){
+  const w=GXS.walk,s=w.S[w.i];GXS.open=null;
+  gq("#gxwalk",body).innerHTML='<div class="gxwalk"><div><small>Walk: '+(w.k==="save"?"Save":"Cancel / Remove")+' · step '+(w.i+1)+' of '+w.S.length+'<\/small><b>'+esc(s.t)+'<\/b><p>'+esc(s.x)+'<\/p><\/div><div class="gxwb"><button class="btn" id="gxp">←<\/button><button class="btn pri" id="gxn">'+(w.i<w.S.length-1?"Next →":"Done")+'<\/button><button class="btn" id="gxx">Stop<\/button><\/div><\/div>';
+  gq("#gxp",body).onclick=()=>{if(w.i>0){w.i--;gxWalkDraw(g,R,body);}};
+  gq("#gxn",body).onclick=()=>{if(w.i<w.S.length-1){w.i++;gxWalkDraw(g,R,body);}else{GXS.walk=null;gq("#gxwalk",body).innerHTML="";gxList(g,R,gq("#gxlist",body));}};
+  gq("#gxx",body).onclick=()=>{GXS.walk=null;gq("#gxwalk",body).innerHTML="";gxList(g,R,gq("#gxlist",body));};
+  gxList(g,R,gq("#gxlist",body));gq("#gxwalk",body).scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- module page: what matters most ---------- */
+const GXCAT=[["nodel","No delete control",/No delete \/ cancel control/i],["nocancel","Delete control ignores CANCEL",/no CANCEL filter/i],["wnodel","Writes elsewhere, no delete control",/Writes to other tables but has no delete/i],
+  ["direct","Action writes directly (firesql)",/firesql|directly/i],["trigoff","Disabled trigger",/trigger.*disabled/i],["users","Hard-coded user IDs",/Hard-coded user/i],["nosave","No save control",/No save control/i]];
+let gxF={cat:"",q:""};
+function vGalaxy(){
+  $("#view").innerHTML='<div class="loading"><div class="spin"><\/div>Loading Galaxy…<\/div>';
+  gxLoad("__idx","data/gx_index.js").then(vGalaxyDraw,()=>{$("#view").innerHTML='<div class="empty">'+ico("info")+'No Galaxy index yet. Run <code class="mono">python galaxy\\build_gx.py all<\/code>.<\/div>';});
+}
+function vGalaxyDraw(){
+  const L=GXD.idx.screens.filter(x=>x.mod===M.module&&SID["t:"+x.t]);
+  L.forEach(x=>{x.cats=GXCAT.filter(c=>(x.chk||[]).some(t=>c[2].test(t))).map(c=>c[0]);x.score=((x.chk||[]).length-(x.cats.includes("nosave")?1:0))*Math.log10(10+(x.docs12||0));});
+  const ok=L.filter(x=>GXSK[x.t]==="ok").length,no=L.filter(x=>GXSK[x.t]==="no").length,seen=L.filter(x=>GXSK[x.t]).length;
+  const msgs=L.reduce((a,x)=>a+(x.msgs||[]).length,0),checks=L.reduce((a,x)=>a+(x.n.CHECK||0),0);
+  let h='<div class="ph"><div><h1>Galaxy<\/h1><p>How the '+esc(M.module)+' screens really work, from the live structures. Start with the screens at the top: they are used most and have the most weak points.<\/p><\/div><\/div>';
+  h+='<div class="kpis">'+kpi("orbit","var(--blue)","Screens explained",L.length,"every form of this module","")+kpi("health","var(--red)","Weak points",checks,"CHECK items to look at first","")+
+    kpi("warn","var(--amber)","Error messages",msgs,"searchable below","")+kpi("ok","var(--green)","You understand",ok,no+" not clear · "+seen+" opened","")+'<\/div>';
+  h+='<div class="bento"><div class="c7">'+card(ico("warn")+"Find an error message","Paste what the user saw: you get the screen and the exact rule",'<input class="gxin big" id="gxm" placeholder="e.g. Stock Will Go Negative" value="'+esc(gxF.q)+'"><div id="gxmr"><\/div>')+'<\/div><div class="c5">'+
+    card("Weak points by type","Tap a bar to filter the list",hbars(GXCAT.map(c=>({l:c[1],v:L.filter(x=>x.cats.includes(c[0])).length,c:c[0]==="nosave"?"var(--grey)":"var(--red)",go:"gxcat:"+c[0]}))))+'<\/div><\/div>';
+  const F=L.filter(x=>!gxF.cat||x.cats.includes(gxF.cat)).sort((a,b)=>b.score-a.score);
+  h+='<div style="height:16px"><\/div><section class="card"><div class="ch"><h3>Look here first<\/h3><div class="hint">'+(gxF.cat?'Filter: <b>'+esc(GXCAT.find(c=>c[0]===gxF.cat)[1])+'<\/b> · <a class="lnk" id="gxclr">clear<\/a> · ':"")+'ranked by weak points × documents in 12 months<\/div><\/div><div class="cb">'+
+    table("gx",[{h:"Screen",k:x=>(x.cap||"").toLowerCase(),r:x=>'<b>'+esc(x.cap)+'<\/b><span class="sub mono">'+esc(x.t)+'<\/span>'},
+      {h:"Docs / 12 m",num:1,k:x=>x.docs12||0,r:x=>x.docs12==null?'<span class="dim">–<\/span>':fmt(x.docs12)},
+      {h:"Flow",num:1,k:x=>x.n.FLOW,r:x=>x.n.FLOW},{h:"Validation",num:1,k:x=>x.n.VALIDATION,r:x=>x.n.VALIDATION},
+      {h:"Weak points",k:x=>x.score,r:x=>'<div class="rl">'+x.cats.map(c=>'<span class="st '+(c==="nosave"?"st-grey":"st-red")+'">'+esc(GXCAT.find(z=>z[0]===c)[1])+'<\/span>').join("")+'<\/div>'},
+      {h:"You",k:x=>GXSK[x.t]||"",r:x=>GXSK[x.t]==="ok"?'<span class="st st-green">understood<\/span>':GXSK[x.t]==="no"?'<span class="st st-amber">not clear<\/span>':GXSK[x.t]?'<span class="st st-grey">opened<\/span>':""}],
+      F,{sort:4,go:x=>"#/screen/t:"+x.t+"/galaxy",lim:500})+'<\/div><\/section>';
+  $("#view").innerHTML=h;
+  $$("[data-go^='gxcat:']",$("#view")).forEach(e=>{e._g=1;e.style.cursor="pointer";e.onclick=()=>{gxF.cat=e.dataset.go.slice(6);vGalaxyDraw();};});
+  countUp($("#view"));bindTables($("#view"),vGalaxyDraw);
+  if($("#gxclr"))$("#gxclr").onclick=()=>{gxF.cat="";vGalaxyDraw();};
+  const mr=()=>{const q=gxF.q.trim().toLowerCase(),out=[];
+    if(q.length>2)GXD.idx.screens.forEach(x=>(x.msgs||[]).forEach(m=>{if(m.toLowerCase().includes(q))out.push([x,m]);}));
+    $("#gxmr").innerHTML=q.length<3?'<div class="dim" style="font-size:13px;margin-top:10px">Searches every module, not only '+esc(M.module)+'.<\/div>':out.length?'<div class="gxsl" style="margin-top:10px">'+out.slice(0,30).map(([x,m],i)=>'<a class="lnk" data-m="'+i+'">“'+esc(m)+'”<small>'+esc(x.cap)+' · '+esc(x.mod)+'<\/small><\/a>').join("")+'<\/div>':'<div class="dim" style="font-size:13px;margin-top:10px">Not found in any structure. It may come from a procedure or the Android app: ask in chat.<\/div>';
+    $$("[data-m]",$("#gxmr")).forEach(a=>a.onclick=()=>{const [x,m]=out[+a.dataset.m];sessionStorage.setItem("gx-msg",m);GXS.open=null;
+      const mod=(ATLAS.mods.find(z=>z.name===x.mod)||{}).slug||CUR;location.hash="#/"+mod+"/screen/t:"+x.t+"/galaxy";});};
+  $("#gxm").oninput=e=>{gxF.q=e.target.value;mr();};mr();
 }
 
 </script>

@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611111141. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611111506. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -660,6 +660,40 @@ button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(
 .lsdev{margin:28px 0 10px;padding-top:14px;border-top:2px dashed var(--line2)}.lsdev h3{font:500 18px var(--disp);margin:0}.lsdev p{margin:2px 0 0;color:var(--ink3);font-size:13px}
 .pfwrap>summary{cursor:pointer;font-weight:500;margin:12px 0;color:var(--ink2)}
 
+/* ---------- Learn this screen part 2: fill / genmap / mdmap / actions (11/11/2026) ---------- */
+.lsx{border-top:1px solid var(--line);padding:8px 0}.lsx:first-child{border-top:0;padding-top:0}
+.lsd summary{cursor:pointer;color:var(--ink3);font-size:12.5px;margin:4px 0}.lsd pre.code{max-height:260px;overflow:auto}
+.lsdin{display:inline-block;margin-left:6px}.lsdin[open]{display:block}
+.lsnm{display:block;font-size:11px;color:var(--ink3);font-weight:400}
+
+/* ---------- Learn this screen part 3: In short, flow picture, WHEN · CTRL · WHAT, rules (11/11/2026) ---------- */
+.lscard .lstech{display:none}.lscard.tech .lstech{display:inline}
+.lsgl{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center}
+.lsg{font-size:12px;color:var(--ink3);background:var(--surf2);border-radius:999px;padding:3px 10px;cursor:help}.lsg b{color:var(--ink);font-weight:600;margin-right:3px}
+.lsgl .chip{margin-left:auto;font-size:12px;padding:3px 10px}
+.lssum{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--blueb)}
+.lssumh{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+.lssuml{margin:0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--ink)}.lssuml li{margin:3px 0}.lssuml b{font-weight:600}
+.lsflow{display:block;width:100%;height:auto;margin-top:12px;background:var(--surf);border-radius:10px}
+.lsf-me{fill:var(--blueb);stroke:var(--blue);stroke-width:1.5}.lsf-box{fill:var(--surf);stroke:var(--line2)}
+.lsf-a{fill:none;stroke:var(--line2);stroke-width:1.5}.lsf-ah{fill:var(--ink3)}
+.lsf-t1{font-size:13px;font-weight:500;fill:var(--ink)}.lsf-t2{font-size:11px;fill:var(--ink3)}
+.lsf-k{font-size:10.5px;font-weight:700;letter-spacing:.05em}.lsf-fill{fill:var(--blue)}.lsf-post{fill:var(--green)}.lsf-update{fill:var(--amber)}
+.lsttl{margin:0 0 4px;font-size:15px}
+.lswcw{display:grid;grid-template-columns:max-content 1fr;gap:6px 12px;align-items:baseline;margin:6px 0}
+.lskw,.lswhen{font:700 10.5px var(--mono);letter-spacing:.04em;padding:2px 7px;border-radius:5px;background:var(--surf2);color:var(--ink2);text-align:center;white-space:nowrap}
+.lswhen{display:inline-block;margin-right:6px;background:var(--amberb);color:var(--amber)}
+.lskw-when,.lskw-how{background:var(--blueb);color:var(--blue)}.lskw-ctrl{background:var(--amberb);color:var(--amber)}
+.lskw-what{background:var(--greenb);color:var(--green)}.lskw-undo{background:var(--redb);color:var(--red)}
+.lskw-if,.lskw-elseif,.lskw-and,.lskw-or{background:var(--amberb);color:var(--amber)}
+.lskw-then,.lskw-do,.lskw-always{background:var(--greenb);color:var(--green)}.lskw-else{background:var(--surf3);color:var(--ink2)}.lskw-c{background:transparent}
+.lsrules{display:flex;flex-direction:column;gap:8px;margin:6px 0}
+.lsrule{border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.lsrr{display:grid;grid-template-columns:74px 1fr;gap:10px;align-items:baseline;margin:3px 0}
+@media(max-width:600px){.lsrr{grid-template-columns:62px 1fr}.lsgl .chip{margin-left:0}}
+.lswhere{white-space:pre-wrap;word-break:break-word;font-size:12px;margin:4px 0;max-height:180px;overflow:auto}
+.lsp-test{background:var(--amberb);color:var(--amber)}
+
 </style>
 </head>
 <body>
@@ -690,11 +724,11 @@ button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "49jDDdt7sQEpk/T8yQT2+KedpLrASGrVY+lMW4xy4vy+FiVR"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "UK6V9OAXvK9F+qlUkhpNDBSRqCVW+XNpPyVLUOnSUFwXEXzo"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611111141";
+const BUILD="202611111506";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -2111,18 +2145,19 @@ function pfTable(title, rows, cols) {
 const pfR = v => v == null || v === "" ? "–" : esc(String(v));   /* raw values on the real document: ids must not get thousand separators */
 function pfWalk(w) {
   if (!w) return "";
+  const pfV = v => { const nm = w.names && v != null && w.names[String(v)]; return nm ? esc(String(v)) + '<small class="lsnm">' + esc(nm) + '<\/small>' : pfR(v); };   /* id + its name */
   const vis = w.head.filter(x => !x[3] && x[2] !== null && x[2] !== ""), hid = w.head.filter(x => x[3] && x[2] !== null && x[2] !== "");
   let h = '<div class="pfi"><div class="pfh"><b>One real document, end to end<\/b><span class="pfn">' + esc(w.why) + '<\/span><\/div>' +
     '<div class="pfdoc"><span class="mono">' + esc(w.docid) + '<\/span><span>' + esc(w.date) + '<\/span><span>by <span class="mono">' + esc(w.by || "?") + '<\/span><\/span><span>saved ' + esc(w.created || "") + '<\/span>' + (w.cancel === "T" ? '<span class="st st-red">Cancelled<\/span>' : "") + '<\/div>';
-  h += '<div class="sec">1 · What the user filled in<\/div><div class="pfkv">' + vis.map(x => '<div><small>' + esc(x[1]) + '<\/small><b>' + pfR(x[2]) + '<\/b><\/div>').join("") + '<\/div>';
-  if (hid.length) h += '<details class="pfhid"><summary>' + hid.length + ' hidden fields Axpert filled in by itself<\/summary><div class="pfkv">' + hid.map(x => '<div><small>' + esc(x[1]) + ' · ' + esc(x[0]) + '<\/small><b>' + pfR(x[2]) + '<\/b><\/div>').join("") + '<\/div><\/details>';
+  h += '<div class="sec">1 · What the user filled in<\/div><div class="pfkv">' + vis.map(x => '<div><small>' + esc(x[1]) + '<\/small><b>' + pfV(x[2]) + '<\/b><\/div>').join("") + '<\/div>';
+  if (hid.length) h += '<details class="pfhid"><summary>' + hid.length + ' hidden fields Axpert filled in by itself<\/summary><div class="pfkv">' + hid.map(x => '<div><small>' + esc(x[1]) + ' · ' + esc(x[0]) + '<\/small><b>' + pfV(x[2]) + '<\/b><\/div>').join("") + '<\/div><\/details>';
   (w.details || []).forEach(d => {
     const ci = d.cols.map((c, i) => [c, i]).filter(([c, i]) => !c[2] && d.rows.some(r => r[i] !== null && r[i] !== ""));
     h += '<div class="sec">2 · Lines (' + esc(d.table) + ') · ' + d.rows.length + '<\/div><div class="tw"><table class="pft"><thead><tr>' + ci.map(([c]) => '<th>' + esc(c[1]) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' +
-      d.rows.map(r => '<tr>' + ci.map(([c, i]) => '<td>' + pfR(r[i]) + '<\/td>').join("") + '<\/tr>').join("") + '<\/tbody><\/table><\/div>';
+      d.rows.map(r => '<tr>' + ci.map(([c, i]) => '<td>' + pfV(r[i]) + '<\/td>').join("") + '<\/tr>').join("") + '<\/tbody><\/table><\/div>';
   });
   h += '<div class="sec">3 · What Save wrote into other tables<\/div>' + (w.writes || []).map(x => '<div class="pfw"><b>' + esc(x.table) + '<\/b> <span class="mono">' + esc(x.map) + '<\/span> · ' + x.rows.length + ' row(s)' +
-    (x.note ? '<p class="pfn">' + esc(x.note) + '<\/p>' : '<div class="tw"><table class="pft"><thead><tr>' + x.cols.map(c => '<th>' + esc(c) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' + x.rows.map(r => '<tr>' + r.map(v => '<td>' + pfR(v) + '<\/td>').join("") + '<\/tr>').join("") + '<\/tbody><\/table><\/div>') + '<\/div>').join("");
+    (x.note ? '<p class="pfn">' + esc(x.note) + '<\/p>' : '<div class="tw"><table class="pft"><thead><tr>' + x.cols.map(c => '<th>' + esc(c) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' + x.rows.map(r => '<tr>' + r.map(v => '<td>' + pfV(v) + '<\/td>').join("") + '<\/tr>').join("") + '<\/tbody><\/table><\/div>') + '<\/div>').join("");
   if (w.ctrl) h += '<div class="sec">4 · Can it be cancelled today?<\/div>' + (w.ctrl.error ? '<p class="pfn">' + esc(w.ctrl.error) + '<\/p>' :
     w.ctrl.blocked ? '<div class="note red">' + ico("cancel") + '<div><b>No.<\/b> The delete control answers: “' + esc(w.ctrl.result) + '”<\/div><\/div>' : '<div class="note blue">' + ico("ok") + '<div><b>Yes.<\/b> The delete control lets it through.<\/div><\/div>');
   return h + '<\/div>';
@@ -2169,110 +2204,489 @@ function gxProofMark(R, p) {
 const LSG = { flow: ["st-green", "FLOW", "what normally happens"], val: ["st-amber", "VALIDATION", "what stops the user"], issue: ["st-red", "ISSUE", "watch out"], info: ["st-blue", "KNOW", "background"] };
 const lsCap = f => String((f && (f.cap || f.n)) || "").replace(/\*+\s*$/, "").trim();
 const lsList = (a, n) => { a = [...new Set(a.filter(Boolean))]; return a.length <= (n || 99) ? a.join(", ") : a.slice(0, n).join(", ") + " and " + (a.length - n) + " more"; };
-/* senior notes that cannot come from the structure: written only after they were checked on live data */
+/* senior notes that cannot come from the structure. Each says where it comes from (11/11/2026):
+   "data" = checked on live data · "code" = worked out from the screen / SQL code, not tried on TEST · "mixed" = see the 5th item */
 const GXNOTES = {
   iss: [
-    ["issue", "Same Android request issued twice", "Two store keepers can issue the same supervisor request from two PCs a minute apart (case #58161: REQ26061624119 issued as ATCISS26062633 and 2635, checked 09/11/2026). Save does not re-check how much of the request is already issued. Before you cancel anything, look for a second issue of the same request."],
-    ["flow", "How to undo an Android issue", "The supervisor returns the material (Material Returns From Site). That writes a Minus row against the return document, not against the issue, so the issue stays blocked. A real cancel needs IT to remove the issue's rows in Android Stock Table first; then Cancel goes through and the store stock comes back (checked 09/11/2026)."]
+    ["issue", "Same Android request issued twice", "Two store keepers can issue the same supervisor request from two PCs a minute apart (case #58161: REQ26061624119 issued as ATCISS26062633 and 2635). Save does not re-check how much of the request is already issued. Before you cancel anything, look for a second issue of the same request.", "data"],
+    ["flow", "How to undo an Android issue", "The supervisor returns the material (Material Returns From Site). That writes a Minus row against the return document, not against the issue, so the issue stays blocked. A real cancel needs IT to remove the issue's rows in Android Stock Table first; then Cancel goes through and the store stock comes back.", "mixed", "the return part was checked on live data (09/11/2026); the IT-clear-then-cancel part is worked out from the cancel control code and was not tried on TEST"]
+  ],
+  mrfs: [
+    ["issue", "A return does not unblock the issue", "Material Returns From Site puts the stock back (STOCKVALUE 'TRANSFER IN'), writes a Minus row in the supervisor's Android stock against the RETURN document and adds the quantity to ISSUEDETAIL.RETURNQTY. The issue's own Plus rows stay, so the issue still cannot be cancelled after a full return.", "data"]
+  ],
+  astkm: [
+    ["issue", "This is where IT clears Android rows", "Android Stock Table has a Remove button with no control and no delete control. Only roles developer, hari and AsstManagerIT open it. Removing an issue's rows here is what lets that issue be cancelled. Never remove rows of an issue whose material was really handed out.", "mixed", "the button and the roles were checked on live data (09/11/2026); that removing rows unblocks the issue is worked out from the Issue's cancel control code"]
+  ],
+  lpo: [
+    ["val", "Once it has a child, it is frozen", "Edit and delete are refused while a PO Cancellation (PRCHDR) or a GRN (LOCALGRN) exists for this PO (control fields saveflag / delflag).", "code"],
+    ["flow", "What is still open for GRN", "Ordered minus cancelled minus received plus returned: PURQTY - POCANCELQTY - GRNQTY + GRNRTNQTY. The GRN screen only offers lines of live, approved POs where this is above 0.", "code"],
+    ["flow", "Support case: 'PO line cancelled, reopen it for GRN'", "Cancel the PO Cancellation document for that line. Its mapping takes the quantity back out of PODTL.POCANCELQTY, so the line becomes open again and shows up in GRN. Check the MR side too: the cancellation also added to MREQDETAIL.MPOCQTY (looked at on PO 26030638).", "code"]
+  ],
+  lpoc: [
+    ["flow", "What a PO Cancellation changes", "It saves PRCHDR / PRCDTL, adds the cancelled quantity to PODTL.POCANCELQTY and to MREQDETAIL.MPOCQTY, and sets the MR line status to 'PO Cancelled'. The PO list only offers POs with quantity still open.", "code"],
+    ["val", "Blocked while a supplier advance exists", "If the PO has a supplier advance payment (ARAPPAYHDR_POADV), the cancellation is refused (control field popaymentctl). Settle or move the advance first.", "code"]
+  ],
+  logrn: [
+    ["flow", "Which PO lines it offers", "Fill Item lists only lines of live, approved POs with quantity still open (PURQTY - POCANCELQTY - GRNQTY + GRNRTNQTY above 0). If a user says 'the PO is not in GRN', check those four numbers on PODTL first.", "code"],
+    ["flow", "PO received quantity is kept right", "Every GRN adds its accepted quantity to PODTL.GRNQTY. On live data that total matches the GRNs on 22,321 of 22,328 PO lines.", "data"]
+  ],
+  qutap: [
+    ["issue", "A cancelled PO quantity can be ordered again", "Quotation Approval treats as pending: quoted - approved + PO-cancelled. So after a PO line is cancelled its quantity is open again here. Check before you Remove anything, or the same quantity is ordered twice.", "code"]
+  ],
+  curr: [
+    ["issue", "A new currency needs a rate too", "Adding a currency here is not enough. GETEXRATE takes the approved exchange rate (Ex. Rates screen) dated on or before the document date; with no such rate the rate comes back empty. 60+ screens read this list.", "mixed", "seen in ticket #64171 (09/11/2026); the on-or-before-date rule is read from the GETEXRATE code"]
+  ],
+  derat: [
+    ["issue", "No rate on or before the document date = empty rate", "GETEXRATE uses the approved rate dated on or before the document date. A rate entered with a later date does not help older documents.", "mixed", "seen in ticket #64171 (09/11/2026); the rule itself is read from the GETEXRATE code"]
+  ],
+  sapr: [
+    ["flow", "Where these documents come from", "Monthly Salary Process (bulsa) creates one Salary Processing document per employee (contract staff go to their own screen). After the bank transfer the document is frozen (saveflag), and Salary Journal (saljn) posts it to the accounts.", "code"],
+    ["issue", "Changes after posting", "Some documents were changed after the accounts posting (16 of 897 posted groups differ), and deleting a posting un-flags the whole month. Compare with the journal before you trust a changed salary.", "mixed", "the 16 of 897 was counted on live data (09/11/2026); the un-flag on delete is read from the posting code"]
   ]
 };
-function lsType(g) {
-  const T = (g.maps || []).map(m => (m.table || "").toUpperCase()), has = re => T.some(t => re.test(t)), k = [];
-  if (has(/STOCK/)) k.push("moves stock");
-  if (has(/^ACCOUNTS|^BANKBOOK|^ARAP|^VAT/)) k.push("posts money to the accounts");
-  if (has(/MRSTATUS|^MREQ|^PODTL|^SUPPINV|^PURRQ/)) k.push("moves an order or request to its next step");
-  if (has(/^LOAN|^EMPHOLD|^ACCAL|MEDICAL/)) k.push("updates employee balances");
-  if (has(/MAILJOBS/)) k.push("sends mails");
-  if (!k.length && T.length) k.push("updates other records");
-  if (!T.length) return (g.readers || []).length >= 3 ? ["master", "a master list: other screens pick their values from it"] : ["record", "a record kept on its own"];
-  return ["posting", "a transaction that " + lsList(k)];
+const lsNoteSrc = x => x[3] === "data" ? lsStamp("proven", "checked on live data") : x[3] === "mixed" ? lsStamp("unproven", "part checked on data: " + (x[4] || "") + "; the rest needs a TEST check") : lsStamp("unproven", "read from the code; needs a TEST check");
+function lsType(g) {      /* exact: what the setup shows, no category guessed from table names (11/11/2026) */
+  const M = g.maps || [], P = M.filter(m => m.kind === "genmap").length, U = M.length - P, r = (g.readers || []).length;
+  if (M.length) return ["posting", "a transaction: saving it " + [P ? "posts to " + P + " other screen" + (P > 1 ? "s" : "") : "", U ? "updates " + U + " linked value" + (U > 1 ? "s" : "") : ""].filter(Boolean).join(" and ")];
+  if (r) return ["master", "a list other screens read from (" + r + " screen" + (r > 1 ? "s" : "") + "); saving it changes no other screen"];
+  return ["record", "a record kept on its own: saving it changes no other screen and no screen reads it"];
 }
 function lsSec(tag, title, body, n) {
   const t = LSG[tag];
   return '<div class="lss lss-' + tag + '"><div class="lsh">' + (n ? '<span class="lsn">' + n + '<\/span>' : "") + '<b>' + title + '<\/b><span class="st ' + t[0] + '" title="' + t[2] + '">' + t[1] + '<\/span><\/div><div class="lsb">' + body + '<\/div><\/div>';
 }
-const lsStamp = (st, txt) => '<span class="lsp lsp-' + st + '">' + (st === "proven" ? "✓" : st === "contra" ? "✗" : "?") + ' ' + esc(txt) + '<\/span>';
+const lsStamp = (st, txt) => st === "proven" || st === "contra" ? '<span class="lsp lsp-' + st + '">' + (st === "proven" ? "✓ " : "✗ ") + esc(txt) + '<\/span>' :
+  '<span class="lsp lsp-test">TEST · ' + esc(txt) + '<\/span>';     /* anything the live data cannot show */
 function gxLesson(s, g, R, P) {
+  /* Peter's model (11/11/2026): FILL brings lines in · POST (genmap) creates entries in other screens · UPDATE (mdmap) changes
+     a number in a linked document · RULE (action) runs on an event · CTRL = the yes/no field that decides. Every part says
+     WHEN · CTRL · WHAT. Technical names are hidden until "Show technical names" is on. */
   const F = g.fields || [], byN = {}; F.forEach(f => byN[f.n.toLowerCase()] = f);
   const cap = n => lsCap(byN[(n || "").toLowerCase()]) || n;
   const [kind, kindTxt] = lsType(g), u = g.usage || {};
   const own = [...new Set((g.dcs || []).map(d => d.tb).filter(Boolean))];
-  const sv = gxItems(g, "save"), cv = gxItems(g, "cancel");
-  const pw = {}; if (P) P.writes.forEach(w => pw[w.table] = w);
+  const cv = gxItems(g, "cancel");
   let n = 0, h = '';
+  h += lsSummary(s, g, R, P, cap);
   /* 1 · what it is */
   h += lsSec("info", "What this screen is for",
     '<p class="lsbig"><b>' + esc(g.cap) + '<\/b> is ' + esc(kindTxt) + '.<\/p><p>You find it in <b>' + esc((s.menus && s.menus[0] ? s.menus[0].path : g.path) || "") + '<\/b>.' +
     (u.docs12 != null ? ' It was saved <b>' + fmt(u.docs12) + '<\/b> times in the last 12 months' + (u.cancel12 ? ' and cancelled ' + fmt(u.cancel12) + ' times' : '') + '.' : '') + '<\/p>' +
     (kind === "master" ? '<p><b>' + g.readers.length + '<\/b> other screens read from it, so a wrong value here spreads to all of them.<\/p>' : ""), ++n);
-  /* 2 · the parts of the screen */
+  /* 2 · the parts */
   const parts = (g.dcs || []).map(d => {
     const fs = F.filter(f => f.dc === d.n), user = fs.filter(f => !f.hid && !f.ro), auto = fs.length - user.length;
     const must = fs.filter(f => f.req && !f.hid).map(lsCap);
-    return '<li><b>' + esc(lsCap(d) || d.n) + '<\/b> <span class="lsdim">' + (d.grid ? "many lines per document" : "once per document") + ' · ' + esc(d.tb || "") + '<\/span><br>' +
+    return '<li><b>' + esc(lsCap(d) || d.n) + '<\/b> <span class="lsdim">' + (d.grid ? "many lines per document" : "once per document") + '<\/span>' + lsT(' · ' + esc(d.tb || "")) + '<br>' +
       'You fill <b>' + user.length + '<\/b> fields' + (auto ? ', Axpert fills <b>' + auto + '<\/b> by itself' : '') + '.' + (must.length ? ' Must not be empty: <b>' + esc(lsList(must, 8)) + '<\/b>.' : '') + '<\/li>';
   });
   if (parts.length) h += lsSec("flow", "The screen has " + parts.length + " part" + (parts.length > 1 ? "s" : ""), '<ol class="lsol">' + parts.join("") + '<\/ol>' +
     (P && P.mandatory && P.mandatory.length ? '<p>' + (P.mandatory.some(x => x.status === "contra") ? lsStamp("contra", "some saved documents have a must-fill field empty") : lsStamp("proven", "every saved document of the year has its must-fill fields")) + '<\/p>' : ""), ++n);
-  /* 3 · where the values come from */
-  const fills = (g.fill || []).map(f => '<li><b>' + esc(f.cap || f.name) + '<\/b> brings lines in automatically' + ((f.params || []).length ? ', using ' + esc(lsList(f.params.map(cap), 6)) : '') + '.<\/li>');
-  const picks = F.filter(f => !f.hid && (f.mode === "select" || (f.sq && !f.ex)) && (f.reads || []).length).slice(0, 6).map(f => '<li><b>' + esc(lsCap(f)) + '<\/b> is picked from a list (' + esc(f.reads.join(", ")) + ').<\/li>');
-  const calc = F.filter(f => f.ex && /^[A-Za-z0-9_ .+\-*/()]+$/.test(f.ex) && /[+\-*/]/.test(f.ex) && !/^\{/.test(f.ex)).slice(0, 4).map(f => '<li><b>' + esc(lsCap(f)) + '<\/b> = ' +
+  /* 3 · FILL */
+  h += ls3Fill(g, cap, () => ++n);
+  /* 4 · values picked from lists and formulas */
+  const picks = F.filter(f => !f.hid && (f.mode === "select" || (f.sq && !f.ex)) && (f.reads || []).length).slice(0, 6).map(f => '<li><b>' + esc(lsCap(f)) + '<\/b> is picked from a list' + lsT(' (' + esc(f.reads.join(", ")) + ')') + '.<\/li>');
+  const calc = F.filter(f => f.ex && /^[A-Za-z0-9_ .+\-*/()]+$/.test(f.ex) && /[+\-*/]/.test(f.ex) && !/^\{/.test(f.ex)).slice(0, 5).map(f => '<li><b>' + esc(lsCap(f)) + '<\/b> = ' +
     esc(f.ex.replace(/[A-Za-z_][A-Za-z0-9_]*/g, w => cap(w)).replace(/\*/g, " × ")) + '<\/li>');
-  if (fills.length || picks.length || calc.length) h += lsSec("flow", "Where the values come from", '<ul class="lsul">' + fills.join("") + picks.join("") + calc.join("") + '<\/ul>' +
-    (P && P.formulas && P.formulas.some(x => x.rows) ? '<p>' + P.formulas.filter(x => x.rows).map(x => lsStamp(x.status, lsCap(byN[x.field.toLowerCase()]) + ": " + fmt(x.equal) + " of " + fmt(x.rows) + " saved lines follow the formula")).join(" ") + '<\/p>' : ""), ++n);
-  /* 4 · what can stop the user while typing */
-  /* only fields the user sees: hidden control fields belong to Save / Cancel below */
-  const seen = {}, vals = R.filter(r => r.k === "VALIDATION" && r.m && r.w === "field" && !(byN[(r.f || "").toLowerCase()] || {}).hid)
-    .filter(r => { const m = r.m.split(" | ")[0]; if (seen[m]) return false; seen[m] = 1; return true; });
-  const msgOf = r => { const m = r.m.split(" | ")[0].trim(); return /^[a-z]/.test(m) ? cap(r.f) + " " + m : m; };   /* "is mandatory" -> "A. Empid is mandatory" */
-  if (vals.length) h += lsSec("val", "What can stop you while you type", '<ul class="lsul">' + vals.slice(0, 7).map(r => '<li>On <b>' + esc(cap(r.f)) + '<\/b> you may see: <q>' + esc(msgOf(r)) + '<\/q><\/li>').join("") + '<\/ul>' +
-    (vals.length > 7 ? '<p class="lsdim">' + (vals.length - 7) + ' more messages in the developer view below.<\/p>' : ""), ++n);
-  /* 5 · what Save does */
-  const gates = sv.L.filter(x => x.kind === "gate");
-  let save = '<ol class="lsol">' + (gates.length ? '<li>Axpert first checks other screens. Save is refused while ' + esc(lsList(gates.map(x => x.title), 4)) + ' exists' + (gates[0].msg ? '. The user sees <q>' + esc(gates[0].msg) + '<\/q>' : '') + '.<\/li>' : '<li>Nothing outside this screen is checked before Save.<\/li>') +
-    '<li>The document is saved in its own table' + (own.length > 1 ? 's' : '') + ': <b>' + esc(own.join(", ")) + '<\/b>.<\/li>';
-  sv.R.forEach(x => {
-    const tb = ((g.answers && (g.answers.save || []).find(a => a.target === x.target)) || {}).table || (x.sub.split("·")[1] || "").trim(), w = pw[(tb || "").toUpperCase()];
-    save += '<li>' + esc(x.say.replace(/\.\?/g, "")) + (w ? '<br>' + (w.status === "proven" ? lsStamp("proven", "seen in " + fmt(w.docs) + " documents of the year (" + w.coverage + "%)") :
-      w.status === "contra" ? lsStamp("contra", "seen in " + fmt(w.docs) + " documents, but some values differ: " + w.fields.filter(f => f.status === "contra").map(f => f.target + " in " + (f.months || []).map(m => m[0]).join(", ")).join("; ")) :
-      lsStamp("unproven", w.note || "not shown by the data")) : "") + '<\/li>';
+  if (picks.length || calc.length) h += lsSec("flow", "Values picked from lists and worked out", '<ul class="lsul">' + picks.join("") + calc.join("") + '<\/ul>' +
+    (P && P.formulas && P.formulas.some(x => x.rows) ? '<p>' + P.formulas.filter(x => x.rows).slice(0, 4).map(x => lsStamp(x.status, lsCap(byN[x.field.toLowerCase()]) + ": " + fmt(x.equal) + " of " + fmt(x.rows) + " saved lines follow the formula")).join(" ") + '<\/p>' : ""), ++n);
+  /* 5 · VALIDATION while typing: message + WHEN, read from the field's own expression */
+  const vals = R.filter(r => r.k === "VALIDATION" && r.m && r.w === "field" && !(byN[(r.f || "").toLowerCase()] || {}).hid);
+  const vItems = [], vDone = {}, vSeen = {};
+  const vMsg = (fn, m) => /^[a-z]/.test(m) ? cap(fn) + " " + m : m;          /* "cannot be future date" -> "DO Date cannot be future date" */
+  vals.forEach(r => {
+    const key = (r.f || "").toLowerCase(), pairs = (byN[key] || {}).vxw || [];
+    if (pairs.length && !vDone[key]) { vDone[key] = 1; pairs.forEach(p => vItems.push('<li>On <b>' + esc(cap(r.f)) + '<\/b>: <q>' + esc(vMsg(r.f, p[1])) + '<\/q><br><span class="lswhen">WHEN<\/span> ' + esc(p[0]) + '<\/li>')); }
+    if (pairs.length && (r.m.indexOf(" | ") >= 0 || pairs.some(p => r.m.indexOf(p[1].slice(0, 15)) >= 0))) return;   /* same rule, already said */
+    const m = r.m.split(" | ")[0].trim();
+    if (vSeen[m]) return; vSeen[m] = 1;
+    const fx = byN[key] || {}, raw = fx.vx && !fx.vxw && !vDone[key] ? (vDone[key] = 1, '<br><span class="lswhen">WHEN<\/span> <span class="lsdim">as written in the setup:<\/span> <code class="mono">' + esc(fx.vx) + '<\/code>') : "";
+    vItems.push('<li>On <b>' + esc(cap(r.f)) + '<\/b>: <q>' + esc(vMsg(r.f, m)) + '<\/q>' + raw + '<\/li>');
   });
-  save += '<\/ol>';
-  h += lsSec(gates.length ? "val" : "flow", "When you press Save", save + (!sv.R.length ? '<p class="lsdim">It changes nothing in other screens.<\/p>' : ""), ++n);
-  /* 6 · can it be undone */
-  const cg = cv.L.filter(x => x.kind === "gate" || x.kind === "trig");
+  if (vItems.length) h += lsSec("val", "What stops you while you type", '<ul class="lsul">' + vItems.slice(0, 9).join("") + '<\/ul>' +
+    (vItems.length > 9 ? '<details class="lsd"><summary>' + (vItems.length - 9) + ' more<\/summary><ul class="lsul">' + vItems.slice(9).join("") + '<\/ul><\/details>' : "") +
+    '<p class="lsdim">WHEN is read from the field\'s own check, in the same order as the code. When it cannot be said in words, the code is shown as written.<\/p>', ++n);
+  /* 6 · SAVE */
+  const sv = gxItems(g, "save"), gates = sv.L.filter(x => x.kind === "gate");
+  h += lsSec(gates.length ? "val" : "flow", "When you press Save", '<ol class="lsol">' +
+    (gates.length ? '<li><span class="lswhen">CHECK<\/span> Save is refused while ' + esc(lsList(gates.map(x => x.title), 4)) + ' exists' + (gates[0].msg ? ' - the user sees <q>' + esc(gates[0].msg) + '<\/q>' : '') + '.<\/li>' : '<li>Nothing outside this screen is checked first.<\/li>') +
+    '<li>The document is saved' + lsT(' in ' + esc(own.join(", "))) + '.<\/li>' +
+    ((g.maps || []).length ? '<li>Then it <b>POSTS<\/b> ' + (g.maps.filter(m => m.kind === "genmap").length) + ' and <b>UPDATES<\/b> ' + (g.maps.filter(m => m.kind === "mdmap").length) + ' other things - see the next two parts.<\/li>' : '<li>It changes nothing in other screens.<\/li>') + '<\/ol>', ++n);
+  /* 7 · POST, 8 · UPDATE */
+  h += ls3Post(g, P, cap, () => ++n) + ls3Update(g, P, cap, () => ++n);
+  /* 9 · RULES */
+  h += ls3Rules(g, cap, () => ++n);
+  /* 10 · undo */
+  const cg = cv.L.filter(x => x.kind === "gate"), ct = cv.L.filter(x => x.kind === "trig");
   let undo = '';
-  if (s.cs || s.rs) undo += '<p>Buttons on this screen: ' + [s.cs ? 'Cancel · <b>' + esc(s.cs.v) + '<\/b>' : "", s.rs ? 'Remove · <b>' + esc(s.rs.v) + '<\/b>' : ""].filter(Boolean).join(" &nbsp; ") + '<\/p>';
-  const cgate = cg.filter(x => x.kind === "gate"), ctrig = cg.filter(x => x.kind === "trig");
-  undo += cgate.length ? '<p>Cancel / Remove is refused while ' + esc(lsList(cgate.map(x => x.title), 4)) + ' exists for this document' + (cgate[0].msg ? '. The user sees <q>' + esc(cgate[0].msg) + '<\/q>' : '') + '.<\/p>' : '<p>Nothing on the screen is checked before Cancel / Remove.<\/p>';
-  ctrig.forEach(x => { undo += '<p>The database itself also refuses when ' + esc(x.title) + ' would go wrong' + (x.msg ? ': <q>' + esc(x.msg) + '<\/q>' : '') + '.<\/p>'; });
+  if (s.cs || s.rs) undo += '<p>Buttons: ' + [s.cs ? 'Cancel · <b>' + esc(s.cs.v) + '<\/b>' : "", s.rs ? 'Remove · <b>' + esc(s.rs.v) + '<\/b>' : ""].filter(Boolean).join(" &nbsp; ") + '<\/p>';
+  undo += cg.length ? '<p><span class="lswhen">CHECK<\/span> Cancel / Remove is refused while ' + esc(lsList(cg.map(x => x.title), 4)) + ' exists for this document' + (cg[0].msg ? ' - the user sees <q>' + esc(cg[0].msg) + '<\/q>' : '') + '.<\/p>' : '<p>Nothing on the screen is checked before Cancel / Remove.<\/p>';
+  ct.forEach(x => { undo += '<p>The database itself also refuses when ' + esc(x.title) + ' would go wrong' + (x.msg ? ': <q>' + esc(x.msg) + '<\/q>' : '') + '.<\/p>'; });
   if (P && P.ctrl && P.ctrl.sample) undo += '<p>' + lsStamp("proven", "tried on " + P.ctrl.sample + " real documents: " + P.ctrl.blocked_pct + "% cannot be cancelled today (about " + fmt(P.ctrl.est_blocked12) + " of the year)") + '<\/p>';
-  if (cv.R.length) undo += '<p>When it does go through, it takes back: ' + esc(lsList(cv.R.map(x => x.title), 5)) + '.<\/p>';
+  if (cv.R.length) undo += '<p>When it goes through, Axpert takes back what Save posted and updated: ' + esc(lsList(cv.R.map(x => x.title), 5)) + '. ' + lsRev(P, undefined, g) + '<\/p>';
   h += lsSec(cg.length ? "val" : "flow", "Can it be undone?", undo, ++n);
-  /* 7 · who depends on it */
+  /* 11 · who uses it */
   if ((g.readers || []).length || (g.writers || []).length) h += lsSec("info", "Who else uses this data",
     ((g.readers || []).length ? '<p><b>' + g.readers.length + '<\/b> screens read it: ' + esc(lsList(g.readers.map(r => r[1]), 8)) + '. If a value here is wrong, they show it wrong too.<\/p>' : "") +
     ((g.writers || []).length ? '<p><b>' + g.writers.length + '<\/b> screens change its data later: ' + esc(lsList(g.writers.map(r => r[1]), 6)) + '. So what you see now may not be what was first saved.<\/p>' : ""), ++n);
-  /* 8 · watch out */
-  const chk = R.filter(r => r.k === "CHECK"), contra = P ? P.writes.filter(w => w.status === "contra") : [];
-  const notes = (GXNOTES[g.t] || []);
+  /* 12 · watch out */
+  const chk = R.filter(r => r.k === "CHECK"), contra = P ? P.writes.filter(w => w.status === "contra") : [], notes = (GXNOTES[g.t] || []);
   if (chk.length || contra.length || notes.length) h += lsSec("issue", "Watch out", '<ul class="lsul">' +
-    chk.slice(0, 6).map(r => '<li><b>' + esc(r.t) + '<\/b>' + (r.s ? ' · ' + esc(r.s) : "") + (r.pf ? ' ' + lsStamp(r.pf.st, r.pf.st === "proven" ? "checked on data" : r.pf.st === "contra" ? "data says otherwise" : "not proven yet") : "") + '<\/li>').join("") +
-    contra.map(w => '<li><b>' + esc(w.table) + ' does not always match the screen.<\/b> ' + w.fields.filter(f => f.status === "contra").map(f => esc(f.target) + ' differs in ' + (f.months || []).map(m => fmt(m[1]) + ' rows of ' + m[0]).join(", ") +
-      ((f.examples || [])[0] ? ', e.g. ' + esc(f.examples[0][0]) + ' screen ' + esc(f.examples[0][1]) + ' → table ' + esc(f.examples[0][2]) : '')).join("; ") + '. ' + lsStamp("contra", "from the data") + '<\/li>').join("") +
-    notes.map(x => '<li><span class="st ' + LSG[x[0]][0] + '">' + LSG[x[0]][1] + '<\/span> <b>' + esc(x[1]) + '.<\/b> ' + esc(x[2]) + '<\/li>').join("") + '<\/ul>', ++n);
-  /* 9 · a real document */
+    notes.map(x => '<li><span class="st ' + LSG[x[0]][0] + '">' + LSG[x[0]][1] + '<\/span> <b>' + esc(x[1]) + '.<\/b> ' + esc(x[2]) + ' ' + lsNoteSrc(x) + '<\/li>').join("") +
+    contra.map(w => '<li><b>' + esc(w.table || w.target_col || "") + ' does not always match.<\/b> ' + esc(w.mdcheck || w.fields.filter(f => f.status === "contra").map(f => f.target + " differs in " + (f.months || []).map(m => fmt(m[1]) + " rows of " + m[0]).join(", ")).join("; ")) + ' ' + lsStamp("contra", "from the data") + '<\/li>').join("") +
+    chk.slice(0, 5).map(r => '<li><b>' + esc(r.t) + '<\/b>' + (r.s ? ' · ' + esc(r.s) : "") + (r.pf ? ' ' + lsStamp(r.pf.st, r.pf.st === "proven" ? "checked on data" : r.pf.st === "contra" ? "data says otherwise" : "needs a TEST check") : "") + '<\/li>').join("") + '<\/ul>', ++n);
+  /* what the data cannot show: a TEST checklist for this screen */
+  const TL = [], pwm = {}; if (P) P.writes.forEach(w => pwm[w.map] = w);
+  if (u.docs12 === 0) TL.push("No documents in the last 12 months: save one on TEST and see what it POSTS and UPDATES.");
+  (g.fill || []).filter(f => !f.on).forEach(f => TL.push("Does <b>" + esc(f.cap || f.name) + "<\/b> fill by itself when " + esc(lsList((f.params || []).map(cap), 4) || "its fields") + " change?"));
+  (g.actions || []).filter(a => (a.apply || "").toLowerCase() === "on field exit" && (byN[(a.on || "").toLowerCase()] || {}).hid).slice(0, 4)
+    .forEach(a => TL.push("Does rule <b>" + esc(a.name) + "<\/b> run when the hidden field <b>" + esc(cap(a.on)) + "<\/b> changes?"));
+  (g.maps || []).filter(m => !(pwm[m.name] && pwm[m.name].cancelrev && (pwm[m.name].cancelrev.docs || pwm[m.name].cancelrev.lines))).slice(0, 4)
+    .forEach(m => TL.push("Cancel one document on TEST: does " + (m.kind === "genmap" ? "its row in <b>" + esc(m.tcap || m.target) + "<\/b> go away" : "<b>" + esc(m.tcap || m.target) + "<\/b> get its value back") + "?"));
+  F.filter(f => f.vx && !f.vxw && !f.hid).slice(0, 3).forEach(f => TL.push("The check on <b>" + esc(lsCap(f)) + "<\/b> could not be said in words: try it on TEST."));
+  if (TL.length) h += lsSec("val", "What still needs a TEST check (" + TL.length + ")", '<p class="lsdim">The live data cannot show these. Try each one once on TEST; until then the lesson marks them TEST.<\/p><ol class="lsol">' + TL.map(x => '<li>' + x + '<\/li>').join("") + '<\/ol>', ++n);
+  /* 13 · real document, 14 · check yourself */
   h += lsSec("flow", "See it on a real document", P && P.walk ? pfWalk(P.walk) : '<p class="lsdim">No real example for this screen yet: the proof from the live data has not been run for it.<\/p>', ++n);
-  /* 10 · check yourself */
-  const Q = [["When you save one " + g.cap + ", what else changes?", sv.R.length ? lsList(sv.R.map(x => x.title)) + "." : "Nothing outside its own tables."],
+  const posts = (g.maps || []).filter(m => m.kind === "genmap"), upds = (g.maps || []).filter(m => m.kind === "mdmap");
+  const Q = [["When you save one " + g.cap + ", what does it POST and UPDATE?", (posts.length ? "Posts to " + lsList(posts.map(m => m.tcap || m.target)) + ". " : "Posts nothing. ") + (upds.length ? "Updates " + lsList(upds.map(m => (m.tcap || m.target) + " (" + m.tfield + ")")) + "." : "Updates nothing.")],
     ["What must be filled before you can save?", (F.filter(f => f.req && !f.hid).map(lsCap).join(", ") || "No field is marked mandatory") + "."],
     ["Can a saved " + g.cap + " be cancelled?", cg.length ? "Not while " + lsList(cg.map(x => x.title), 3) + " exists" + (cg[0].msg ? " - the user sees “" + cg[0].msg + "”" : "") + "." : "Yes. Nothing is checked first" + (s.cs && s.cs.key === "open" ? ", and the Cancel button has no control." : ".")]];
-  if ((g.readers || []).length) Q.push(["If a value here is wrong, where else will people see it wrong?", lsList(g.readers.map(r => r[1]), 6) + "."]);
+  const firstCtrl = posts.find(m => m.ctrl);
+  if (firstCtrl) Q.push(["When does it post to " + (firstCtrl.tcap || firstCtrl.target) + "?", "Only when " + (lsWhenOf(g, firstCtrl) || firstCtrl.ctrl + " is T") + "."]);
   h += lsSec("info", "Check yourself", Q.map((q, i) => '<details class="lsq"><summary>' + (i + 1) + '. ' + esc(q[0]) + '<\/summary><p>' + esc(q[1]) + '<\/p><\/details>').join("") +
     '<div class="tool" style="margin:10px 0 0"><button class="btn' + (GXSK[g.t] === "ok" ? " pri" : "") + '" data-sk="ok">' + ico("ok") + 'I understand it<\/button><button class="btn' + (GXSK[g.t] === "no" ? " pri" : "") + '" data-sk="no">Not clear yet<\/button><\/div>', ++n);
-  return '<section class="card lscard"><div class="ch"><h3>Learn this screen<\/h3><div class="hint">Explained the way a senior developer would teach a new joiner, built from this screen\'s own structure' +
-    (P ? ' and checked against the live data (' + esc(P.built) + ')' : '') + '. <span class="st st-green">FLOW<\/span> what normally happens · <span class="st st-amber">VALIDATION<\/span> what stops the user · <span class="st st-red">ISSUE<\/span> watch out.<\/div><\/div><div class="cb lsbody">' + h + '<\/div><\/section>';
+  let tech = false; try { tech = localStorage.getItem("ls-tech") === "1"; } catch (e) { }
+  return '<section class="card lscard' + (tech ? " tech" : "") + '"><div class="ch"><h3>Learn this screen<\/h3><div class="hint">Explained the way a senior developer would teach a new joiner, built from this screen\'s own structure' +
+    (P ? ' and checked against the live data (' + esc(P.built) + ')' : '') + '.<br>Plain text is read exactly from the screen setup. ' + lsStamp("proven", "checked on live data") + ' ' + lsStamp("contra", "live data says otherwise") + ' ' + lsStamp("unproven", "the data cannot show it") + '<\/div><div class="lsgl">' + LSGLOSS.map(x => '<span class="lsg" title="' + esc(x[2]) + '"><b>' + x[0] + '<\/b> ' + esc(x[1]) + '<\/span>').join("") +
+    '<button class="chip' + (tech ? " on" : "") + '" id="lstech" onclick="this.classList.toggle(\'on\');this.closest(\'.lscard\').classList.toggle(\'tech\');try{localStorage.setItem(\'ls-tech\',this.classList.contains(\'on\')?\'1\':\'0\')}catch(e){}">Show technical names<\/button><\/div><\/div><div class="cb lsbody">' + h + '<\/div><\/section>';
+}
+
+function lsSqlPlain(sql, cap) {        /* the WHERE conditions of a fill / list SQL, said simply */
+  const w = (sql || "").replace(/\s+/g, " "), out = [];
+  if (/cancel\s*=\s*'F'/i.test(w)) out.push("only live documents (not cancelled)");
+  if (/approv\w*\s*=\s*'(YES|Y|T)'/i.test(w) || /app_status\s*=\s*'approved'/i.test(w)) out.push("only approved ones");
+  if (/(qty|quantity)[^><=]{0,80}>\s*0/i.test(w) || /having\s+sum[^>]{0,120}>\s*0/i.test(w)) out.push("only what is still pending (quantity left above 0)");
+  if (/inactive\s*=\s*'F'|active\s*=\s*'(T|Y|YES)'/i.test(w)) out.push("only active records");
+  const ps = [...new Set((w.match(/:\w+/g) || []).map(p => p.slice(1)))];
+  if (ps.length) out.push("matching what you picked: " + lsList(ps.map(cap), 6));
+  return out;
+}
+function lsSelectCols(sql) {           /* the column names a fill SQL hands back */
+  const m = (sql || "").replace(/\s+/g, " ").match(/select (.*?) from /i);
+  if (!m) return [];
+  let depth = 0, cur = "", cols = [];
+  for (const ch of m[1]) { if (ch === "(") depth++; if (ch === ")") depth--; if (ch === "," && !depth) { cols.push(cur); cur = ""; } else cur += ch; }
+  cols.push(cur);
+  return cols.map(c => { c = c.trim(); const qa = c.match(/"([^"]+)"\s*$/); if (qa) return qa[1].toLowerCase();   /* quoted alias */
+    const a = c.match(/(?:\bas\s+)?([a-z_][a-z0-9_]*)\s*$/i); return a ? a[1].toLowerCase() : c; }).filter(Boolean);
+}
+const LSTASK = {
+  "field access": "changes which fields can be typed in, are read-only or hidden", "show message": "shows a message", "cancel transaction": "cancels the document",
+  "delete transaction": "deletes the document", "save": "saves the document", "print form": "prints", "preview form": "shows a print preview", "pdf": "makes a PDF",
+  "open iview": "opens a report", "open tstruct": "opens another screen", "load transaction": "opens another document", "excel import": "imports lines from Excel",
+  "csv import": "imports lines from a CSV file", "email": "sends an email", "set value": "sets a value", "clear form": "clears the screen", "close window": "closes the window",
+  "new": "starts a new document", "page load": "opens a page"
+};
+/* ---------- Learn this screen, part 2 (11/11/2026, Peter's model) ----------
+   FILL   = how lines come into the screen (fill grid)
+   POST   = entries Save creates in other screens (genmap)
+   UPDATE = a number Save changes in a linked document (mdmap)
+   RULE   = what runs by itself on an event (actions: IF / AND / OR / THEN / ELSE)
+   CTRL   = the hidden yes/no field that decides whether a POST / UPDATE runs
+   Every part says WHEN · CTRL · WHAT. Technical names sit in .lstech and show only with "Show technical names". */
+const LSGLOSS = [
+  ["FILL", "brings lines in", "Fill grid: reads data from other screens and puts lines into this one, on a button or by itself."],
+  ["POST", "creates entries elsewhere", "genmap: after Save, Axpert writes rows into another screen's table. Example: GRN → Stock Value."],
+  ["UPDATE", "changes a linked number", "mdmap: after Save, Axpert adds to or sets a value on a line of a linked document. Example: GRN → PO received quantity."],
+  ["RULE", "runs on an event", "Action: when a field is left, a button is pressed or a document opens, IF a condition holds THEN steps run, ELSE others."],
+  ["CTRL", "the yes / no that decides", "A hidden field the screen works out (T or F). A POST or UPDATE runs only where it is T."],
+  ["CHECK", "what stops you", "A validation or control field: a field, Save or Cancel is refused with a message."]
+];
+const lsT = h => '<span class="lstech">' + h + '<\/span>';
+const lsMono = t => t ? lsT(' <span class="mono">' + esc(t) + '<\/span>') : "";
+const lsAns = (g, m) => ((g.answers && g.answers.save) || []).find(a => a.map === m.name) || {};
+const lsWhenOf = (g, m) => String(lsAns(g, m).when || "").replace(/\s+/g, " ").trim();
+const lsSqlKw = t => !/^(ORDER|GROUP|WHERE|SELECT|BY|AND|OR|ON|DUAL|FROM|HAVING|UNION)$/i.test(String(t || ""));
+const lsSrc = (tbs, caps) => [...new Set((tbs || []).map((t, i) => [t, (caps || [])[i]]).filter(x => lsSqlKw(x[0])).map(([t, c]) => c || String(t).toUpperCase()))];   /* owning screen, else the table */
+function lsWCW(rows) {                 /* WHEN · CTRL · WHAT block */
+  return '<div class="lswcw">' + rows.filter(Boolean).map(r => '<span class="lskw lskw-' + r[0].toLowerCase() + '">' + r[0] + '<\/span><span>' + r[1] + '<\/span>').join("") + '<\/div>';
+}
+/* Cancel taking back a POST / UPDATE: say whether the live data showed it (build_proof "cancelrev"), else say it is from the code */
+function lsRev(P, w, g) {
+  const c = w && w.cancelrev;
+  if (c && c.how === "direct") return !c.lines ? lsStamp("unproven", "no linked line was touched by the " + fmt(c.docs) + " cancelled documents of the year") :
+    c.kept ? lsStamp("contra", "checked on " + fmt(c.lines) + " lines touched by cancelled documents: " + fmt(c.kept) + " still hold the cancelled amount") :
+    c.back === c.lines ? lsStamp("proven", "checked on " + fmt(c.lines) + " lines touched by cancelled documents: all taken back") :
+    c.back ? lsStamp("proven", "checked on " + fmt(c.lines) + " lines touched by cancelled documents: none still holds the cancelled amount (" + fmt(c.back) + " match the live total exactly, " + fmt(c.lines - c.back) + " differ for another reason)") :
+    lsStamp("unproven", "checked on " + fmt(c.lines) + " lines touched by cancelled documents: " + fmt(c.back) + " match the live total, " + fmt(c.lines - c.back) + " differ for another reason");
+  if (c && c.docs) return c.live ? lsStamp("contra", "checked on " + fmt(c.docs) + " cancelled documents: " + fmt(c.live_docs) + " of them still " + (c.live_docs === 1 ? "has " : "have ") + fmt(c.live) + " live row" + (c.live === 1 ? "" : "s") + " in " + (w.table || "the target")) :
+    lsStamp("proven", "checked on " + fmt(c.docs) + " cancelled documents: none left behind");
+  if (w === undefined && P) {            /* the whole screen: sum up the per-map checks */
+    const L = P.writes.filter(x => x.cancelrev && x.cancelrev.docs), bad = L.filter(x => x.cancelrev.live || x.cancelrev.kept);
+    if (L.length) return bad.length ? lsStamp("contra", "rows of cancelled documents are still live in " + bad.map(x => x.table).join(", ")) :
+      lsStamp("proven", "checked on data for " + L.length + " of " + P.writes.length + " posts / updates" + (L.length < P.writes.length ? "; the others are not proven yet" : ""));
+  }
+  const u = (g && g.usage) || {};
+  return lsStamp("unproven", u.docs12 === 0 ? "no documents in 12 months to check on; cancel one on TEST" :
+    P ? "the data cannot show it for this mapping; cancel one on TEST" : "proof not run for this screen yet");
+}
+/* action IF text "appctrl Equal to F" -> "Approval Ctrl = F (no)" */
+function lsCond(t, cap) {
+  t = String(t || "").replace(/\s+/g, " ").trim();
+  const m = t.match(/^([A-Za-z_][A-Za-z0-9_]*)\s+(.*)$/);
+  if (!m) return esc(t);
+  const ops = [[/^Not Equal to\b/i, "≠"], [/^Equal to\b/i, "="], [/^Greater than or Equal to\b/i, "≥"], [/^Less than or Equal to\b/i, "≤"],
+    [/^Greater than\b/i, ">"], [/^Less than\b/i, "<"], [/^Is Not Empty\b/i, "is not empty"], [/^Is Empty\b/i, "is empty"]];
+  let rest = m[2];
+  for (const [re, s] of ops) if (re.test(rest)) { rest = rest.replace(re, s); break; }
+  rest = rest.replace(/(^|[=≠ ])\s*T$/, "$1 T (yes)").replace(/(^|[=≠ ])\s*F$/, "$1 F (no)");
+  const c = cap(m[1]);
+  return '<b>' + esc(c) + '<\/b>' + (c.toLowerCase() !== m[1].toLowerCase() ? lsMono(m[1]) : "") + ' ' + esc(rest.trim());
+}
+/* brackets said simply: ((x)) -> x, NOT (a = b) -> a ≠ b, outer brackets only when they wrap everything */
+function lsTidy(t) {
+  t = String(t || "").replace(/\s+/g, " ").trim();
+  let prev;
+  do {
+    prev = t;
+    t = t.replace(/\(\s*\(([^()]*)\)\s*\)/g, "($1)");
+    t = t.replace(/(^|[^A-Za-z0-9_])\(\s*([^()&|<>=≠]*?)\s*\)/g, (m, b, x) => /\b(AND|OR)\b/.test(x) ? m : b + x);
+    t = t.replace(/NOT \(([^()]*?) = ([^()]*?)\)/g, (m, a, b) => /\b(AND|OR)\b/.test(a + b) ? m : a.trim() + " ≠ " + b.trim());
+  } while (t !== prev);
+  const wraps = x => { if (!/^\(.*\)$/.test(x)) return false; let d = 0; for (let i = 0; i < x.length; i++) { if (x[i] === "(") d++; else if (x[i] === ")") { d--; if (!d && i < x.length - 1) return false; } } return true; };
+  while (wraps(t)) t = t.slice(1, -1).trim();
+  return t;
+}
+/* validation expression -> [[when, message]]   iif(dcdt > date(), {cannot be future date}, {T}) -> ["DC Date > today", "cannot be future date"] */
+function lsVxPairs(vx, cap) {
+  const out = [];
+  if (!vx) return out;
+  const split = a => { const r = []; let d = 0, b = 0, cur = "";
+    for (const ch of a) { if (ch === "{") b++; else if (ch === "}") b--; else if (ch === "(" && !b) d++; else if (ch === ")" && !b) d--;
+      if (ch === "," && !d && !b) { r.push(cur); cur = ""; } else cur += ch; }
+    r.push(cur); return r.map(x => x.trim()); };
+  const words = c => { let t = c.split(/(\{[^{}]*\})/).map(q => q[0] === "{" ? q.slice(1, -1).trim() :
+      q.replace(/\b(trim|lower|upper)\s*\(/gi, "(").replace(/\bdate\s*\(\s*\)/gi, "today")
+        .replace(/[A-Za-z_][A-Za-z0-9_]*/g, w => /^(today|and|or|not)$/i.test(w) ? w : cap(w))
+        .replace(/#/g, " ≠ ").replace(/&/g, " AND ").replace(/\|/g, " OR ")).join("").replace(/\s+/g, " ").trim();
+    return lsTidy(t); };
+  const msg = x => { const mm = String(x || "").trim().match(/^\{([\s\S]*)\}$/); return mm ? mm[1].trim() : null; };
+  const walk = (e, pre) => {
+    const m = String(e || "").trim().match(/^iif\s*\(([\s\S]*)\)$/i);
+    if (!m) return;
+    const a = split(m[1]);
+    if (a.length < 2) return;
+    const c = words(a[0]), y = msg(a[1]), no = a[2] || "", n = msg(no), nested = /^iif\s*\(/i.test(no.trim());
+    const join = x => lsTidy(pre ? pre + " AND " + (/ OR /.test(x) ? "(" + x + ")" : x) : x);
+    if (y && y.toUpperCase() !== "T") { out.push([join(c), y]); if (nested) walk(no, join("NOT (" + c + ")")); }
+    else if (y && y.toUpperCase() === "T") { if (n && n.toUpperCase() !== "T") out.push([join("NOT (" + c + ")"), n]); else if (nested) walk(no, join("NOT (" + c + ")")); }
+  };
+  walk(String(vx).replace(/^\s*[A-Za-z_][A-Za-z0-9_]*\s+-\s*(?=iif)/i, ""), "");
+  return out.slice(0, 6);
+}
+/* one action step -> [plain text, writes data directly?, code] */
+function lsStep(st, cap, dcCap) {
+  const t = (st.task || "").toLowerCase(), txt = st.text || "";
+  if (["if", "elseif", "and", "or", "else", "end"].includes(t)) return null;
+  if (t === "field access") {
+    const V = { hide: "hides", show: "shows", disable: "disables", enable: "enables", readonly: "makes read-only", mandatory: "makes mandatory" }, parts = [];
+    if (st.readonly_all) parts.push("makes the whole document read-only");
+    [["fields", x => cap(x), "field"], ["dcs", x => dcCap(x), "part"], ["buttons", x => x, "button"]].forEach(([k, nm, word]) => {
+      const by = {}; (st[k] || []).forEach(([n, v]) => { (by[v] = by[v] || []).push(nm(n)); });
+      Object.keys(by).forEach(v => parts.push((V[v.toLowerCase()] || v.toLowerCase()) + " the " + word + (by[v].length > 1 ? "s " : " ") + lsList(by[v], 6)));
+    });
+    return [parts.length ? parts.join(", ") : LSTASK[t], false];
+  }
+  if (t === "scripts" || t === "user defined task") {
+    const fs = txt.match(/firesql\s*\(\s*\{[^}]*\}\s*,\s*\{([\s\S]*?)\}\s*\)/i);
+    if (fs) {
+      const q = fs[1].trim(), w = q.match(/^\s*(insert\s+into|update|delete\s+from|delete)\s+([a-z_][a-z0-9_.]*)/i);
+      if (/^commit$/i.test(q)) return ["commits the database work (FireSql commit)", false];
+      if (w) return ["runs SQL that " + (w[1].toLowerCase().startsWith("insert") ? "adds rows to " : w[1].toLowerCase() === "update" ? "changes rows in " : "deletes rows from ") + w[2].toUpperCase() + " directly", true, q];
+      return ["runs SQL: " + q.slice(0, 90) + (q.length > 90 ? "…" : ""), false, q];
+    }
+    if (/xrun\s*\(/i.test(txt)) return ["runs a report export (xrun)", false, txt];
+    return ["runs a script", false, txt];
+  }
+  let s = LSTASK[t] || t;
+  if (t === "show message" && txt) s += ": “" + txt.replace(/:(\w+)/g, (a, w) => "‹" + cap(w) + "›") + "”";
+  if ((t === "print form" || t === "preview form" || t === "pdf") && (st.printformlist || st.name)) s += " (" + (st.printformlist || st.name) + ")";
+  if ((t === "open iview" || t === "open tstruct" || t === "load transaction" || t === "page load") && st.name) s += " (" + st.name + ")";
+  return [s, false];
+}
+/* when an action runs, without the word "When" (the WHEN tag says it) */
+function lsWhen(a, cap, hidden) {
+  const ap = (a.apply || "").toLowerCase();
+  if (!ap) return "you press the button <b>" + esc(a.name) + "<\/b>";
+  if (ap === "on field exit") return hidden ? "the hidden field <b>" + esc(cap(a.on)) + "<\/b> gets its value" : "you leave the field <b>" + esc(cap(a.on)) + "<\/b>";
+  if (ap === "on field enter") return "you enter the field <b>" + esc(cap(a.on)) + "<\/b>";
+  if (ap === "on click") return "you click <b>" + esc(cap(a.on) || a.name) + "<\/b>";
+  const W = { "on data load": "a saved document is opened", "after save transaction": "after Save", "before save transaction": "before Save",
+    "on clearform": "the screen is cleared for a new document", "on form load": "the screen opens", "after delete transaction": "after Cancel / Delete",
+    "before delete transaction": "before Cancel / Delete", "on approve": "the document is approved" };
+  return "<b>" + esc(W[ap] || a.apply) + "<\/b>";
+}
+function lsCtx(g, P) {
+  const pw = {}; if (P) P.writes.forEach(w => pw[w.map] = w);
+  const dcCap = n => { const d = (g.dcs || []).find(x => x.n === n); return d ? lsCap(d) || d.n : n; };
+  const dcGrid = n => ((g.dcs || []).find(x => x.n === n) || {}).grid;
+  const fld = n => (g.fields || []).find(f => f.n.toLowerCase() === String(n || "").toLowerCase()) || {};
+  return { pw, dcCap, dcGrid, fld };
+}
+/* the picture: FILL sources -> this screen -> POST / UPDATE targets */
+function lsFlowSvg(g, cap) {
+  const tr = (s, k) => (s = String(s || "")).length > k ? s.slice(0, k - 1) + "…" : s;
+  let L = (g.fill || []).map(f => ["FILL", f.cap || f.name, "from " + (lsList(lsSrc(f.tables, f.srcs), 2) || "a list")]);
+  let Rt = (g.maps || []).map(m => [m.kind === "genmap" ? "POST" : "UPDATE", m.tcap || m.target, m.ctrl ? "only when " + (lsWhenOf(g, m) || cap(m.ctrl) + " is T") : "every Save"]);
+  if (!L.length && !Rt.length) return "";
+  if (L.length > 4) L = L.slice(0, 3).concat([["FILL", "+" + (L.length - 3) + " more", ""]]);
+  if (Rt.length > 6) Rt = Rt.slice(0, 5).concat([["", "+" + (Rt.length - 5) + " more", ""]]);
+  const rowH = 58, n = Math.max(L.length, Rt.length, 1), H = n * rowH + 18, W = 780, bw = 236, bh = 46, cx = 300, cw = 180, cy = H / 2;
+  const top = (k, i) => 9 + (n - k) * rowH / 2 + i * rowH + (rowH - bh) / 2;
+  const box = (x, y, it) => '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + bh + '" rx="9" class="lsf-box"/>' +
+    '<text x="' + (x + 12) + '" y="' + (y + 19) + '" class="lsf-t1">' + (it[0] ? '<tspan class="lsf-k lsf-' + it[0].toLowerCase() + '">' + it[0] + '<\/tspan> ' : '') + esc(tr(it[1], 28)) + '<\/text>' +
+    (it[2] ? '<text x="' + (x + 12) + '" y="' + (y + 36) + '" class="lsf-t2">' + esc(tr(it[2], 40)) + '<\/text>' : '');
+  const arrow = (x1, y1, x2, y2) => '<path class="lsf-a" d="M' + x1 + ' ' + y1 + ' C' + ((x1 + x2) / 2) + ' ' + y1 + ',' + ((x1 + x2) / 2) + ' ' + y2 + ',' + (x2 - 6) + ' ' + y2 + '"/>' +
+    '<path class="lsf-ah" d="M' + (x2 - 7) + ' ' + (y2 - 4) + ' L' + x2 + ' ' + y2 + ' L' + (x2 - 7) + ' ' + (y2 + 4) + ' Z"/>';
+  let o = '<svg class="lsflow" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Where ' + esc(g.cap) + ' takes data from and where it sends it">';
+  L.forEach((it, i) => { const y = top(L.length, i); o += arrow(8 + bw, y + bh / 2, cx, cy) + box(8, y, it); });
+  Rt.forEach((it, i) => { const y = top(Rt.length, i); o += arrow(cx + cw, cy, W - 8 - bw, y + bh / 2) + box(W - 8 - bw, y, it); });
+  o += '<rect x="' + cx + '" y="' + (cy - 32) + '" width="' + cw + '" height="64" rx="13" class="lsf-me"/>' +
+    '<text x="' + (cx + cw / 2) + '" y="' + (cy - 5) + '" text-anchor="middle" class="lsf-t1">' + esc(tr(g.cap, 22)) + '<\/text>' +
+    '<text x="' + (cx + cw / 2) + '" y="' + (cy + 14) + '" text-anchor="middle" class="lsf-t2">you fill · you Save<\/text>';
+  return o + '<\/svg>';
+}
+function lsSummary(s, g, R, P, cap) {
+  const posts = (g.maps || []).filter(m => m.kind === "genmap"), upds = (g.maps || []).filter(m => m.kind === "mdmap");
+  const kindTxt = lsType(g)[1], sv = gxItems(g, "save"), cv = gxItems(g, "cancel");
+  const gates = sv.L.filter(x => x.kind === "gate"), cg = cv.L.filter(x => x.kind === "gate");
+  const l1 = '<b>' + esc(g.cap) + '<\/b> is ' + esc(kindTxt) + '.' + ((g.fill || []).length ? ' Lines come in with <b>' + esc(lsList(g.fill.map(f => f.cap || f.name), 3)) + '<\/b>.' : '');
+  const l2 = (posts.length || upds.length) ? 'When you Save, it ' + [posts.length ? '<b>POSTS<\/b> to ' + esc(lsList(posts.map(m => m.tcap || m.target), 4)) : '',
+    upds.length ? '<b>UPDATES<\/b> ' + esc(lsList(upds.map(m => m.tcap || m.target), 3)) : ''].filter(Boolean).join(' and ') +
+    ((g.maps || []).some(m => m.ctrl) ? ' - some only when their CTRL says yes' : '') + '.' : 'Saving it changes nothing in other screens.';
+  const l3 = (gates.length || cg.length) ? 'It is stopped ' + [gates.length ? 'on Save while ' + esc(lsList(gates.map(x => x.title), 2)) + ' exists' : '',
+    cg.length ? 'on Cancel while ' + esc(lsList(cg.map(x => x.title), 2)) + ' exists' : ''].filter(Boolean).join(', and ') + '.' :
+    'Nothing outside the screen stops Save or Cancel.';
+  return '<div class="lssum"><div class="lssumh">In short<\/div><ol class="lssuml"><li>' + l1 + '<\/li><li>' + l2 + '<\/li><li>' + l3 + '<\/li><\/ol>' + lsFlowSvg(g, cap) + '<\/div>';
+}
+/* the WHERE part of a SQL exactly as written (top level only), screen values shown as ‹caption› */
+function lsWhere(sql, cap) {
+  const q = String(sql || "").replace(/\s+/g, " ").trim(), low = q.toLowerCase();
+  let d = 0, st = -1, en = q.length;
+  for (let i = 0; i < q.length; i++) {
+    const ch = q[i];
+    if (ch === "'") { const j = q.indexOf("'", i + 1); if (j < 0) break; i = j; continue; }
+    if (ch === "(") d++; else if (ch === ")") d--;
+    if (d) continue;
+    if (st < 0 && low.startsWith(" where ", i)) { st = i + 7; continue; }
+    if (st >= 0 && /^ (group by|order by|union|having|connect by) /.test(low.slice(i, i + 13))) { en = i; break; }
+  }
+  if (st < 0) return "";
+  const w = q.slice(st, en).trim().replace(/:([a-z_][a-z0-9_]*)/gi, (m, n) => "‹" + cap(n) + "›");
+  return w.length > 700 ? w.slice(0, 700) + " …" : w;
+}
+const LSFMODE = { "append rows to grid": "adds the lines below the ones already there", "add only when grid is empty": "fills only while the grid is still empty",
+  "initialize grid and add": "clears the grid first, then adds the lines", "append selected rows to grid": "shows a list, and only the lines you tick are added" };
+function ls3Fill(g, cap, nx) {
+  if (!(g.fill || []).length) return "";
+  const { dcCap } = lsCtx(g);
+  return lsSec("flow", "FILL · how lines come into the screen", g.fill.map(f => {
+    const on = (f.on || "").toLowerCase(), mode = LSFMODE[(f.mode || "").toLowerCase()], src = lsSrc(f.tables, f.srcs);
+    const where = lsWhere(f.sql, cap);
+    const cols = (f.cols || []).length ? f.cols.map(c => [cap(c[0]), c[1]]) : lsSelectCols(f.sql).map(c => [cap(c), c]);
+    return '<div class="lsx"><p class="lsttl"><b>' + esc(f.cap || f.name) + '<\/b>' + lsMono(f.name) + '<\/p>' + lsWCW([
+      ["WHEN", on === "onclick" ? 'you press the <b>' + esc(f.cap || f.name) + '<\/b> button' : 'no Fill button is set in its settings ' + lsStamp("unproven", "whether it then runs by itself needs a TEST check")],
+      ["CTRL", (f.params || []).length ? 'it uses what you entered in <b>' + esc(lsList(f.params.map(cap), 6)) + '<\/b>' + lsMono(f.params.join(", ")) : 'nothing you typed - the same list every time'],
+      ["HOW", mode ? esc(mode) : (f.mode ? esc(f.mode) : 'not set')],
+      ["WHAT", 'lines into <b>' + esc(dcCap(f.dc) || "the grid") + '<\/b>' + lsMono(f.dc) + ', from ' + esc(lsList(src, 5) || "a list") +
+        lsMono((f.tables || []).filter(lsSqlKw).join(", ").toUpperCase()) + (where ? '<br><span class="lsdim">Its SQL keeps only rows where:<\/span><pre class="code lswhere">' + esc(where) + '<\/pre>' : "")]
+    ]) + (cols.length ? '<details class="lsd"><summary>What goes into which field (' + cols.length + ')<\/summary><div class="tw"><table class="pft"><thead><tr><th>Field on the screen<\/th><th>Taken from (SQL column)<\/th><\/tr><\/thead><tbody>' +
+      cols.map(c => '<tr><td>' + esc(c[0]) + '<\/td><td class="mono">' + esc(c[1]) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div><\/details>' : "") +
+      '<details class="lsd"><summary>The SQL<\/summary><pre class="code">' + esc(f.sql || "") + '<\/pre><\/details><\/div>';
+  }).join("") + '<p class="lsdim">WHEN and HOW are read from the fill grid settings. The conditions are the WHERE text of its SQL; ‹…› is a value from the screen.<\/p>', nx());
+}
+function lsCtrlTxt(g, m, wh, cap, fld, dcGrid) {
+  if (!m.ctrl) return 'none - it runs on every Save';
+  const f = fld(m.ctrl), perLine = f.dc && dcGrid(f.dc), wc = lsAns(g, m).wcode;
+  return 'only when <b>' + esc(wh || cap(m.ctrl) + " is T") + '<\/b>' + lsMono(m.ctrl) +
+    (!wh && wc ? '<br><span class="lsdim">' + esc(cap(m.ctrl)) + ' is worked out on the screen as:<\/span> <code class="mono">' + esc(wc) + '<\/code>' : '') + (f.dc ? '<br><span class="lsdim">' + (perLine ? 'checked line by line: lines where it is not met are skipped' : 'checked once for the whole document') + '<\/span>' : '');
+}
+function ls3Post(g, P, cap, nx) {
+  const { pw, dcCap, dcGrid, fld } = lsCtx(g, P), gm = (g.maps || []).filter(m => m.kind === "genmap");
+  if (!gm.length) return "";
+  return lsSec("flow", "POST · entries Save creates in other screens", gm.map(m => {
+    const w = pw[m.name], wh = lsWhenOf(g, m);
+    const rows = (m.fields || []).map(f => {
+      const pf = w && (w.fields || []).find(x => x.target === f[0]);
+      return '<tr><td class="mono">' + esc(f[0]) + '<\/td><td>' + (f[1] === "value" ? 'always <b>' + esc(f[2]) + '<\/b>' : '<b>' + esc(cap(f[2])) + '<\/b> <span class="lsdim mono">' + esc(f[2]) + '<\/span>') + '<\/td><td>' +
+        (pf ? lsStamp(pf.status || "unproven", pf.pct != null ? pf.pct + "% equal" : pf.held ? "holds " + pf.held.map(x => x[0]).join(", ") : (pf.note || "not compared")) : "") + '<\/td><\/tr>';
+    }).join("");
+    return '<div class="lsx"><p class="lsttl">→ <b>' + esc(m.tcap || m.target) + '<\/b>' + lsMono((m.table || "") + " · " + m.name) + '<\/p>' + lsWCW([
+      ["WHEN", 'after you <b>Save<\/b> a ' + esc(g.cap)],
+      ["CTRL", lsCtrlTxt(g, m, wh, cap, fld, dcGrid)],
+      ["WHAT", (dcGrid(m.dc) ? 'one row for <b>each line<\/b> of ' + esc(dcCap(m.dc)) : 'one row for <b>the document<\/b>') + ' in ' + esc(m.tcap || m.target) +
+        (w && w.rows12 != null ? '<br>' + lsStamp(w.status, fmt(w.rows12) + " rows from " + fmt(w.docs) + " documents in 12 months (" + w.coverage + "% of documents)") : "")],
+      ["UNDO", 'Cancel takes these rows back. ' + lsRev(P, w || null, g)]
+    ]) + '<details class="lsd"><summary>Mapping: column by column (' + (m.fields || []).length + ')<\/summary><div class="tw"><table class="pft"><thead><tr><th>Column in ' + esc(m.table) + '<\/th><th>Takes its value from<\/th><th>Data check<\/th><\/tr><\/thead><tbody>' + rows + '<\/tbody><\/table><\/div><\/details><\/div>';
+  }).join(""), nx());
+}
+function ls3Update(g, P, cap, nx) {
+  const { pw, dcGrid, fld } = lsCtx(g, P), md = (g.maps || []).filter(m => m.kind === "mdmap");
+  if (!md.length) return "";
+  return lsSec("val", "UPDATE · numbers Save changes in linked documents", md.map(m => {
+    const o = GXOP[m.op] || ["changes", "in", "puts back", "in"], w = pw[m.name], a = lsAns(g, m), wh = String(a.when || "").replace(/\s+/g, " ").trim();
+    const tf = a.field || m.tfield, sf = a.src ? String(a.src).replace(/\*+\s*$/, "") : cap(m.sfield);
+    return '<div class="lsx"><p class="lsttl">→ <b>' + esc(m.tcap || m.target) + '<\/b> · ' + esc(tf) + lsMono((m.table || "") + "." + m.tfield + " · " + m.name) + '<\/p>' + lsWCW([
+      ["WHEN", 'after you <b>Save<\/b> a ' + esc(g.cap)],
+      ["CTRL", lsCtrlTxt(g, m, wh, cap, fld, dcGrid)],
+      ["WHAT", '<b>' + o[0] + '<\/b> ' + esc(sf) + ' ' + o[1] + ' <b>' + esc(tf) + '<\/b> of the linked ' + esc(m.tcap || m.target) + ' line, found through <b>' + esc(cap(m.key)) + '<\/b>' + lsMono(m.key + " → " + (m.tkey || m.key)) +
+        (w && w.mdcheck ? '<br>' + lsStamp(w.status, w.mdcheck + (w.ctrl_used ? " (only documents where the CTRL is T)" : "")) : (w && w.note ? '<br>' + lsStamp("unproven", w.note) : ""))],
+      ["UNDO", 'Cancel ' + o[2] + ' ' + esc(tf) + ' ' + o[3] + ' that line. ' + lsRev(P, w || null, g)]
+    ]) + '<\/div>';
+  }).join(""), nx());
+}
+/* one action -> rows [keyword, html, writes directly?, code] following IF / AND / OR / THEN / ELSE / END */
+function lsRuleRows(a, cap, dcCap) {
+  const rows = [], none = '<span class="lsdim">nothing<\/span>';
+  let st = "top";
+  (a.steps || []).forEach(x => {
+    const t = (x.task || "").toLowerCase();
+    if (t === "if") {
+      const last = rows[rows.length - 1];
+      if (last && last[0] === "ELSE" && !last[1]) { rows.pop(); rows.push(["ELSE IF", lsCond(x.text, cap)]); } else rows.push(["IF", lsCond(x.text, cap)]);
+      st = "cond"; return;
+    }
+    if (t === "elseif") { if (st === "cond") rows.push(["THEN", none]); rows.push(["ELSE IF", lsCond(x.text, cap)]); st = "cond"; return; }   /* op 2 */
+    if (t === "and" || t === "or") { rows.push([t.toUpperCase(), lsCond(x.text, cap)]); return; }
+    if (t === "else") { if (st === "cond") rows.push(["THEN", none]); rows.push(["ELSE", ""]); st = "else0"; return; }
+    if (t === "end") { if (st === "cond") rows.push(["THEN", none]); if (st === "else0") rows[rows.length - 1][1] = none; st = "after"; return; }
+    const s = lsStep(x, cap, dcCap);
+    if (!s) return;
+    const html = s[1] ? '<b class="pfred">' + esc(s[0]) + '<\/b>' : esc(s[0]);
+    if (st === "cond") { rows.push(["THEN", html, s[1], s[2]]); st = "then"; }
+    else if (st === "else0") { const L = rows[rows.length - 1]; L[1] = html; L[2] = s[1]; L[3] = s[2]; st = "else"; }
+    else if (st === "top" || st === "after") { rows.push([st === "top" ? "DO" : "ALWAYS", html, s[1], s[2]]); st = "more"; }
+    else if (rows[rows.length - 1][1] !== html) rows.push(["", html, s[1], s[2]]);
+  });
+  if (st === "cond") rows.push(["THEN", none]);
+  if (st === "else0") rows[rows.length - 1][1] = none;
+  return rows;
+}
+function ls3Rules(g, cap, nx) {
+  const { dcCap, fld } = lsCtx(g);
+  const A = (g.actions || []).map(a => ({ a, rows: lsRuleRows(a, cap, dcCap) })).filter(x => x.rows.some(r => r[1] && !/lsdim/.test(r[1]) && !["IF", "ELSE IF", "AND", "OR"].includes(r[0])));
+  if (!A.length) return "";
+  const risky = A.filter(x => x.rows.some(r => r[2]));
+  const hx = a => (a.apply || "").toLowerCase() === "on field exit" && fld(a.on).hid;
+  const one = x => '<div class="lsrule"><div class="lsrr"><span class="lskw lskw-when">WHEN<\/span><span>' + lsWhen(x.a, cap, fld(x.a.on).hid) + lsMono(x.a.name) +
+    (hx(x.a) ? ' ' + lsStamp("unproven", "set on a hidden field's exit; when it fires needs a TEST check") : '') + '<\/span><\/div>' +
+    x.rows.map(r => '<div class="lsrr"><span class="lskw lskw-' + (r[0] || "c").toLowerCase().replace(/\s+/g, "") + '">' + (r[0] || "") + '<\/span><span>' + (r[1] || '<span class="lsdim">nothing<\/span>') + '<\/span><\/div>').join("") +
+    (x.rows.some(r => r[3]) ? '<details class="lsd"><summary>code<\/summary><pre class="code">' + esc(x.rows.filter(r => r[3]).map(r => r[3]).join("\n\n")) + '<\/pre><\/details>' : "") + '<\/div>';
+  return lsSec(risky.length ? "issue" : "flow", "RULES · what runs by itself (" + A.length + ")",
+    '<p class="lsdim">Each rule: WHEN it runs · IF its condition holds · THEN what it does · ELSE what it does otherwise.<\/p>' +
+    '<div class="lsrules">' + A.slice(0, 8).map(one).join("") + '<\/div>' +
+    (A.length > 8 ? '<details class="lsd"><summary>' + (A.length - 8) + ' more rules<\/summary><div class="lsrules">' + A.slice(8).map(one).join("") + '<\/div><\/details>' : "") +
+    (risky.length ? '<p>' + lsStamp("contra", risky.length + " rule(s) write data directly with SQL. They are not POST / UPDATE, so Axpert's Cancel does not take them back by itself") + '<\/p>' : ""), nx());
 }
 
 /* =====================================================================

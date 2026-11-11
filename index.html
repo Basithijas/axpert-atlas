@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611101637. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611111048. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -525,6 +525,111 @@ pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radi
 .jt.on{background:var(--blueb)}
 @media(max-width:1100px){.jgrid{grid-template-columns:1fr}.jflows{position:static;max-height:none}.jbottom{grid-template-columns:1fr}}
 
+/* ---------- dashboards (10/11/2026) ---------- */
+.dhero h1{font:400 28px/1.15 var(--disp);margin:0}
+.dmeta{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--ink3)}
+.dmeta span{display:inline-flex;align-items:center;gap:5px}.dmeta svg.i{width:15px;height:15px}
+.dsec{padding:18px 20px;margin-bottom:16px}
+.dsh{margin-bottom:14px}.dsh h2{font:500 17px/1.3 var(--disp);margin:0}.dsh p{margin:3px 0 0;color:var(--ink3);font-size:12.5px;max-width:900px}
+.dgrid{display:grid;gap:16px}.dgrid>.dsec{margin-bottom:16px}
+.dgrid.g2{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}.dgrid.g2w{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+@media(max-width:1100px){.dgrid.g2,.dgrid.g2w{grid-template-columns:1fr}}
+.fun{display:flex;flex-direction:column;gap:9px}
+.fs{display:grid;grid-template-columns:170px minmax(0,1fr) 62px;gap:12px;align-items:center}
+.fl b{display:block;font-weight:500;font-size:13.5px}.fl small{color:var(--ink3);font-size:11.5px}
+.ft{height:30px;background:var(--surf2);border-radius:8px;overflow:hidden}
+.ft span{display:flex;align-items:center;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--blue),var(--teal));animation:dgrow .9s var(--ease) both}
+.ft em{font-style:normal;color:#fff;font-weight:600;font-size:12.5px;padding-left:10px;white-space:nowrap}
+.fr{text-align:right;font-weight:600}.fr small{display:block;font-weight:500;color:var(--red);font-size:11px}
+@keyframes dgrow{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
+.dn{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.dnsvg{width:170px;height:170px;flex:none}
+.dnsvg circle{transition:stroke-width .2s}.dnsvg circle:hover{stroke-width:26}
+.dnv{font:600 20px var(--disp);fill:var(--ink);text-anchor:middle}.dns{font:11px var(--font);fill:var(--ink3);text-anchor:middle}
+.dnl{flex:1;min-width:200px;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.dnl div{display:grid;grid-template-columns:12px minmax(0,1fr) auto 44px;gap:8px;align-items:center}
+.dnl i{width:12px;height:12px;border-radius:4px}.dnl em{font-style:normal;color:var(--ink3);text-align:right;font-size:12px}
+.hb{display:flex;flex-direction:column;gap:10px}
+.hbr{display:grid;grid-template-columns:minmax(90px,190px) minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.hbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2)}
+.hbt{height:12px;background:var(--surf2);border-radius:6px;overflow:hidden}.hbt span{display:block;height:100%;border-radius:6px;animation:dgrow .9s var(--ease) both}
+.hbv{font-weight:600;text-align:right;white-space:nowrap}.hbv small{display:block;font-weight:400;color:var(--ink3);font-size:11px}
+.chart{width:100%;height:auto;display:block}.chart .gl{stroke:var(--line);stroke-width:1}.chart .ax{font:10.5px var(--font);fill:var(--ink3)}
+.chart rect{transition:opacity .2s}.chart rect:hover{opacity:.75}
+.lg{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-top:8px}.lg span{display:inline-flex;align-items:center;gap:6px}.lg i{width:11px;height:11px;border-radius:3px}
+table.heat td.hc{background:color-mix(in srgb,var(--hc) calc(var(--a)*70%),transparent);font-weight:600}
+.tyc{padding:10px 0;border-bottom:1px solid var(--line)}.tyc:last-child{border:0}
+.tyh{display:flex;justify-content:space-between;margin-bottom:6px}.tyh span{color:var(--ink3);font-size:12.5px}
+.tyr{display:grid;grid-template-columns:52px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:12.5px;color:var(--ink2);margin:4px 0}.tyr em{font-style:normal;text-align:right;font-weight:600}
+.pbar{display:inline-block;width:46px;height:6px;background:var(--surf2);border-radius:3px;vertical-align:middle;margin-left:6px;overflow:hidden}.pbar span{display:block;height:100%;background:var(--green)}
+.tag{display:inline-block;padding:2px 8px;border-radius:6px;background:var(--amberb);color:var(--amber);font-size:12px;font-weight:500;white-space:nowrap}
+.dtabs{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.dq{margin-left:auto;width:260px;max-width:100%}.dq input{border:0;outline:0;background:none;width:100%;font:inherit;color:inherit}
+.drules summary{cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:500}.drules ol{margin:12px 0 0;color:var(--ink2);font-size:13px;line-height:1.7}
+.strip{display:flex;height:22px;border-radius:8px;overflow:hidden;gap:2px;margin-bottom:14px}
+.exg{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px}
+.exc{border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--c) 10%,var(--surf));border-left:4px solid var(--c)}
+.exc small{display:block;color:var(--ink3);font-size:11.5px}.exc b{font:600 22px var(--disp);color:var(--c)}.exc span{font-size:11.5px;color:var(--ink3);margin-left:4px}.exc em{display:block;font-style:normal;font-size:11.5px;color:var(--ink2)}
+.locn{margin-top:14px;font-size:11.5px;color:var(--ink3);display:flex;flex-direction:column;gap:2px}
+.dcn{display:flex;gap:18px;margin-top:10px}.dcn span{display:flex;flex-direction:column;font-size:12px;color:var(--ink3)}.dcn b{font:600 22px var(--disp);color:var(--ink)}
+.ni.sitesw{text-decoration:none;margin-top:6px;border:1px dashed var(--line2)}
+@media(max-width:700px){.fs{grid-template-columns:110px minmax(0,1fr) 48px}.dq{width:100%;margin-left:0}}
+
+/* nav items must not shrink: with 40+ modules the column overflowed and squeezed the buttons to 0 height (10/11/2026) */
+.nav>*{flex-shrink:0}
+
+/* ---------- Oman stock · three ledgers (11/11/2026) ---------- */
+.osw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:14px 0 16px}
+.osl{position:relative;overflow:hidden;display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;padding:16px 18px;border:2px solid transparent;
+  cursor:pointer;color:inherit;font:inherit;background:var(--surf);border-radius:var(--r);box-shadow:var(--e1);transition:transform .2s var(--ease),box-shadow .2s,border-color .2s}
+.osl:hover{transform:translateY(-2px);box-shadow:var(--e3)}
+.osl.on{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 7%,var(--surf))}
+.osl .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--blueb);color:var(--blue)}.osl .ic svg{width:24px;height:24px;fill:currentColor}
+.osl.on .ic{background:var(--blue);color:var(--surf)}
+.osln{min-width:0}.osln b{display:block;font:500 16px/1.25 var(--disp)}.osln code{font:11.5px var(--mono);color:var(--ink3)}
+.oslv{text-align:right}.oslv b{display:block;font:500 26px/1.1 var(--disp);font-variant-numeric:tabular-nums}.oslv small{display:block;font-size:11.5px;color:var(--ink3)}
+.oslv em{font-style:normal;font-size:11.5px;color:var(--ink2)}
+.osbars{display:flex;flex-direction:column;gap:2px}
+.osbar{display:grid;grid-template-columns:minmax(120px,250px) minmax(0,1fr) 64px;gap:12px;align-items:center;width:100%;border:0;background:none;padding:6px 8px;border-radius:10px;
+  text-align:left;cursor:pointer;color:inherit;font:inherit;font-size:13px;transition:background .15s}
+.osbar:hover{background:var(--surf2)}.osbar.on{background:var(--blueb);box-shadow:inset 3px 0 0 var(--blue)}
+.osbl{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.osbl small{display:block;font-size:11px;color:var(--ink3);overflow:hidden;text-overflow:ellipsis}
+.osbar>b{text-align:right;font-weight:600}
+button.osx{cursor:pointer;border:0;border-left:4px solid var(--c);text-align:left;font:inherit;color:inherit;transition:transform .15s}
+button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(--c);outline-offset:1px}
+.osf{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;color:var(--ink3)}.osf svg{width:18px;height:18px;fill:currentColor}
+.oslk{cursor:pointer;color:inherit;text-decoration:none}.oslk:hover b{color:var(--blue);text-decoration:underline}
+.osu{font-size:11.5px;color:var(--ink3)}
+.ostrust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;align-items:start}
+.ostr{padding:0;margin-bottom:12px;overflow:hidden;border-left:4px solid var(--sc)}.ostr.wide{grid-column:1/-1}
+.ostr summary{list-style:none;display:grid;grid-template-columns:12px minmax(0,1fr) auto 20px;gap:12px;align-items:center;padding:14px 18px;cursor:pointer}
+.ostr summary::-webkit-details-marker{display:none}
+.ostr summary svg{width:20px;height:20px;fill:var(--ink3);transition:transform .2s}.ostr[open] summary svg{transform:rotate(90deg)}
+.osdot{width:12px;height:12px;border-radius:50%;background:var(--sc);box-shadow:0 0 0 4px color-mix(in srgb,var(--sc) 22%,transparent)}
+.ostc{font-weight:600;color:var(--sc);white-space:nowrap}
+.ostr-green{--sc:var(--green)}.ostr-amber{--sc:var(--amber)}.ostr-red{--sc:var(--red)}.ostr-grey{--sc:var(--grey)}
+.ostb{padding:0 18px 16px;font-size:13px;color:var(--ink2)}.ostb p{margin:0 0 10px;line-height:1.6}.ostb code{font:12px var(--mono)}
+.ostb tr.hot td{background:var(--redb)}
+.osexp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:center}
+.osexp h2{font:500 18px var(--disp);margin:0 0 6px}.osexp p{margin:0;font-size:13px;color:var(--ink2);line-height:1.6}.osexp code{font:12px var(--mono)}
+.osflow{width:100%;height:auto;display:block}
+.osfn{fill:color-mix(in srgb,var(--c) 12%,var(--surf));stroke:var(--c);stroke-width:1.5}
+.osft{font:600 12.5px var(--font);fill:var(--ink);text-anchor:middle}.osfs{font:10.5px var(--mono);fill:var(--ink3);text-anchor:middle}
+.osfe{fill:none;stroke:var(--ink3);stroke-width:1.6;stroke-dasharray:5 5;animation:osdash 1.1s linear infinite}
+.osfa{fill:var(--ink3)}.osfl{font:10.5px var(--font);fill:var(--ink2);text-anchor:middle}
+@keyframes osdash{to{stroke-dashoffset:-10}}
+@media(prefers-reduced-motion:reduce){.osfe{animation:none}}
+.osic{display:grid;grid-template-columns:1fr 1fr;gap:10px}.osic div{background:var(--surf2);border-radius:12px;padding:10px 12px}
+.osic small{display:block;font-size:11.5px;color:var(--ink3)}.osic b{font:500 24px var(--disp)}.osic span{display:block;font-size:11.5px;color:var(--ink3)}
+@media(max-width:1100px){.osw{grid-template-columns:1fr}.ostrust{grid-template-columns:1fr}.osexp{grid-template-columns:1fr}}
+@media(max-width:700px){.osbar{grid-template-columns:minmax(90px,140px) minmax(0,1fr) 50px}.osl{grid-template-columns:40px minmax(0,1fr) auto;padding:12px}.oslv b{font-size:22px}}
+.hb>.hbr{align-self:stretch}   /* rows were shrinking to their text: the older .hb rule centres flex items (11/11/2026) */
+.kpis.k6{grid-template-columns:repeat(6,minmax(0,1fr))}.kpis.k5{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media(max-width:1300px){.kpis.k6,.kpis.k5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.kpis.k6,.kpis.k5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- downloads: Excel / PDF buttons (11/11/2026) ---------- */
+.xlbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.ph .xlbar{margin-left:auto}
+.xlbar .btn{padding:6px 14px}.xlbar .btn svg{width:17px;height:17px}
+
 </style>
 </head>
 <body>
@@ -555,11 +660,11 @@ pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radi
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "fWMzo1Q7rsuHS9qPg5b72v2bg2EeYR3syx8edJ5XYZ3EGL/a"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "fmZkYGKW0GdNKnIkbVu5FROMCq3Z4w9g7Yr0EcshI1RHFk8y"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611101637";
+const BUILD="202611111048";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -608,7 +713,7 @@ async function unlockSaved(){for(const src of ["session","local"])try{
 
 const $=s=>document.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmt=n=>Number(n).toLocaleString("en-IN");
+const fmt=n=>Number(n).toLocaleString("en-US");   // Oman: 1,234,567 (was en-IN lakh grouping until 10/11/2026)
 const pct=(a,b)=>b?Math.round(a*100/b):0;
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const enc=encodeURIComponent;
@@ -723,6 +828,7 @@ function useModule(slug){
   ];
   HI={};H.forEach(h=>HI[h.id]=h);highCount=H.filter(h=>h.sev==="High").reduce((a,h)=>a+h.list.length,0);
   NAV=[["overview","Overview","dash",""],["galaxy","Galaxy","orbit",""],["screens","Screens","tree",S.length],["matrix","Access matrix","grid",""],["people","People","people",workU.length],["roles","Roles","key",Object.keys(R).length],["health","Health","health",highCount,1],["changes","Changes","hist",CHG?CHG.length:""]];
+  if(SITE()==="pharmacy")NAV=NAV.filter(n=>n[0]!=="galaxy");   /* pharmacy: no Galaxy yet (AXPDC not readable, live DB kept light) */
   const c={};[M,S,R,U,SID,userRoles,roleScreens,forms,reps,nFields,workU,uScr,mismatch,H,HI,highCount,NAV,FIND,PROPR,CHG].forEach((v,i)=>c[KEYS[i]]=v);CTX[slug]=c;
 }
 
@@ -789,13 +895,13 @@ const issues=m=>m.leavers+m.remove_open+m.cancel_open;
 /* ---------- nav + router ---------- */
 function renderNav(cur){
   const mods=ATLAS.mods||[];
-  let h='<div class="brand"><span class="logo"><span><svg viewBox="0 0 24 24"><path d="'+P.tree+'"/><\/svg><\/span><\/span><div><b>Axpert Atlas<\/b><small>Developer console<\/small><\/div><\/div>';
+  let h='<div class="brand"><span class="logo"><span><svg viewBox="0 0 24 24"><path d="'+P.tree+'"/><\/svg><\/span><\/span><div><b>Axpert Atlas<\/b><small>'+(SITE()==="pharmacy"?"AIMS Pharmacy · ":"Oman ERP · ")+'Developer console<\/small><\/div><\/div>';
   h+='<button class="ni'+(cur==="home"?" on":"")+'" data-go="#@/">'+ico("home")+'All modules<\/button>';
   h+='<button class="ni'+(cur==="allpeople"?" on":"")+'" data-go="#@/all/people">'+ico("people")+'People · all modules<span class="b">'+(ATLAS.people?fmt(Object.keys(ATLAS.people).length):"")+'<\/span><\/button>';
   h+='<button class="ni'+(cur==="projects"?" on":"")+'" data-go="#@/all/projects">'+ico("tree")+'Project access<span class="b">'+(ATLAS.proj?fmt(Object.keys(ATLAS.proj.proj).length):"")+'<\/span><\/button>';
-  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>';
-  h+='<div class="modsw" style="margin-top:10px"><div class="lbl">Module<\/div>'+mods.map(m=>'<a class="mod'+(m.slug===CUR&&!["home","allpeople","projects","companies"].includes(cur)?" on":"")+'" href="#/'+m.slug+'/overview" data-mod="'+m.slug+'"><i><\/i>'+esc(m.name)+'<span class="bdg'+(issues(m)?"":" z")+'" title="High-priority issues">'+fmt(issues(m))+'<\/span><\/a>').join("")+'<\/div>';
-  if(CUR&&!["home","allpeople","projects","companies"].includes(cur)){
+  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+dashNav(cur);
+  h+='<div class="modsw" style="margin-top:10px"><div class="lbl">Module<\/div>'+mods.map(m=>'<a class="mod'+(m.slug===CUR&&!isGlob(cur)?" on":"")+'" href="#/'+m.slug+'/overview" data-mod="'+m.slug+'"><i><\/i>'+esc(m.name)+'<span class="bdg'+(issues(m)?"":" z")+'" title="High-priority issues">'+fmt(issues(m))+'<\/span><\/a>').join("")+'<\/div>';
+  if(CUR&&!isGlob(cur)){
     h+='<div class="navsec">'+esc(M.module)+'<\/div>'+NAV.map(n=>'<button class="ni'+(cur===n[0]?" on":"")+'" data-go="#/'+n[0]+'">'+ico(n[2])+n[1]+(n[3]!==""&&n[3]!=null?'<span class="b'+(n[4]&&n[3]?" r":"")+'">'+fmt(n[3])+'<\/span>':"")+'<\/button>').join("");
   }
   const mt=ATLAS.meta||{};
@@ -804,7 +910,7 @@ function renderNav(cur){
   if($("#lockout"))$("#lockout").onclick=()=>lockOut();
   bindGo($("#nav"));
   $$("a.mod",$("#nav")).forEach(a=>a.onclick=e=>{e.preventDefault();const h=hashParts(),v=h[0]||"overview";
-    const keep=["home","allpeople","projects","companies"].includes(cur)?"overview":({screen:"screens",person:"people",role:"roles"}[v]||v);
+    const keep=isGlob(cur)?"overview":({screen:"screens",person:"people",role:"roles"}[v]||v);
     location.hash="#/"+a.dataset.mod+"/"+(v==="health"&&h[1]?"health/"+h[1]:keep);closeNav();});
   $$(".ni",$("#nav")).forEach(b=>b.addEventListener("click",closeNav));
   renderBottom(cur);
@@ -815,6 +921,7 @@ function renderBottom(cur){
   $("#bnav").innerHTML=items.map(x=>'<button class="'+(cur===x[0]?"on":"")+'" data-h="'+x[3]+'"><span class="pillbg">'+ico(x[2])+'<\/span>'+x[1]+(x[0]==="health"&&CUR&&highCount?'<i>'+fmt(highCount)+'<\/i>':"")+'<\/button>').join("");
   $$("#bnav button").forEach(b=>b.onclick=()=>{location.hash=b.dataset.h;});
 }
+const isGlob=k=>["home","allpeople","projects","companies"].includes(k)||String(k).startsWith("dash_");
 function closeNav(){$("#nav").classList.remove("on");$("#navscrim").classList.remove("on");}
 $("#hamb").onclick=()=>{$("#nav").classList.add("on");$("#navscrim").classList.add("on");};
 $("#navscrim").onclick=closeNav;
@@ -833,6 +940,9 @@ function route(){
     if(!ATLAS.people){showLoading("Loading people…");load("people").then(()=>ATLAS.people?route():showErr("people"),()=>showErr("people"));return;}
     const needP=["projects","project","companies","company","person"].includes(p[1]);
     if(needP&&!ATLAS.proj){showLoading("Loading projects and companies…");load("projects").then(()=>ATLAS.proj?route():showErr("projects"),()=>showErr("projects"));return;}
+    if(p[1]==="dash"){const dn=p[2]||"";
+      if(!ATLAS.dash[dn]){showLoading("Loading dashboard…");load("dash_"+dn).then(()=>ATLAS.dash[dn]?route():showErr("dash_"+dn),()=>showErr("dash_"+dn));return;}
+      navNow="dash_"+dn;renderNav(navNow);$("#searchHint").textContent="Search modules, people, projects, companies";vDash(dn);if("dash/"+dn!==lastView)window.scrollTo(0,0);lastView="dash/"+dn;countUp($("#view"));bindGo($("#view"));return;}
     navKey={projects:"projects",project:"projects",companies:"companies",company:"companies"}[p[1]]||"allpeople";key="all/"+(p[1]||"")+"/"+(p[2]||"");
     fn={person:()=>vAllPerson(p[2]),projects:vProjects,project:()=>vProject(p[2]),companies:vCompanies,company:()=>vCompany(p[2])}[p[1]]||vAllPeople;
   } else {
@@ -845,7 +955,7 @@ function route(){
         roles:vRoles,role:()=>vRole(h[1]),health:()=>vHealth(h[1]),changes:vChanges,galaxy:vGalaxy,journey:vJourney}[v]||vOverview;
   }
   navNow=navKey;renderNav(navKey);
-  const glob=["home","allpeople","projects","companies"].includes(navKey);
+  const glob=isGlob(navKey);
   $("#searchHint").textContent=glob?"Search modules, people, projects, companies":"Search "+M.module+": screens, fields, roles, people";
   fn();if(key!==lastView)window.scrollTo(0,0);lastView=key;
   countUp($("#view"));bindGo($("#view"));
@@ -861,12 +971,13 @@ function vHome(){
   const tot=k=>mods.reduce((a,m)=>a+(m[k]||0),0);
   const ppl=pp?Object.keys(pp):[],left=ppl.filter(u=>hrOf(pp[u].hr)==="left");
   let h='<section class="card hero-home spot" style="margin-top:14px"><span class="logo" style="width:64px;height:64px;border-radius:18px"><span style="width:48px;height:48px;border-radius:14px"><svg viewBox="0 0 24 24" style="width:28px;height:28px"><path d="'+P.tree+'"/><\/svg><\/span><\/span>'+
-     '<div style="flex:1;min-width:0"><h1>Axpert Atlas<\/h1><p>Every screen, field, button rule and person with access, across '+mods.length+' modules. Read from live Axpert ('+esc(mt.source)+') on '+esc(mt.scanned)+'. Nothing here writes to Axpert.<\/p><\/div><\/section>';
+     '<div style="flex:1;min-width:0"><h1>Axpert Atlas'+(SITE()==="pharmacy"?" · AIMS Pharmacy":" · Oman ERP")+'<\/h1><p>Every screen, field, button rule and person with access, across '+mods.length+' modules. Read from live Axpert ('+esc(mt.source)+') on '+esc(mt.scanned)+'. Nothing here writes to Axpert.<\/p><\/div><\/section>';
   h+='<div class="kpis" style="margin-top:16px">'+kpi("apps","var(--blue)","Modules",mods.length,tot("menu")+" menu items","")+kpi("form","var(--purple)","Forms",tot("forms"),fmt(tot("fields"))+" fields","")+
      kpi("report","var(--green)","Reports",tot("reps"),"columns, parameters, SQL","")+kpi("people","var(--teal)","People with access",ppl.length,"active logins, any module","#@/all/people")+
      kpi("leave","var(--red)","Left, login on",left.length,"across all modules","#@/all/people")+
      (ATLAS.proj?kpi("tree","var(--amber)","Projects",Object.keys(projIndex().by).length,fmt(ATLAS.proj.pu.filter(r=>r[4]&&pLeft(r[0])).length)+" active rows for leavers","#@/all/projects")+
        kpi("apps","var(--teal)","Companies",Object.keys(projIndex().co).length,fmt(Object.keys(ATLAS.proj.ca).filter(pLeft).length)+" leavers still have access","#@/all/companies"):"")+'<\/div>';
+  h+=dashCards();
   h+='<div class="ph" style="margin:22px 0 12px"><div><h1 style="font-size:22px">Modules<\/h1><p>Pick a module. Red = high-priority issues (leavers with login, Remove / Cancel with no control).<\/p><\/div><\/div>';
   h+='<div class="mcards">'+mods.map(m=>{const c=m.cancel||{};return '<div class="card spot mcard" data-go="#@/'+m.slug+'/overview" style="--k:var(--blue)"><div class="top"><span class="ic">'+ico(MODICON[m.slug]||"apps")+'<\/span><h3>'+esc(m.name)+'<\/h3>'+
      '<span class="st '+(issues(m)?"st-red":"st-green")+'" style="margin-left:auto">'+(issues(m)?fmt(issues(m))+" issues":"clear")+'<\/span><\/div>'+
@@ -910,6 +1021,7 @@ function vAllPerson(u){
   h+='<section class="card hero spot" style="margin-top:12px"><span class="av" style="width:64px;height:64px;font-size:22px;background:'+avc(u)+'">'+ini(x.nm||u)+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(x.nm||u)+'<\/h2><div class="meta"><code>'+esc(u)+'<\/code><span>'+esc(x.dept||"–")+'<\/span>'+hrPill(x.hr)+
      '<span class="st '+(x.ax?"st-green":"st-grey")+'">Login '+(x.ax?"on":"off")+'<\/span>'+(x.dor&&hrOf(x.hr)==="left"?'<span>left on <b style="font-weight:500">'+esc(x.dor.slice(0,10))+'<\/b><\/span>':"")+'<\/div><\/div><div class="right"><button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
   if(hrOf(x.hr)==="left"&&(mods.length||x.ax))h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>Action needed:<\/b> HR status is '+esc(hrLabel(x.hr))+', but this login '+(x.ax?"is still on":"still has rows")+(mods.length?" and reaches screens in "+mods.length+" module(s)":"")+'.<\/div><\/div>';
+  h+=''+(x.hl?'<div class="note blue" style="margin-top:12px">'+ico("info")+'<div>HR status above is from the Oman ERP (ADK2026 EMPMAST), the live HR master. The EMPMAST copy in the pharmacy database still says <b>'+esc(hrLabel(x.hl))+'<\/b>.<\/div><\/div>':"");
   h+='<div class="kpis" style="margin-top:16px">'+kpi("apps","var(--blue)","Modules",mods.length,"with live access","")+kpi("form","var(--purple)","Forms",tot(1),"can open","")+kpi("report","var(--green)","Reports",tot(2),"can open","")+
      kpi("cancel","var(--amber)","Cancel buttons",tot(3),"forms that have one","")+kpi("del","var(--red)","Remove buttons",tot(4),"forms that have one","")+'<\/div>';
   h+='<div class="mcards">'+mods.map(m=>{const v=x.m[m.slug];return '<div class="card spot mcard" data-go="#@/'+m.slug+'/person/'+enc(u)+'"><div class="top"><span class="ic">'+ico(MODICON[m.slug]||"apps")+'<\/span><h3>'+esc(m.name)+'<\/h3><span class="st st-blue" style="margin-left:auto">open '+ico("chev")+'<\/span><\/div>'+
@@ -927,7 +1039,7 @@ function vOverview(){
   const fl=Object.values(folders).sort((a,b)=>(b.t+b.o)-(a.t+a.o)).slice(0,12);
   const top=S.slice().sort((a,b)=>b.users.length-a.users.length).slice(0,10);
   const hrc={};workU.forEach(u=>{const c=hrCat(u);hrc[c]=(hrc[c]||0)+1;});
-  let h='<div class="ph"><div><h1>'+esc(M.module)+' at a glance<\/h1><p>Every screen, field, button rule and person with access, read from live Axpert. Tap any number, bar or slice to drill in.<\/p><\/div><\/div>';
+  let h='<div class="ph"><div><h1>'+esc(M.module)+' at a glance<\/h1><p>Every screen, field, button rule and person with access, read from live Axpert. Tap any number, bar or slice to drill in.<\/p><\/div>'+xlButtons("module")+'<\/div>';
   h+='<div class="kpis">'+kpi("tree","var(--blue)","Screens",S.length,forms.length+" forms · "+reps.length+" reports / pages","#/screens")+
      kpi("field","var(--purple)","Fields",nFields,fmt(hid)+" hidden · "+fmt(req)+" mandatory","#/screens")+
      kpi("key","var(--teal)","Roles",Object.keys(R).length,(Object.keys(R).length-HI.emptyroles.list.length)+" have people in them","#/roles")+
@@ -989,14 +1101,14 @@ function vScreen(id,sub,fld){
   const s=SID[id];if(!s){$("#view").innerHTML='<div class="empty">'+ico("info")+'Screen not found in '+esc(M.module)+'.<\/div>';return;}
   const kd=KIND[s.k],roles=Object.keys(s.roles).sort();
   let tabs=[["overview","Overview"]];
-  if(s.k==="t")tabs=tabs.concat([["galaxy","Galaxy"],["fields","Fields",s.f.length],["buttons","Cancel & Remove",s.cancel.length+s.remove.length]]);
+  if(s.k==="t")tabs=tabs.concat([SITE()==="pharmacy"?null:["galaxy","Galaxy"],["fields","Fields",s.f.length],["buttons","Cancel & Remove",s.cancel.length+s.remove.length]].filter(Boolean));
   if(s.iv)tabs=tabs.concat([["columns","Columns",s.iv.cols.length],["params","Parameters",s.iv.params.length],["sql","SQL"]]);
   tabs.push(["access","Who can open",s.users.length]);
   if(!tabs.some(t=>t[0]===sub))sub="overview";
   let h='<div class="crumbs"><a data-go="#/screens">Screens<\/a>'+ico("chev")+'<a data-go="#/screens/'+enc(s.folder)+'">'+esc(s.folder)+'<\/a>'+ico("chev")+'<span>'+esc(s.cap)+'<\/span><\/div>';
   h+='<section class="card hero spot" style="--k:'+kd.k+';margin-top:12px"><span class="big">'+ico(kd.ic)+'<\/span><div style="min-width:0;flex:1"><h2>'+esc(s.cap)+'<\/h2><div class="meta"><span class="st '+kd.st+'">'+kd.n+'<\/span><span>'+(s.k==="t"?"transid":s.k==="i"?"iview":"page")+' <code>'+esc(s.n)+'<\/code><\/span><span>menu <code>'+esc(s.menus.map(m=>m.page).join(", "))+'<\/code><\/span>'+
      (s.tables&&s.tables.length?'<span>tables <code>'+esc(s.tables.join(", "))+'<\/code><\/span>':"")+(s.chg&&s.chg.on?'<span>'+ico("hist","i")+' changed <b style="font-weight:500">'+esc(s.chg.on.slice(0,10))+'<\/b> by <code>'+esc(s.chg.by||"?")+'<\/code><\/span>':"")+'<\/div><\/div><div class="right">'+(s.cs?'<span class="st '+s.cs.st+'">'+ico("cancel")+'Cancel · '+s.cs.v+'<\/span>':"")+(s.rs?'<span class="st '+s.rs.st+'">'+ico("del")+'Remove · '+s.rs.v+'<\/span>':"")+
-     '<button class="btn" id="cpid">'+ico("copy")+'Copy '+(s.k==="t"?"transid":"name")+'<\/button><\/div><\/section>';
+     xlButtons("screen",s.id)+'<button class="btn" id="cpid">'+ico("copy")+'Copy '+(s.k==="t"?"transid":"name")+'<\/button><\/div><\/section>';
   h+='<nav class="tabs" id="stabs">'+tabs.map(t=>'<button class="tab'+(sub===t[0]?" on":"")+'" data-go="#/screen/'+s.id+'/'+t[0]+'">'+t[1]+(t[2]!=null?' <span class="n">'+t[2]+'<\/span>':"")+'<\/button>').join("")+'<span class="ind"><\/span><\/nav><div id="sbody"><\/div>';
   $("#view").innerHTML=h;
   $("#cpid").onclick=()=>copy(s.n,s.n);
@@ -1237,6 +1349,7 @@ function vPerson(u){
      (other.length?'<div class="modchips" style="margin-top:10px"><span class="dim" style="font-size:12.5px">Also in:<\/span>'+other.map(m=>'<a class="st st-blue" style="text-decoration:none;cursor:pointer" data-go="#@/'+m.slug+'/person/'+enc(u)+'">'+esc(m.name)+'<\/a>').join("")+'<a class="lnk" style="font-size:12.5px" data-go="#@/all/person/'+enc(u)+'">all modules, projects, companies →<\/a><\/div>':"")+'<\/div>'+
      '<div class="right"><button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
   if(isLeaver(u))h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>Action needed:<\/b> HR says '+esc(hrLabel(x.hr))+', but this Axpert login is on and can open everything below.<\/div><\/div>';
+  h+=''+(x.hl?'<div class="note blue" style="margin-top:12px">'+ico("info")+'<div>HR status above is from the Oman ERP (ADK2026 EMPMAST), the live HR master. The EMPMAST copy in the pharmacy database still says <b>'+esc(hrLabel(x.hl))+'<\/b>.<\/div><\/div>':"");
   if(!working(u))h+='<div class="note blue" style="margin-top:16px">'+ico("info")+'<div>'+(x.ax?"No live role in this module.":"Axpert login is off.")+' Nothing below is reachable today.<\/div><\/div>';
   h+='<div class="kpis" style="margin-top:16px">'+kpi("key","var(--teal)","Live roles",live.length,(rs.length-live.length)+" ended","")+kpi("form","var(--blue)","Forms",fm.length,"can open","")+kpi("report","var(--green)","Reports / pages",rp.length,"can open","")+
      kpi("cancel","var(--amber)","Cancel buttons",cb.length,cb.filter(s=>s.cs.key==="tbc").length+" not yet tested","")+kpi("del","var(--red)","Remove buttons",rb.length,rb.filter(s=>s.rs.key==="open").length+" with no control","")+'<\/div>';
@@ -1309,6 +1422,7 @@ function vHealth(sel){
   const c=HI[sel]||H.find(x=>x.list.length)||H[0];
   let h='<div class="ph"><div><h1>Health · '+esc(M.module)+'<\/h1><p>Problems found automatically in the snapshot. Pick a card to see the list, copy the IDs or export it.<\/p><\/div><\/div>';
   h+='<div class="note blue">'+ico("info")+'<div><b>HR status (verified 07/11/2026):<\/b> EMPMAST has one row per employee. Resignation, Termination, Absconding and Cancel rows all carry a relieving date (DOR), so all four count as "left".<\/div><\/div>';
+  {const H=ATLAS.meta&&ATLAS.meta.hr;if(H)h+='<div class="note '+(H.ok?"blue":"red")+'">'+ico("info")+'<div>'+(H.ok?'<b>HR status on this site comes from the Oman ERP<\/b> (ADK2026 EMPMAST, read '+esc(H.read)+'), the live HR master: '+fmt(H.found)+' of '+fmt(H.users)+' user ids found there. The EMPMAST copy in the pharmacy database stopped being updated in July 2026 and differs for '+fmt(H.differ)+' of them; the person page shows both.':'<b>Oman HR could not be read<\/b> ('+esc(H.error||"")+'): HR status below is from the EMPMAST copy in the pharmacy database, which is out of date.')+'<\/div><\/div>';}
   h+='<div class="hgrid">'+H.map(x=>'<div class="card hov spot hc'+(x.id===c.id?" sel":"")+'" style="--k:'+(x.list.length?x.k:"var(--green)")+'" data-go="#/health/'+x.id+'"><div class="row1"><span class="ic">'+ico(x.list.length?x.ic:"ok")+'<\/span><span class="sev">'+(x.list.length?x.sev:"Clear")+'<\/span><\/div><div class="v" data-count="'+x.list.length+'">0<\/div><h3>'+esc(x.ttl)+'<\/h3><p>'+esc(x.why)+'<\/p><\/div>').join("")+'<\/div>';
   let tbl="",ids=[],rows=[],head=[];
   if(c.kind==="users"){ids=c.list;head=["EmpID","Name","Department","HR status","Left on","Roles"];rows=c.list.map(u=>[u,U[u].nm,U[u].dept,U[u].hr,U[u].dor,liveR(u).join(" ")]);
@@ -2048,6 +2162,807 @@ function jDetail(E,i){
   }
   return h;
 }
+
+/* ---------- DASHBOARDS (added 10/11/2026) ----------
+   data/dash_<name>.js -> ATLAS.dashLoaded(name, data). Built by galaxy/build_dash.py at every refresh (SELECT only).
+   Route: #/all/dash/<name>. Oman site: purchase (MR -> PB). Pharmacy site: stock.
+   Charts are inline SVG only (the Axpert servers are offline: no CDN, no chart library). */
+ATLAS.dash = {};
+ATLAS.dashLoaded = function (n, d) { this.dash[n] = d; };
+const SITE = () => (ATLAS.meta && ATLAS.meta.site) || "oman";
+const DASHES = { oman: [["purchase", "Purchase · MR to PB", "report"], ["ostock", "Stock · 3 ledgers", "apps"]], pharmacy: [["stock", "Pharmacy stock", "apps"]] };
+const nf = (n, d) => Number(n || 0).toLocaleString("en-US", { maximumFractionDigits: d == null ? 0 : d });
+const DST = {};   /* per-dashboard UI state: list tab + search */
+
+function dashNav(cur) {
+  const L = DASHES[SITE()] || [];
+  const other = SITE() === "pharmacy" ? ["../", "Oman ERP Atlas"] : ["pharmacy/", "AIMS Pharmacy Atlas"];
+  return '<div class="navsec">Dashboards<\/div>' + L.map(d => '<button class="ni' + (cur === "dash_" + d[0] ? " on" : "") + '" data-go="#@/all/dash/' + d[0] + '">' + ico(d[2]) + d[1] + '<\/button>').join("") +
+    '<a class="ni sitesw" href="' + other[0] + '">' + ico("apps") + 'Switch to ' + other[1] + '<\/a>';
+}
+
+function vDash(name) {
+  const D = ATLAS.dash[name];
+  if (!D) { $("#view").innerHTML = '<div class="empty">' + ico("warn") + 'No data for this dashboard yet.<\/div>'; return; }
+  ({ purchase: dPurchase, stock: dStock, ostock: dOStock })[name](D);
+}
+
+/* ---------- small chart kit ---------- */
+function hbars(rows, opt) {        /* rows: [{l, v, sub, c}] -> horizontal bars, HTML */
+  const mx = Math.max(1, ...rows.map(r => r.v));
+  return '<div class="hb">' + rows.map(r => '<div class="hbr"' + (r.go ? ' data-go="' + r.go + '"' : "") + '><div class="hbl">' + esc(r.l) + '<\/div><div class="hbt"><span style="width:' + Math.max(0.6, r.v * 100 / mx) + '%;background:' + (r.c || "var(--blue)") + '"><\/span><\/div><div class="hbv num">' + nf(r.v, opt && opt.dec) + (r.sub ? '<small>' + r.sub + '<\/small>' : "") + '<\/div><\/div>').join("") + '<\/div>';
+}
+function donut(parts, label, sub) {   /* parts: [{l, v, c}] */
+  const T = parts.reduce((a, p) => a + p.v, 0) || 1, R = 52, C = 2 * Math.PI * R;
+  let off = 0;
+  const seg = parts.map(p => { const L = p.v / T * C, s = '<circle r="' + R + '" cx="70" cy="70" fill="none" stroke="' + p.c + '" stroke-width="20" stroke-dasharray="' + L + ' ' + (C - L) + '" stroke-dashoffset="' + (-off) + '"><title>' + esc(p.l) + ': ' + nf(p.v) + '<\/title><\/circle>'; off += L; return s; }).join("");
+  return '<div class="dn"><svg viewBox="0 0 140 140" class="dnsvg"><g transform="rotate(-90 70 70)">' + seg + '<\/g><text x="70" y="68" class="dnv">' + nf(T) + '<\/text><text x="70" y="86" class="dns">' + esc(label) + '<\/text><\/svg>' +
+    '<div class="dnl">' + parts.map(p => '<div><i style="background:' + p.c + '"><\/i><span>' + esc(p.l) + '<\/span><b class="num">' + nf(p.v) + '<\/b><em>' + pct(p.v, T) + '%<\/em><\/div>').join("") + (sub ? '<p class="dnote">' + sub + '<\/p>' : "") + '<\/div><\/div>';
+}
+function cols(months, series, opt) {   /* grouped columns, SVG. series: [{k, l, c}] */
+  const W = 760, H = 230, pl = 46, pb = 26, pt = 10, n = months.length, g = (W - pl - 8) / n, bw = Math.min(16, (g - 8) / series.length);
+  const mx = Math.max(1, ...months.flatMap(m => series.map(s => m[s.k] || 0)));
+  const step = Math.pow(10, Math.floor(Math.log10(mx))), top = Math.ceil(mx / step) * step, y = v => pt + (H - pt - pb) * (1 - v / top);
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" class="chart">';
+  for (let i = 0; i <= 4; i++) { const v = top * i / 4; s += '<line x1="' + pl + '" x2="' + W + '" y1="' + y(v) + '" y2="' + y(v) + '" class="gl"/><text x="' + (pl - 6) + '" y="' + (y(v) + 4) + '" class="ax" text-anchor="end">' + nf(v) + '<\/text>'; }
+  months.forEach((m, i) => {
+    const x0 = pl + i * g + (g - bw * series.length) / 2;
+    series.forEach((se, j) => { const v = m[se.k] || 0; s += '<rect x="' + (x0 + j * bw) + '" y="' + y(v) + '" width="' + (bw - 2) + '" height="' + (y(0) - y(v)) + '" rx="2" fill="' + se.c + '"><title>' + esc(m.m + " · " + se.l + ": " + nf(v)) + '<\/title><\/rect>'; });
+    s += '<text x="' + (pl + i * g + g / 2) + '" y="' + (H - 8) + '" class="ax" text-anchor="middle">' + mlabel(m.m) + '<\/text>';
+  });
+  return s + '<\/svg><div class="lg">' + series.map(se => '<span><i style="background:' + se.c + '"><\/i>' + esc(se.l) + '<\/span>').join("") + (opt && opt.note ? '<span class="lgn">' + opt.note + '<\/span>' : "") + '<\/div>';
+}
+const mlabel = m => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][+m.slice(5) - 1] + " " + m.slice(2, 4);
+const dhead = (D, title, sub, icon) => '<section class="card hero-home spot dhero" style="margin-top:14px"><span class="logo" style="width:56px;height:56px;border-radius:16px"><span style="width:42px;height:42px;border-radius:12px">' + ico(icon) + '<\/span><\/span>' +
+  '<div style="flex:1;min-width:0"><h1>' + title + '<\/h1><p>' + sub + '<\/p><div class="dmeta"><span>' + ico("hist") + 'Built ' + esc(D.built) + '<\/span><span>' + ico("code") + esc(D.source) + '<\/span><span>' + ico("lock") + 'Read-only · SELECT only<\/span><\/div><\/div><\/section>';
+const rulesBox = D => '<details class="card dsec drules"><summary>' + ico("info") + 'How these numbers are made<\/summary><ol>' + D.rules.map(r => '<li>' + esc(r) + '<\/li>').join("") + '<\/ol><\/details>';
+const sec = (title, sub, body, cls) => '<section class="card dsec' + (cls ? " " + cls : "") + '"><div class="dsh"><h2>' + title + '<\/h2>' + (sub ? '<p>' + sub + '<\/p>' : "") + '<\/div>' + body + '<\/section>';
+
+function listTabs(name, tabs, D, redraw) {   /* tabs: [[key, label, rows, cols, search(r)]] */
+  const st = DST[name] || (DST[name] = { t: tabs[0][0], q: "" });
+  const T = tabs.find(t => t[0] === st.t) || tabs[0];
+  const q = st.q.trim().toLowerCase(), rows = q ? T[2].filter(r => T[4](r).toLowerCase().includes(q)) : T[2];
+  return '<div class="dtabs">' + tabs.map(t => '<button class="chip' + (t[0] === T[0] ? " on" : "") + '" data-dt="' + t[0] + '">' + t[1] + ' <span class="n">' + nf(t[2].length) + '<\/span><\/button>').join("") +
+    '<label class="field dq">' + ico("tune") + '<input id="dq_' + name + '" placeholder="Filter this list" value="' + esc(st.q) + '"><\/label><\/div>' + table("dash_" + name + "_" + T[0], T[3], rows, { sort: T[5] || 0, dir: T[6] || -1, lim: 100 });
+}
+function bindList(name, redraw) {
+  $$("[data-dt]", $("#view")).forEach(b => b.onclick = () => { DST[name].t = b.dataset.dt; redraw(); });
+  const i = $("#dq_" + name);
+  if (i) i.oninput = () => { DST[name].q = i.value; redraw(); keepFocus("dq_" + name); };
+  bindTables($("#view"), redraw);
+}
+
+/* ================= OMAN PURCHASE: MR -> PB ================= */
+function dPurchase(D) {
+  const S = D.steps, first = S[1].n || 1, pb = S[S.length - 1].n;
+  const routeC = { "Credit purchase (PO)": "var(--blue)", "Issued from store": "var(--teal)", "Cash purchase": "var(--amber)", "Production": "var(--purple)",
+    "Approved, no next step": "var(--grey)", "Rejected": "var(--red)", "MR pending approval": "#e37400", "Short closed": "#a142f4" };
+  let h = dhead(D, "Purchase · MR to Purchase Bill", "Every MR line raised since " + esc(D.since) + ", followed through Axpert's own steps: request, RFQ, quote, PO, GRN and the purchase bill. Where each line is, how long each step takes, and what is waiting now.", "report");
+  h += '<div class="kpis">' + kpi("form", "var(--blue)", "MR lines", D.lines, "12 months · all routes", "") +
+    kpi("tree", "var(--purple)", "Credit purchase road", first, pct(first, D.lines) + "% of MR lines go via PO", "") +
+    kpi("ok", "var(--teal)", "PO issued", S[5].n, pct(S[5].n, first) + "% of the road", "") +
+    kpi("apps", "var(--green)", "GRN received", S[6].n, pct(S[6].n, first) + "% of the road", "") +
+    kpi("report", "var(--green)", "Purchase billed", pb, pct(pb, first) + "% reached PB", "") +
+    kpi("warn", "var(--red)", "Waiting now", D.stuck_total, "open lines, not closed", "") + '<\/div>';
+  /* funnel */
+  const fun = S.slice(1).map((s, i) => {
+    const prev = i ? S[i].n : s.n, drop = prev - s.n, w = Math.max(4, s.n * 100 / first);
+    return '<div class="fs"><div class="fl"><b>' + esc(s.name) + '<\/b><small>' + (s.med != null ? "median " + nf(s.med, 1) + " days after previous step" : "") + '<\/small><\/div>' +
+      '<div class="ft"><span style="width:' + w + '%"><em class="num">' + nf(s.n) + '<\/em><\/span><\/div><div class="fr num">' + pct(s.n, first) + '%' + (i && drop > 0 ? '<small>−' + nf(drop) + '<\/small>' : "<small>&nbsp;<\/small>") + '<\/div><\/div>';
+  }).join("");
+  h += '<div class="dgrid g2">' + sec("The road: MR line to purchase bill", "Credit-purchase lines only. Bar = lines that reached the step. Small red = lines that did not get to it (yet).", '<div class="fun">' + fun + '<\/div>') +
+    sec("Which way each MR line went", "Every approved line takes one route. Only the blue route goes to PO, GRN and bill.",
+      donut(D.routes.map(r => ({ l: r[0], v: r[1], c: routeC[r[0]] || "var(--grey)" })), "MR lines")) + '<\/div>';
+  /* waiting heatmap */
+  const mxc = Math.max(1, ...D.pipe.flatMap(p => p.b));
+  const pipe = D.pipe.filter(p => p.b.some(x => x));
+  h += sec("Waiting now · where and for how long", "Open credit-purchase lines by the last step they reached and days since that step. Darker = more lines. Over 90 days at PO issued usually means the supplier has not delivered or the GRN was not made.",
+    '<div class="tw"><table class="heat"><thead><tr><th>Stuck after<\/th>' + D.ages.map(a => '<th class="num">' + a + '<\/th>').join("") + '<th class="num">Total<\/th><\/tr><\/thead><tbody>' +
+    pipe.map(p => '<tr><td><b>' + esc(p.name) + '<\/b><\/td>' + p.b.map((v, i) => '<td class="num hc" style="--a:' + (v / mxc).toFixed(3) + ';--hc:' + (i >= 2 ? "var(--red)" : "var(--amber)") + '">' + (v ? nf(v) : "·") + '<\/td>').join("") + '<td class="num"><b>' + nf(p.b.reduce((a, b) => a + b, 0)) + '<\/b><\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>');
+  /* monthly cohort */
+  h += '<div class="dgrid g2w">' + sec("Month by month", "MR lines raised each month, and how many of those lines have by now reached PO, GRN and bill. Recent months are naturally lower: they are still moving.",
+    cols(D.months, [{ k: "mr", l: "MR lines", c: "var(--line2)" }, { k: "po", l: "PO issued", c: "var(--blue)" }, { k: "grn", l: "GRN", c: "var(--teal)" }, { k: "pb", l: "Billed", c: "var(--green)" }])) +
+    sec("Goods, service, asset", "Item type from the item master.", D.types.map(t => '<div class="tyc"><div class="tyh"><b>' + esc(t.t) + '<\/b><span class="num">' + nf(t.lines) + ' lines<\/span><\/div>' +
+      [["PO", t.po, "var(--blue)"], ["GRN", t.grn, "var(--teal)"], ["Billed", t.pb, "var(--green)"]].map(x => '<div class="tyr"><span>' + x[0] + '<\/span><div class="hbt"><span style="width:' + pct(x[1], t.lines) + '%;background:' + x[2] + '"><\/span><\/div><em class="num">' + nf(x[1]) + '<\/em><\/div>').join("") + '<\/div>').join("")) + '<\/div>';
+  /* projects + lists */
+  const pc = [{ h: "Project", k: r => r.code, r: r => '<b>' + esc(r.code) + '<\/b><div class="sub">' + esc(r.name) + '<\/div>' },
+    { h: "MR lines", num: 1, k: r => r.lines, r: r => nf(r.lines) }, { h: "Via PO", num: 1, k: r => r.credit, r: r => nf(r.credit) },
+    { h: "PO", num: 1, k: r => r.po, r: r => nf(r.po) }, { h: "GRN", num: 1, k: r => r.grn, r: r => nf(r.grn) },
+    { h: "Billed", num: 1, k: r => r.pb, r: r => nf(r.pb) + ' <span class="pbar"><span style="width:' + pct(r.pb, r.credit) + '%"><\/span><\/span>' },
+    { h: "Waiting", num: 1, k: r => r.open, r: r => r.open ? '<b style="color:var(--red)">' + nf(r.open) + '<\/b>' : "0" }];
+  const STEPN = Object.fromEntries(D.steps.map(s => [s.k, s.name]).concat([["DRAFT", "Draft PO (not issued)"]]));
+  const sc = [{ h: "MR", k: r => r.mr, r: r => '<span class="mono">' + esc(r.mr) + '<\/span>' }, { h: "Item", k: r => r.item, r: r => esc(r.item) + '<div class="sub">' + nf(r.qty, 2) + ' ' + esc(r.unit || "") + '<\/div>' },
+    { h: "Project", k: r => r.proj, r: r => esc(r.proj) + '<div class="sub">' + esc(r.pname) + '<\/div>' },
+    { h: "Stuck after", k: r => r.at, r: r => '<span class="tag">' + esc(STEPN[r.at] || r.at) + '<\/span>' }, { h: "Since", k: r => r.since, r: r => esc(r.since) },
+    { h: "Days", num: 1, k: r => r.days, r: r => '<b style="color:' + (r.days > 90 ? "var(--red)" : r.days > 30 ? "var(--amber)" : "inherit") + '">' + nf(r.days) + '<\/b>' }];
+  const draw = () => {
+    $("#dlist").innerHTML = listTabs("purchase", [["stuck", "Longest waiting lines (top " + D.stuck.length + " of " + nf(D.stuck_total) + ")", D.stuck, sc, r => r.mr + " " + r.item + " " + r.proj + " " + r.pname, 5],
+      ["proj", "Top projects", D.projects, pc, r => r.code + " " + r.name, 1]], D, draw);
+    bindList("purchase", draw);
+  };
+  h += '<section class="card dsec" id="dlist"><\/section>' + rulesBox(D);
+  $("#view").innerHTML = h; draw();
+}
+
+/* ================= PHARMACY STOCK ================= */
+function dStock(D) {
+  const K = D.kpi;
+  const EC = { "Expired": "var(--red)", "0-30 days": "#e8710a", "31-90 days": "var(--amber)", "91-180 days": "#f9ab00", "181-365 days": "var(--teal)", "Over 1 year": "var(--green)", "No expiry": "var(--grey)" };
+  let h = dhead(D, "AIMS Pharmacy · Stock", "Stock on hand in every pharmacy location, batch by batch, from Axpert's stock ledger. Expiry runway, categories, locations, movement, and the batches that need action.", "apps");
+  h += '<div class="kpis">' + kpi("apps", "var(--blue)", "Items in stock", K.items, nf(K.batches) + " batches", "") +
+    kpi("report", "var(--teal)", "Units on hand", K.qty, "all locations", "") +
+    kpi("warn", "var(--red)", "Expired, still in stock", K.expired, "batches", "") +
+    kpi("hist", "var(--amber)", "Expiring in 90 days", K.soon, "batches", "") +
+    kpi("cancel", "var(--red)", "Negative balances", K.neg, nf(K.negqty) + " units · data problem", "") +
+    kpi("leave", "var(--grey)", "Slow moving", K.slow, "items, nothing out for 180+ days", "") + '<\/div>';
+  /* expiry runway: stacked strip + bars */
+  const tq = D.expiry.reduce((a, e) => a + e.qty, 0) || 1;
+  h += sec("Expiry runway", "Units on hand by how long until the batch expires. Red and orange need action first.",
+    '<div class="strip">' + D.expiry.filter(e => e.qty).map(e => '<span style="flex:' + e.qty + ';background:' + EC[e.b] + '" title="' + esc(e.b + ": " + nf(e.qty) + " units") + '"><\/span>').join("") + '<\/div>' +
+    '<div class="exg">' + D.expiry.map(e => '<div class="exc" style="--c:' + EC[e.b] + '"><small>' + esc(e.b) + '<\/small><b class="num">' + nf(e.batches) + '<\/b><span>batches<\/span><em class="num">' + nf(e.qty) + ' units · ' + pct(e.qty, tq) + '%<\/em><\/div>').join("") + '<\/div>');
+  /* categories + locations */
+  const CC = ["var(--blue)", "var(--green)", "var(--purple)", "var(--teal)", "var(--amber)", "#e37400", "#a142f4", "var(--grey)", "#1e8e3e", "#d01884"];
+  h += '<div class="dgrid g2">' + sec("By category", "Category from the pharmacy item master.",
+    donut(D.cats.map((c, i) => ({ l: c.c, v: c.qty, c: CC[i % CC.length] })), "units") +
+    '<div class="tw" style="margin-top:12px"><table><thead><tr><th>Category<\/th><th class="num">Items<\/th><th class="num">Batches<\/th><th class="num">Expired<\/th><th class="num">≤ 90 days<\/th><\/tr><\/thead><tbody>' +
+    D.cats.map(c => '<tr><td>' + esc(c.c) + '<\/td><td class="num">' + nf(c.items) + '<\/td><td class="num">' + nf(c.batches) + '<\/td><td class="num"' + (c.expired ? ' style="color:var(--red);font-weight:600"' : "") + '>' + nf(c.expired) + '<\/td><td class="num"' + (c.soon ? ' style="color:var(--amber);font-weight:600"' : "") + '>' + nf(c.soon) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>') +
+    sec("By location", "Where the units are.", hbars(D.locs.map(l => ({ l: l.code, v: l.qty, sub: nf(l.items) + " items · " + nf(l.batches) + " batches" + (l.expired ? " · " + l.expired + " expired" : ""), c: "var(--teal)" }))) +
+      '<div class="locn">' + D.locs.map(l => '<div><b>' + esc(l.code) + '<\/b> ' + esc(l.name) + '<\/div>').join("") + '<\/div>') + '<\/div>';
+  /* movement */
+  h += '<div class="dgrid g2w">' + sec("Units in and out, month by month", "All stock movements. Transfers between locations count both in and out.",
+    cols(D.months, [{ k: "i", l: "In", c: "var(--green)" }, { k: "o", l: "Out", c: "var(--blue)" }])) +
+    sec("What moved the stock", "Stock rows in 12 months by document type.", hbars(D.mix.slice(0, 12).map(m => ({ l: m.doc + " · " + m.dir, v: m.n, c: m.dir === "In" ? "var(--green)" : "var(--blue)" })))) + '<\/div>';
+  /* lists */
+  const ex = [{ h: "Item", k: r => r.item, r: r => '<b>' + esc(r.item) + '<\/b><div class="sub mono">' + esc(r.code || "") + ' · ' + esc(r.cat) + '<\/div>' },
+    { h: "Batch", k: r => r.batch, r: r => '<span class="mono">' + esc(r.batch) + '<\/span>' }, { h: "Location", k: r => r.loc, r: r => esc(r.loc) },
+    { h: "Expiry", k: r => r.exp || "", r: r => esc(r.exp || "-") },
+    { h: "Days left", num: 1, k: r => r.days, r: r => '<b style="color:' + (r.days < 0 ? "var(--red)" : r.days <= 30 ? "#e8710a" : "var(--amber)") + '">' + (r.days < 0 ? "expired " + nf(-r.days) + " d ago" : nf(r.days)) + '<\/b>' },
+    { h: "Units", num: 1, k: r => r.qty, r: r => nf(r.qty, 2) }];
+  const ng = [{ h: "Item", k: r => r.item, r: r => '<b>' + esc(r.item) + '<\/b><div class="sub mono">' + esc(r.code || "") + '<\/div>' }, { h: "Batch", k: r => r.batch, r: r => '<span class="mono">' + esc(r.batch) + '<\/span>' },
+    { h: "Location", k: r => r.loc, r: r => esc(r.loc) }, { h: "Expiry", k: r => r.exp || "", r: r => esc(r.exp || "-") }, { h: "Balance", num: 1, k: r => r.qty, r: r => '<b style="color:var(--red)">' + nf(r.qty, 2) + '<\/b>' }];
+  const sl = [{ h: "Item", k: r => r.item, r: r => '<b>' + esc(r.item) + '<\/b><div class="sub mono">' + esc(r.code || "") + ' · ' + esc(r.cat) + '<\/div>' },
+    { h: "Units", num: 1, k: r => r.qty, r: r => nf(r.qty, 2) }, { h: "Batches", num: 1, k: r => r.batches, r: r => nf(r.batches) },
+    { h: "Last out", k: r => r.lastout || "", r: r => esc(r.lastout || "never") }, { h: "Last in", k: r => r.lastin || "", r: r => esc(r.lastin || "-") },
+    { h: "Idle days", num: 1, k: r => r.idle == null ? 1e9 : r.idle, r: r => r.idle == null ? '<b style="color:var(--red)">never sold<\/b>' : nf(r.idle) }];
+  const tp = [{ h: "Item", k: r => r.item, r: r => '<b>' + esc(r.item) + '<\/b><div class="sub mono">' + esc(r.code || "") + '<\/div>' }, { h: "Category", k: r => r.cat, r: r => esc(r.cat) },
+    { h: "Batches", num: 1, k: r => r.batches, r: r => nf(r.batches) }, { h: "Units", num: 1, k: r => r.qty, r: r => nf(r.qty, 2) }];
+  const draw = () => {
+    $("#dlist").innerHTML = listTabs("stock", [["exp", "Expired and expiring ≤ 90 days", D.expiring, ex, r => r.item + " " + r.code + " " + r.batch + " " + r.loc + " " + r.cat, 4, 1],
+      ["neg", "Negative balances", D.negative, ng, r => r.item + " " + r.code + " " + r.batch + " " + r.loc, 4, 1],
+      ["slow", "Slow moving", D.slow, sl, r => r.item + " " + r.code + " " + r.cat, 5],
+      ["top", "Biggest stock", D.top, tp, r => r.item + " " + r.code + " " + r.cat, 3]], D, draw);
+    bindList("stock", draw);
+  };
+  h += '<section class="card dsec" id="dlist"><\/section>' + rulesBox(D);
+  $("#view").innerHTML = h; draw();
+}
+
+/* home page: dashboard cards (loaded lazily, a card shows its headline numbers once its data is here) */
+function dashCards() {
+  const L = DASHES[SITE()] || [];
+  if (!L.length) return "";
+  L.forEach(d => { if (!ATLAS.dash[d[0]]) load("dash_" + d[0]).then(() => { if (navNow === "home") route(); }, () => { }); });
+  const line = n => { const D = ATLAS.dash[n]; if (!D) return '<span class="sub">Loading…<\/span>';
+    if (n === "purchase") return '<div class="dcn"><span><b class="num">' + nf(D.lines) + '<\/b>MR lines<\/span><span><b class="num">' + nf(D.steps[7].n) + '<\/b>billed<\/span><span><b class="num" style="color:var(--red)">' + nf(D.stuck_total) + '<\/b>waiting<\/span><\/div>';
+    if (n === "ostock") { const P = osPrep(D); return '<div class="dcn"><span><b class="num">' + nf(P.itemsIn) + '<\/b>items in stock<\/span><span><b class="num">' + nf(P.pos) + '<\/b>stock lines<\/span><span><b class="num" style="color:var(--red)">' + nf(P.neg) + '<\/b>negative<\/span><\/div>'; }
+    if (n === "stock") return '<div class="dcn"><span><b class="num">' + nf(D.kpi.items) + '<\/b>items<\/span><span><b class="num" style="color:var(--red)">' + nf(D.kpi.expired) + '<\/b>expired<\/span><span><b class="num" style="color:var(--amber)">' + nf(D.kpi.soon) + '<\/b>≤ 90 days<\/span><\/div>';
+    return ""; };
+  return '<div class="ph" style="margin:22px 0 12px"><div><h1 style="font-size:22px">Dashboards<\/h1><p>Live numbers from Axpert, rebuilt at 07:00 and 19:00. Click to open.<\/p><\/div><\/div><div class="mcards">' +
+    L.map(d => '<div class="card spot mcard dcard" data-go="#@/all/dash/' + d[0] + '" style="--k:var(--blue)"><div class="top"><span class="ic">' + ico(d[2]) + '<\/span><h3>' + esc(d[1]) + '<\/h3><\/div>' + line(d[0]) + (ATLAS.dash[d[0]] ? '<div class="sub">Built ' + esc(ATLAS.dash[d[0]].built) + '<\/div>' : "") + '<\/div>').join("") +
+    '<a class="card spot mcard dcard" href="' + (SITE() === "pharmacy" ? "../" : "pharmacy/") + '" style="--k:var(--teal);text-decoration:none;color:inherit"><div class="top"><span class="ic">' + ico("apps") + '<\/span><h3>' + (SITE() === "pharmacy" ? "Oman ERP Atlas" : "AIMS Pharmacy Atlas") + '<\/h3><\/div><div class="sub" style="margin-top:8px">Open the other Axpert system: same screens, fields, Galaxy and dashboards.<\/div><\/a><\/div>';
+}
+
+/* ================= OMAN STOCK · three ledgers (added 11/11/2026) =================
+   data/dash_ostock.js <- galaxy/build_dash.py ostock (SELECT only, rebuilt with every refresh).
+   main = STOCKVALUE (store ledger) · sub = SUBSTOCKVALUE (cut-piece register) · android = ANDROIDEMPWSTOCK (supervisor stock).
+   Quantities only and never added across different items (units differ). Lines are compact arrays, see build_dash.py. */
+const OSL = [["main", "Main store stock", "STOCKVALUE", "apps"], ["sub", "Cut pieces & offcuts", "SUBSTOCKVALUE", "tree"], ["android", "Supervisor stock", "ANDROIDEMPWSTOCK", "people"]];
+const OSAGE = [[30, "0-30 days", "var(--green)"], [90, "31-90 days", "var(--teal)"], [180, "3-6 months", "var(--blue)"], [365, "6-12 months", "var(--amber)"],
+  [730, "1-2 years", "#e8710a"], [1825, "2-5 years", "var(--red)"], [1e12, "Over 5 years", "#a50e0e"]];
+function osS() { return DST.ostock || (DST.ostock = { tab: "main", comp: null, store: null, band: null, cat: null, list: "lines", q: "", slist: "instock", sq: "", sup: null, alist: "held", aq: "" }); }
+const osD = (D, d) => { if (d == null) return "-"; const t = new Date(D.today + "T00:00:00"); t.setDate(t.getDate() - d); return t.toLocaleDateString("en-GB"); };
+const osI = v => v ? String(v).slice(0, 10).split("-").reverse().join("/") : "-";
+const osAgo = d => d == null ? "-" : d < 1 ? "today" : d < 60 ? nf(d) + " d" : d < 730 ? nf(Math.round(d / 30.4)) + " mo" : (d / 365).toFixed(1) + " yr";
+const osQty = (v, u) => '<b class="num"' + (v < 0 ? ' style="color:var(--red)"' : "") + '>' + nf(v, 3) + '<\/b> <span class="osu">' + esc(u || "") + '<\/span>';
+const osK = (act, html) => html.replace('<button class="kpi"', '<button class="kpi" data-act="' + act + '"');
+const osAgeOf = r => { const a = Math.min(r[5] == null ? 1e12 : r[5], r[6] == null ? 1e12 : r[6]); return a >= 1e12 ? null : a; };
+const osBand = a => a == null ? OSAGE.length - 1 : OSAGE.findIndex(x => a <= x[0]);
+
+function osPrep(D) {
+  if (D._p) return D._p;
+  const X = D.dict, M = D.main, P = { pos: 0, neg: 0 };
+  P.comp = X.comps.map((c, i) => ({ i, lines: 0, neg: 0, items: new Set(), stores: new Set() }));
+  P.cats = X.cats.map((c, i) => ({ i, l: c, lines: 0, items: new Set() }));
+  const items = new Set(), stores = new Set();
+  M.lines.forEach(r => {
+    r.age = osAgeOf(r); r.band = osBand(r.age);
+    const C = P.comp[r[3]];
+    if (r[4] < 0) { P.neg++; if (C) C.neg++; return; }
+    P.pos++; items.add(r[0]); stores.add(r[2]);
+    if (C) { C.lines++; C.items.add(r[0]); C.stores.add(r[2]); }
+    const K = P.cats[X.items[r[0]][2]]; K.lines++; K.items.add(r[0]);
+  });
+  P.itemsIn = items.size; P.storesIn = stores.size; P.compsIn = P.comp.filter(c => c.lines).length;
+  P.old = M.lines.filter(r => r[4] > 0 && r.band >= 4).length;
+  P.unknownItems = X.items.filter(x => x[4] === "?").length;
+  P.unknownComps = X.comps.filter(c => /not in BRANCH/.test(c[1] || "")).length;
+  P.backRows = M.backdated.filter(b => b.map !== "itopn2").reduce((a, b) => a + b.n, 0);   /* the opening rebuild has its own trust card */
+  const A = D.android.lines;
+  P.aHeld = A.filter(r => r[3] > 0); P.aNeg = A.filter(r => r[3] < 0);
+  P.aHolders = new Set(P.aHeld.map(r => r[0]));
+  P.left = e => D.left_status.includes(D.dict.emps[e][2]);
+  return D._p = P;
+}
+
+function osBars(rows, act, sqrt) {   /* clickable horizontal bars: rows [{k, l, sub, v, c, on}]; sqrt = square-root scale for very uneven data */
+  const f = sqrt ? Math.sqrt : (x => x), mx = Math.max(1, ...rows.map(r => f(r.v)));
+  return '<div class="osbars">' + (rows.length ? rows.map(r => '<button class="osbar' + (r.on ? " on" : "") + '" data-act="' + act + ':' + r.k + '"><span class="osbl">' + esc(r.l) + (r.sub ? '<small>' + r.sub + '<\/small>' : "") + '<\/span><span class="hbt"><span style="width:' + Math.max(0.8, f(r.v) * 100 / mx) + '%;background:' + (r.c || "var(--blue)") + '"><\/span><\/span><b class="num">' + nf(r.v) + '<\/b><\/button>').join("") : '<div class="empty">' + ico("info") + 'Nothing here.<\/div>') + '<\/div>';
+}
+function osFlow(W, H, nodes, edges) {   /* small SVG flow: nodes [{x,y,w,h,t,s,c}], edges [{d, t, tx, ty}] */
+  const box = n => '<g><rect x="' + n.x + '" y="' + n.y + '" width="' + n.w + '" height="' + n.h + '" rx="12" class="osfn" style="--c:' + n.c + '"/><text x="' + (n.x + n.w / 2) + '" y="' + (n.y + n.h / 2 + (n.s ? -3 : 4)) + '" class="osft">' + esc(n.t) + '<\/text>' +
+    (n.s ? '<text x="' + (n.x + n.w / 2) + '" y="' + (n.y + n.h / 2 + 13) + '" class="osfs">' + esc(n.s) + '<\/text>' : "") + '<\/g>';
+  const ed = e => '<path d="' + e.d + '" class="osfe" marker-end="url(#osar)"/>' + (e.t ? '<text x="' + e.tx + '" y="' + e.ty + '" class="osfl">' + esc(e.t) + '<\/text>' : "");
+  return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="osflow" role="img"><defs><marker id="osar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="osfa"/><\/marker><\/defs>' +
+    edges.map(ed).join("") + nodes.map(box).join("") + '<\/svg>';
+}
+function osSwitch(D, P, S) {
+  const K = D.sub.kpi;
+  const head = { main: [P.itemsIn, "items in stock", nf(P.pos) + " lines · " + nf(P.storesIn) + " stores"],
+    sub: [K.instock, "cut pieces in stock", nf(K.registered) + " registered"],
+    android: [P.aHolders.size, "supervisors holding stock", nf(P.aHeld.length) + " lines"] };
+  return '<div class="osw">' + OSL.map(l => '<button class="osl spot' + (S.tab === l[0] ? " on" : "") + '" data-act="tab:' + l[0] + '"><span class="ic">' + ico(l[3]) + '<\/span><span class="osln"><b>' + l[1] + '<\/b><code>' + l[2] + '<\/code><\/span>' +
+    '<span class="oslv"><b class="num">' + nf(head[l[0]][0]) + '<\/b><small>' + head[l[0]][1] + '<\/small><em>' + head[l[0]][2] + '<\/em><\/span><\/button>').join("") + '<\/div>';
+}
+
+/* ---------- tab 1: main store stock ---------- */
+function osMain(D, P, S) {
+  const X = D.dict, M = D.main;
+  let h = '<div class="kpis k6">' + osK("list:items", kpi("apps", "var(--blue)", "Items in stock", P.itemsIn, "distinct items with a balance above 0", "")) +
+    osK("list:lines", kpi("report", "var(--teal)", "Stock lines", P.pos, "item × project × store · of " + nf(M.lines_all) + " ever used", "")) +
+    kpi("tree", "var(--purple)", "Stores holding stock", P.storesIn, "in " + P.compsIn + " companies", "") +
+    osK("list:old", kpi("hist", "var(--amber)", "Not moved for 1 year+", P.old, pct(P.old, P.pos) + "% of stock lines", "")) +
+    osK("list:neg", kpi("cancel", "var(--red)", "Negative balances", P.neg, "lines · wrong data", "")) +
+    osK("trust:back", kpi("warn", "var(--red)", "Back-dated rows", P.backRows, "entered " + M.backdated_days + "+ days late · 12 months · opening rebuild apart", "")) + '<\/div>';
+  /* company -> store drill */
+  const comps = P.comp.filter(c => c.lines || c.neg).sort((a, b) => b.lines - a.lines);
+  const sl = new Map(), bands = OSAGE.map(a => ({ lines: 0, items: new Set() }));
+  M.lines.forEach(r => {
+    if (r[4] <= 0 || (S.comp != null && r[3] !== S.comp)) return;
+    let o = sl.get(r[2]); if (!o) sl.set(r[2], o = { k: r[2], v: 0, items: new Set(), old: 0 });
+    o.v++; o.items.add(r[0]); if (r.band >= 4) o.old++;
+    if (S.store == null || r[2] === S.store) { bands[r.band].lines++; bands[r.band].items.add(r[0]); }
+  });
+  const sb = [...sl.values()].sort((a, b) => b.v - a.v).slice(0, 15);
+  h += '<div class="dgrid g2">' + sec("Where the stock is · by company", "Stock lines with a balance, by the company on the stock row. Click a company: its stores open on the right and the list below follows. Bars use a square-root scale so the small companies stay visible.",
+    osBars(comps.map(c => ({ k: c.i, l: X.comps[c.i][1], sub: nf(c.items.size) + " items · " + c.stores.size + " stores" + (c.neg ? " · " + c.neg + " negative" : ""), v: c.lines, c: "var(--blue)", on: S.comp === c.i })), "comp", true)) +
+    sec(S.comp == null ? "Biggest stores" : "Stores of " + esc(X.comps[S.comp][1]), "Top " + sb.length + " of " + nf(sl.size) + " stores by stock lines. The small line says how much of it has not moved for a year.",
+      osBars(sb.map(o => ({ k: o.k, l: X.stores[o.k][1] + (X.stores[o.k][0] ? " · " + X.stores[o.k][0] : ""), sub: nf(o.items.size) + " items · " + pct(o.old, o.v) + "% idle 1 yr+", v: o.v, c: "var(--teal)", on: S.store === o.k })), "store")) + '<\/div>';
+  /* ageing */
+  const tl = bands.reduce((a, b) => a + b.lines, 0) || 1;
+  const scope = S.store != null ? X.stores[S.store][1] : S.comp != null ? X.comps[S.comp][1] : "all companies";
+  h += sec("How long since the stock last moved", "Stock lines by days since the last movement in or out (" + esc(scope) + "). Long-idle stock is money asleep in the store - or a balance that is no longer really there. Click a band to list it.",
+    '<div class="strip">' + bands.map((b, i) => b.lines ? '<span style="flex:' + b.lines + ';background:' + OSAGE[i][2] + '" title="' + esc(OSAGE[i][1] + ": " + nf(b.lines) + " lines") + '"><\/span>' : "").join("") + '<\/div>' +
+    '<div class="exg">' + bands.map((b, i) => '<button class="exc osx' + (S.band === i ? " on" : "") + '" data-act="band:' + i + '" style="--c:' + OSAGE[i][2] + '"><small>' + OSAGE[i][1] + '<\/small><b class="num">' + nf(b.lines) + '<\/b><span>lines<\/span><em class="num">' + nf(b.items.size) + ' items · ' + pct(b.lines, tl) + '%<\/em><\/button>').join("") + '<\/div>');
+  /* movement */
+  h += '<div class="dgrid g2w">' + sec("Stock movements, month by month", "Stock rows written in and out each month, all companies. Rows, not quantity: kilos, metres and pieces cannot be added together.",
+    cols(M.months, [{ k: "i", l: "Rows in", c: "var(--green)" }, { k: "o", l: "Rows out", c: "var(--blue)" }])) +
+    sec("Which screens move the stock", "Stock rows in 12 months by the screen that wrote them.", hbars(M.mix.slice(0, 12).map(m => ({ l: m.doc + " · " + m.dir, v: m.n, c: m.dir === "In" ? "var(--green)" : "var(--blue)" })))) + '<\/div>';
+  /* category + lifecycle */
+  const cats = P.cats.filter(c => c.lines).sort((a, b) => b.lines - a.lines);
+  h += '<div class="dgrid g2">' + sec("By item category", "Stock lines by the item's category (ITEM master). Click to filter the list.",
+    osBars(cats.slice(0, 12).map(c => ({ k: c.i, l: c.l, sub: nf(c.items.size) + " items", v: c.lines, c: "var(--purple)", on: S.cat === c.i })), "cat")) +
+    sec("Every line Axpert has ever used", "Item × project × store combinations in STOCKVALUE. Most went back to zero - only the green part is stock today.",
+      donut([{ l: "In stock now", v: P.pos, c: "var(--green)" }, { l: "Back to zero", v: M.lines_all - P.pos - P.neg, c: "var(--line2)" }, { l: "Negative", v: P.neg, c: "var(--red)" }], "lines")) + '<\/div>';
+  return h;
+}
+function osItemCell(D, i) {
+  const it = D.dict.items[i];
+  return '<a class="oslk" data-item="' + i + '"><b>' + esc(it[0]) + '<\/b><\/a><div class="sub mono">' + esc(it[5] || (it[4] === "P" ? "production item" : it[4] === "?" ? "unknown item" : "")) + ' · ' + esc(D.dict.cats[it[2]]) + '<\/div>';
+}
+function osList(D, P, S) {
+  const X = D.dict, it = i => X.items[i], st = l => X.stores[l], pj = p => X.proj[p], unit = i => X.units[it(i)[1]];
+  const L = D.main.lines.filter(r => (S.comp == null || r[3] === S.comp) && (S.store == null || r[2] === S.store) && (S.band == null || r.band === S.band) && (S.cat == null || it(r[0])[2] === S.cat));
+  const q = S.q.trim().toLowerCase();
+  const txt = r => r.t || (r.t = (it(r[0])[0] + " " + (it(r[0])[5] || "") + " " + (st(r[2])[0] || "") + " " + st(r[2])[1] + " " + pj(r[1])[0] + " " + pj(r[1])[1]).toLowerCase());
+  const lines = q ? L.filter(r => txt(r).includes(q)) : L;
+  const pos = lines.filter(r => r[4] > 0), neg = lines.filter(r => r[4] < 0), old = pos.filter(r => r.band >= 4);
+  const im = new Map();
+  pos.forEach(r => { let o = im.get(r[0]); if (!o) im.set(r[0], o = { i: r[0], qty: 0, lines: 0, stores: new Set(), age: null }); o.qty += r[4]; o.lines++; o.stores.add(r[2]); if (r.age != null) o.age = o.age == null ? r.age : Math.min(o.age, r.age); });
+  const lc = [{ h: "Item", k: r => it(r[0])[0], r: r => osItemCell(D, r[0]) },
+    { h: "Store", k: r => st(r[2])[1], r: r => esc(st(r[2])[1]) + '<div class="sub">' + esc(X.comps[r[3]] ? X.comps[r[3]][1] : "") + '<\/div>' },
+    { h: "Project", k: r => pj(r[1])[0], r: r => '<span class="mono">' + esc(pj(r[1])[0]) + '<\/span><div class="sub">' + esc(pj(r[1])[1]) + '<\/div>' },
+    { h: "Balance", num: 1, k: r => r[4], r: r => osQty(r[4], unit(r[0])) },
+    { h: "Last in", k: r => r[5] == null ? -1e9 : -r[5], r: r => osD(D, r[5]) },
+    { h: "Last out", k: r => r[6] == null ? -1e9 : -r[6], r: r => r[6] == null ? '<span class="sub">never<\/span>' : osD(D, r[6]) },
+    { h: "Idle", num: 1, k: r => r.age == null ? 1e9 : r.age, r: r => '<b style="color:' + OSAGE[r.band][2] + '">' + osAgo(r.age) + '<\/b>' }];
+  const ic = [{ h: "Item", k: o => it(o.i)[0], r: o => osItemCell(D, o.i) }, { h: "In stock", num: 1, k: o => o.qty, r: o => osQty(o.qty, unit(o.i)) },
+    { h: "Lines", num: 1, k: o => o.lines, r: o => nf(o.lines) }, { h: "Stores", num: 1, k: o => o.stores.size, r: o => nf(o.stores.size) },
+    { h: "Idle", num: 1, k: o => o.age == null ? 1e9 : o.age, r: o => osAgo(o.age) }];
+  const tabs = [["lines", "Stock lines", pos, lc, 3, -1], ["items", "Items", [...im.values()], ic, 2, -1], ["old", "Not moved 1 year+", old, lc, 6, -1], ["neg", "Negative balances", neg, lc, 3, 1]];
+  const T = tabs.find(t => t[0] === S.list) || tabs[0];
+  const chips = [];
+  if (S.comp != null) chips.push(["comp", "Company: " + X.comps[S.comp][1]]);
+  if (S.store != null) chips.push(["store", "Store: " + X.stores[S.store][1]]);
+  if (S.band != null) chips.push(["band", "Idle: " + OSAGE[S.band][1]]);
+  if (S.cat != null) chips.push(["cat", "Category: " + X.cats[S.cat]]);
+  return '<div class="dsh"><h2>Find any item<\/h2><p>The stock lines behind every number above. Click an item for its card: every store, project and supervisor that holds it.<\/p><\/div>' + osChips(chips) +
+    osTabs(tabs, T, "list", S.q, "Item, code, store or project") + table("os_" + T[0], T[3], T[2], { sort: T[4], dir: T[5], lim: 100 });
+}
+const osChips = chips => chips.length ? '<div class="osf">' + ico("tune") + chips.map(c => '<button class="chip on" data-act="clr:' + c[0] + '">' + esc(c[1]) + ' ✕<\/button>').join("") + (chips.length > 1 ? '<button class="chip" data-act="clr:all">Clear all<\/button>' : "") + '<\/div>' : "";
+const osTabs = (tabs, T, act, q, ph) => '<div class="dtabs">' + tabs.map(t => '<button class="chip' + (t[0] === T[0] ? " on" : "") + '" data-act="' + act + ':' + t[0] + '">' + t[1] + ' <span class="n">' + nf(t[2].length) + '<\/span><\/button>').join("") +
+  '<label class="field dq">' + ico("tune") + '<input id="osq" placeholder="' + ph + '" value="' + esc(q) + '"><\/label><\/div>';
+
+function osTrust(D, P) {
+  const M = D.main, X = D.dict, R = M.rebuild;
+  const card = (state, title, count, body, wide, id) => '<details class="card ostr ostr-' + state + (wide ? " wide" : "") + '"' + (id ? ' id="' + id + '"' : "") + '><summary><span class="osdot"><\/span><b>' + title + '<\/b><span class="num ostc">' + count + '<\/span>' + ico("chev") + '<\/summary><div class="ostb">' + body + '<\/div><\/details>';
+  const sm = (head, rows) => '<div class="tw"><table><thead><tr>' + head.map(x => '<th' + (x[1] ? ' class="num"' : "") + '>' + x[0] + '<\/th>').join("") + '<\/tr><\/thead><tbody>' + rows.join("") + '<\/tbody><\/table><\/div>';
+  let h = '<div class="dsh" style="margin:24px 0 10px"><h2>Can I trust these numbers?<\/h2><p>Every known weakness of the stock ledger, rechecked at every refresh. Green = checked and fine · amber = known, read with care · red = wrong data that moves a balance · grey = not shown on purpose.<\/p><\/div><div class="ostrust">';
+  h += card("green", "Same formula as Axpert's own stock reports", "49 of 51", '<p>Balance = <code>SUM(DECODE(PLUSORMINUS,\'P\',QTY,-QTY)) WHERE CANCEL = \'F\'<\/code>. 49 of Axpert\'s 51 stock reports use exactly this; the other two (ngtstk, wipst) also count cancelled rows. ' + nf(M.cancelled) + ' cancelled rows are left out here.<\/p>');
+  h += card(P.neg ? "red" : "green", "Negative balances", nf(P.neg) + " lines", '<p>A store cannot hold less than nothing. The stock went out before it came in, or a receipt was cancelled after the issue. Axpert holds these balances as they are; they are listed, not netted off.<\/p><button class="btn" data-act="list:neg">List the ' + nf(P.neg) + ' lines<\/button>');
+  h += card(M.future.length ? "amber" : "green", "Future-dated rows", nf(M.future.length) + " rows", M.future.length ? '<p>Typing mistakes in the year. They count in today\'s balance, the same as in Axpert.<\/p>' + sm([["Screen"], ["Document"], ["Doc date"], ["Entered"], ["Item"], ["Qty", 1]],
+    M.future.map(f => '<tr><td>' + esc(f.scr) + '<\/td><td class="mono">' + esc(f.doc) + '<\/td><td><b style="color:var(--red)">' + osI(f.date) + '<\/b><\/td><td>' + esc(f.by) + ' · ' + osI(f.on) + '<\/td><td>' + osItemCell(D, f.item) + '<\/td><td class="num">' + (f.pm === "M" ? "−" : "+") + nf(f.qty, 3) + '<\/td><\/tr>')) : "<p>None.<\/p>");
+  h += card(M.mismatch.length ? "amber" : "green", "Store belongs to another company", nf(M.mismatch.length) + " pairs", '<p>The company on the stock row (LOCID) is not the company the store (LOCATION) belongs to.<\/p>' + sm([["Company on row"], ["Store"], ["Store's company"], ["Rows", 1], ["Balance", 1], ["Dates"]],
+    M.mismatch.map(m => '<tr><td>' + esc(X.comps[m.c][1]) + '<\/td><td>' + esc(X.stores[m.l][1]) + '<\/td><td>' + esc(X.comps[m.lc] ? X.comps[m.lc][1] : "-") + '<\/td><td class="num">' + nf(m.n) + '<\/td><td class="num">' + nf(m.bal, 3) + '<\/td><td>' + osI(m.d1) + ' – ' + osI(m.d2) + '<\/td><\/tr>')));
+  h += card(P.unknownItems || P.unknownComps ? "amber" : "green", "Item or company missing from the master", nf(P.unknownItems) + " items · " + nf(P.unknownComps) + " company", '<p>ITEMID in neither ITEM nor PROITEM, or LOCID not in BRANCH. They still count; the id is shown as the name.<\/p>');
+  h += card("grey", "Money value not shown", "quantity only", '<p>The opening rows of 20-21/12/2025 carry a rate equal to the quantity (their value adds up to 42.9 billion), so the stored value cannot be used. The database already has valuation functions (CALCULATE_WEIGHTED_AVG_STOCK, CALCULATE_FIFO, GET_LAST_PURCHASE_RATE): a value view waits for Finance to choose the rule.<\/p>');
+  h += card("amber", "Opening stock rebuild · " + esc(R.by) + ", " + esc(R.on), nf(R.opening_rows) + " rows", '<p>Old ledger rows were replaced by ' + nf(R.opening_rows) + ' opening rows dated up to 01/01/2021. Checked once on ' + esc(R.checked) + ' against the backup of 25/11/2025: ' + nf(R.same) + ' of ' + nf(R.compared) + ' balances match, <b>' + nf(R.differ) + '<\/b> differ (part of it explained by later entries). ' + nf(R.double_lines) + ' lines hold an opening row and an older row dated on or before it: ' + esc(R.double_bulk) + '. The cut-off rule has to come from ' + esc(R.by) + ' before these lines are called right or wrong.<\/p>', true);
+  h += card("red", "Back-dated entries · last 12 months", nf(P.backRows) + " rows", '<p>Rows entered more than ' + M.backdated_days + ' days after their document date. They change past balances, so a report printed earlier no longer matches. Hundreds of rows on one day (highlighted) are bulk loads - normally IT data fixes, which need a written reason. The Item Opening rows of the rebuild are listed but counted in the card above, not here.<\/p>' +
+    sm([["Entered by"], ["On"], ["Screen"], ["Rows", 1], ["Docs", 1], ["Documents"], ["Document dates"]],
+      M.backdated.slice(0, 40).map(b => '<tr' + (b.n >= 100 ? ' class="hot"' : "") + '><td><b>' + esc(b.who) + '<\/b><\/td><td>' + osI(b.on) + '<\/td><td>' + esc(b.scr) + '<div class="sub mono">' + esc(b.map) + (b.map === "itopn2" ? ' · opening rebuild, not counted above' : "") + '<\/div><\/td><td class="num">' + nf(b.n) + '<\/td><td class="num">' + nf(b.docs) + '<\/td><td class="mono">' + esc(b.doc1) + (b.doc2 !== b.doc1 ? " … " + esc(b.doc2) : "") + '<\/td><td>' + osI(b.d1) + ' – ' + osI(b.d2) + '<\/td><\/tr>')) +
+    (M.backdated.length > 40 ? '<p class="sub">Top 40 of ' + M.backdated.length + ' groups shown.<\/p>' : ""), true, "osback");
+  return h + '<\/div>';
+}
+
+/* ---------- tab 2: cut pieces (SUBSTOCKVALUE) ---------- */
+function osSub(D, S) {
+  const B = D.sub, K = B.kpi;
+  let h = '<section class="card dsec osexp"><div><h2>A register of pieces, not a stock ledger<\/h2><p>Cutting and offcut screens write one row per piece into <code>SUBSTOCKVALUE<\/code> - always a plus, never a minus. The same screens make the piece an item of its own (PROITEM) and put its stock into <code>STOCKVALUE<\/code>. When production uses the piece, only STOCKVALUE goes down. So "still in stock" is read from STOCKVALUE, and these pieces are already inside the main tab: do not add the two.<\/p><\/div>' +
+    osFlow(560, 190, [{ x: 4, y: 66, w: 176, h: 58, t: "Cutting screens", s: "sivtr · penrm · ispro · fabex", c: "var(--purple)" }, { x: 236, y: 10, w: 170, h: 54, t: "SUBSTOCKVALUE", s: "piece register · + only", c: "var(--amber)" },
+      { x: 236, y: 126, w: 170, h: 54, t: "STOCKVALUE", s: "piece stock · + and −", c: "var(--blue)" }, { x: 436, y: 126, w: 116, h: 54, t: "Production use", s: "− rows", c: "var(--teal)" }],
+      [{ d: "M180 84 C 210 84, 206 37, 234 37", t: "1 row per piece", tx: 214, ty: 52 }, { d: "M180 106 C 210 106, 206 153, 234 153", t: "+ piece stock", tx: 212, ty: 146 }, { d: "M436 153 L 408 153" }, { d: "M321 66 L 321 124", t: "status read here", tx: 378, ty: 98 }]) + '<\/section>';
+  h += '<div class="kpis k5">' + kpi("tree", "var(--blue)", "Pieces registered", K.registered, "rows in SUBSTOCKVALUE · " + nf(K.cancelled) + " cancelled left out", "") +
+    osK("slist:instock", kpi("apps", "var(--green)", "Still in stock", K.instock, pct(K.instock, K.registered) + "% · STOCKVALUE balance above 0", "")) +
+    kpi("ok", "var(--grey)", "Used up", K.used, "balance back to 0", "") +
+    osK("slist:noposted", kpi("warn", "var(--amber)", "No stock row", K.noposted, "registered, STOCKVALUE has nothing", "")) +
+    osK("slist:neg", kpi("cancel", "var(--red)", "Negative", K.neg, "more used than cut", "")) + '<\/div>';
+  const SC = [["In stock", "var(--green)", K.instock], ["Used up", "var(--grey)", K.used], ["No stock row", "var(--amber)", K.noposted], ["Negative", "var(--red)", K.neg]];
+  h += sec("Every registered piece, where it is now", "Status of all " + nf(K.registered) + " pieces.", stack100(SC.map(c => ({ l: c[0], v: c[2], c: c[1] }))));
+  const mx = Math.max(1, ...B.bytype.map(b => b["No stock row"]));
+  h += '<div class="dgrid g2w">' + sec("Which screen registered the pieces", "Screen and type on the register row, and the status of those pieces today. Each screen decides by a control field whether it also posts the piece to STOCKVALUE - 'No stock row' is where it did not.",
+    '<div class="tw"><table class="heat"><thead><tr><th>Screen · type<\/th><th class="num">In stock<\/th><th class="num">Used up<\/th><th class="num">No stock row<\/th><th class="num">Negative<\/th><\/tr><\/thead><tbody>' +
+    B.bytype.map(b => '<tr><td><b>' + esc(b.scr) + '<\/b><div class="sub">' + esc(b.tt) + '<\/div><\/td><td class="num">' + nf(b["In stock"]) + '<\/td><td class="num">' + nf(b["Used up"]) + '<\/td><td class="num hc" style="--a:' + (b["No stock row"] / mx).toFixed(3) + ';--hc:var(--amber)">' + nf(b["No stock row"]) + '<\/td><td class="num"' + (b.Negative ? ' style="color:var(--red);font-weight:600"' : "") + '>' + nf(b.Negative) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>') +
+    sec("Pieces registered per month", "By the status of those pieces today.", cols(B.months, [{ k: "in", l: "Still in stock", c: "var(--green)" }, { k: "used", l: "Used up", c: "var(--grey)" }, { k: "none", l: "No stock row", c: "var(--amber)" }])) + '<\/div>';
+  return h + '<section class="card dsec" id="oslist"><\/section>';
+}
+function osSubList(D, S) {
+  const B = D.sub, X = D.dict, KD = B.kinds, q = S.sq.trim().toLowerCase();
+  const f = rows => q ? rows.filter(r => (r[0] + " " + r[3] + " " + KD[r[2]].join(" ") + " " + X.proj[r[5]][0] + " " + X.stores[r[6]][1]).toLowerCase().includes(q)) : rows;
+  const base = [{ h: "Piece", k: r => r[0], r: r => '<b>' + esc(r[0]) + '<\/b><div class="sub">' + esc(KD[r[2]][0]) + ' · ' + esc(KD[r[2]][1]) + (r[1] != null ? ' · length ' + nf(r[1], 3) : "") + '<\/div>' },
+    { h: "Registered by", k: r => r[3], r: r => '<span class="mono">' + esc(r[3]) + '<\/span><div class="sub">' + osD(D, r[4]) + '<\/div>' },
+    { h: "Project", k: r => X.proj[r[5]][0], r: r => '<span class="mono">' + esc(X.proj[r[5]][0]) + '<\/span><div class="sub">' + esc(X.proj[r[5]][1]) + '<\/div>' },
+    { h: "Store", k: r => X.stores[r[6]][1], r: r => esc(X.stores[r[6]][1]) },
+    { h: "Age", num: 1, k: r => r[4] == null ? 1e9 : r[4], r: r => osAgo(r[4]) }];
+  const wb = base.concat([{ h: "Balance", num: 1, k: r => r[7], r: r => osQty(r[7], X.units[r[8]]) }, { h: "Last used", k: r => r[9] == null ? -1e9 : -r[9], r: r => r[9] == null ? '<span class="sub">never<\/span>' : osD(D, r[9]) }]);
+  const tabs = [["instock", "Still in stock", f(B.instock), wb, 4, -1], ["noposted", "No stock row (latest " + nf(B.noposted.length) + " of " + nf(B.noposted_total) + ")", f(B.noposted), base, 4, 1], ["neg", "Negative", f(B.neg), wb, 5, 1]];
+  const T = tabs.find(t => t[0] === S.slist) || tabs[0];
+  return '<div class="dsh"><h2>The pieces<\/h2><p>Name, length and size come from the register row; balance and last use from STOCKVALUE.<\/p><\/div>' + osTabs(tabs, T, "slist", S.sq, "Piece, document, project or store") + table("ossub_" + T[0], T[3], T[2], { sort: T[4], dir: T[5], lim: 100 });
+}
+
+/* ---------- tab 3: supervisor stock (ANDROIDEMPWSTOCK) ---------- */
+function osEmp(D, e) {
+  const x = D.dict.emps[e], left = D.left_status.includes(x[2]);
+  return '<a class="oslk" data-act="sup:' + e + '"><b>' + esc(x[1]) + '<\/b><\/a><div class="sub"><span class="mono">' + esc(x[0]) + '<\/span> · <span class="st ' + (left ? "st-red" : x[2] === "ACTIVE" ? "st-green" : "st-amber") + '" style="padding:0 7px;font-size:11px">' + esc(left ? "Left · " + String(x[2]).toLowerCase() : x[2] || "?") + '<\/span><\/div>';
+}
+function osAnd(D, P, S) {
+  const A = D.android, Q = A.quality;
+  const leftH = [...P.aHolders].filter(P.left), leftL = P.aHeld.filter(r => P.left(r[0]));
+  let h = '<section class="card dsec osexp"><div><h2>A second ledger, beside the store<\/h2><p>When the store issues material to a site supervisor (Material Consumption), the store\'s own stock goes down in <code>STOCKVALUE<\/code> and a plus row goes to the supervisor in <code>ANDROIDEMPWSTOCK<\/code>. The supervisor then hands it to workers in the Android app (minus rows) or returns it to the store (Material Returns From Site). Separate ledgers: never add this to the main tab.<\/p><\/div>' +
+    osFlow(560, 190, [{ x: 8, y: 68, w: 120, h: 54, t: "Store", s: "STOCKVALUE −", c: "var(--blue)" }, { x: 214, y: 68, w: 150, h: 54, t: "Supervisor", s: "ANDROIDEMPWSTOCK", c: "var(--purple)" },
+      { x: 440, y: 8, w: 112, h: 54, t: "Workers", s: "Android app −", c: "var(--teal)" }, { x: 440, y: 128, w: 112, h: 54, t: "Back to store", s: "mrfs2 −", c: "var(--amber)" }],
+      [{ d: "M128 95 L 212 95", t: "issue (iss2 +)", tx: 170, ty: 86 }, { d: "M364 84 C 400 84, 400 35, 438 35", t: "given out", tx: 402, ty: 56 }, { d: "M364 106 C 400 106, 400 155, 438 155", t: "returned", tx: 400, ty: 140 }]) + '<\/section>';
+  h += '<div class="kpis k6">' + kpi("people", "var(--purple)", "Supervisors holding stock", P.aHolders.size, "of " + nf(Q.emps) + " who ever had Android stock", "") +
+    osK("alist:held", kpi("apps", "var(--blue)", "Lines held now", P.aHeld.length, "supervisor × item × project", "")) +
+    osK("alist:left", kpi("leave", "var(--red)", "Left the company, still holding", leftH.length, nf(leftL.length) + " lines · EMPMAST status", "")) +
+    osK("alist:neg", kpi("cancel", "var(--red)", "Negative lines", P.aNeg.length, "gave out more than received", "")) +
+    kpi("warn", "var(--amber)", "Rows with the wrong sign", Q.minus_pos + Q.plus_neg, "'Minus' rows with a plus quantity", "") +
+    kpi("info", "var(--grey)", "Zero-quantity rows", Q.zero_qty, "change nothing · app noise", "") + '<\/div>';
+  const sc = [{ h: "Supervisor", k: s => D.dict.emps[s.e][1], r: s => osEmp(D, s.e) }, { h: "Lines held", num: 1, k: s => s.pos, r: s => nf(s.pos) },
+    { h: "Negative", num: 1, k: s => s.neg, r: s => s.neg ? '<b style="color:var(--red)">' + nf(s.neg) + '<\/b>' : "0" },
+    { h: "Last move", num: 1, k: s => s.last == null ? 1e9 : s.last, r: s => osAgo(s.last) }];
+  h += '<div class="dgrid g2w">' + sec("Supervisor stock, month by month", "Rows written each month: store issues to supervisors, hand-outs in the Android app, returns to the store.",
+    cols(A.months, [{ k: "plus", l: "Store → supervisor", c: "var(--blue)" }, { k: "app", l: "Given out in app", c: "var(--teal)" }, { k: "ret", l: "Returned to store", c: "var(--amber)" }])) +
+    sec("Supervisors", "Click a name to list what that supervisor holds.", table("os_sups", sc, A.sups, { sort: 1, dir: -1, lim: 12 })) + '<\/div>';
+  return h + '<section class="card dsec" id="oslist"><\/section>';
+}
+function osAndList(D, P, S) {
+  const X = D.dict, q = S.aq.trim().toLowerCase(), it = i => X.items[i];
+  const base = S.sup == null ? D.android.lines : D.android.lines.filter(r => r[0] === S.sup);
+  const f = rows => q ? rows.filter(r => (X.emps[r[0]][0] + " " + X.emps[r[0]][1] + " " + it(r[1])[0] + " " + (it(r[1])[5] || "") + " " + X.proj[r[2]][0]).toLowerCase().includes(q)) : rows;
+  const held = f(base.filter(r => r[3] > 0)), neg = f(base.filter(r => r[3] < 0)), left = held.filter(r => P.left(r[0]));
+  const lc = [{ h: "Supervisor", k: r => X.emps[r[0]][1], r: r => osEmp(D, r[0]) }, { h: "Item", k: r => it(r[1])[0], r: r => osItemCell(D, r[1]) },
+    { h: "Project", k: r => X.proj[r[2]][0], r: r => '<span class="mono">' + esc(X.proj[r[2]][0]) + '<\/span>' },
+    { h: "Balance", num: 1, k: r => r[3], r: r => osQty(r[3], X.units[it(r[1])[1]]) },
+    { h: "Last issued", k: r => r[4] == null ? -1e9 : -r[4], r: r => osD(D, r[4]) }, { h: "Last given out", k: r => r[5] == null ? -1e9 : -r[5], r: r => r[5] == null ? '<span class="sub">never<\/span>' : osD(D, r[5]) }];
+  const tabs = [["held", "Held now", held, lc, 3, -1], ["left", "Held by people who left", left, lc, 3, -1], ["neg", "Negative", neg, lc, 3, 1]];
+  const T = tabs.find(t => t[0] === S.alist) || tabs[0];
+  return '<div class="dsh"><h2>What each supervisor holds<\/h2><p>Balance = all plus and minus rows of that supervisor, item and project.<\/p><\/div>' + osChips(S.sup != null ? [["sup", "Supervisor: " + X.emps[S.sup][1]]] : []) +
+    osTabs(tabs, T, "alist", S.aq, "Supervisor, item or project") + table("osand_" + T[0], T[3], T[2], { sort: T[4], dir: T[5], lim: 100 });
+}
+
+/* ---------- item card (drawer): one item across both ledgers ---------- */
+function osItem(D, i) {
+  const X = D.dict, it = X.items[i], u = X.units[it[1]];
+  const ml = D.main.lines.filter(r => r[0] === i).sort((a, b) => b[4] - a[4]), al = D.android.lines.filter(r => r[1] === i).sort((a, b) => b[3] - a[3]);
+  const tot = ml.filter(r => r[4] > 0).reduce((a, r) => a + r[4], 0), atot = al.filter(r => r[3] > 0).reduce((a, r) => a + r[3], 0);
+  let h = '<div class="dh"><div style="flex:1;min-width:0"><small>' + esc(X.cats[it[2]]) + ' · ' + esc(X.types[it[3]]) + ' · ' + (it[4] === "P" ? "PROITEM (production item)" : it[4] === "?" ? "not in ITEM or PROITEM" : "ITEM") + '<\/small><h3>' + esc(it[0]) + '<\/h3><small>' + (it[5] ? esc(it[5]) + " · " : "") + 'unit ' + esc(u) + '<\/small><\/div><button class="ib" id="dclose" title="Close (Esc)">' + ico("close") + '<\/button><\/div><div class="db">';
+  h += '<div class="osic"><div><small>In the stores (STOCKVALUE)<\/small><b class="num">' + nf(tot, 3) + '<\/b><span>' + esc(u) + ' · ' + ml.filter(r => r[4] > 0).length + ' lines<\/span><\/div><div><small>With supervisors (Android)<\/small><b class="num">' + nf(atot, 3) + '<\/b><span>' + esc(u) + ' · ' + al.filter(r => r[3] > 0).length + ' supervisors<\/span><\/div><\/div>' +
+    '<p class="sub" style="margin:8px 0 0">Two separate ledgers: the store already took the supervisor\'s quantity out of its own stock. Do not add them.<\/p>';
+  h += '<div class="sec">In the stores · by store and project<\/div>' + (ml.length ? '<div class="tw"><table><thead><tr><th>Store<\/th><th>Project<\/th><th class="num">Balance<\/th><th>Last in<\/th><th>Last out<\/th><\/tr><\/thead><tbody>' +
+    ml.map(r => '<tr><td>' + esc(X.stores[r[2]][1]) + '<div class="sub">' + esc(X.comps[r[3]] ? X.comps[r[3]][1] : "") + '<\/div><\/td><td class="mono">' + esc(X.proj[r[1]][0]) + '<\/td><td class="num">' + osQty(r[4], "") + '<\/td><td>' + osD(D, r[5]) + '<\/td><td>' + osD(D, r[6]) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>' : '<p class="sub">No store holds this item now.<\/p>');
+  h += '<div class="sec">With supervisors<\/div>' + (al.length ? '<div class="tw"><table><thead><tr><th>Supervisor<\/th><th>Project<\/th><th class="num">Balance<\/th><th>Last issued<\/th><\/tr><\/thead><tbody>' +
+    al.map(r => '<tr><td>' + esc(X.emps[r[0]][1]) + '<div class="sub mono">' + esc(X.emps[r[0]][0]) + (D.left_status.includes(X.emps[r[0]][2]) ? ' · <span style="color:var(--red)">left<\/span>' : "") + '<\/div><\/td><td class="mono">' + esc(X.proj[r[2]][0]) + '<\/td><td class="num">' + osQty(r[3], "") + '<\/td><td>' + osD(D, r[4]) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>' : '<p class="sub">No supervisor holds this item.<\/p>');
+  $("#drawer").innerHTML = h + '<\/div>'; openDrawer(); $("#dclose").onclick = closeDrawer;
+}
+
+/* ---------- page + events ---------- */
+function dOStock(D, again) {
+  const S = osS(), P = osPrep(D);
+  let h = dhead(D, "Oman stock · three ledgers", "Stock as Axpert holds it, in its three separate ledgers: the store ledger, the cut-piece register and the supervisor (Android) stock. Item by item, quantity only, with every known weakness shown next to the number.", "apps");
+  h += osSwitch(D, P, S);
+  if (S.tab === "main") h += osMain(D, P, S) + '<section class="card dsec" id="oslist"><\/section>' + osTrust(D, P);
+  else if (S.tab === "sub") h += osSub(D, S);
+  else h += osAnd(D, P, S);
+  h += '<details class="card dsec drules"><summary>' + ico("info") + 'How these numbers are made<\/summary><ol>' + D.rules[S.tab].map(r => '<li>' + esc(r) + '<\/li>').join("") + '<\/ol><\/details>';
+  $("#view").innerHTML = h;
+  if (again) $$("[data-count]", $("#view")).forEach(el => { el._c = 1; el.textContent = nf(+el.dataset.count); });   /* no count-up on a redraw */
+  osWire(D, $("#view"));
+  osDrawList(D);
+}
+function osWire(D, root) {
+  const mine = el => root.id === "oslist" || !el.closest("#oslist");
+  $$("[data-act]", root).forEach(b => { if (mine(b)) b.onclick = e => { e.stopPropagation(); osAct(D, b.dataset.act); }; });
+  $$("[data-item]", root).forEach(a => { if (mine(a)) a.onclick = () => osItem(D, +a.dataset.item); });
+  bindTables(root, () => root.id === "oslist" ? osDrawList(D) : osRedraw(D));
+}
+function osDrawList(D) {
+  const S = osS(), el = $("#oslist"); if (!el) return;
+  el.innerHTML = S.tab === "main" ? osList(D, osPrep(D), S) : S.tab === "sub" ? osSubList(D, S) : osAndList(D, osPrep(D), S);
+  osWire(D, el);
+  const inp = $("#osq", el);
+  if (inp) inp.oninput = () => { S[{ main: "q", sub: "sq", android: "aq" }[S.tab]] = inp.value; clearTimeout(osDrawList.t); osDrawList.t = setTimeout(() => { osDrawList(D); keepFocus("osq"); }, 160); };
+}
+function osRedraw(D) { const y = window.scrollY; dOStock(D, true); window.scrollTo(0, y); }
+function osAct(D, a) {
+  const S = osS(), k = a.slice(0, a.indexOf(":")), v = a.slice(a.indexOf(":") + 1), n = +v;
+  const toList = () => { osDrawList(D); const el = $("#oslist"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); };
+  if (k === "tab") { S.tab = v; osRedraw(D); return; }
+  if (k === "list") { S.list = v; return toList(); }
+  if (k === "slist") { S.slist = v; return toList(); }
+  if (k === "alist") { S.alist = v; return toList(); }
+  if (k === "sup") { S.sup = S.sup === n ? null : n; S.alist = "held"; return toList(); }
+  if (k === "trust") { const t = $("#osback"); if (t) { t.open = true; t.scrollIntoView({ behavior: "smooth", block: "start" }); } return; }
+  if (k === "comp") { S.comp = S.comp === n ? null : n; S.store = null; }
+  else if (k === "store") S.store = S.store === n ? null : n;
+  else if (k === "band") S.band = S.band === n ? null : n;
+  else if (k === "cat") S.cat = S.cat === n ? null : n;
+  else if (k === "clr") { if (v === "all") S.comp = S.store = S.band = S.cat = S.sup = null; else S[v] = null; if (v === "sup") return osDrawList(D); }
+  osRedraw(D);
+}
+
+/* ---------- DOWNLOADS: Excel (.xlsx) and PDF for a module or for one screen (added 11/11/2026) ----------
+   Offline by design (the Axpert servers have no internet, no library may be loaded):
+     Excel = a real .xlsx written here by hand (Office Open XML parts inside a plain "stored" ZIP), one sheet per topic.
+     PDF   = the browser's own "Save as PDF" on a print-ready page (A4 landscape, header row repeated on every page).
+   Nothing is sent anywhere. Works in the encrypted GitHub copy too: the data is already unlocked in memory.
+   Uses the module context set by useModule() in app.js (M, S, R, U, forms, reps, H, ...). */
+
+const XLSX = (() => {
+  const T = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; T[n] = c >>> 0; }
+  const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = T[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+  const u8 = s => new TextEncoder().encode(s);
+  const xe = s => String(s).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F￾￿]/g, "").replace(/&/g, "&amp;").replace(/[<]/g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const colName = n => { let s = ""; n++; while (n) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; };
+
+  async function deflate(d) {               /* raw DEFLATE with the browser's own CompressionStream; null = not available */
+    if (typeof CompressionStream === "undefined") return null;
+    try { return new Uint8Array(await new Response(new Blob([d]).stream().pipeThrough(new CompressionStream("deflate-raw"))).arrayBuffer()); }
+    catch (e) { return null; }
+  }
+  async function zip(files) {               /* files: [{name, data: Uint8Array}] -> Promise<Blob> (ZIP: deflate, else stored) */
+    const parts = [], cent = [];
+    let off = 0;
+    for (const f of files) {
+      const nm = u8(f.name), raw = f.data, c = crc32(raw), z = await deflate(raw);
+      const method = z && z.length < raw.length ? 8 : 0, d = method ? z : raw;
+      const h = new DataView(new ArrayBuffer(30));
+      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, method, true);
+      h.setUint16(10, 0, true); h.setUint16(12, 0x21, true); h.setUint32(14, c, true); h.setUint32(18, d.length, true);
+      h.setUint32(22, raw.length, true); h.setUint16(26, nm.length, true); h.setUint16(28, 0, true);
+      parts.push(new Uint8Array(h.buffer), nm, d);
+      const e = new DataView(new ArrayBuffer(46));
+      e.setUint32(0, 0x02014b50, true); e.setUint16(4, 20, true); e.setUint16(6, 20, true); e.setUint16(8, 0x0800, true);
+      e.setUint16(10, method, true); e.setUint16(12, 0, true); e.setUint16(14, 0x21, true); e.setUint32(16, c, true);
+      e.setUint32(20, d.length, true); e.setUint32(24, raw.length, true); e.setUint16(28, nm.length, true);
+      e.setUint32(42, off, true);
+      cent.push(new Uint8Array(e.buffer), nm);
+      off += 30 + nm.length + d.length;
+    }
+    const size = cent.reduce((a, p) => a + p.length, 0), end = new DataView(new ArrayBuffer(22));
+    end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true);
+    end.setUint32(12, size, true); end.setUint32(16, off, true);
+    return new Blob(parts.concat(cent, [new Uint8Array(end.buffer)]), { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  }
+
+  function sheetXml(sh) {                   /* sh: {name, cols: [{h, w, wrap}], rows: [[...]]} */
+    const cell = (v, r, c, st) => {
+      if (v == null || v === "") return "";
+      const ref = colName(c) + r, s = st ? ' s="' + st + '"' : "";
+      if (typeof v === "number" && isFinite(v)) return '<c r="' + ref + '"' + s + '><v>' + v + '<\/v><\/c>';
+      return '<c r="' + ref + '" t="inlineStr"' + s + '><is><t xml:space="preserve">' + xe(String(v).slice(0, 32000)) + '<\/t><\/is><\/c>';
+    };
+    const out = ['<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">',
+      '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/><\/sheetView><\/sheetViews>',
+      '<cols>' + sh.cols.map((c, i) => '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + (c.w || 16) + '" customWidth="1"/>').join("") + '<\/cols><sheetData>',
+      '<row r="1">' + sh.cols.map((c, i) => cell(c.h, 1, i, 1)).join("") + '<\/row>'];
+    sh.rows.forEach((row, ri) => out.push('<row r="' + (ri + 2) + '">' + row.map((v, i) => cell(v, ri + 2, i, sh.cols[i] && sh.cols[i].wrap ? 2 : 0)).join("") + '<\/row>'));
+    out.push('<\/sheetData>');
+    if (sh.rows.length) out.push('<autoFilter ref="A1:' + colName(sh.cols.length - 1) + (sh.rows.length + 1) + '"/>');
+    out.push('<\/worksheet>');
+    return out.join("");
+  }
+
+  function build(sheets) {                 /* -> Promise<Blob> */
+    const used = new Set();
+    sheets.forEach(sh => {                  /* Excel sheet names: max 31 chars, no []:*?/\ , unique */
+      let n = String(sh.name).replace(/[\[\]:*?\/\\]/g, " ").slice(0, 31) || "Sheet", k = 2;
+      while (used.has(n.toLowerCase())) n = n.slice(0, 28) + " " + k++;
+      used.add(n.toLowerCase()); sh.name = n;
+    });
+    const wb = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>' +
+      sheets.map((sh, i) => '<sheet name="' + xe(sh.name) + '" sheetId="' + (i + 1) + '" r:id="rId' + (i + 1) + '"/>').join("") + '<\/sheets><definedNames>' +
+      sheets.map((sh, i) => sh.rows.length ? '<definedName name="_xlnm._FilterDatabase" localSheetId="' + i + '" hidden="1">\'' + xe(sh.name.replace(/'/g, "''")) + '\'!$A$1:$' + colName(sh.cols.length - 1) + '$' + (sh.rows.length + 1) + '<\/definedName>' : "").join("") +
+      '<\/definedNames><\/workbook>';
+    const rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+      sheets.map((sh, i) => '<Relationship Id="rId' + (i + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet' + (i + 1) + '.xml"/>').join("") +
+      '<Relationship Id="rId' + (sheets.length + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><\/Relationships>';
+    const styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+      '<fonts count="2"><font><sz val="10"/><name val="Calibri"/><\/font><font><b/><sz val="10"/><color rgb="FFFFFFFF"/><name val="Calibri"/><\/font><\/fonts>' +
+      '<fills count="3"><fill><patternFill patternType="none"/><\/fill><fill><patternFill patternType="gray125"/><\/fill><fill><patternFill patternType="solid"><fgColor rgb="FF1A73E8"/><bgColor indexed="64"/><\/patternFill><\/fill><\/fills>' +
+      '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/><\/border><\/borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/><\/cellStyleXfs>' +
+      '<cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/>' +
+      '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/><\/xf><\/cellXfs>' +
+      '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/><\/cellStyles><\/styleSheet>';
+    const types = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+      '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>' +
+      '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>' +
+      '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>' +
+      sheets.map((sh, i) => '<Override PartName="/xl/worksheets/sheet' + (i + 1) + '.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join("") + '<\/Types>';
+    const root = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/><\/Relationships>';
+    return zip([{ name: "[Content_Types].xml", data: u8(types) }, { name: "_rels/.rels", data: u8(root) }, { name: "xl/workbook.xml", data: u8(wb) },
+      { name: "xl/_rels/workbook.xml.rels", data: u8(rels) }, { name: "xl/styles.xml", data: u8(styles) }]
+      .concat(sheets.map((sh, i) => ({ name: "xl/worksheets/sheet" + (i + 1) + ".xml", data: u8(sheetXml(sh)) }))));
+  }
+  return { build };
+})();
+
+/* ---------- shared bits ---------- */
+const xlDay = () => { const d = new Date(); return d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0"); };
+const xlSafe = s => String(s || "").replace(/[^A-Za-z0-9_-]+/g, "_").replace(/^_+|_+$/g, "");
+const xlBase = (...p) => ["Atlas", SITE() === "pharmacy" ? "Pharmacy" : "Oman"].concat(p.map(xlSafe)).concat([xlDay()]).join("_");
+const yn = v => v ? "Yes" : "";
+const kindName = s => s.k === "t" ? "Form" : s.k === "i" ? "Report" : "Page";
+const menuPath = s => s.menus.map(m => m.path).join(" | ");
+const XC = (h, w, wrap) => ({ h, w, wrap: !!wrap });
+function xlSave(blob, name) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+  toast(name + " saved");
+}
+const siteName = () => SITE() === "pharmacy" ? "AIMS Pharmacy (ADKPHARMACY)" : "Oman ERP (ADK2026)";
+const hrSrc = () => { const h = ATLAS.meta && ATLAS.meta.hr; return h ? (h.ok ? "Oman ERP ADK2026 EMPMAST, read " + h.read : "pharmacy EMPMAST copy (Oman HR not readable)") : "EMPMAST of this database"; };
+
+/* ---------- row builders (one place, used by Excel and PDF) ---------- */
+const COLS = {
+  field: [XC("Screen", 10), XC("Screen caption", 26), XC("DC", 6), XC("Order", 6), XC("Field", 16), XC("Caption", 24), XC("Type", 6), XC("Width", 6), XC("Mode of entry", 12),
+    XC("Hidden", 7), XC("Read-only", 9), XC("Mandatory", 10), XC("Unique", 7), XC("Table", 14), XC("Expression", 40, 1), XC("Validation", 40, 1), XC("Source", 16),
+    XC("Recalculates", 24, 1), XC("Parent fields", 16), XC("List values", 24, 1)],
+  btn: [XC("Screen", 10), XC("Screen caption", 26), XC("Button", 8), XC("Has button", 10), XC("Control", 9), XC("Control field", 16), XC("Mechanism", 18, 1), XC("Action", 18, 1),
+    XC("Apply when", 18, 1), XC("Condition", 40, 1), XC("Remarks", 40, 1)],
+  ivcol: [XC("Report", 10), XC("Report caption", 26), XC("Column", 16), XC("Caption", 24), XC("Type", 10), XC("Decimals", 8), XC("Width", 7), XC("Align", 7), XC("Total", 7), XC("Hidden", 7)],
+  param: [XC("Report", 10), XC("Report caption", 26), XC("Parameter", 14), XC("Caption", 22), XC("Type", 10), XC("Mode", 9), XC("Required", 9), XC("Hidden", 7), XC("Default", 14), XC("Depends on", 14), XC("SQL", 60, 1)],
+  dc: [XC("Screen", 10), XC("DC", 6), XC("No", 5), XC("Caption", 24), XC("Table", 18), XC("Grid", 6), XC("Add rows", 9), XC("Delete rows", 10), XC("Change", 8)]
+};
+const fieldRows = list => list.flatMap(s => (s.f || []).map(f => [s.n, s.cap, f.dc, f.o, f.n, f.cap, f.ty, f.w, f.m, yn(f.hid), yn(f.ro), yn(f.req), yn(f.nodup), f.tbl, f.ex, f.vx, f.src, f.dep, f.par, f.lst]));
+const btnRows = list => list.flatMap(s => (s.cancel || []).map(c => [s.n, s.cap, "Cancel", c.has_cancel, c.cancel_control, c.control_field, c.mechanism, c.action, c.apply_when, c.condition, c.remarks])
+  .concat((s.remove || []).map(c => [s.n, s.cap, "Remove", c.has_remove_button, c.remove_control, c.control_field, c.mechanism, c.action, c.apply_when, c.condition, c.remarks])));
+const ivColRows = list => list.filter(s => s.iv).flatMap(s => (s.iv.cols || []).map(c => [s.n, s.cap, c.a, c.cap, c.ty, c.dec, c.w, c.al, c.tot, yn(c.hid)]));
+const paramRows = list => list.filter(s => s.iv).flatMap(s => (s.iv.params || []).map(p => [s.n, s.cap, p.n, p.cap, p.ty, p.mode, p.req, yn(p.hid), p.dflt, p.dep, p.sql]));
+const dcRows = list => list.flatMap(s => (s.dcs || []).map(d => [s.n, d.n, d.no, d.cap, d.tbl, yn(d.grid), yn(d.add), yn(d.dele), yn(d.chg)]));
+function personRow(u, onlyRolesOf) {
+  const x = U[u] || {}, roles = liveR(u).filter(r => !onlyRolesOf || onlyRolesOf[r]);
+  const row = [u, x.nm, x.dept, hrLabel(x.hr), x.dor ? String(x.dor).slice(0, 10) : "", yn(x.ax), roles.join(" "), isLeaver(u) ? "LEFT - login still on" : ""];
+  if (SITE() === "pharmacy") row.push(x.hl ? hrLabel(x.hl) : "");
+  return row;
+}
+const personCols = () => [XC("EmpID", 11), XC("Name", 30), XC("Department", 18), XC("HR status", 13), XC("Left on", 11), XC("Login on", 9), XC("Live roles", 40, 1), XC("Flag", 20)]
+  .concat(SITE() === "pharmacy" ? [XC("Pharmacy EMPMAST copy says", 22)] : []);
+function healthRows() {
+  const item = (h, x) => {
+    if (h.kind === "users") { const p = U[x] || {}; return [x, p.nm, (p.dept || "") + " · " + hrLabel(p.hr)]; }
+    if (h.kind === "screens") return [x.n, x.cap, kindName(x) + " · " + menuPath(x)];
+    if (h.kind === "findings") return [x.sc.n, x.sc.cap, x.where + " · " + x.kind + ": " + x.hit];
+    if (h.kind === "pairs") return [x.r, x.s.n + " · " + x.s.cap, x.t];
+    if (h.kind === "props") return [x.sc ? x.sc.n : "", x.sc ? x.sc.cap : "", Object.entries(x).filter(([k]) => k !== "sc" && k !== "s").map(([k, v]) => k + "=" + (typeof v === "object" ? JSON.stringify(v) : v)).join("; ")];
+    if (h.kind === "roles") return [x, "", liveUsers(x).length + " working users"];
+    return [String(x), "", ""];
+  };
+  return H.flatMap(h => h.list.map(x => [h.sev, h.ttl].concat(item(h, x))));
+}
+const healthCols = [XC("Severity", 9), XC("Check", 36), XC("ID", 14), XC("Name", 30), XC("Detail", 60, 1)];
+
+/* ---------- Excel: whole module ---------- */
+function xlModule() {
+  const sheets = [];
+  const summary = [["Site", siteName()], ["Module", M.module], ["Read from", M.source], ["Scanned", M.scanned], ["Built", M.built], ["Menu items", M.menu_items],
+    ["Forms", forms.length], ["Reports and pages", reps.length], ["Fields on forms", nFields], ["Roles", Object.keys(R).length],
+    ["People working (login on, live role)", workU.length], ["Left the company, login still on", workU.filter(isLeaver).length], ["HR status source", hrSrc()]]
+    .concat(H.map(h => ["Health · " + h.ttl + " (" + h.sev + ")", h.list.length]));
+  sheets.push({ name: "Summary", cols: [XC("Item", 44), XC("Value", 60, 1)], rows: summary });
+  sheets.push({ name: "Screens", cols: [XC("Type", 8), XC("ID", 12), XC("Caption", 32), XC("Menu path", 40, 1), XC("Folder", 24), XC("Hidden", 7), XC("Tables", 30, 1), XC("DCs", 6), XC("Fields", 7),
+    XC("Cancel button", 18), XC("Remove button", 18), XC("Roles", 7), XC("People", 8), XC("Last changed", 17), XC("Changed by", 12), XC("Findings", 9)],
+    rows: S.map(s => [kindName(s), s.n, s.cap, menuPath(s), s.folder, yn(s.hidden), (s.tables || []).join(", "), (s.dcs || []).length || "", (s.f || []).length || "",
+      s.cs ? s.cs.v : "", s.rs ? s.rs.v : "", Object.keys(s.roles).length, s.users.length, s.chg && s.chg.on, s.chg && s.chg.by, s.find.length || ""]) });
+  sheets.push({ name: "Fields", cols: COLS.field, rows: fieldRows(forms) });
+  sheets.push({ name: "DCs", cols: COLS.dc, rows: dcRows(forms) });
+  sheets.push({ name: "Cancel & Remove", cols: COLS.btn, rows: btnRows(forms) });
+  sheets.push({ name: "Report columns", cols: COLS.ivcol, rows: ivColRows(reps) });
+  sheets.push({ name: "Report parameters", cols: COLS.param, rows: paramRows(reps) });
+  sheets.push({ name: "Report SQL", cols: [XC("Report", 12), XC("Caption", 30), XC("SQL", 120, 1)], rows: reps.filter(s => s.iv).map(s => [s.n, s.cap, s.iv.sql]) });
+  sheets.push({ name: "Access", cols: [XC("Role", 22), XC("Type", 8), XC("Screen", 12), XC("Caption", 32), XC("Via menu", 9), XC("Via screen", 10), XC("Working users in role", 12)],
+    rows: S.flatMap(s => Object.entries(s.roles).map(([r, a]) => [r, kindName(s), s.n, s.cap, yn(a.menu), yn(a.obj), liveUsers(r).length])) });
+  const ppl = Object.keys(U).filter(u => userRoles[u]).sort((a, b) => (isLeaver(b) - isLeaver(a)) || String((U[a] || {}).nm).localeCompare(String((U[b] || {}).nm)));
+  sheets.push({ name: "People", cols: personCols().concat([XC("Forms", 7), XC("Reports", 8)]),
+    rows: ppl.map(u => personRow(u).concat([(uScr[u] || []).filter(s => s.k === "t").length, (uScr[u] || []).filter(s => s.k !== "t").length])) });
+  sheets.push({ name: "Roles", cols: [XC("Role", 24), XC("Working users", 10), XC("Live links", 10), XC("Ended links", 10), XC("Forms", 7), XC("Reports", 8)],
+    rows: Object.keys(R).sort().map(r => [r, liveUsers(r).length, R[r].live.length, R[r].ended.length, (roleScreens[r] || []).filter(s => s.k === "t").length, (roleScreens[r] || []).filter(s => s.k !== "t").length]) });
+  sheets.push({ name: "Health", cols: healthCols, rows: healthRows() });
+  return XLSX.build(sheets).then(b => xlSave(b, xlBase(M.module) + ".xlsx"));
+}
+
+/* ---------- Excel: one screen ---------- */
+function screenInfo(s) {
+  const info = [["Site", siteName()], ["Module", M.module], ["Type", kindName(s)], ["ID", s.n], ["Caption", s.cap], ["Menu", menuPath(s)], ["Menu page", s.menus.map(m => m.page).join(", ")],
+    ["Hidden from menu", yn(s.hidden)], ["Tables", (s.tables || []).join(", ")], ["Last changed", s.chg && s.chg.on], ["Changed by", s.chg && s.chg.by]];
+  if (s.set) info.push(["Workflow", yn(s.set.workflow)], ["Track changes", yn(s.set.track)], ["Attachments", yn(s.set.attach)], ["List view", yn(s.set.listview)],
+    ["Save control", s.set.savectrl || ""], ["Delete control", s.set.delctrl || ""]);
+  if (s.cs) info.push(["Cancel button", s.cs.v]);
+  if (s.rs) info.push(["Remove button", s.rs.v]);
+  info.push(["Roles with access", Object.keys(s.roles).length], ["People who can open it", s.users.length], ["Findings", s.find.length], ["Read from", M.source], ["Scanned", M.scanned]);
+  return info;
+}
+const roleRowsOf = s => Object.entries(s.roles).sort().map(([r, a]) => [r, yn(a.menu), yn(a.obj), liveUsers(r).length, liveUsers(r).join(" ")]);
+const roleColsOf = [XC("Role", 24), XC("Via menu", 9), XC("Via screen", 10), XC("Working users", 10), XC("Users", 80, 1)];
+function xlScreen(s) {
+  const sheets = [{ name: "Screen", cols: [XC("Item", 26), XC("Value", 80, 1)], rows: screenInfo(s) }];
+  if (s.k === "t") {
+    sheets.push({ name: "Fields", cols: COLS.field, rows: fieldRows([s]) }, { name: "DCs", cols: COLS.dc, rows: dcRows([s]) }, { name: "Cancel & Remove", cols: COLS.btn, rows: btnRows([s]) });
+  }
+  if (s.iv) {
+    sheets.push({ name: "Columns", cols: COLS.ivcol, rows: ivColRows([s]) }, { name: "Parameters", cols: COLS.param, rows: paramRows([s]) },
+      { name: "SQL", cols: [XC("SQL", 140, 1)], rows: [[s.iv.sql]] });
+  }
+  sheets.push({ name: "Roles", cols: roleColsOf, rows: roleRowsOf(s) });
+  sheets.push({ name: "People", cols: personCols(), rows: s.users.slice().sort((a, b) => isLeaver(b) - isLeaver(a)).map(u => personRow(u, s.roles)) });
+  sheets.push({ name: "Findings", cols: [XC("Where", 30), XC("Kind", 20), XC("Found", 60, 1)], rows: s.find.map(f => [f.where, f.kind, f.hit]) });
+  return XLSX.build(sheets).then(b => xlSave(b, xlBase(M.module, s.n) + ".xlsx"));
+}
+
+/* ---------- PDF: print-ready page -> browser "Save as PDF" ---------- */
+const PDF_CSS = '@page{size:A4 landscape;margin:11mm 9mm 13mm}*{box-sizing:border-box}body{font:8.6pt/1.35 "Segoe UI",Arial,sans-serif;color:#1f1f1f;margin:0;background:#fff}' +
+  'h1{font-size:17pt;margin:0 0 1.5mm}h2{font-size:12pt;margin:6mm 0 2mm;border-bottom:1.4pt solid #1a73e8;padding-bottom:1mm;page-break-after:avoid}' +
+  'h3{font-size:10pt;margin:4mm 0 1.5mm;page-break-after:avoid}.sub{color:#5f6368;font-size:8pt}table{border-collapse:collapse;width:100%;margin:1mm 0 3mm}' +
+  'table.fx{table-layout:fixed}table.fx td,table.fx th{overflow-wrap:break-word;word-break:normal}' +
+  'th{background:#e8f0fe;text-align:left;font-weight:600}th,td{border:.4pt solid #c4c7c5;padding:1mm 1.5mm;vertical-align:top;overflow-wrap:anywhere}' +
+  'thead{display:table-header-group}tr{page-break-inside:avoid}td.n,th.n{text-align:right}table.kv td:first-child{width:52mm;color:#5f6368}' +
+  '.kpis{display:flex;flex-wrap:wrap;gap:2.5mm;margin:3mm 0}.kpi{border:.5pt solid #c4c7c5;border-radius:2mm;padding:1.8mm 3mm;min-width:36mm}' +
+  '.kpi b{display:block;font-size:13pt}.red{color:#d93025}.amber{color:#b06000}.pb{page-break-before:always}' +
+  '.code{font:7.6pt/1.3 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.foot{position:fixed;bottom:-9mm;left:0;right:0;font-size:7pt;color:#747775}' +
+  '.badge{display:inline-block;border-radius:1.5mm;padding:0 1.5mm;background:#fce8e6;color:#d93025;font-weight:600}';
+const pe = v => esc(v == null ? "" : v);
+function pTable(cols, rows, opt) {        /* cols: [{h, w, wrap}] from the Excel builders; opt.code = column indexes shown as code */
+  opt = opt || {};
+  if (!rows.length) return '<p class="sub">None.<\/p>';
+  /* fixed layout with the Excel widths as proportions, so short columns (DC, Type, Yes) never break mid-word */
+  const tw = cols.every(c => c.w) ? cols.reduce((a, c) => a + c.w, 0) : 0;
+  return '<table' + (tw ? ' class="fx"><colgroup>' + cols.map(c => '<col style="width:' + (c.w * 100 / tw).toFixed(2) + '%">').join("") + '<\/colgroup>' : '>') +
+    '<thead><tr>' + cols.map(c => '<th>' + pe(c.h) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' +
+    rows.map(r => '<tr>' + r.map((v, i) => '<td' + (typeof v === "number" ? ' class="n"' : "") + '>' + ((opt.code || []).includes(i) && v ? '<div class="code">' + pe(v) + '<\/div>' : pe(v)) + '<\/td>').join("") + '<\/tr>').join("") + '<\/tbody><\/table>';
+}
+const pKv = rows => '<table class="kv"><tbody>' + rows.map(r => '<tr><td>' + pe(r[0]) + '<\/td><td>' + pe(r[1]) + '<\/td><\/tr>').join("") + '<\/tbody><\/table>';
+function pdfPage(title, body) {
+  return '<!doctype html><html><head><meta charset="UTF-8"><title>' + pe(title) + '<\/title><style>' + PDF_CSS + '<\/style><\/head><body>' + body +
+    '<div class="foot">Axpert Atlas · ' + pe(siteName()) + ' · read-only snapshot ' + pe(M.scanned) + ' · printed ' + pe(new Date().toLocaleString("en-GB")) + '<\/div><\/body><\/html>';
+}
+function pdfPrint(html, title) {
+  const f = document.createElement("iframe");
+  f.setAttribute("aria-hidden", "true");
+  f.style.cssText = "position:fixed;left:-12000px;top:0;width:1200px;height:800px;border:0";
+  document.body.appendChild(f);
+  const d = f.contentWindow.document;
+  d.open(); d.write(html); d.close();
+  const old = document.title;
+  setTimeout(() => {
+    document.title = title;                 /* the browser suggests this as the PDF file name */
+    try { f.contentWindow.focus(); f.contentWindow.print(); } catch (e) { toast("Could not open the print window: " + e.message); }
+    document.title = old;
+    setTimeout(() => f.remove(), 60000);
+  }, 400);
+  toast('Choose "Save as PDF" as the printer');
+}
+const FIELD_PDF = [0, 2, 3, 4, 5, 6, 8, 9, 10, 11, 14, 15];   /* the Excel field columns that fit on a page */
+const xlPick = (cols, rows, idx) => [idx.map(i => cols[i]), rows.map(r => idx.map(i => r[i]))];
+function pdfScreenBody(s, withPeople) {
+  let h = '';
+  if (s.k === "t") {
+    const [fc, fr] = xlPick(COLS.field, fieldRows([s]), FIELD_PDF.slice(1));
+    h += '<h3>Fields · ' + (s.f || []).length + '<\/h3>' + pTable(fc, fr, { code: [9, 10] });
+    h += '<h3>Data containers<\/h3>' + pTable(COLS.dc.slice(1), dcRows([s]).map(r => r.slice(1)));
+    const [bc, br] = xlPick(COLS.btn, btnRows([s]), [2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    h += '<h3>Cancel & Remove<\/h3>' + pTable(bc, br, { code: [7] });
+  }
+  if (s.iv) {
+    h += '<h3>Columns · ' + (s.iv.cols || []).length + '<\/h3>' + pTable(COLS.ivcol.slice(2), ivColRows([s]).map(r => r.slice(2)));
+    h += '<h3>Parameters<\/h3>' + pTable(COLS.param.slice(2), paramRows([s]).map(r => r.slice(2)), { code: [8] });
+    h += '<h3>SQL<\/h3><div class="code">' + pe(s.iv.sql) + '<\/div>';
+  }
+  h += '<h3>Roles with access · ' + Object.keys(s.roles).length + '<\/h3>' + pTable(roleColsOf, roleRowsOf(s));
+  if (withPeople) h += '<h3>People who can open it · ' + s.users.length + '<\/h3>' + pTable(personCols(), s.users.slice().sort((a, b) => isLeaver(b) - isLeaver(a)).map(u => personRow(u, s.roles)));
+  if (s.find.length) h += '<h3>Findings<\/h3>' + pTable([XC("Where"), XC("Kind"), XC("Found")], s.find.map(f => [f.where, f.kind, f.hit]));
+  return h;
+}
+function pdfScreen(s) {
+  const title = xlBase(M.module, s.n);
+  const body = '<h1>' + pe(s.cap) + '<\/h1><div class="sub">' + pe(kindName(s)) + ' <b>' + pe(s.n) + '<\/b> · ' + pe(M.module) + ' · ' + pe(siteName()) + '<\/div>' +
+    '<h2>Screen<\/h2>' + pKv(screenInfo(s)) + '<h2>Details<\/h2>' + pdfScreenBody(s, true);
+  pdfPrint(pdfPage(title, body), title);
+}
+function pdfModule(full) {
+  const title = xlBase(M.module) + (full ? "_full" : "");
+  const left = workU.filter(isLeaver);
+  let b = '<h1>' + pe(M.module) + '<\/h1><div class="sub">' + pe(siteName()) + ' · read from ' + pe(M.source) + ' · scanned ' + pe(M.scanned) + ' · HR status: ' + pe(hrSrc()) + '<\/div>';
+  b += '<div class="kpis">' + [["Forms", forms.length], ["Reports", reps.length], ["Fields", nFields], ["Roles", Object.keys(R).length], ["People working", workU.length], ["Left, login on", left.length]]
+    .map((k, i) => '<div class="kpi">' + pe(k[0]) + '<b' + (i === 5 && k[1] ? ' class="red"' : "") + '>' + fmt(k[1]) + '<\/b><\/div>').join("") + '<\/div>';
+  b += '<h2>Health<\/h2>' + pTable([XC("Severity"), XC("Check"), XC("Count"), XC("First items")], H.map(h => [h.sev, h.ttl, h.list.length,
+    h.list.slice(0, 8).map(x => h.kind === "users" ? x + " " + ((U[x] || {}).nm || "") : h.kind === "screens" ? x.n : h.kind === "findings" ? x.sc.n + ": " + x.hit : h.kind === "pairs" ? x.r + " / " + x.s.n : h.kind === "props" ? (x.sc ? x.sc.n : "") : String(x)).join(", ") + (h.list.length > 8 ? " …" : "")]));
+  b += '<h2>Screens · ' + S.length + '<\/h2>' + pTable([XC("Type"), XC("ID"), XC("Caption"), XC("Menu path"), XC("Tables"), XC("Fields"), XC("Cancel"), XC("Remove"), XC("Roles"), XC("People"), XC("Changed")],
+    S.map(s => [kindName(s), s.n, s.cap, menuPath(s), (s.tables || []).join(", "), (s.f || []).length || "", s.cs ? s.cs.v : "", s.rs ? s.rs.v : "", Object.keys(s.roles).length, s.users.length, s.chg && s.chg.on ? String(s.chg.on).slice(0, 10) : ""]));
+  const ppl = workU.slice().sort((a, c) => (isLeaver(c) - isLeaver(a)) || String((U[a] || {}).nm).localeCompare(String((U[c] || {}).nm)));
+  b += '<h2 class="pb">People working · ' + ppl.length + ' <span class="badge">' + left.length + ' left, login on<\/span><\/h2>' + pTable(personCols(), ppl.map(u => personRow(u)));
+  b += '<h2>Roles · ' + Object.keys(R).length + '<\/h2>' + pTable([XC("Role"), XC("Working users"), XC("Forms"), XC("Reports")],
+    Object.keys(R).sort().map(r => [r, liveUsers(r).length, (roleScreens[r] || []).filter(s => s.k === "t").length, (roleScreens[r] || []).filter(s => s.k !== "t").length]));
+  if (full) S.forEach((s, i) => { b += '<h2 class="pb">' + pe(kindName(s)) + ' · ' + pe(s.cap) + ' <span class="sub">' + pe(s.n) + ' · ' + pe(menuPath(s)) + '<\/span><\/h2>' + pdfScreenBody(s, false); });
+  pdfPrint(pdfPage(title, b), title);
+}
+
+/* buttons are plain markup with data-xl; one listener for the whole app */
+const xlButtons = (scope, id) => '<div class="xlbar">' + (scope === "module"
+  ? '<button class="btn" data-xl="mod-x" title="Every screen, field, report, role and person of this module, one sheet each">' + ico("dl") + 'Excel<\/button>' +
+    '<button class="btn" data-xl="mod-p" title="Summary: health, screens, people, roles">' + ico("dl") + 'PDF<\/button>' +
+    '<button class="btn" data-xl="mod-pf" title="Summary plus every screen in detail (long)">' + ico("dl") + 'PDF · every screen<\/button>'
+  : '<button class="btn" data-xl="scr-x" data-id="' + esc(id) + '">' + ico("dl") + 'Excel<\/button><button class="btn" data-xl="scr-p" data-id="' + esc(id) + '">' + ico("dl") + 'PDF<\/button>') + '<\/div>';
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-xl]");
+  if (!b) return;
+  e.preventDefault();
+  try {
+    if (b.dataset.xl.endsWith("-x")) toast("Building the Excel file…");
+    Promise.resolve(({ "mod-x": () => xlModule(), "mod-p": () => pdfModule(false), "mod-pf": () => pdfModule(true),
+       "scr-x": () => xlScreen(SID[b.dataset.id]), "scr-p": () => pdfScreen(SID[b.dataset.id]) })[b.dataset.xl]())
+      .catch(err => { console.error(err); toast("Download failed: " + err.message); });
+  } catch (err) { console.error(err); toast("Download failed: " + err.message); }
+});
 
 </script>
 </body>

@@ -1,6 +1,6 @@
-// Axpert Atlas service worker (build 202611101637): network first, cached copy when the network is down.
+// Axpert Atlas service worker (build 202611111048): network first, cached copy when the network is down.
 // Browsers only run it on https or localhost; on a plain-http server the app simply works online.
-const CACHE = "atlas-202611101637";
+const CACHE = "atlas-202611111048";
 self.addEventListener("install", e => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", e => {

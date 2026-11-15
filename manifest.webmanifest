@@ -1,0 +1,13 @@
+{
+  "name": "Axpert Atlas",
+  "short_name": "Atlas",
+  "description": "Read-only developer console for Axpert: screens, fields, button rules and who can use them.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fc",
+  "theme_color": "#1a73e8",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

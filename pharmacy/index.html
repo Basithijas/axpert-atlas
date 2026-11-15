@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611150708. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611151433. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -694,6 +694,10 @@ button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(
 .lswhere{white-space:pre-wrap;word-break:break-word;font-size:12px;margin:4px 0;max-height:180px;overflow:auto}
 .lsp-test{background:var(--amberb);color:var(--amber)}
 
+/* __LOGIC_TAB__ Business Logic tab */
+.lg-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.lg-head h1{margin:0}.lg-frame{width:100%;height:calc(100vh - 170px);min-height:520px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff}
+
 </style>
 </head>
 <body>
@@ -724,11 +728,11 @@ button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "0m/kbGrkYOKiEkthmLHOcCvUH8hbh4ab0JOmof4tNwPpxBwT"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "s4J5kYFZh5okDUFzOZQuJfnHJkECZ/zXKpQVGh/769Y0Chh9"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611150708";
+const BUILD="202611151433";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -891,8 +895,8 @@ function useModule(slug){
     why:"In the menu, but no role has an access row for it.",list:S.filter(s=>!Object.keys(s.roles).length)},
   ];
   HI={};H.forEach(h=>HI[h.id]=h);highCount=H.filter(h=>h.sev==="High").reduce((a,h)=>a+h.list.length,0);
-  NAV=[["overview","Overview","dash",""],["galaxy","Galaxy","orbit",""],["screens","Screens","tree",S.length],["matrix","Access matrix","grid",""],["people","People","people",workU.length],["roles","Roles","key",Object.keys(R).length],["health","Health","health",highCount,1],["changes","Changes","hist",CHG?CHG.length:""]];
-  if(SITE()==="pharmacy")NAV=NAV.filter(n=>n[0]!=="galaxy");   /* pharmacy: no Galaxy yet (AXPDC not readable, live DB kept light) */
+  NAV=[["overview","Overview","dash",""],["galaxy","Galaxy","orbit",""],["logic","Business Logic","code",""],["screens","Screens","tree",S.length],["matrix","Access matrix","grid",""],["people","People","people",workU.length],["roles","Roles","key",Object.keys(R).length],["health","Health","health",highCount,1],["changes","Changes","hist",CHG?CHG.length:""]];
+  if(SITE()==="pharmacy")NAV=NAV.filter(n=>n[0]!=="galaxy"&&n[0]!=="logic");   /* pharmacy: no Galaxy yet (AXPDC not readable, live DB kept light) */
   const c={};[M,S,R,U,SID,userRoles,roleScreens,forms,reps,nFields,workU,uScr,mismatch,H,HI,highCount,NAV,FIND,PROPR,CHG].forEach((v,i)=>c[KEYS[i]]=v);CTX[slug]=c;
 }
 
@@ -1016,7 +1020,7 @@ function route(){
     const h=p.slice(1),v=h[0]||"overview";
     navKey={screen:"screens",person:"people",role:"roles",journey:"galaxy"}[v]||v;key=m+"/"+v+"/"+(h[1]||"")+"/"+(h[2]||"");
     fn={overview:vOverview,screens:()=>vScreens(h[1]||""),screen:()=>vScreen(h[1],h[2],h[3]),matrix:vMatrix,people:vPeople,person:()=>vPerson(h[1]),
-        roles:vRoles,role:()=>vRole(h[1]),health:()=>vHealth(h[1]),changes:vChanges,galaxy:vGalaxy,journey:vJourney}[v]||vOverview;
+        roles:vRoles,role:()=>vRole(h[1]),health:()=>vHealth(h[1]),changes:vChanges,galaxy:vGalaxy,journey:vJourney,logic:()=>vLogic(h[1])}[v]||vOverview;
   }
   navNow=navKey;renderNav(navKey);
   const glob=isGlob(navKey);
@@ -1516,6 +1520,14 @@ function vHealth(sel){
 
 /* ---------- CHANGES since the previous scan ---------- */
 let chF="all",chQ="";
+/* Business Logic: full scan of every screen (fields, validations, expressions, actions, firesql, gen/md maps, fill grids).
+   Built by D:\Work-AXP\AXPERT_SCAN (run_scan.py -> build_report.py) and shipped as app_static/business_logic.html. */
+function vLogic(screen){
+  const src="business_logic.html"+(screen?"#s-"+encodeURIComponent(String(screen).toLowerCase()):"");
+  $("#view").innerHTML='<div class="lg-head"><div><h1>Business Logic<\/h1><p class="dim">Every screen read from its definition: fields, validations, expressions, actions, fire SQL, gen maps, MD maps and fill grids.<\/p><\/div>'+
+    '<a class="btn" href="'+src+'" target="_blank" rel="noopener">Open in new tab<\/a><\/div>'+
+    '<iframe class="lg-frame" src="'+src+'" title="Business Logic"><\/iframe>';
+}
 function vChanges(){
   let h='<div class="ph"><div><h1>Changes · '+esc(M.module)+'<\/h1><p>'+(CHG?'What changed in Axpert between the scan of <b>'+esc(M.baseline)+'<\/b> and <b>'+esc(M.scanned)+'<\/b>.':'')+'<\/p><\/div><\/div>';
   if(!CHG){$("#view").innerHTML=h+'<div class="empty">'+ico("hist")+'No earlier scan of '+esc(M.module)+' to compare with. Changes show from the next daily scan.<\/div>';return;}

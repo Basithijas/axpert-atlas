@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611151610. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611151643. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -792,11 +792,11 @@ a.lk{color:var(--blue);cursor:pointer;text-decoration:none}a.lk:hover{text-decor
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "s4J5kYFZh5okDUFzOZQuJfnHJkECZ/zXKpQVGh/769Y0Chh9"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "wIBAtGJc69jKtsjRMeUC6yVqr+hf0RWDfxGn4Yp6dxxDuIxG"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611151610";
+const BUILD="202611151643";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -1722,8 +1722,23 @@ function vLive(path){
   h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">'+LIVE.map(l=>'<button class="btn'+(top===l[0]||(top==="employee"&&l[0]==="people")?" pri":"")+'" title="'+esc(l[3])+'" data-go="#@/live/'+l[0]+'">'+ico(l[2])+esc(l[1])+'<\/button>').join("")+
      (MC_BASE?'<a class="btn" style="margin-left:auto" target="_blank" rel="noopener" href="'+esc(MC_BASE+"/"+path)+'">Open as full page<\/a>':"")+'<\/div>';
   if(!MC_BASE)h+='<div class="note">'+ico("info")+'<div>The live pages read the ERP directly, so they open only inside the office network: <b>http://ADRAK-TESTDB/atlas<\/b>, menu <b>MasterControl · live<\/b>. This copy of Atlas has the snapshot only.<\/div><\/div>';
-  else h+='<iframe id="mcframe" title="MasterControl live page" src="'+esc(MC_BASE+"/"+path+(path.includes("?")?"&":"?")+"embed=1")+'" style="width:100%;height:calc(100vh - 230px);min-height:560px;border:1px solid var(--line);border-radius:14px;background:var(--bg)"><\/iframe>';
+  else h+='<div id="mcslot"><div class="empty">'+ico("hist")+'Checking that MasterControl is installed…<\/div><\/div>';
   $("#view").innerHTML=h;
+  if(!MC_BASE)return;
+  mcInstalled().then(ok=>{const slot=$("#mcslot");if(!slot)return;
+    slot.innerHTML=ok?'<iframe id="mcframe" title="MasterControl live page" src="'+esc(MC_BASE+"/"+path+(path.includes("?")?"&":"?")+"embed=1")+'" style="width:100%;height:calc(100vh - 230px);min-height:560px;border:1px solid var(--line);border-radius:14px;background:var(--bg)"><\/iframe>'
+      :'<div class="note">'+ico("warn")+'<div><b>MasterControl is not installed on this server yet.<\/b> '+esc(MC_BASE)+' does not answer. The package is ready; once it is installed as the IIS application <b>/mastercontrol<\/b>, these pages open here. Until then Atlas works as before.<\/div><\/div>';});
+}
+/* Is MasterControl there? Same server (.53): read the real status - 404 or no answer = not installed; 200 / 401 / 403 = installed.
+   Another origin (PC preview on port 5080): an opaque answer means something answered there. Asked once per page load. */
+let MC_CHECK=null;
+function mcInstalled(){
+  if(MC_CHECK)return MC_CHECK;
+  const same=MC_BASE.charAt(0)==="/";
+  MC_CHECK=fetch(MC_BASE+"/api/health?t="+Date.now(),{   /* unique URL: the Atlas service worker answers failed fetches from its cache */
+    credentials:"include",cache:"no-store",mode:same?"same-origin":"no-cors"})
+    .then(r=>r.type==="opaque"||r.ok||r.status===401||r.status===403,()=>false);
+  return MC_CHECK;
 }
 
 /* ---------- PROJECT ACCESS (Project User Details, transid puser · PROJECTUSERDET) and

@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611151643. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611160954. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -792,11 +792,11 @@ a.lk{color:var(--blue);cursor:pointer;text-decoration:none}a.lk:hover{text-decor
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "LTraPc8d21p6ftAmn2FzvrZ63qsP4XaWGD0LscLNLlDXEdPR"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "LwR1hEGcIBGtznffEz3j2NLflgxU+C+bibsEnZ/CVo2rnJug"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611151643";
+const BUILD="202611160954";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -1032,7 +1032,7 @@ function renderNav(cur){
   h+='<button class="ni'+(cur==="home"?" on":"")+'" data-go="#@/">'+ico("home")+'All modules<\/button>';
   h+='<button class="ni'+(cur==="allpeople"?" on":"")+'" data-go="#@/all/people">'+ico("people")+'People · all modules<span class="b">'+(ATLAS.people?fmt(Object.keys(ATLAS.people).length):"")+'<\/span><\/button>';
   h+='<button class="ni'+(cur==="projects"?" on":"")+'" data-go="#@/all/projects">'+ico("tree")+'Project access<span class="b">'+(ATLAS.proj?fmt(Object.keys(ATLAS.proj.proj).length):"")+'<\/span><\/button>';
-  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+'<button class="ni'+(cur==="live"?" on":"")+'" data-go="#@/live/finance">'+ico("report")+'MasterControl · live<span class="b">'+(MC_BASE?"live":"office")+'<\/span><\/button>'+dashNav(cur)+learnNav(cur);
+  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+'<button class="ni'+(cur==="live"?" on":"")+'" data-go="#@/live/finance">'+ico("report")+'MasterControl · live<span class="b">'+(HAS_MC?"live":"office")+'<\/span><\/button>'+dashNav(cur)+learnNav(cur);
   h+='<div class="modsw" style="margin-top:10px"><div class="lbl">Module<\/div>'+mods.map(m=>'<a class="mod'+(m.slug===CUR&&!isGlob(cur)?" on":"")+'" href="#/'+m.slug+'/overview" data-mod="'+m.slug+'"><i><\/i>'+esc(m.name)+'<span class="bdg'+(issues(m)?"":" z")+'" title="High-priority issues">'+fmt(issues(m))+'<\/span><\/a>').join("")+'<\/div>';
   if(CUR&&!isGlob(cur)){
     h+='<div class="navsec">'+esc(M.module)+'<\/div>'+NAV.map(n=>'<button class="ni'+(cur===n[0]?" on":"")+'" data-go="#/'+n[0]+'">'+ico(n[2])+n[1]+(n[3]!==""&&n[3]!=null?'<span class="b'+(n[4]&&n[3]?" r":"")+'">'+fmt(n[3])+'<\/span>':"")+'<\/button>').join("");
@@ -1156,7 +1156,7 @@ function vAllPerson(u){
   const mods=ATLAS.mods.filter(m=>x.m[m.slug]),tot=i=>mods.reduce((a,m)=>a+x.m[m.slug][i],0);
   let h='<div class="crumbs"><a data-go="#@/all/people">People · all modules<\/a>'+ico("chev")+'<span>'+esc(x.nm||u)+'<\/span><\/div>';
   h+='<section class="card hero spot" style="margin-top:12px"><span class="av" style="width:64px;height:64px;font-size:22px;background:'+avc(u)+'">'+ini(x.nm||u)+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(x.nm||u)+'<\/h2><div class="meta"><code>'+esc(u)+'<\/code><span>'+esc(x.dept||"–")+'<\/span>'+hrPill(x.hr)+
-     '<span class="st '+(x.ax?"st-green":"st-grey")+'">Login '+(x.ax?"on":"off")+'<\/span>'+(x.dor&&hrOf(x.hr)==="left"?'<span>left on <b style="font-weight:500">'+esc(x.dor.slice(0,10))+'<\/b><\/span>':"")+'<\/div><\/div><div class="right">'+(MC_BASE?'<button class="btn pri" data-go="#@/live/employee/'+enc(u)+'">'+ico("report")+'Pay & settlements<\/button>':"")+'<button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
+     '<span class="st '+(x.ax?"st-green":"st-grey")+'">Login '+(x.ax?"on":"off")+'<\/span>'+(x.dor&&hrOf(x.hr)==="left"?'<span>left on <b style="font-weight:500">'+esc(x.dor.slice(0,10))+'<\/b><\/span>':"")+'<\/div><\/div><div class="right">'+(HAS_MC?'<button class="btn pri" data-go="#@/live/employee/'+enc(u)+'">'+ico("report")+'Pay & settlements<\/button>':"")+'<button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
   if(x.mv)h+='<div class="note" style="margin-top:16px">'+ico("warn")+'<div><b>Same person, new ID:<\/b> HR closed this ID ('+esc(x.hr0||"")+(x.dor?' on '+esc(x.dor.slice(0,10)):'')+'), but the person works on as <b>'+esc(x.mv.empid)+'<\/b> ('+esc(x.mv.estatus||"")+') — '+esc(x.mv.how)+'. '+(x.ax?'This old login is still on: close it or move its roles to the new ID.':'')+'<\/div><\/div>';
   if(hrOf(x.hr)==="left"&&(mods.length||x.ax))h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>Action needed:<\/b> HR status is '+esc(hrLabel(x.hr))+', but this login '+(x.ax?"is still on":"still has rows")+(mods.length?" and reaches screens in "+mods.length+" module(s)":"")+'.<\/div><\/div>';
   h+=''+(x.hl?'<div class="note blue" style="margin-top:12px">'+ico("info")+'<div>HR status above is from the Oman ERP (ADK2026 EMPMAST), the live HR master. The EMPMAST copy in the pharmacy database still says <b>'+esc(hrLabel(x.hl))+'<\/b>.<\/div><\/div>':"");
@@ -1702,12 +1702,17 @@ if(window.ATLAS_LOCK){
 /* ---------- MASTERCONTROL · LIVE: the live pages inside Atlas (one app, one menu) ----------
    On .53 Atlas (/atlas) and MasterControl (/mastercontrol) share the server, so the live pages open here in a frame and use the
    same Windows login. The PC preview runs MasterControl on port 5080. The GitHub copy has no live pages (office network only). */
-const MC_BASE=(()=>{const h=location.hostname,p=location.pathname;
+const MC_BASE=(()=>{const h=location.hostname,p=location.pathname,local=/^(localhost|127\.0\.0\.1)$/.test(h);
   if(window.MC_URL)return window.MC_URL;
   if(/github\.io$/i.test(h)||location.protocol==="file:")return null;
-  if(/^\/atlas(\/|$)/i.test(p))return "/mastercontrol";
-  if(/^(localhost|127\.0\.0\.1)$/.test(h))return "http://localhost:5080";
+  /* served by MasterControl behind its sign-in: <base>/atlas/ -> <base> (.53: /mastercontrol/atlas/, PC: localhost:5080/atlas/) */
+  const m=p.match(/^(.*)\/atlas(\/|$)/i);
+  if(m&&m[1])return m[1];
+  if(m&&local&&location.port==="5080")return "";
+  if(m)return "/mastercontrol";                 /* the separate /atlas site on .53 */
+  if(local)return "http://localhost:5080";       /* the "atlas" preview on a PC */
   return "/mastercontrol";})();
+const HAS_MC=MC_BASE!==null;   /* "" = MasterControl on the same origin (PC), still there */
 const LIVE=[["finance","Money","report","income, expenses, salary, settlements, owed to us / by us, sales"],
   ["people","People & pay","people","any employee: roles, access, salary, leave and final settlements, loans"],
   ["benefits","Benefits","leave","basis of gratuity, leave, encashment, tickets; who received; who is due; salary access"],
@@ -1720,11 +1725,11 @@ function vLive(path){
   let h='<div class="crumbs"><a data-go="#@/">All modules<\/a>'+ico("chev")+'<span>MasterControl · live<\/span><\/div>';
   h+='<div class="ph" style="margin:10px 0 8px"><div><h1 style="font-size:22px">MasterControl · live<\/h1><p>Read from the live ERP when you open it (Windows login, read only). Atlas shows how Axpert is built; these pages show the live numbers: money, pay and settlements, documents, logins.<\/p><\/div><\/div>';
   h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">'+LIVE.map(l=>'<button class="btn'+(top===l[0]||(top==="employee"&&l[0]==="people")?" pri":"")+'" title="'+esc(l[3])+'" data-go="#@/live/'+l[0]+'">'+ico(l[2])+esc(l[1])+'<\/button>').join("")+
-     (MC_BASE?'<a class="btn" style="margin-left:auto" target="_blank" rel="noopener" href="'+esc(MC_BASE+"/"+path)+'">Open as full page<\/a>':"")+'<\/div>';
-  if(!MC_BASE)h+='<div class="note">'+ico("info")+'<div>The live pages read the ERP directly, so they open only inside the office network: <b>http://ADRAK-TESTDB/atlas<\/b>, menu <b>MasterControl · live<\/b>. This copy of Atlas has the snapshot only.<\/div><\/div>';
+     (HAS_MC?'<a class="btn" style="margin-left:auto" target="_blank" rel="noopener" href="'+esc(MC_BASE+"/"+path)+'">Open as full page<\/a>':"")+'<\/div>';
+  if(!HAS_MC)h+='<div class="note">'+ico("info")+'<div>The live pages read the ERP directly, so they open only inside the office network: <b>http://ADRAK-TESTDB/atlas<\/b>, menu <b>MasterControl · live<\/b>. This copy of Atlas has the snapshot only.<\/div><\/div>';
   else h+='<div id="mcslot"><div class="empty">'+ico("hist")+'Checking that MasterControl is installed…<\/div><\/div>';
   $("#view").innerHTML=h;
-  if(!MC_BASE)return;
+  if(!HAS_MC)return;
   mcInstalled().then(ok=>{const slot=$("#mcslot");if(!slot)return;
     slot.innerHTML=ok?'<iframe id="mcframe" title="MasterControl live page" src="'+esc(MC_BASE+"/"+path+(path.includes("?")?"&":"?")+"embed=1")+'" style="width:100%;height:calc(100vh - 230px);min-height:560px;border:1px solid var(--line);border-radius:14px;background:var(--bg)"><\/iframe>'
       :'<div class="note">'+ico("warn")+'<div><b>MasterControl is not installed on this server yet.<\/b> '+esc(MC_BASE)+' does not answer. The package is ready; once it is installed as the IIS application <b>/mastercontrol<\/b>, these pages open here. Until then Atlas works as before.<\/div><\/div>';});
@@ -1734,11 +1739,29 @@ function vLive(path){
 let MC_CHECK=null;
 function mcInstalled(){
   if(MC_CHECK)return MC_CHECK;
-  const same=MC_BASE.charAt(0)==="/";
+  const same=MC_BASE===""||MC_BASE.charAt(0)==="/";
   MC_CHECK=fetch(MC_BASE+"/api/health?t="+Date.now(),{   /* unique URL: the Atlas service worker answers failed fetches from its cache */
     credentials:"include",cache:"no-store",mode:same?"same-origin":"no-cors"})
     .then(r=>r.type==="opaque"||r.ok||r.status===401||r.status===403,()=>false);
   return MC_CHECK;
+}
+
+/* ---------- SIGNED IN THROUGH MASTERCONTROL ----------
+   When MasterControl serves Atlas (<base>/atlas/, behind its sign-in) this page follows that session: every minute it asks
+   whether the session is still open (the check does not count as activity), moving between pages counts as activity, and
+   when the session is over (timeout, cut by an admin, user switched off) the page leaves for the sign-in screen, which also
+   throws away the data held in memory. The separate /atlas site and the GitHub copy are not affected. */
+const MC_SERVED=(()=>{const m=location.pathname.match(/^(.*)\/atlas(\/|$)/i);
+  return !!m&&(!!m[1]||(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)&&location.port==="5080"));})();
+if(MC_SERVED&&HAS_MC){
+  const mcOut=why=>{location.href=MC_BASE+"/login?r="+encodeURIComponent(location.pathname.slice(MC_BASE.length)+location.search+location.hash)+(why?"&why="+encodeURIComponent(why):"");};
+  const mcAsk=beat=>fetch(MC_BASE+"/api/auth/me"+(beat?"?beat=1":""),{credentials:"include",cache:"no-store"}).then(r=>{
+    if(r.status===401)return r.json().then(j=>mcOut(j&&j.message&&j.message!=="Please sign in."?j.message:""),()=>mcOut(""));
+    if(r.status===403)return r.json().then(j=>{document.body.innerHTML='<div class="empty" style="margin:40px">'+esc((j&&j.message)||"Access closed.")+'<\/div>';},()=>{});
+  },()=>{});
+  setInterval(()=>mcAsk(true),60000);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)mcAsk(true);});
+  let mcLast=0;window.addEventListener("hashchange",()=>{const n=Date.now();if(n-mcLast>60000){mcLast=n;mcAsk(false);}});
 }
 
 /* ---------- PROJECT ACCESS (Project User Details, transid puser · PROJECTUSERDET) and

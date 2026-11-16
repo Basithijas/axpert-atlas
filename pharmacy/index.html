@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611151433. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611160708. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -698,6 +698,70 @@ button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(
 .lg-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .lg-head h1{margin:0}.lg-frame{width:100%;height:calc(100vh - 170px);min-height:520px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff}
 
+/* ---------- learn (15/11/2026) ---------- */
+.lkick{font-size:11px;letter-spacing:.14em;font-weight:600;color:var(--blue)}
+.lhero{align-items:flex-start}.lact{display:flex;flex-direction:column;gap:8px}
+.l1m ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.6;color:var(--ink)}
+.l1m li::marker{color:var(--blue);font-weight:700}
+.lk6{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.lkpi{cursor:default}.lkpi .top{font-size:12.5px;color:var(--ink2)}.lkpi.bad .v{color:var(--red)}
+.lno{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--blueb);color:var(--blue);font-size:12.5px;margin-right:9px;vertical-align:1px}
+.lcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.lcard{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--surf)}
+.lcard h3{margin:0 0 6px;font:500 15px var(--disp)}.lcard p{margin:0 0 10px;color:var(--ink2);font-size:13px;line-height:1.55}
+.lfact{display:flex;gap:7px;align-items:flex-start;font-size:12.5px;background:var(--greenb);color:var(--ink);border-radius:10px;padding:8px 10px}
+.lfact svg.i{width:16px;height:16px;fill:var(--green);margin-top:1px}
+.lflow{display:flex;flex-direction:column}
+.lstep{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px}
+.lrail{position:relative;display:flex;justify-content:center}.lrail::before{content:"";position:absolute;top:34px;bottom:-6px;width:2px;background:var(--line2)}
+.lstep:last-child .lrail::before{display:none}
+.lrail span{position:relative;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:700;font-size:13px}
+.lbody{padding:2px 0 22px}.lsh{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.lsh h3{margin:0;font:500 16px var(--disp)}
+.lwhat{margin:6px 0;font-size:14px;line-height:1.55}.lout{font-size:13px;color:var(--ink2);background:var(--surf2);border-radius:10px;padding:8px 10px}
+.lchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.lchips span{font-size:12px;color:var(--ink3);border:1px solid var(--line);border-radius:999px;padding:3px 10px}.lchips b{color:var(--ink)}
+.lmsg{margin-top:8px;font-size:12.5px}.lmsg summary{cursor:pointer;color:var(--blue)}.lmsg ul{margin:6px 0 0;color:var(--ink2)}
+.lk{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--blue);text-decoration:none}
+.lled td,.lled th{padding:9px 12px}.lled .ltot td{font-weight:700;border-top:2px solid var(--line2)}
+.lnote{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--ink2)}.lnote svg.i{width:16px;height:16px;fill:var(--green)}
+.llad{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px}.llh{display:flex;justify-content:space-between;margin-bottom:8px}.llh span{color:var(--ink3);font-size:12.5px}
+.llv{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.lst{background:var(--blueb);color:var(--blue);border-radius:8px;padding:4px 10px;font-size:12.5px;font-weight:500}.llv i{color:var(--ink3);font-style:normal}
+.ltr{border-left:3px solid var(--amber);padding:4px 0 4px 14px;margin-bottom:16px}.ltr h3{display:flex;gap:7px;align-items:center;margin:0 0 4px;font:500 14.5px var(--disp)}
+.ltr h3 svg.i{width:17px;height:17px;fill:var(--amber)}.ltr p{margin:0 0 6px;color:var(--ink2);font-size:13px}
+.lsql{background:var(--surf2);border-radius:10px;padding:10px 12px;font:12px/1.55 var(--mono);overflow:auto;margin:0;white-space:pre}
+.lnotesec{border-left:4px solid var(--grey)}.lnotes{margin:0;padding-left:20px;color:var(--ink2);font-size:13px;line-height:1.7}
+.ni.soon{opacity:.5;cursor:default}
+@media print{
+  .nav,#nav,#appbar,#bnav,#navscrim,.noprint,.appbar,.bnav{display:none!important}
+  .shell{display:block!important}body{background:#fff!important}
+  .card{box-shadow:none!important;border:1px solid #ddd;break-inside:avoid}
+  .lstep,.ltr,.lcard{break-inside:avoid}details>*{display:block}
+}
+/* learn v2: contents, why, screen cards, links (15/11/2026) */
+.ltoc ol{margin:0;padding-left:20px;line-height:1.9;font-size:13.5px}
+a.lk{color:var(--blue);cursor:pointer;text-decoration:none}a.lk:hover{text-decoration:underline}
+.lrel{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.lrel small{display:block;color:var(--ink3);font-size:11.5px}.lrelh{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:600;margin-bottom:6px}
+.lwhy{display:flex;gap:8px;align-items:flex-start;background:var(--blueb);border-radius:10px;padding:9px 12px;margin:-4px 0 14px;font-size:13px;line-height:1.5}
+.lwhy svg.i{width:17px;height:17px;fill:var(--blue);flex:none;margin-top:1px}
+.lscards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.lscard{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--surf);display:flex;flex-direction:column;gap:8px;transition:box-shadow .2s,transform .2s}
+.lscard.go{cursor:pointer}.lscard.go:hover{box-shadow:var(--e2);transform:translateY(-2px)}
+.lsct{display:flex;justify-content:space-between;gap:8px;align-items:center}.lsct b{font:500 15px var(--disp)}
+.lscard p{margin:0;font-size:13px;color:var(--ink2);line-height:1.5}
+.lsnum{display:flex;gap:14px;flex-wrap:wrap}.lsnum span{display:flex;flex-direction:column;font-size:11px;color:var(--ink3)}.lsnum b{font:600 18px var(--disp);color:var(--ink)}
+.lstb{font-size:11px;color:var(--ink3)}.lsmsg{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--ink2);border-left:3px solid var(--amber);padding-left:8px}
+.lsfoot{margin-top:auto;font-size:12px;color:var(--blue)}
+.lcard.lbad{border-color:var(--red)}.lcard.lbad .lfact{background:var(--redb)}.lcard.lbad .lfact svg.i{fill:var(--red)}
+.lsep{color:var(--ink3)}.ltop{text-align:right;margin-top:6px;font-size:12px}
+.hbr[data-go]{cursor:pointer}.hbr[data-go]:hover .hbl{color:var(--blue)}
+
+/* Learn: business logic of a flow step (on save / stops when / cancel takes back / used next by) */
+.lrules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:8px 0 6px}
+.lrule{border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:12.5px}
+.lrule b{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3,var(--dim));margin-bottom:3px}
+.lrule ul{margin:0;padding-left:16px}.lrule li{margin:1px 0}
+.lr-save{border-left:3px solid var(--green)}.lr-stop{border-left:3px solid var(--red)}.lr-back{border-left:3px solid var(--amber)}.lr-next{border-left:3px solid var(--blue)}
+
 </style>
 </head>
 <body>
@@ -728,11 +792,11 @@ button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "LTraPc8d21p6ftAmn2FzvrZ63qsP4XaWGD0LscLNLlDXEdPR"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "LwR1hEGcIBGtznffEz3j2NLflgxU+C+bibsEnZ/CVo2rnJug"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611151433";
+const BUILD="202611160708";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -825,8 +889,8 @@ const MODICON={payroll:"people",purchase:"form",finance:"report",inventory:"apps
 
 /* ---------- people / HR helpers (verified 07/11/2026: one EMPMAST row per EMPID; these statuses all carry a DOR) ---------- */
 const LEFT=["RESIGNATION","TERMINATION","ABSCONDING","CANCEL"];
-const HRC={act:["Active","st-green","var(--green)"],leave:["On leave","st-amber","var(--amber)"],left:["Left","st-red","var(--red)"],nohr:["No HR record","st-grey","var(--grey)"],other:["Other","st-grey","var(--grey)"]};
-const hrOf=h=>{if(!h||h==="-")return"nohr";if(h==="ACTIVE")return"act";if(h==="Leave")return"leave";if(LEFT.includes(h))return"left";return"other";};
+const HRC={act:["Active","st-green","var(--green)"],leave:["On leave","st-amber","var(--amber)"],left:["Left","st-red","var(--red)"],moved:["Moved to a new ID","st-amber","var(--amber)"],nohr:["No HR record","st-grey","var(--grey)"],other:["Other","st-grey","var(--grey)"]};
+const hrOf=h=>{if(!h||h==="-")return"nohr";if(h==="ACTIVE")return"act";if(h==="Leave")return"leave";if(h==="MOVED")return"moved";if(LEFT.includes(h))return"left";return"other";};
 const hrLabel=h=>{const c=hrOf(h);return c==="left"?(h==="CANCEL"?"Left (cancelled)":h.charAt(0)+h.slice(1).toLowerCase()):HRC[c][0];};
 const hrPill=h=>'<span class="st '+HRC[hrOf(h)][1]+'">'+esc(hrLabel(h))+'<\/span>';
 const avColors=["#1a73e8","#188038","#d93025","#e37400","#9334e6","#007b83","#c5221f","#1967d2","#137333","#b06000","#a142f4","#129eaf"];
@@ -896,7 +960,8 @@ function useModule(slug){
   ];
   HI={};H.forEach(h=>HI[h.id]=h);highCount=H.filter(h=>h.sev==="High").reduce((a,h)=>a+h.list.length,0);
   NAV=[["overview","Overview","dash",""],["galaxy","Galaxy","orbit",""],["logic","Business Logic","code",""],["screens","Screens","tree",S.length],["matrix","Access matrix","grid",""],["people","People","people",workU.length],["roles","Roles","key",Object.keys(R).length],["health","Health","health",highCount,1],["changes","Changes","hist",CHG?CHG.length:""]];
-  if(SITE()==="pharmacy")NAV=NAV.filter(n=>n[0]!=="galaxy"&&n[0]!=="logic");   /* pharmacy: no Galaxy yet (AXPDC not readable, live DB kept light) */
+  if(SITE()==="pharmacy")NAV=NAV.filter(n=>n[0]!=="galaxy"&&n[0]!=="logic");
+  if(window.ATLAS_LOCK)NAV=NAV.filter(n=>n[0]!=="logic");   /* GitHub copy: business_logic.html is not published (it holds employee IDs) */   /* pharmacy: no Galaxy yet (AXPDC not readable, live DB kept light) */
   const c={};[M,S,R,U,SID,userRoles,roleScreens,forms,reps,nFields,workU,uScr,mismatch,H,HI,highCount,NAV,FIND,PROPR,CHG].forEach((v,i)=>c[KEYS[i]]=v);CTX[slug]=c;
 }
 
@@ -967,7 +1032,7 @@ function renderNav(cur){
   h+='<button class="ni'+(cur==="home"?" on":"")+'" data-go="#@/">'+ico("home")+'All modules<\/button>';
   h+='<button class="ni'+(cur==="allpeople"?" on":"")+'" data-go="#@/all/people">'+ico("people")+'People · all modules<span class="b">'+(ATLAS.people?fmt(Object.keys(ATLAS.people).length):"")+'<\/span><\/button>';
   h+='<button class="ni'+(cur==="projects"?" on":"")+'" data-go="#@/all/projects">'+ico("tree")+'Project access<span class="b">'+(ATLAS.proj?fmt(Object.keys(ATLAS.proj.proj).length):"")+'<\/span><\/button>';
-  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+dashNav(cur);
+  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+'<button class="ni'+(cur==="live"?" on":"")+'" data-go="#@/live/finance">'+ico("report")+'MasterControl · live<span class="b">'+(MC_BASE?"live":"office")+'<\/span><\/button>'+dashNav(cur)+learnNav(cur);
   h+='<div class="modsw" style="margin-top:10px"><div class="lbl">Module<\/div>'+mods.map(m=>'<a class="mod'+(m.slug===CUR&&!isGlob(cur)?" on":"")+'" href="#/'+m.slug+'/overview" data-mod="'+m.slug+'"><i><\/i>'+esc(m.name)+'<span class="bdg'+(issues(m)?"":" z")+'" title="High-priority issues">'+fmt(issues(m))+'<\/span><\/a>').join("")+'<\/div>';
   if(CUR&&!isGlob(cur)){
     h+='<div class="navsec">'+esc(M.module)+'<\/div>'+NAV.map(n=>'<button class="ni'+(cur===n[0]?" on":"")+'" data-go="#/'+n[0]+'">'+ico(n[2])+n[1]+(n[3]!==""&&n[3]!=null?'<span class="b'+(n[4]&&n[3]?" r":"")+'">'+fmt(n[3])+'<\/span>':"")+'<\/button>').join("");
@@ -989,7 +1054,7 @@ function renderBottom(cur){
   $("#bnav").innerHTML=items.map(x=>'<button class="'+(cur===x[0]?"on":"")+'" data-h="'+x[3]+'"><span class="pillbg">'+ico(x[2])+'<\/span>'+x[1]+(x[0]==="health"&&CUR&&highCount?'<i>'+fmt(highCount)+'<\/i>':"")+'<\/button>').join("");
   $$("#bnav button").forEach(b=>b.onclick=()=>{location.hash=b.dataset.h;});
 }
-const isGlob=k=>["home","allpeople","projects","companies"].includes(k)||String(k).startsWith("dash_");
+const isGlob=k=>["home","allpeople","projects","companies","live"].includes(k)||String(k).startsWith("dash_")||String(k).startsWith("learn_");
 function closeNav(){$("#nav").classList.remove("on");$("#navscrim").classList.remove("on");}
 $("#hamb").onclick=()=>{$("#nav").classList.add("on");$("#navscrim").classList.add("on");};
 $("#navscrim").onclick=closeNav;
@@ -1004,10 +1069,14 @@ function route(){
   if(!ATLAS.mods){showLoading("Loading…");return;}
   let fn,navKey,key;
   if(!m){navKey="home";fn=vHome;key="home";}
+  else if(m==="live"){navNow="live";renderNav("live");$("#searchHint").textContent="Search modules, people, projects, companies";vLive(location.hash.replace(/^#\/?live\/?/,""));if(lastView!=="live")window.scrollTo(0,0);lastView="live";bindGo($("#view"));return;}
   else if(m==="all"){
     if(!ATLAS.people){showLoading("Loading people…");load("people").then(()=>ATLAS.people?route():showErr("people"),()=>showErr("people"));return;}
     const needP=["projects","project","companies","company","person"].includes(p[1]);
     if(needP&&!ATLAS.proj){showLoading("Loading projects and companies…");load("projects").then(()=>ATLAS.proj?route():showErr("projects"),()=>showErr("projects"));return;}
+    if(p[1]==="learn"){const ln=p[2]||"";
+      if(!ATLAS.learn[ln]&&LREADY.includes(ln)){showLoading("Loading…");load("learn_"+ln).then(()=>ATLAS.learn[ln]?route():showErr("learn_"+ln),()=>showErr("learn_"+ln));return;}
+      navNow="learn_"+ln;renderNav(navNow);vLearn(ln);if("learn/"+ln!==lastView)window.scrollTo(0,0);lastView="learn/"+ln;bindGo($("#view"));return;}
     if(p[1]==="dash"){const dn=p[2]||"";
       if(!ATLAS.dash[dn]){showLoading("Loading dashboard…");load("dash_"+dn).then(()=>ATLAS.dash[dn]?route():showErr("dash_"+dn),()=>showErr("dash_"+dn));return;}
       navNow="dash_"+dn;renderNav(navNow);$("#searchHint").textContent="Search modules, people, projects, companies";vDash(dn);if("dash/"+dn!==lastView)window.scrollTo(0,0);lastView="dash/"+dn;countUp($("#view"));bindGo($("#view"));return;}
@@ -1087,7 +1156,8 @@ function vAllPerson(u){
   const mods=ATLAS.mods.filter(m=>x.m[m.slug]),tot=i=>mods.reduce((a,m)=>a+x.m[m.slug][i],0);
   let h='<div class="crumbs"><a data-go="#@/all/people">People · all modules<\/a>'+ico("chev")+'<span>'+esc(x.nm||u)+'<\/span><\/div>';
   h+='<section class="card hero spot" style="margin-top:12px"><span class="av" style="width:64px;height:64px;font-size:22px;background:'+avc(u)+'">'+ini(x.nm||u)+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(x.nm||u)+'<\/h2><div class="meta"><code>'+esc(u)+'<\/code><span>'+esc(x.dept||"–")+'<\/span>'+hrPill(x.hr)+
-     '<span class="st '+(x.ax?"st-green":"st-grey")+'">Login '+(x.ax?"on":"off")+'<\/span>'+(x.dor&&hrOf(x.hr)==="left"?'<span>left on <b style="font-weight:500">'+esc(x.dor.slice(0,10))+'<\/b><\/span>':"")+'<\/div><\/div><div class="right"><button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
+     '<span class="st '+(x.ax?"st-green":"st-grey")+'">Login '+(x.ax?"on":"off")+'<\/span>'+(x.dor&&hrOf(x.hr)==="left"?'<span>left on <b style="font-weight:500">'+esc(x.dor.slice(0,10))+'<\/b><\/span>':"")+'<\/div><\/div><div class="right">'+(MC_BASE?'<button class="btn pri" data-go="#@/live/employee/'+enc(u)+'">'+ico("report")+'Pay & settlements<\/button>':"")+'<button class="btn" id="cpu">'+ico("copy")+'Copy ID<\/button><\/div><\/section>';
+  if(x.mv)h+='<div class="note" style="margin-top:16px">'+ico("warn")+'<div><b>Same person, new ID:<\/b> HR closed this ID ('+esc(x.hr0||"")+(x.dor?' on '+esc(x.dor.slice(0,10)):'')+'), but the person works on as <b>'+esc(x.mv.empid)+'<\/b> ('+esc(x.mv.estatus||"")+') — '+esc(x.mv.how)+'. '+(x.ax?'This old login is still on: close it or move its roles to the new ID.':'')+'<\/div><\/div>';
   if(hrOf(x.hr)==="left"&&(mods.length||x.ax))h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>Action needed:<\/b> HR status is '+esc(hrLabel(x.hr))+', but this login '+(x.ax?"is still on":"still has rows")+(mods.length?" and reaches screens in "+mods.length+" module(s)":"")+'.<\/div><\/div>';
   h+=''+(x.hl?'<div class="note blue" style="margin-top:12px">'+ico("info")+'<div>HR status above is from the Oman ERP (ADK2026 EMPMAST), the live HR master. The EMPMAST copy in the pharmacy database still says <b>'+esc(hrLabel(x.hl))+'<\/b>.<\/div><\/div>':"");
   h+='<div class="kpis" style="margin-top:16px">'+kpi("apps","var(--blue)","Modules",mods.length,"with live access","")+kpi("form","var(--purple)","Forms",tot(1),"can open","")+kpi("report","var(--green)","Reports",tot(2),"can open","")+
@@ -1523,6 +1593,7 @@ let chF="all",chQ="";
 /* Business Logic: full scan of every screen (fields, validations, expressions, actions, firesql, gen/md maps, fill grids).
    Built by D:\Work-AXP\AXPERT_SCAN (run_scan.py -> build_report.py) and shipped as app_static/business_logic.html. */
 function vLogic(screen){
+  if(window.ATLAS_LOCK){$("#view").innerHTML='<div class="empty">'+ico("info")+'Business Logic opens only inside the office network (http://ADRAK-TESTDB/atlas). It is not part of this copy.<\/div>';return;}
   const src="business_logic.html"+(screen?"#s-"+encodeURIComponent(String(screen).toLowerCase()):"");
   $("#view").innerHTML='<div class="lg-head"><div><h1>Business Logic<\/h1><p class="dim">Every screen read from its definition: fields, validations, expressions, actions, fire SQL, gen maps, MD maps and fill grids.<\/p><\/div>'+
     '<a class="btn" href="'+src+'" target="_blank" rel="noopener">Open in new tab<\/a><\/div>'+
@@ -1626,6 +1697,49 @@ if(window.ATLAS_LOCK){
   else{let m="";try{m=sessionStorage.getItem("atlas-lockmsg")||"";sessionStorage.removeItem("atlas-lockmsg");}catch(e){}
     unlockSaved().then(ok=>{if(ok){startIdleWatch();start();}else lockScreen(m);});}
 } else start();
+
+
+/* ---------- MASTERCONTROL · LIVE: the live pages inside Atlas (one app, one menu) ----------
+   On .53 Atlas (/atlas) and MasterControl (/mastercontrol) share the server, so the live pages open here in a frame and use the
+   same Windows login. The PC preview runs MasterControl on port 5080. The GitHub copy has no live pages (office network only). */
+const MC_BASE=(()=>{const h=location.hostname,p=location.pathname;
+  if(window.MC_URL)return window.MC_URL;
+  if(/github\.io$/i.test(h)||location.protocol==="file:")return null;
+  if(/^\/atlas(\/|$)/i.test(p))return "/mastercontrol";
+  if(/^(localhost|127\.0\.0\.1)$/.test(h))return "http://localhost:5080";
+  return "/mastercontrol";})();
+const LIVE=[["finance","Money","report","income, expenses, salary, settlements, owed to us / by us, sales"],
+  ["people","People & pay","people","any employee: roles, access, salary, leave and final settlements, loans"],
+  ["benefits","Benefits","leave","basis of gratuity, leave, encashment, tickets; who received; who is due; salary access"],
+  ["transaction","Trace a document","tree","what one document posted, updated and took back"],
+  ["access","Access log","lock","logins, failed logins, logins after leaving"],
+  ["issues","Issues","warn","everything the checks found, worst first"]];
+function vLive(path){
+  path=path||"finance";
+  const top=path.split(/[/?]/)[0];
+  let h='<div class="crumbs"><a data-go="#@/">All modules<\/a>'+ico("chev")+'<span>MasterControl · live<\/span><\/div>';
+  h+='<div class="ph" style="margin:10px 0 8px"><div><h1 style="font-size:22px">MasterControl · live<\/h1><p>Read from the live ERP when you open it (Windows login, read only). Atlas shows how Axpert is built; these pages show the live numbers: money, pay and settlements, documents, logins.<\/p><\/div><\/div>';
+  h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">'+LIVE.map(l=>'<button class="btn'+(top===l[0]||(top==="employee"&&l[0]==="people")?" pri":"")+'" title="'+esc(l[3])+'" data-go="#@/live/'+l[0]+'">'+ico(l[2])+esc(l[1])+'<\/button>').join("")+
+     (MC_BASE?'<a class="btn" style="margin-left:auto" target="_blank" rel="noopener" href="'+esc(MC_BASE+"/"+path)+'">Open as full page<\/a>':"")+'<\/div>';
+  if(!MC_BASE)h+='<div class="note">'+ico("info")+'<div>The live pages read the ERP directly, so they open only inside the office network: <b>http://ADRAK-TESTDB/atlas<\/b>, menu <b>MasterControl · live<\/b>. This copy of Atlas has the snapshot only.<\/div><\/div>';
+  else h+='<div id="mcslot"><div class="empty">'+ico("hist")+'Checking that MasterControl is installed…<\/div><\/div>';
+  $("#view").innerHTML=h;
+  if(!MC_BASE)return;
+  mcInstalled().then(ok=>{const slot=$("#mcslot");if(!slot)return;
+    slot.innerHTML=ok?'<iframe id="mcframe" title="MasterControl live page" src="'+esc(MC_BASE+"/"+path+(path.includes("?")?"&":"?")+"embed=1")+'" style="width:100%;height:calc(100vh - 230px);min-height:560px;border:1px solid var(--line);border-radius:14px;background:var(--bg)"><\/iframe>'
+      :'<div class="note">'+ico("warn")+'<div><b>MasterControl is not installed on this server yet.<\/b> '+esc(MC_BASE)+' does not answer. The package is ready; once it is installed as the IIS application <b>/mastercontrol<\/b>, these pages open here. Until then Atlas works as before.<\/div><\/div>';});
+}
+/* Is MasterControl there? Same server (.53): read the real status - 404 or no answer = not installed; 200 / 401 / 403 = installed.
+   Another origin (PC preview on port 5080): an opaque answer means something answered there. Asked once per page load. */
+let MC_CHECK=null;
+function mcInstalled(){
+  if(MC_CHECK)return MC_CHECK;
+  const same=MC_BASE.charAt(0)==="/";
+  MC_CHECK=fetch(MC_BASE+"/api/health?t="+Date.now(),{   /* unique URL: the Atlas service worker answers failed fetches from its cache */
+    credentials:"include",cache:"no-store",mode:same?"same-origin":"no-cors"})
+    .then(r=>r.type==="opaque"||r.ok||r.status===401||r.status===403,()=>false);
+  return MC_CHECK;
+}
 
 /* ---------- PROJECT ACCESS (Project User Details, transid puser · PROJECTUSERDET) and
               COMPANY ACCESS (User Access Company, transid uabra · UABRANCHDETAIL) ----------
@@ -3631,6 +3745,120 @@ document.addEventListener("click", e => {
       .catch(err => { console.error(err); toast("Download failed: " + err.message); });
   } catch (err) { console.error(err); toast("Download failed: " + err.message); }
 });
+
+/* ---------- LEARN (added 15/11/2026) ----------
+   data/learn_<module>.js -> ATLAS.learnLoaded(name, data). Built by galaxy/build_learn.py (SELECT only).
+   Route: #/all/learn/<module>. One page per core module, same shape for all.
+   Links: data-go = Atlas routes (screens, modules, other Learn pages, dashboards); data-jump = a section on this page
+   (no #anchors - the hash is the router). Download = a standalone .html of the page; Print = browser print / PDF. */
+ATLAS.learn = {};
+ATLAS.learnLoaded = function (n, d) { this.learn[n] = d; };
+const LEARN = [["admin", "Admin"], ["payroll", "Payroll"], ["purchase", "Purchase"], ["finance", "Finance"], ["timecard", "Time Card"],
+  ["tools", "Tools & Equipment"], ["inventory", "Inventory"], ["asset", "Asset"], ["production", "Production"]];
+const LREADY = ["admin", "payroll", "purchase", "finance", "timecard", "tools", "inventory", "asset", "production"];
+
+function learnNav(cur) {
+  if (SITE() !== "oman") return "";
+  return '<div class="navsec">Learn · core modules<\/div>' + LEARN.map(m => LREADY.includes(m[0])
+    ? '<button class="ni' + (cur === "learn_" + m[0] ? " on" : "") + '" data-go="#@/all/learn/' + m[0] + '">' + ico("info") + m[1] + '<\/button>'
+    : '<button class="ni soon" disabled title="Coming next">' + ico("info") + m[1] + '<span class="b">soon<\/span><\/button>').join("");
+}
+
+const lModSlug = m => { const x = (ATLAS.mods || []).find(z => z.name === m); return x ? x.slug : null; };
+const lScrHref = s => { if (!s || !s.mod) return null; const sl = lModSlug(s.mod); return sl ? "#@/" + sl + "/screen/t:" + s.t : null; };
+const lGo = (href, text, cls) => href
+  ? (href.charAt(0) === "#" && href.charAt(1) !== "@" && href.charAt(1) !== "/" ? '<a class="lk ' + (cls || "") + '" data-jump="' + esc(href.slice(1)) + '">' + text + '<\/a>'
+     : '<a class="lk ' + (cls || "") + '" data-go="' + esc(href) + '">' + text + '<\/a>')
+  : text;
+const lScr = (s, text) => lGo(lScrHref(s), text || esc((s && (s.cap || s.t)) || ""));
+
+/* business logic of one step, as short lists (from the Galaxy definitions of the screen): what save writes, what stops the save,
+   what Cancel / Remove takes back, what stops a Cancel, and the screens that use this data next */
+const lList = (cls, title, xs) => xs && xs.length ? '<div class="lrule ' + cls + '"><b>' + title + '<\/b><ul>' + xs.map(x => '<li>' + esc(x) + '<\/li>').join("") + '<\/ul><\/div>' : "";
+function lRules(s) {
+  return (s.save || s.stop || s.back || s.noback || s.next) ? '<div class="lrules">' + lList("lr-save", "On save", s.save) + lList("lr-stop", "Save stops when", s.stop) +
+    lList("lr-back", "Cancel / Remove takes back", s.back) + lList("lr-stop", "Cancel / Remove stops when", s.noback) +
+    (s.next && s.next.length ? '<div class="lrule lr-next"><b>Used next by<\/b><div>' + s.next.map(x => lScr(x, esc(x.cap || x.t))).join('<span class="lsep"> · <\/span>') + '<\/div><\/div>' : "") + '<\/div>' : "";
+}
+
+function vLearn(name) {
+  const D = ATLAS.learn[name];
+  if (!D) { $("#view").innerHTML = '<div class="empty">' + ico("warn") + 'This module is not written yet.<\/div>'; return; }
+  const secs = D.sections.map((S, i) => Object.assign({ id: S.id || "s" + i }, S));
+  let h = '<section class="card hero-home spot dhero lhero" style="margin-top:14px"><span class="logo" style="width:56px;height:56px;border-radius:16px"><span style="width:42px;height:42px;border-radius:12px">' + ico("info") + '<\/span><\/span>' +
+    '<div style="flex:1;min-width:0"><div class="lkick">LEARN · ' + esc(D.module.toUpperCase()) + '<\/div><h1>' + esc(D.title) + '<\/h1><p>' + esc(D.sub) + '<\/p>' +
+    '<div class="dmeta"><span>' + ico("hist") + 'Numbers read ' + esc(D.built) + '<\/span><span>' + ico("code") + esc(D.source) + '<\/span><span>' + ico("lock") + 'Read-only<\/span><\/div><\/div>' +
+    '<div class="lact noprint"><button class="btn" id="ldl">' + ico("dl") + 'Download<\/button><button class="btn" id="lpr">' + ico("page") + 'Print / PDF<\/button><\/div><\/section>';
+  /* contents + related */
+  h += '<div class="dgrid g2w"><section class="card dsec l1m"><div class="dsh"><h2>In one minute<\/h2><\/div><ol>' + D.oneminute.map(x => '<li>' + esc(x) + '<\/li>').join("") + '<\/ol><\/section>' +
+    '<section class="card dsec ltoc"><div class="dsh"><h2>On this page<\/h2><\/div><ol>' + secs.map((S, i) => '<li><a class="lk" data-jump="' + esc(S.id) + '">' + esc(S.title) + '<\/a><\/li>').join("") + '<\/ol>' +
+    (D.related && D.related.length ? '<div class="lrel"><div class="lrelh">Related<\/div>' + D.related.map(r => '<div>' + lGo(r.href || (r.mod && lModSlug(r.mod) ? "#@/" + lModSlug(r.mod) + "/overview" : null), esc(r.t) + ' ›') + '<small>' + esc(r.s || "") + '<\/small><\/div>').join("") + '<\/div>' : "") +
+    '<\/section><\/div>';
+  h += '<div class="kpis lk6">' + D.kpis.map(k => '<div class="kpi lkpi' + (k.bad ? " bad" : "") + '"><div class="top">' + esc(k.l) + '<\/div><div class="v num">' + nf(k.v) + '<\/div><div class="s">' + esc(k.s) + '<\/div><\/div>').join("") + '<\/div>';
+  secs.forEach((S, si) => {
+    const head = '<div class="dsh"><h2><span class="lno">' + (si + 1) + '<\/span>' + esc(S.title) + '<\/h2>' + (S.sub ? '<p>' + esc(S.sub) + '<\/p>' : "") + '<\/div>' +
+      (S.why ? '<div class="lwhy">' + ico("info") + '<span><b>Why it matters · <\/b>' + esc(S.why) + '<\/span><\/div>' : "");
+    let b = "";
+    if (S.type === "bars") { const tot = S.rows.reduce((a, x) => a + x.v, 0);
+      b = hbars(S.rows.map(r => ({ l: r.l + (r.go ? " ›" : ""), v: r.v, c: r.c, sub: pct(r.v, tot) + "%", go: r.go }))); }
+    else if (S.type === "table") b = '<div class="tw"><table><thead><tr>' + S.cols.map((c, i) => '<th>' + esc(c) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' +
+      S.rows.map(r => '<tr>' + r.map((c, i) => '<td' + (typeof c === "number" ? ' class="num"' : "") + '>' +
+        (Array.isArray(c) ? c.map(x => lScr(x.scr, esc(x.t))).join('<span class="lsep"> · <\/span>') : i === 0 ? '<b class="mono">' + esc(c) + '<\/b>' : typeof c === "number" ? nf(c) : esc(c)) + '<\/td>').join("") + '<\/tr>').join("") + '<\/tbody><\/table><\/div>';
+    else if (S.type === "concepts") b = '<div class="lcards">' + S.cards.map(c => '<div class="lcard"><h3>' + esc(c.t) + '<\/h3><p>' + esc(c.b) + '<\/p><div class="lfact">' + ico("ok") + '<span>' + esc(c.f) +
+      (c.go ? ' ' + lGo(c.go, "See ›") : "") + '<\/span><\/div><\/div>').join("") + '<\/div>';
+    else if (S.type === "screens") b = '<div class="lscards">' + S.cards.map(c => { const href = lScrHref(c);
+      return '<div class="lscard' + (href ? " go" : "") + '"' + (href ? ' data-go="' + esc(href) + '"' : "") + '><div class="lsct"><b>' + esc(c.cap) + '<\/b><span class="tag mono">' + esc(c.t) + '<\/span><\/div>' +
+        '<p>' + esc(c.why) + '<\/p><div class="lsnum"><span><b class="num">' + nf(c.v) + '<\/b>' + esc(c.unit || "vouchers") + ' · 12 m<\/span><span><b class="num">' + nf(c.u) + '<\/b>people made them<\/span><span><b class="num">' + nf(c.roles) + '<\/b>roles can open<\/span><\/div>' +
+        (c.tables.length ? '<div class="mono lstb">' + esc(c.tables.join(" · ")) + '<\/div>' : "") +
+        (c.msgs.length ? '<div class="lsmsg">' + c.msgs.map(m => '<span>“' + esc(m) + '”<\/span>').join("") + '<\/div>' : "") +
+        '<div class="lsfoot">' + esc(c.mod || "") + (href ? ' · open in Atlas ›' : "") + '<\/div><\/div>'; }).join("") + '<\/div>';
+    else if (S.type === "approval") b = '<div class="lcards">' + S.cards.map(c => '<div class="lcard' + (c.bad ? " lbad" : "") + '"><h3>' + esc(c.t) + '<\/h3><p>' + esc(c.b) + '<\/p><div class="lfact">' + ico(c.bad ? "warn" : "ok") + '<span>' + esc(c.f) + '<\/span><\/div><\/div>').join("") + '<\/div>' +
+      '<div class="dgrid g2w" style="margin-top:14px"><div class="tw"><table><thead><tr>' + S.cols.map(c => '<th>' + esc(c) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' +
+      S.rows.map(r => '<tr><td><b class="mono">' + esc(r[0]) + '<\/b><\/td><td>' + esc(r[1]) + '<\/td><td class="num">' + nf(r[2]) + '<\/td><td class="mono">' + esc(r[3]) + '<\/td><td class="num"' + (r[4] < 100 ? ' style="color:var(--red);font-weight:600"' : "") + '>' + r[4] + '%<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>' +
+      '<div><div class="lrelh">Who authorised the most vouchers (12 months)<\/div>' + hbars(S.top.map(t => ({ l: t.u + (t.nm ? " · " + t.nm : ""), v: t.n, c: "var(--purple)" }))) + '<\/div><\/div>';
+    else if (S.type === "flow") b = '<div class="lflow">' + S.steps.map((s, i) => '<div class="lstep"><div class="lrail"><span>' + (i + 1) + '<\/span><\/div><div class="lbody">' +
+      '<div class="lsh"><h3>' + esc(s.name) + '<\/h3><span class="tag mono">' + esc(s.chip) + '<\/span><\/div>' +
+      '<p class="lwhat">' + esc(s.what) + '<\/p>' + (s.out ? '<div class="lout"><b>Writes:<\/b> ' + esc(s.out) + '<\/div>' : "") + lRules(s) +
+      '<div class="lchips">' + (s.n != null ? '<span><b class="num">' + nf(s.n) + '<\/b> ' + esc(s.unit || "lines") + '<\/span>' : "") + (s.docs != null ? '<span><b class="num">' + nf(s.docs) + '<\/b> documents<\/span>' : "") +
+      (s.med != null ? '<span><b class="num">' + nf(s.med, 1) + '<\/b> days after previous step<\/span>' : "") +
+      (s.screen && s.screen.tables && s.screen.tables.length ? '<span class="mono">' + esc(s.screen.tables.join(" · ")) + '<\/span>' : "") + '<\/div>' +
+      (s.screen && s.screen.msgs && s.screen.msgs.length ? '<details class="lmsg"><summary>Messages users see on this screen (' + s.screen.msgs.length + ')<\/summary><ul>' + s.screen.msgs.map(m => '<li>“' + esc(m) + '”<\/li>').join("") + '<\/ul><\/details>' : "") +
+      (s.screen && lScrHref(s.screen) ? '<div class="noprint">' + lScr(s.screen, 'Open “' + esc(s.screen.cap || s.screen.t) + '” in Atlas ›') + '<\/div>' : "") + '<\/div><\/div>').join("") + '<\/div>';
+    else if (S.type === "ledger") { const td = S.rows.reduce((a, r) => a + r.dr, 0), tc = S.rows.reduce((a, r) => a + r.cr, 0);
+      b = '<div class="tw"><table class="lled"><thead><tr><th>Account<\/th><th class="num">Debit<\/th><th class="num">Credit<\/th><\/tr><\/thead><tbody>' +
+        S.rows.map(r => '<tr><td>' + esc(r.acc) + '<\/td><td class="num">' + (r.dr ? nf(r.dr, 3) : "") + '<\/td><td class="num">' + (r.cr ? nf(r.cr, 3) : "") + '<\/td><\/tr>').join("") +
+        '<tr class="ltot"><td>Total<\/td><td class="num">' + nf(td, 3) + '<\/td><td class="num">' + nf(tc, 3) + '<\/td><\/tr><\/tbody><\/table><\/div>' +
+        '<p class="lnote">' + ico(Math.abs(td - tc) < 0.0005 ? "ok" : "warn") + (Math.abs(td - tc) < 0.0005 ? "Debit = Credit: the voucher balances." : "Debit and credit differ.") + '<\/p>'; }
+    else if (S.type === "ladder") b = S.items.map(w => '<div class="llad"><div class="llh"><b>' + esc(w.name) + '<\/b><span class="num">' + nf(w.n) + ' ' + esc(w.s) + '<\/span><\/div><div class="llv">' +
+      w.levels.map((l, i) => '<span class="lst">' + (i + 1) + ' · ' + esc(l) + '<\/span>').join('<i>›<\/i>') + '<\/div><\/div>').join("");
+    else if (S.type === "trouble") b = S.items.map(t => '<div class="ltr"><h3>' + ico("warn") + esc(t.q) + '<\/h3><p>' + esc(t.a) + (t.go ? ' ' + lGo(t.go, "More ›") : "") + '<\/p>' + (t.sql ? '<pre class="lsql">' + esc(t.sql) + '<\/pre>' : "") + '<\/div>').join("");
+    else if (S.type === "note") b = '<ul class="lnotes">' + S.items.map(x => '<li>' + esc(x) + '<\/li>').join("") + '<\/ul>';
+    h += '<section class="card dsec' + (S.type === "note" ? " lnotesec" : "") + '" id="ls_' + esc(S.id) + '">' + head + b + '<div class="ltop noprint"><a class="lk" data-jump="top">↑ Top<\/a><\/div><\/section>';
+  });
+  $("#view").innerHTML = h;
+  $$("[data-jump]", $("#view")).forEach(a => a.onclick = e => { e.preventDefault();
+    const id = a.dataset.jump, el = id === "top" ? $("#view") : $("#ls_" + id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); });
+  $("#ldl").onclick = () => learnDownload(D);
+  $("#lpr").onclick = () => window.print();
+}
+
+function learnDownload(D) {
+  const v = $("#view").cloneNode(true);
+  v.querySelectorAll(".noprint").forEach(e => e.remove());
+  v.querySelectorAll("details").forEach(e => e.setAttribute("open", ""));
+  v.querySelectorAll("[data-go]").forEach(e => { e.removeAttribute("data-go"); e.classList.remove("go"); });
+  v.querySelectorAll("a.lk[data-jump]").forEach(a => { a.setAttribute("href", "#ls_" + a.dataset.jump); a.removeAttribute("data-jump"); });
+  const css = [...document.querySelectorAll("style")].map(s => s.textContent).join("\n");
+  const html = '<!doctype html><html lang="en" data-theme="' + (document.documentElement.getAttribute("data-theme") || "light") + '"><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1"><title>Axpert ' + esc(D.module) + ' - how it works<\/title><style>' + css +
+    '\nbody{background:var(--bg)} .lwrap{max-width:1100px;margin:0 auto;padding:16px} a.lk{cursor:pointer}<\/style><\/head><body><main class="lwrap">' + v.innerHTML +
+    '<p style="color:var(--ink3);font-size:12px;margin:24px 0">Axpert Atlas · read-only · numbers as of ' + esc(D.built) + ' · ' + esc(D.source) + '<\/p><\/main><\/body><\/html>';
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+  a.download = "Axpert_" + D.module.replace(/\W+/g, "_") + "_how_it_works_" + D.built.slice(6, 10) + D.built.slice(3, 5) + D.built.slice(0, 2) + ".html";
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
 
 </script>
 <script>

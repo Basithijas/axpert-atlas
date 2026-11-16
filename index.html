@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611160954. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611161056. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -761,6 +761,11 @@ a.lk{color:var(--blue);cursor:pointer;text-decoration:none}a.lk:hover{text-decor
 .lrule b{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3,var(--dim));margin-bottom:3px}
 .lrule ul{margin:0;padding-left:16px}.lrule li{margin:1px 0}
 .lr-save{border-left:3px solid var(--green)}.lr-stop{border-left:3px solid var(--red)}.lr-back{border-left:3px solid var(--amber)}.lr-next{border-left:3px solid var(--blue)}
+/* Blob files (16/11/2026) */
+.bmeta{display:flex;gap:4px 16px;flex-wrap:wrap;color:var(--ink3);font-size:13px;margin-top:8px}.bmeta b{color:var(--ink);font-weight:600}
+.bvers{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+pre.sql.bpre{max-height:220px;font-size:12px;padding:8px 10px;margin-top:6px;min-width:220px}
+.bdet summary{cursor:pointer;color:var(--blue);font-size:13px}.bdet+.bdet{margin-top:4px}
 
 </style>
 </head>
@@ -792,11 +797,11 @@ a.lk{color:var(--blue);cursor:pointer;text-decoration:none}a.lk:hover{text-decor
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "LwR1hEGcIBGtznffEz3j2NLflgxU+C+bibsEnZ/CVo2rnJug"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "dRk6EfKiLET/CaaAtJBJZiq24KcmvLz3UbZz2PgBoVXVKafT"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611160954";
+const BUILD="202611161056";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -1032,7 +1037,7 @@ function renderNav(cur){
   h+='<button class="ni'+(cur==="home"?" on":"")+'" data-go="#@/">'+ico("home")+'All modules<\/button>';
   h+='<button class="ni'+(cur==="allpeople"?" on":"")+'" data-go="#@/all/people">'+ico("people")+'People · all modules<span class="b">'+(ATLAS.people?fmt(Object.keys(ATLAS.people).length):"")+'<\/span><\/button>';
   h+='<button class="ni'+(cur==="projects"?" on":"")+'" data-go="#@/all/projects">'+ico("tree")+'Project access<span class="b">'+(ATLAS.proj?fmt(Object.keys(ATLAS.proj.proj).length):"")+'<\/span><\/button>';
-  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+'<button class="ni'+(cur==="live"?" on":"")+'" data-go="#@/live/finance">'+ico("report")+'MasterControl · live<span class="b">'+(HAS_MC?"live":"office")+'<\/span><\/button>'+dashNav(cur)+learnNav(cur);
+  h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+'<button class="ni'+(cur==="live"?" on":"")+'" data-go="#@/live/finance">'+ico("report")+'MasterControl · live<span class="b">'+(HAS_MC?"live":"office")+'<\/span><\/button>'+blobNav(cur)+dashNav(cur)+learnNav(cur);
   h+='<div class="modsw" style="margin-top:10px"><div class="lbl">Module<\/div>'+mods.map(m=>'<a class="mod'+(m.slug===CUR&&!isGlob(cur)?" on":"")+'" href="#/'+m.slug+'/overview" data-mod="'+m.slug+'"><i><\/i>'+esc(m.name)+'<span class="bdg'+(issues(m)?"":" z")+'" title="High-priority issues">'+fmt(issues(m))+'<\/span><\/a>').join("")+'<\/div>';
   if(CUR&&!isGlob(cur)){
     h+='<div class="navsec">'+esc(M.module)+'<\/div>'+NAV.map(n=>'<button class="ni'+(cur===n[0]?" on":"")+'" data-go="#/'+n[0]+'">'+ico(n[2])+n[1]+(n[3]!==""&&n[3]!=null?'<span class="b'+(n[4]&&n[3]?" r":"")+'">'+fmt(n[3])+'<\/span>':"")+'<\/button>').join("");
@@ -1054,7 +1059,7 @@ function renderBottom(cur){
   $("#bnav").innerHTML=items.map(x=>'<button class="'+(cur===x[0]?"on":"")+'" data-h="'+x[3]+'"><span class="pillbg">'+ico(x[2])+'<\/span>'+x[1]+(x[0]==="health"&&CUR&&highCount?'<i>'+fmt(highCount)+'<\/i>':"")+'<\/button>').join("");
   $$("#bnav button").forEach(b=>b.onclick=()=>{location.hash=b.dataset.h;});
 }
-const isGlob=k=>["home","allpeople","projects","companies","live"].includes(k)||String(k).startsWith("dash_")||String(k).startsWith("learn_");
+const isGlob=k=>["home","allpeople","projects","companies","live","blobs"].includes(k)||String(k).startsWith("dash_")||String(k).startsWith("learn_");
 function closeNav(){$("#nav").classList.remove("on");$("#navscrim").classList.remove("on");}
 $("#hamb").onclick=()=>{$("#nav").classList.add("on");$("#navscrim").classList.add("on");};
 $("#navscrim").onclick=closeNav;
@@ -1070,6 +1075,7 @@ function route(){
   let fn,navKey,key;
   if(!m){navKey="home";fn=vHome;key="home";}
   else if(m==="live"){navNow="live";renderNav("live");$("#searchHint").textContent="Search modules, people, projects, companies";vLive(location.hash.replace(/^#\/?live\/?/,""));if(lastView!=="live")window.scrollTo(0,0);lastView="live";bindGo($("#view"));return;}
+  else if(m==="all"&&(p[1]==="blobs"||p[1]==="blob")){blobRoute(p);return;}   /* blob files: blobs.js, no people data needed */
   else if(m==="all"){
     if(!ATLAS.people){showLoading("Loading people…");load("people").then(()=>ATLAS.people?route():showErr("people"),()=>showErr("people"));return;}
     const needP=["projects","project","companies","company","person"].includes(p[1]);
@@ -3881,6 +3887,155 @@ function learnDownload(D) {
   a.href = URL.createObjectURL(new Blob([html], { type: "text/html" }));
   a.download = "Axpert_" + D.module.replace(/\W+/g, "_") + "_how_it_works_" + D.built.slice(6, 10) + D.built.slice(3, 5) + D.built.slice(0, 2) + ".html";
   document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+
+/* ---------- BLOB FILES · LIVE (office copy only, 16/11/2026) ----------
+   Every form (TSTRUCTS) and report (IVIEWS) definition in live Axpert ADK2026, decoded by galaxy/build_blobs_live.py on each
+   Atlas refresh: blobs/index.js -> ATLAS.blobsLoaded(d), blobs/b_<t|i>_<name>.js -> ATLAS.blobLoaded(id, d).
+   Each refresh keeps a new version when a definition changed, with the field changes against the version before.
+   The blobs folder is not published, so the GitHub copy hides this page (window.ATLAS_LOCK). */
+ATLAS.blobs = null; ATLAS.blob = {};
+ATLAS.blobsLoaded = function (d) { this.blobs = d; };
+ATLAS.blobLoaded = function (id, d) { this.blob[id] = d; };
+const blobWait = {};
+function loadBlob(name, v) {
+  if (blobWait[name]) return blobWait[name];
+  const base = SITE() === "pharmacy" ? "../blobs/" : "blobs/";       /* one library for both sites: /atlas/blobs/ */
+  return blobWait[name] = new Promise((res, rej) => { const s = document.createElement("script"); s.src = base + name + ".js?v=" + encodeURIComponent(v);
+    s.onload = res; s.onerror = () => { delete blobWait[name]; rej(new Error("blobs/" + name + ".js")); }; document.head.appendChild(s); });
+}
+const BKIND = { t: "Form", i: "Report" };
+let blF = "all", blQ = "", blM = "", bfQ = "";
+
+function blobNav(cur) {
+  if (window.ATLAS_LOCK) return "";
+  return '<button class="ni' + (cur === "blobs" ? " on" : "") + '" data-go="#@/all/blobs">' + ico("code") + 'Blob files · live<span class="b">' + (ATLAS.blobs ? fmt(ATLAS.blobs.files.length) : "") + '<\/span><\/button>';
+}
+/* #/all/blobs and #/all/blob/<id>/<tab> */
+function blobRoute(p) {
+  navNow = "blobs";
+  if (window.ATLAS_LOCK) { renderNav("blobs"); $("#view").innerHTML = '<div class="empty">' + ico("info") + 'Blob files open only inside the office network. They are not part of this copy.<\/div>'; return; }
+  if (!ATLAS.blobs) { showLoading("Loading blob files…");
+    loadBlob("index", Date.now()).then(() => ATLAS.blobs ? route() : blobMissing(), blobMissing); return; }
+  const id = p[1] === "blob" ? p[2] || "" : "", tab = p[3] || "history";
+  if (id && !ATLAS.blobs.files.some(f => f.id === id)) { location.hash = "#/all/blobs"; return; }
+  if (id && !ATLAS.blob[id]) { showLoading("Decoding…");
+    loadBlob("b_" + id, ATLAS.blobs.meta.built).then(() => ATLAS.blob[id] ? route() : blobMissing(), blobMissing); return; }
+  renderNav("blobs"); $("#searchHint").textContent = "Search modules, people, projects, companies";
+  if (id) vBlob(id, tab); else vBlobs();
+  const key = "blob/" + id; if (key !== lastView) window.scrollTo(0, 0); lastView = key; bindGo($("#view"));
+}
+function blobMissing() {
+  renderNav("blobs");
+  $("#view").innerHTML = '<div class="empty">' + ico("warn") + 'The blob library is not in this copy yet. It is written by <span class="mono">galaxy/build_blobs_live.py<\/span> on the Atlas refresh.<\/div>';
+}
+const bDate = s => { const m = /^(\d{4})-(\d{2})-(\d{2})(.*)$/.exec(s || ""); return m ? m[3] + "/" + m[2] + "/" + m[1] + m[4] : (s || "–"); };
+const bDay = s => bDate(s).slice(0, 10);
+const bAgo = (s, days) => { const b = ATLAS.blobs.meta.built; return !!s && (Date.parse(b.slice(0, 10)) - Date.parse(s.slice(0, 10))) / 864e5 <= days; };
+const bChanged = f => f.v > 1;
+const bChTag = f => f.gone ? '<span class="tag" style="background:var(--redb);color:var(--red)">left live ' + esc(bDay(f.gone)) + '<\/span>'
+  : bChanged(f) ? '<span class="tag">' + esc(bDay(f.seen)) + (f.ch != null ? ' · ' + fmt(f.ch) + ' field' + (f.ch === 1 ? "" : "s") : "") + '<\/span>' : '<span class="dim">–<\/span>';
+
+function vBlobs() {
+  const D = ATLAS.blobs, all = D.files, tr = bDate(D.meta.tracking);
+  const mods = [...new Set(all.map(f => f.mod).filter(Boolean))].sort();
+  const chips = [["all", "All", () => true], ["t", "Forms", f => f.k === "t"], ["i", "Reports", f => f.k === "i"], ["saved", "Saved in Axpert · 30 days", f => bAgo(f.upOn, 30)],
+    ["changed", "Changed since " + bDay(D.meta.tracking), bChanged], ["nomenu", "Not in the menu", f => !f.menu && !f.gone]].concat(all.some(f => f.gone) ? [["gone", "Left live", f => !!f.gone]] : []);
+  const recent = all.filter(bChanged).sort((a, b) => (b.seen > a.seen ? 1 : -1)).slice(0, 12);
+  const draw = () => {
+    const fl = (chips.find(c => c[0] === blF) || chips[0])[2];
+    const base = all.filter(f => !blM || (blM === "-" ? !f.mod : f.mod === blM));
+    const L = base.filter(f => fl(f) && (!blQ || (f.cap + " " + f.name + " " + f.mod + " " + f.upBy).toLowerCase().includes(blQ)));
+    let h = '<div class="crumbs"><a data-go="#@/">All modules<\/a>' + ico("chev") + '<span>Blob files · live<\/span><\/div>' +
+      '<div class="ph"><div><h1>Blob files · live<\/h1><p>Every form and report definition in live Axpert, decoded from the blob. Read with each Atlas refresh (SELECT only); every change to a definition is kept from ' + esc(tr) + '.<\/p><\/div><\/div>';
+    h += '<div class="kpis">' + kpi("form", "var(--blue)", "Forms", all.filter(f => f.k === "t" && !f.gone).length, fmt(all.filter(f => f.k === "t" && f.menu).length) + " in the menu", "") +
+      kpi("report", "var(--purple)", "Reports", all.filter(f => f.k === "i" && !f.gone).length, fmt(all.filter(f => f.k === "i" && f.menu).length) + " in the menu", "") +
+      kpi("hist", "var(--teal)", "Saved in Axpert · 30 days", all.filter(f => bAgo(f.upOn, 30)).length, "by the date Axpert keeps on the blob", "") +
+      kpi("tune", "var(--amber)", "Changes seen", all.filter(bChanged).length, "definitions changed since " + esc(bDay(D.meta.tracking)), "") + '<\/div>';
+    h += '<section class="card" style="margin-top:14px"><div class="ch"><h3>Changes seen in live<\/h3><div class="hint">Newest first. A change is any new save of the definition in Axpert.<\/div><\/div><div class="cb">' +
+      (recent.length ? '<div class="tw"><table><tbody>' + recent.map(f => '<tr class="go" data-go="#@/all/blob/' + esc(f.id) + '/history"><td data-l="Screen"><b>' + esc(f.cap) + '<\/b><div class="dim mono">' + esc(f.name) + ' · ' + BKIND[f.k] + '<\/div><\/td>' +
+        '<td data-l="Seen">' + esc(bDate(f.seen)) + '<\/td><td data-l="Saved by">' + esc(f.upBy || "–") + '<\/td><td data-l="Change">' + bChTag(f) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>'
+        : '<div class="empty" style="padding:16px">' + ico("info") + 'No change seen yet. Tracking started ' + esc(tr) + '. From the next refresh, a definition saved in Axpert shows here with its field changes.<\/div>') + '<\/div><\/section>';
+    h += '<div class="tool" style="margin-top:14px"><div class="chips">' + chips.map(c => '<button class="chip' + (blF === c[0] ? " on" : "") + '" data-f="' + c[0] + '">' + esc(c[1]) + ' <span class="n">' + fmt(base.filter(c[2]).length) + '<\/span><\/button>').join("") + '<\/div>' +
+      '<label class="field">' + ico("apps") + '<select id="blm"><option value="">All modules<\/option>' + mods.map(m => '<option' + (m === blM ? " selected" : "") + '>' + esc(m) + '<\/option>').join("") + '<option value="-"' + (blM === "-" ? " selected" : "") + '>Not in the menu<\/option><\/select><\/label>' +
+      '<label class="field">' + ico("field") + '<input id="blq" placeholder="Filter by name, caption, user" value="' + esc(blQ) + '"><\/label><span class="cnt">' + fmt(L.length) + ' of ' + fmt(base.length) + '<\/span>' +
+      '<button class="btn" id="blx">' + ico("dl") + 'CSV<\/button><\/div>';
+    h += '<section class="card">' + table("blobs", [
+      { h: "Screen", k: f => f.cap.toLowerCase(), r: f => '<b>' + esc(f.cap) + '<\/b><div class="dim mono">' + esc(f.name) + ' · ' + BKIND[f.k] + (f.err ? ' · XML not readable' : "") + '<\/div>' },
+      { h: "Module", k: f => f.mod || "~", r: f => f.mod ? esc(f.mod) : '<span class="dim">not in the menu<\/span>' },
+      { h: "Saved in Axpert", k: f => f.upOn, r: f => esc(bDate(f.upOn)) + '<div class="dim">' + esc(f.upBy || "") + '<\/div>' },
+      { h: "Fields", k: f => f.f, num: 1, r: f => fmt(f.f) },
+      { h: "Versions", k: f => f.v, num: 1, r: f => fmt(f.v) },
+      { h: "Last change seen", k: f => f.gone ? "z" + f.gone : bChanged(f) ? f.seen : "", r: bChTag }], L, { sort: 2, go: f => "#@/all/blob/" + f.id }) + '<\/section>';
+    h += '<div class="note blue" style="margin-top:14px">' + ico("info") + '<div>Read ' + esc(bDate(D.meta.built)) + ' from ' + esc(D.meta.source) + '. "Saved in Axpert" is the date and user Axpert writes on the definition. Passwords, connection strings and long keys are masked.<\/div><\/div>';
+    $("#view").innerHTML = h;
+    $$(".chip[data-f]", $("#view")).forEach(c => c.onclick = () => { blF = c.dataset.f; draw(); });
+    $("#blm").onchange = e => { blM = e.target.value; draw(); };
+    const q = $("#blq"); q.oninput = () => { blQ = q.value.trim().toLowerCase(); draw(); keepFocus("blq"); };
+    $("#blx").onclick = () => csv("blob_files_live", ["Name", "Caption", "Kind", "Module", "In menu", "Saved in Axpert", "Saved by", "Created", "Created by", "Fields", "DCs", "Buttons", "Versions", "Last change seen", "Fields changed", "Left live"],
+      all.map(f => [f.name, f.cap, BKIND[f.k], f.mod, f.menu ? "Yes" : "No", f.upOn, f.upBy, f.crOn, f.crBy, f.f, f.d, f.b, f.v, f.v > 1 ? f.seen : "", f.ch == null ? "" : f.ch, f.gone || ""]));
+    bindTables($("#view"), draw); countUp($("#view"));
+  };
+  draw();
+}
+
+/* one changed value: short text inline, SQL / long expressions in a scrolling box */
+const bVal = v => !v ? '<span class="dim">–<\/span>' : v.length > 70 || v.includes("\n") ? '<pre class="sql bpre">' + esc(v) + '<\/pre>' : '<span class="mono">' + esc(v) + '<\/span>';
+function bDiff(rows) {
+  return '<div class="tw"><table><thead><tr><th>Field<\/th><th>What<\/th><th>Before<\/th><th>After<\/th><\/tr><\/thead><tbody>' +
+    rows.map(d => '<tr><td data-l="Field"><b class="mono">' + esc(d.n) + '<\/b><\/td><td data-l="What"><span class="tag">' + esc(d.what) + '<\/span><\/td><td data-l="Before">' + bVal(d.a) + '<\/td><td data-l="After">' + bVal(d.b) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>';
+}
+function vBlob(id, tab) {
+  const f = ATLAS.blobs.files.find(x => x.id === id), d = ATLAS.blob[id];
+  const liveHref = f.slug && !f.gone ? "#@/" + f.slug + "/screen/" + f.k + ":" + f.name.toLowerCase() : "";
+  const T = [["history", "History", d.versions.length], ["fields", "Fields", d.fields.length]].concat(d.dcs.length ? [["dcs", "DCs", d.dcs.length]] : []).concat([["xml", "XML", null]]);
+  if (!T.some(t => t[0] === tab)) tab = "history";
+  let h = '<div class="crumbs"><a data-go="#@/">All modules<\/a>' + ico("chev") + '<a data-go="#@/all/blobs">Blob files · live<\/a>' + ico("chev") + '<span>' + esc(f.cap) + '<\/span><\/div>';
+  h += '<div class="ph"><div><h1>' + esc(f.cap) + '<\/h1><p><span class="mono">' + esc(f.name) + '<\/span> · ' + BKIND[f.k] + ' · ' + (f.mod ? esc(f.mod) : "not in the menu") + (f.gone ? ' · <span class="tag" style="background:var(--redb);color:var(--red)">left live ' + esc(bDay(f.gone)) + '<\/span>' : "") + '<\/p>' +
+    '<div class="bmeta"><span>Saved in Axpert <b>' + esc(bDate(f.upOn)) + '<\/b> by <b>' + esc(f.upBy || "–") + '<\/b><\/span>' + (f.crOn || f.crBy ? '<span>Created <b>' + esc(bDate(f.crOn)) + '<\/b> by <b>' + esc(f.crBy || "–") + '<\/b><\/span>' : "") +
+    '<span><b>' + fmt(f.f) + '<\/b> fields' + (f.k === "t" ? ' · <b>' + fmt(f.d) + '<\/b> DCs · <b>' + fmt(f.b) + '<\/b> buttons' : "") + '<\/span><span>Tracked since <b>' + esc(bDate(f.first)) + '<\/b><\/span><\/div><\/div>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-left:auto">' + (liveHref ? '<button class="btn pri" data-go="' + esc(liveHref) + '">' + ico(f.k === "t" ? "form" : "report") + 'Open in Atlas<\/button>' : "") +
+    '<button class="btn" id="bxml">' + ico("dl") + 'Decoded XML<\/button><\/div><\/div>';
+  if (d.err) h += '<div class="note" style="margin-bottom:12px">' + ico("warn") + '<div>Axpert saved this definition with a character that is not valid XML (' + esc(d.err) + '), so its fields could not be listed. The XML tab shows it as saved.<\/div><\/div>';
+  h += '<nav class="tabs" id="btabs">' + T.map(t => '<button class="tab' + (tab === t[0] ? " on" : "") + '" data-go="#@/all/blob/' + id + '/' + t[0] + '">' + t[1] + (t[2] != null ? ' <span class="n">' + fmt(t[2]) + '<\/span>' : "") + '<\/button>').join("") + '<span class="ind"><\/span><\/nav><div id="bbody" style="margin-top:14px"><\/div>';
+  $("#view").innerHTML = h;
+  slideInd($("#btabs"));
+  const body = $("#bbody");
+  if (tab === "history") {
+    body.innerHTML = d.versions.slice().reverse().map(v => card('Version ' + v.n + ' · seen ' + esc(bDate(v.seen)),
+      'Saved in Axpert ' + esc(bDate(v.upOn)) + ' by ' + esc(v.upBy || "–"),
+      v.diff == null ? '<div class="empty" style="padding:16px">' + ico("info") + 'Tracking started here: the definition as it was in live Axpert on ' + esc(bDate(v.seen)) + '.<\/div>'
+        : v.diff.length ? bDiff(v.diff) : '<div class="empty" style="padding:16px">' + ico("ok") + 'Saved again in Axpert with no field change (layout, buttons or other settings may have changed; compare the XML).<\/div>')).join('<div style="height:12px"><\/div>');
+  } else if (tab === "fields") {
+    const drawF = () => {
+      const L = d.fields.map((x, i) => Object.assign({ i: i + 1 }, x)).filter(x => !bfQ || (x.n + " " + x.cap + " " + x.dc + " " + x.ex + " " + x.sq).toLowerCase().includes(bfQ));
+      body.innerHTML = '<div class="tool"><label class="field">' + ico("field") + '<input id="bfq" placeholder="Filter fields, expressions, SQL" value="' + esc(bfQ) + '"><\/label><span class="cnt">' + L.length + ' of ' + d.fields.length + ' · screen order<\/span>' +
+        '<button class="btn" id="bfx" style="margin-left:auto">' + ico("dl") + 'CSV<\/button><\/div><section class="card">' + table("blobf_" + id, [
+        { h: "#", k: x => x.i, num: 1, r: x => x.i },
+        { h: "Field", k: x => x.n.toLowerCase(), r: x => '<b class="mono">' + esc(x.n) + '<\/b><div class="dim">' + esc(x.cap) + '<\/div>' },
+        { h: f.k === "t" ? "DC" : "Part", k: x => x.dc, r: x => '<span class="mono">' + esc(x.dc) + '<\/span>' },
+        { h: "Type", k: x => x.ty, r: x => esc(x.ty) + (x.w ? '<span class="dim"> · ' + esc(x.w) + '<\/span>' : "") },
+        { h: "Mode", k: x => x.mode, r: x => esc(x.mode) },
+        { h: "Expression / SQL", k: x => (x.ex ? 2 : 0) + (x.sq ? 1 : 0), r: x => (x.ex ? '<details class="bdet"><summary>' + (f.k === "t" ? "Expression" : "Format / default") + '<\/summary><pre class="sql bpre">' + esc(x.ex) + '<\/pre><\/details>' : "") +
+          (x.sq ? '<details class="bdet"><summary>SQL · ' + x.sq.split("\n").length + (x.sq.includes("\n") ? ' lines' : ' line') + '<\/summary><pre class="sql bpre">' + esc(x.sq) + '<\/pre><\/details>' : "") || '<span class="dim">–<\/span>' }], L, { sort: 0, dir: 1, lim: 400 }) + '<\/section>';
+      const q = $("#bfq"); q.oninput = () => { bfQ = q.value.trim().toLowerCase(); drawF(); keepFocus("bfq"); };
+      $("#bfx").onclick = () => csv(f.name + "_fields", ["#", "Field", "Caption", f.k === "t" ? "DC" : "Part", "Type", "Width", "Mode", "Expression", "SQL"], d.fields.map((x, i) => [i + 1, x.n, x.cap, x.dc, x.ty, x.w, x.mode, x.ex, x.sq]));
+      bindTables(body, drawF);
+    };
+    drawF();
+  } else if (tab === "dcs") {
+    const cnt = {}; d.fields.forEach(x => { cnt[x.dc] = (cnt[x.dc] || 0) + 1; });
+    body.innerHTML = '<section class="card">' + table("blobd_" + id, [
+      { h: "DC", k: x => x.n, r: x => '<b class="mono">' + esc(x.n) + '<\/b>' }, { h: "Caption", k: x => x.cap.toLowerCase(), r: x => esc(x.cap) },
+      { h: "Table", k: x => x.tb, r: x => '<span class="mono">' + esc(x.tb) + '<\/span>' }, { h: "Fields", k: x => cnt[x.n] || 0, num: 1, r: x => fmt(cnt[x.n] || 0) }], d.dcs, { sort: 0, dir: 1 }) + '<\/section>';
+    bindTables(body, () => vBlob(id, "dcs"));
+  } else {
+    body.innerHTML = '<div class="code-wrap card" style="padding:4px"><button class="btn" id="bcx">' + ico("copy") + 'Copy XML<\/button><pre class="sql">' + esc(d.xml) + '<\/pre><\/div>';
+    $("#bcx").onclick = () => copy(d.xml, "XML");
+  }
+  bindGo(body);
+  $("#bxml").onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([d.xml], { type: "text/xml" }));
+    a.download = f.name + ".xml"; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); toast(f.name + ".xml saved"); };
 }
 
 </script>

@@ -12,7 +12,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Axpert Atlas</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Axpert Atlas build 202611161056. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
+<!-- Axpert Atlas build 202611161458. Read-only. Offline: no CDN, no font link, no chart library; inline SVG + canvas only. -->
 <style>
 :root{
   --bg:#f6f8fc;--surf:#ffffff;--surf2:#f1f3f4;--surf3:#e9eef6;--ink:#1f1f1f;--ink2:#444746;--ink3:#747775;--line:#e1e3e1;--line2:#c4c7c5;
@@ -548,7 +548,7 @@ pre.sql{margin:0;font:12.5px/1.6 var(--mono);background:var(--surf2);border-radi
 .dnl{flex:1;min-width:200px;display:flex;flex-direction:column;gap:6px;font-size:13px}
 .dnl div{display:grid;grid-template-columns:12px minmax(0,1fr) auto 44px;gap:8px;align-items:center}
 .dnl i{width:12px;height:12px;border-radius:4px}.dnl em{font-style:normal;color:var(--ink3);text-align:right;font-size:12px}
-.hb{display:flex;flex-direction:column;gap:10px}
+.hbw{display:flex;flex-direction:column;gap:10px}   /* dashboard bars (dBars); .hb is the grid row of app.js hbars */
 .hbr{display:grid;grid-template-columns:minmax(90px,190px) minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
 .hbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2)}
 .hbt{height:12px;background:var(--surf2);border-radius:6px;overflow:hidden}.hbt span{display:block;height:100%;border-radius:6px;animation:dgrow .9s var(--ease) both}
@@ -621,7 +621,7 @@ button.osx:hover{transform:translateY(-2px)}button.osx.on{outline:2px solid var(
 .osic small{display:block;font-size:11.5px;color:var(--ink3)}.osic b{font:500 24px var(--disp)}.osic span{display:block;font-size:11.5px;color:var(--ink3)}
 @media(max-width:1100px){.osw{grid-template-columns:1fr}.ostrust{grid-template-columns:1fr}.osexp{grid-template-columns:1fr}}
 @media(max-width:700px){.osbar{grid-template-columns:minmax(90px,140px) minmax(0,1fr) 50px}.osl{grid-template-columns:40px minmax(0,1fr) auto;padding:12px}.oslv b{font-size:22px}}
-.hb>.hbr{align-self:stretch}   /* rows were shrinking to their text: the older .hb rule centres flex items (11/11/2026) */
+.hbw>.hbr{align-self:stretch}   /* each bar row takes the full width */
 .kpis.k6{grid-template-columns:repeat(6,minmax(0,1fr))}.kpis.k5{grid-template-columns:repeat(5,minmax(0,1fr))}
 @media(max-width:1300px){.kpis.k6,.kpis.k5{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){.kpis.k6,.kpis.k5{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -766,6 +766,15 @@ a.lk{color:var(--blue);cursor:pointer;text-decoration:none}a.lk:hover{text-decor
 .bvers{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
 pre.sql.bpre{max-height:220px;font-size:12px;padding:8px 10px;margin-top:6px;min-width:220px}
 .bdet summary{cursor:pointer;color:var(--blue);font-size:13px}.bdet+.bdet{margin-top:4px}
+/* Learn: points to remember, and the every-field book */
+.lrem{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;counter-reset:lrem}
+.lrem li{counter-increment:lrem;position:relative;background:var(--surf2);border-radius:14px;padding:14px 14px 14px 52px;line-height:1.5}
+.lrem li::before{content:counter(lrem);position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:50%;background:var(--blueb);color:var(--blue);display:grid;place-items:center;font-weight:700;font-size:13px}
+.lrem li b{display:block;margin-bottom:4px}.lrem li span{color:var(--ink2);font-size:13.5px}
+.lfbs{border:1px solid var(--line);border-radius:12px;margin:8px 0;background:var(--surf)}
+.lfbs>summary{cursor:pointer;padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lfbs[open]>summary{border-bottom:1px solid var(--line)}
+.lfbs .tw{max-height:none}
 
 </style>
 </head>
@@ -797,11 +806,11 @@ pre.sql.bpre{max-height:220px;font-size:12px;padding:8px 10px;margin-top:6px;min
 </div>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "dRk6EfKiLET/CaaAtJBJZiq24KcmvLz3UbZz2PgBoVXVKafT"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "rCy3kB4AMMP8fSzdlQ1JL1og+g5pzC4UL5Ojw4DrQPmoZLPa"};</script>
 <script>
 "use strict";
 /* Axpert Atlas web app. Data comes from data/*.js (script tags work from a web server and from a double-clicked file). */
-const BUILD="202611161056";
+const BUILD="202611161458";
 const ATLAS={mods:null,meta:null,data:{},people:null,
   modulesLoaded(m,meta){this.mods=m;this.meta=meta;},
   moduleLoaded(d){this.data[d.meta.slug]=d;},
@@ -839,21 +848,29 @@ function lockScreen(msg){
 }
 /* 09/11/2026: the key is also kept for this browser tab only (sessionStorage "atlas-skey") so galaxy.html can decrypt
    the same data; it is gone when the tab closes, on Lock, and on the idle timeout. */
-function keepTabKey(raw){try{sessionStorage.setItem("atlas-skey",JSON.stringify({k:btoa(String.fromCharCode(...new Uint8Array(raw))),s:window.ATLAS_LOCK.salt}));}catch(e){}}
+/* The tab key also carries the time of the last activity (a), so a tab that comes back after IDLE_MIN without use
+   (reloaded, reopened, or restored after the browser discarded it) is locked the same way as the idle timeout. */
+function keepTabKey(raw){try{sessionStorage.setItem("atlas-skey",JSON.stringify({k:btoa(String.fromCharCode(...new Uint8Array(raw))),s:window.ATLAS_LOCK.salt,a:Date.now()}));}catch(e){}}
+function stampTabKey(t){try{const j=JSON.parse(sessionStorage.getItem("atlas-skey")||"null");if(j){j.a=t;sessionStorage.setItem("atlas-skey",JSON.stringify(j));}}catch(e){}}
+/* true = unlocked; false or a message = show the lock screen */
 async function unlockSaved(){for(const src of ["session","local"])try{
-  const j=JSON.parse((src==="session"?sessionStorage.getItem("atlas-skey"):localStorage.getItem("atlas-key"))||"null");
-  if(!j||j.s!==window.ATLAS_LOCK.salt||(src==="local"&&j.t<Date.now()))continue;
+  const st=src==="session"?sessionStorage:localStorage,name=src==="session"?"atlas-skey":"atlas-key",j=JSON.parse(st.getItem(name)||"null");
+  if(!j)continue;
+  if(j.s!==window.ATLAS_LOCK.salt||(src==="local"&&!(j.t>Date.now()))){st.removeItem(name);continue;}   /* expired, or made with an older password: forget it */
+  if(src==="session"&&!(Date.now()-j.a<=IDLE_MIN*60000)){localStorage.removeItem("atlas-key");sessionStorage.removeItem("atlas-skey");
+    return "Locked after "+IDLE_MIN+" minutes without activity. Enter the password again.";}
   const k=await crypto.subtle.importKey("raw",b64(j.k),{name:"AES-GCM"},false,["decrypt"]);await decryptRaw(b64(window.ATLAS_LOCK.check),k);LOCKKEY=k;
-  if(src==="local")try{sessionStorage.setItem("atlas-skey",JSON.stringify({k:j.k,s:j.s}));}catch(e){}
+  if(src==="local")try{sessionStorage.setItem("atlas-skey",JSON.stringify({k:j.k,s:j.s,a:Date.now()}));}catch(e){}
   return true;}catch(e){}
   return false;}
 
 const $=s=>document.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmt=n=>Number(n).toLocaleString("en-US");   // Oman: 1,234,567 (was en-IN lakh grouping until 10/11/2026)
+const fmt=n=>{const v=Number(n);return isNaN(v)?"–":v.toLocaleString("en-US");};   // Oman: 1,234,567 (was en-IN lakh grouping until 10/11/2026); a missing value shows as –
 const pct=(a,b)=>b?Math.round(a*100/b):0;
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const enc=encodeURIComponent;
+const ownKey=(o,k)=>!!o&&Object.prototype.hasOwnProperty.call(o,k);   /* for keys taken from the address: "constructor" etc. are not data */
 
 /* ---------- icons (Material paths) ---------- */
 const P={
@@ -983,11 +1000,14 @@ function copy(text,what){const done=()=>toast(what+" copied");
   const fallback=()=>{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();try{document.execCommand("copy");done();}catch(e){toast("Copy not allowed here");}t.remove();};
   try{navigator.clipboard.writeText(text).then(done,fallback);}catch(e){fallback();}}
 function csv(name,head,rows){
-  const q=v=>{v=v==null?"":String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+  /* text that starts with = + - @ tab or CR gets a leading ' so Excel does not run it as a formula (plain numbers and a lone "-" stay as they are) */
+  const q=v=>{const s=v==null?"":String(v),t=typeof v==="string"&&/^[=+\-@\t\r]/.test(s)&&!/^[+-]?(\d[\d,.]*)?$/.test(s)?"'"+s:s;return /[",\r\n]/.test(t)?'"'+t.replace(/"/g,'""')+'"':t;};
   const blob=new Blob(["﻿"+[head].concat(rows).map(r=>r.map(q).join(",")).join("\r\n")],{type:"text/csv"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name+".csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);toast(name+".csv saved");}
 function countUp(root){$$("[data-count]",root).forEach(el=>{if(el._c)return;el._c=1;const to=+el.dataset.count,t0=performance.now(),d=900;
-  const step=t=>{const p=Math.min(1,(t-t0)/d),e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(to*e));if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);});}
+  if(!isFinite(to)){el.textContent="–";return;}   /* value missing in the data */
+  const dec=(to.toFixed(3).split(".")[1]||"").replace(/0+$/,"").length,show=v=>dec?v.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec}):fmt(Math.round(v));   /* keep up to 3 decimals when the value has them */
+  const step=t=>{const p=Math.min(1,(t-t0)/d),e=1-Math.pow(1-p,3);el.textContent=show(to*e);if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);});}
 document.addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;const c=e.target.closest&&e.target.closest(".spot,.kpi");if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px");});
 document.addEventListener("pointerdown",e=>{const b=e.target.closest&&e.target.closest(".btn,.chip,.ni,.tab,.ib,.kpi,.bnav button");if(!b)return;const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),s=document.createElement("span");
   s.className="ripple";s.style.cssText="width:"+d+"px;height:"+d+"px;left:"+(e.clientX-r.left-d/2)+"px;top:"+(e.clientY-r.top-d/2)+"px";b.appendChild(s);setTimeout(()=>s.remove(),600);});
@@ -1006,7 +1026,8 @@ function hbars(items,max){max=max||Math.max(1,...items.map(x=>x.v));
 function stack100(parts){const t=parts.reduce((a,p)=>a+p.v,0)||1;
   return '<div class="stack100">'+parts.map(p=>'<span title="'+esc(p.l)+': '+p.v+'" style="width:'+(p.v/t*100)+'%;background:'+p.c+'"><\/span>').join("")+'<\/div><div class="legend">'+parts.map(p=>'<span><i class="sw" style="background:'+p.c+'"><\/i>'+esc(p.l)+' <b>'+fmt(p.v)+'<\/b> <span class="dim">'+pct(p.v,t)+'%<\/span><\/span>').join("")+'<\/div>';}
 
-/* sortable table: cols=[{h,k(row)->sort value,r(row)->html,num}] ; on phones every row becomes a card */
+/* sortable table: cols=[{h,k(row)->sort value,r(row)->html,num}] ; on phones every row becomes a card.
+   h is HTML (already escaped), so the phone label (data-l) only needs its quotes escaped, not a second esc(). */
 const TS={};
 const strip=h=>String(h).replace(/<[^>]+>/g,"");
 function table(id,cols,rows,opt={}){
@@ -1015,7 +1036,7 @@ function table(id,cols,rows,opt={}){
   const c=cols[st.k];const sorted=rows.slice().sort((a,b)=>{const x=c.k(a),y=c.k(b);return (x>y?1:x<y?-1:0)*st.d;});
   const shown=sorted.slice(0,st.lim);
   return '<div class="tw"><table data-t="'+esc(id)+'"><thead><tr>'+cols.map((c,i)=>'<th class="s'+(c.num?" num":"")+(i===st.k?" sorted":"")+'" data-i="'+i+'">'+c.h+'<span class="ar">'+(i===st.k?(st.d>0?"↑":"↓"):"↕")+'<\/span><\/th>').join("")+'<\/tr><\/thead><tbody>'+
-    (shown.length?shown.map(r=>'<tr class="'+(opt.go?"go ":"")+(opt.cls?opt.cls(r):"")+'"'+(opt.go?' data-go="'+esc(opt.go(r))+'"':"")+'>'+cols.map(c=>'<td data-l="'+esc(strip(c.h))+'"'+(c.num?' class="num"':"")+'>'+c.r(r)+'<\/td>').join("")+'<\/tr>').join(""):'<tr><td colspan="'+cols.length+'"><div class="empty">'+ico("info")+'Nothing matches this filter.<\/div><\/td><\/tr>')+'<\/tbody><\/table>'+
+    (shown.length?shown.map(r=>'<tr class="'+(opt.go?"go ":"")+(opt.cls?opt.cls(r):"")+'"'+(opt.go?' data-go="'+esc(opt.go(r))+'"':"")+'>'+cols.map(c=>'<td data-l="'+strip(c.h).replace(/"/g,"&quot;")+'"'+(c.num?' class="num"':"")+'>'+c.r(r)+'<\/td>').join("")+'<\/tr>').join(""):'<tr><td colspan="'+cols.length+'"><div class="empty">'+ico("info")+'Nothing matches this filter.<\/div><\/td><\/tr>')+'<\/tbody><\/table>'+
     (sorted.length>st.lim?'<div class="more-row"><button class="btn" data-more="'+esc(id)+'">Show more · '+fmt(sorted.length-st.lim)+' left<\/button><\/div>':"")+'<\/div>';
 }
 function bindTables(root,redraw){
@@ -1036,7 +1057,7 @@ function renderNav(cur){
   let h='<div class="brand"><span class="logo"><span><svg viewBox="0 0 24 24"><path d="'+P.tree+'"/><\/svg><\/span><\/span><div><b>Axpert Atlas<\/b><small>'+(SITE()==="pharmacy"?"AIMS Pharmacy · ":"Oman ERP · ")+'Developer console<\/small><\/div><\/div>';
   h+='<button class="ni'+(cur==="home"?" on":"")+'" data-go="#@/">'+ico("home")+'All modules<\/button>';
   h+='<button class="ni'+(cur==="allpeople"?" on":"")+'" data-go="#@/all/people">'+ico("people")+'People · all modules<span class="b">'+(ATLAS.people?fmt(Object.keys(ATLAS.people).length):"")+'<\/span><\/button>';
-  h+='<button class="ni'+(cur==="projects"?" on":"")+'" data-go="#@/all/projects">'+ico("tree")+'Project access<span class="b">'+(ATLAS.proj?fmt(Object.keys(ATLAS.proj.proj).length):"")+'<\/span><\/button>';
+  h+='<button class="ni'+(cur==="projects"?" on":"")+'" data-go="#@/all/projects">'+ico("tree")+'Projects<span class="b">'+(ATLAS.proj?fmt(Object.keys(ATLAS.proj.proj).length):"")+'<\/span><\/button>';
   h+='<button class="ni'+(cur==="companies"?" on":"")+'" data-go="#@/all/companies">'+ico("apps")+'Company access<\/button>'+'<button class="ni'+(cur==="live"?" on":"")+'" data-go="#@/live/finance">'+ico("report")+'MasterControl · live<span class="b">'+(HAS_MC?"live":"office")+'<\/span><\/button>'+blobNav(cur)+dashNav(cur)+learnNav(cur);
   h+='<div class="modsw" style="margin-top:10px"><div class="lbl">Module<\/div>'+mods.map(m=>'<a class="mod'+(m.slug===CUR&&!isGlob(cur)?" on":"")+'" href="#/'+m.slug+'/overview" data-mod="'+m.slug+'"><i><\/i>'+esc(m.name)+'<span class="bdg'+(issues(m)?"":" z")+'" title="High-priority issues">'+fmt(issues(m))+'<\/span><\/a>').join("")+'<\/div>';
   if(CUR&&!isGlob(cur)){
@@ -1081,10 +1102,10 @@ function route(){
     const needP=["projects","project","companies","company","person"].includes(p[1]);
     if(needP&&!ATLAS.proj){showLoading("Loading projects and companies…");load("projects").then(()=>ATLAS.proj?route():showErr("projects"),()=>showErr("projects"));return;}
     if(p[1]==="learn"){const ln=p[2]||"";
-      if(!ATLAS.learn[ln]&&LREADY.includes(ln)){showLoading("Loading…");load("learn_"+ln).then(()=>ATLAS.learn[ln]?route():showErr("learn_"+ln),()=>showErr("learn_"+ln));return;}
+      if(!ownKey(ATLAS.learn,ln)&&LREADY.includes(ln)){showLoading("Loading…");load("learn_"+ln).then(()=>ownKey(ATLAS.learn,ln)?route():showErr("learn_"+ln),()=>showErr("learn_"+ln));return;}
       navNow="learn_"+ln;renderNav(navNow);vLearn(ln);if("learn/"+ln!==lastView)window.scrollTo(0,0);lastView="learn/"+ln;bindGo($("#view"));return;}
     if(p[1]==="dash"){const dn=p[2]||"";
-      if(!ATLAS.dash[dn]){showLoading("Loading dashboard…");load("dash_"+dn).then(()=>ATLAS.dash[dn]?route():showErr("dash_"+dn),()=>showErr("dash_"+dn));return;}
+      if(!ownKey(ATLAS.dash,dn)){showLoading("Loading dashboard…");load("dash_"+dn).then(()=>ownKey(ATLAS.dash,dn)?route():showErr("dash_"+dn),()=>showErr("dash_"+dn));return;}
       navNow="dash_"+dn;renderNav(navNow);$("#searchHint").textContent="Search modules, people, projects, companies";vDash(dn);if("dash/"+dn!==lastView)window.scrollTo(0,0);lastView="dash/"+dn;countUp($("#view"));bindGo($("#view"));return;}
     navKey={projects:"projects",project:"projects",companies:"companies",company:"companies"}[p[1]]||"allpeople";key="all/"+(p[1]||"")+"/"+(p[2]||"");
     fn={person:()=>vAllPerson(p[2]),projects:vProjects,project:()=>vProject(p[2]),companies:vCompanies,company:()=>vCompany(p[2])}[p[1]]||vAllPeople;
@@ -1158,7 +1179,7 @@ function vAllPeople(){
   draw();
 }
 function vAllPerson(u){
-  const x=ATLAS.people[u]||(ATLAS.proj&&ATLAS.proj.ppl[u]&&Object.assign({m:{}},ATLAS.proj.ppl[u]));if(!x){$("#view").innerHTML='<div class="empty">'+ico("info")+'This person has no live access in any module, project or company.<\/div>';return;}
+  const x=(ownKey(ATLAS.people,u)&&ATLAS.people[u])||(ATLAS.proj&&ownKey(ATLAS.proj.ppl,u)&&Object.assign({m:{}},ATLAS.proj.ppl[u]));if(!x){$("#view").innerHTML='<div class="empty">'+ico("info")+'This person has no live access in any module, project or company.<\/div>';return;}
   const mods=ATLAS.mods.filter(m=>x.m[m.slug]),tot=i=>mods.reduce((a,m)=>a+x.m[m.slug][i],0);
   let h='<div class="crumbs"><a data-go="#@/all/people">People · all modules<\/a>'+ico("chev")+'<span>'+esc(x.nm||u)+'<\/span><\/div>';
   h+='<section class="card hero spot" style="margin-top:12px"><span class="av" style="width:64px;height:64px;font-size:22px;background:'+avc(u)+'">'+ini(x.nm||u)+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(x.nm||u)+'<\/h2><div class="meta"><code>'+esc(u)+'<\/code><span>'+esc(x.dept||"–")+'<\/span>'+hrPill(x.hr)+
@@ -1242,7 +1263,7 @@ function vScreens(folder){
 /* ---------- SCREEN X-RAY ---------- */
 let fF="all",fQ="",fDC="";
 function vScreen(id,sub,fld){
-  const s=SID[id];if(!s){$("#view").innerHTML='<div class="empty">'+ico("info")+'Screen not found in '+esc(M.module)+'.<\/div>';return;}
+  const s=ownKey(SID,id)?SID[id]:null;if(!s){$("#view").innerHTML='<div class="empty">'+ico("info")+'Screen not found in '+esc(M.module)+'.<\/div>';return;}
   const kd=KIND[s.k],roles=Object.keys(s.roles).sort();
   let tabs=[["overview","Overview"]];
   if(s.k==="t")tabs=tabs.concat([SITE()==="pharmacy"?null:["galaxy","Galaxy"],["fields","Fields",s.f.length],["buttons","Cancel & Remove",s.cancel.length+s.remove.length]].filter(Boolean));
@@ -1483,7 +1504,7 @@ function vPeople(){
   draw();
 }
 function vPerson(u){
-  const x=U[u];if(!x){$("#view").innerHTML='<div class="empty">'+ico("info")+'This person has no role in '+esc(M.module)+'. <a class="lnk" data-go="#@/all/person/'+enc(u)+'">See all modules<\/a><\/div>';return;}
+  const x=ownKey(U,u)?U[u]:null;if(!x){$("#view").innerHTML='<div class="empty">'+ico("info")+'This person has no role in '+esc(M.module)+'. <a class="lnk" data-go="#@/all/person/'+enc(u)+'">See all modules<\/a><\/div>';return;}
   const rs=(userRoles[u]||[]).slice().sort((a,b)=>b.live-a.live),live=rs.filter(r=>r.live).map(r=>r.r);
   const sc=uScr[u]||[],fm=sc.filter(s=>s.k==="t").sort((a,b)=>a.cap.localeCompare(b.cap)),rp=sc.filter(s=>s.k!=="t");
   const cb=fm.filter(s=>hasBtn(s.cs)),rb=fm.filter(s=>hasBtn(s.rs));
@@ -1547,7 +1568,7 @@ function vRoles(){
   draw();
 }
 function vRole(r){
-  if(!R[r]){$("#view").innerHTML='<div class="empty">'+ico("info")+'Role not found in '+esc(M.module)+'.<\/div>';return;}
+  if(!ownKey(R,r)){$("#view").innerHTML='<div class="empty">'+ico("info")+'Role not found in '+esc(M.module)+'.<\/div>';return;}
   const lu=liveUsers(r),sc=roleScreens[r]||[],fm=sc.filter(s=>s.k==="t");
   let h='<div class="crumbs"><a data-go="#/roles">Roles<\/a>'+ico("chev")+'<span>'+esc(r)+'<\/span><\/div>';
   h+='<section class="card hero spot" style="--k:var(--teal);margin-top:12px"><span class="big">'+ico("key")+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(r)+'<\/h2><div class="meta"><span>'+lu.length+' people<\/span><span>'+fm.length+' forms<\/span><span>'+(sc.length-fm.length)+' reports / pages<\/span><span>'+R[r].ended.length+' ended links<\/span><\/div><\/div><div class="right"><button class="btn" id="cpr">'+ico("copy")+'Copy role<\/button><\/div><\/section>';
@@ -1563,7 +1584,7 @@ function vRole(r){
 
 /* ---------- HEALTH ---------- */
 function vHealth(sel){
-  const c=HI[sel]||H.find(x=>x.list.length)||H[0];
+  const c=(ownKey(HI,sel)&&HI[sel])||H.find(x=>x.list.length)||H[0];
   let h='<div class="ph"><div><h1>Health · '+esc(M.module)+'<\/h1><p>Problems found automatically in the snapshot. Pick a card to see the list, copy the IDs or export it.<\/p><\/div><\/div>';
   h+='<div class="note blue">'+ico("info")+'<div><b>HR status (verified 07/11/2026):<\/b> EMPMAST has one row per employee. Resignation, Termination, Absconding and Cancel rows all carry a relieving date (DOR), so all four count as "left".<\/div><\/div>';
   {const H=ATLAS.meta&&ATLAS.meta.hr;if(H)h+='<div class="note '+(H.ok?"blue":"red")+'">'+ico("info")+'<div>'+(H.ok?'<b>HR status on this site comes from the Oman ERP<\/b> (ADK2026 EMPMAST, read '+esc(H.read)+'), the live HR master: '+fmt(H.found)+' of '+fmt(H.users)+' user ids found there. The EMPMAST copy in the pharmacy database stopped being updated in July 2026 and differs for '+fmt(H.differ)+' of them; the person page shows both.':'<b>Oman HR could not be read<\/b> ('+esc(H.error||"")+'): HR status below is from the EMPMAST copy in the pharmacy database, which is out of date.')+'<\/div><\/div>';}
@@ -1609,6 +1630,7 @@ function vChanges(){
   let h='<div class="ph"><div><h1>Changes · '+esc(M.module)+'<\/h1><p>'+(CHG?'What changed in Axpert between the scan of <b>'+esc(M.baseline)+'<\/b> and <b>'+esc(M.scanned)+'<\/b>.':'')+'<\/p><\/div><\/div>';
   if(!CHG){$("#view").innerHTML=h+'<div class="empty">'+ico("hist")+'No earlier scan of '+esc(M.module)+' to compare with. Changes show from the next daily scan.<\/div>';return;}
   const types=[...new Set(CHG.map(c=>c.t))].sort();
+  if(chF!=="all"&&!types.includes(chF))chF="all";   /* the type picked in another module may not exist here */
   const icon=t=>/added|granted/i.test(t)?"st-green":/removed|left/i.test(t)?"st-red":"st-amber";
   const draw=()=>{
     const L=CHG.filter(c=>(chF==="all"||c.t===chF)&&(!chQ||JSON.stringify(c).toLowerCase().includes(chQ)));
@@ -1656,7 +1678,7 @@ const hl=(t,q)=>{t=String(t);const i=q?t.toLowerCase().indexOf(q):-1;return i<0?
 const ORDER=["Modules","Projects","Companies","Screens","People","Roles","Fields","Report columns","Health"];
 function palSearch(){
   const q=$("#palq").value.trim().toLowerCase(),res=$("#palres"),I=index();
-  if(!q){const jump=(CUR&&NAV&&!/^#\/(all\/|$)/.test(location.hash||"#/")?NAV.map(n=>({ic:n[2],t:n[1],go:"#/"+n[0]})):[]).concat([{ic:"home",t:"All modules",go:"#@/"},{ic:"people",t:"People · all modules",go:"#@/all/people"},{ic:"tree",t:"Project access",go:"#@/all/projects"},{ic:"apps",t:"Company access",go:"#@/all/companies"}]);
+  if(!q){const jump=(CUR&&NAV&&!/^#\/(all\/|$)/.test(location.hash||"#/")?NAV.map(n=>({ic:n[2],t:n[1],go:"#/"+n[0]})):[]).concat([{ic:"home",t:"All modules",go:"#@/"},{ic:"people",t:"People · all modules",go:"#@/all/people"},{ic:"tree",t:"Projects",go:"#@/all/projects"},{ic:"apps",t:"Company access",go:"#@/all/companies"}]);
     hits=jump;hi=0;res.innerHTML='<div class="grp">Jump to<\/div>'+jump.map((n,i)=>'<div class="it" data-i="'+i+'"><span class="ic">'+ico(n.ic)+'<\/span><div><b>'+esc(n.t)+'<\/b><\/div><\/div>').join("");mark();return;}
   const w=q.split(/\s+/),all=I.filter(x=>w.every(z=>x.s.includes(z))).sort((a,b)=>(a.s.startsWith(q)?0:1)-(b.s.startsWith(q)?0:1));
   const by={};all.forEach(x=>{by[x.g]=by[x.g]||[];if(by[x.g].length<6)by[x.g].push(x);});
@@ -1684,8 +1706,9 @@ document.addEventListener("keydown",e=>{
 const IDLE_MIN=(()=>{try{const v=+localStorage.getItem("atlas-idle-min");return v>0?v:15;}catch(e){return 15;}})(),REMEMBER_H=8;
 function lockOut(msg){try{localStorage.removeItem("atlas-key");sessionStorage.removeItem("atlas-skey");if(msg)sessionStorage.setItem("atlas-lockmsg",msg);}catch(e){}location.reload();}
 let idleWatch=null;
-function startIdleWatch(){if(!window.ATLAS_LOCK||idleWatch)return;let last=Date.now();
-  const touch=()=>{last=Date.now();};["pointerdown","pointermove","keydown","wheel","touchstart","scroll"].forEach(ev=>addEventListener(ev,touch,{passive:true,capture:true}));
+function startIdleWatch(){if(!window.ATLAS_LOCK||idleWatch)return;let last=Date.now(),kept=0;
+  const touch=()=>{last=Date.now();if(last-kept>10000){kept=last;stampTabKey(last);}};   /* the stored time follows at most every 10 s */
+  ["pointerdown","pointermove","keydown","wheel","touchstart","scroll"].forEach(ev=>addEventListener(ev,touch,{passive:true,capture:true}));touch();
   const check=()=>{if(Date.now()-last>IDLE_MIN*60000)lockOut("Locked after "+IDLE_MIN+" minutes without activity. Enter the password again.");};
   idleWatch=setInterval(check,15000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)check();});}
 function setTheme(t){document.documentElement.dataset.theme=t;$("#theme").innerHTML=ico(t==="dark"?"sun":"moon");
@@ -1701,7 +1724,7 @@ function start(){load("modules").then(()=>{route();load("people").then(()=>{for(
 if(window.ATLAS_LOCK){
   if(!window.crypto||!crypto.subtle||typeof DecompressionStream==="undefined")$("#view").innerHTML='<div class="empty">'+ico("warn")+'This browser cannot open the encrypted copy. Use a current Chrome, Edge or Safari over https.<\/div>';
   else{let m="";try{m=sessionStorage.getItem("atlas-lockmsg")||"";sessionStorage.removeItem("atlas-lockmsg");}catch(e){}
-    unlockSaved().then(ok=>{if(ok){startIdleWatch();start();}else lockScreen(m);});}
+    unlockSaved().then(ok=>{if(ok===true){startIdleWatch();start();}else lockScreen(ok||m);});}
 } else start();
 
 
@@ -1709,6 +1732,7 @@ if(window.ATLAS_LOCK){
    On .53 Atlas (/atlas) and MasterControl (/mastercontrol) share the server, so the live pages open here in a frame and use the
    same Windows login. The PC preview runs MasterControl on port 5080. The GitHub copy has no live pages (office network only). */
 const MC_BASE=(()=>{const h=location.hostname,p=location.pathname,local=/^(localhost|127\.0\.0\.1)$/.test(h);
+  if(window.ATLAS_LOCK)return null;              /* the encrypted copy never has MasterControl, wherever it is hosted */
   if(window.MC_URL)return window.MC_URL;
   if(/github\.io$/i.test(h)||location.protocol==="file:")return null;
   /* served by MasterControl behind its sign-in: <base>/atlas/ -> <base> (.53: /mastercontrol/atlas/, PC: localhost:5080/atlas/) */
@@ -1727,6 +1751,7 @@ const LIVE=[["finance","Money","report","income, expenses, salary, settlements, 
   ["issues","Issues","warn","everything the checks found, worst first"]];
 function vLive(path){
   path=path||"finance";
+  if(/^[\/\\]|\\|^[a-z][a-z0-9+.\-]*:/i.test(path))path="finance";   /* only a plain relative path: no //host, no scheme, no backslash */
   const top=path.split(/[/?]/)[0];
   let h='<div class="crumbs"><a data-go="#@/">All modules<\/a>'+ico("chev")+'<span>MasterControl · live<\/span><\/div>';
   h+='<div class="ph" style="margin:10px 0 8px"><div><h1 style="font-size:22px">MasterControl · live<\/h1><p>Read from the live ERP when you open it (Windows login, read only). Atlas shows how Axpert is built; these pages show the live numbers: money, pay and settlements, documents, logins.<\/p><\/div><\/div>';
@@ -1795,46 +1820,115 @@ function fbTable(id,rows,showCo){
     showCo?{h:"Company",k:o=>o.co,r:o=>esc(o.co)}:{h:"Report",k:o=>o.cap,r:o=>'<b>'+esc(o.cap)+'<\/b><span class="sub">'+esc(o.scr)+'<\/span>'},
     {h:"Row",k:o=>o.act,r:o=>o.act?'<span class="st st-green">Active<\/span>':'<span class="st st-grey">Inactive<\/span>'},{h:"HR",k:o=>ppHr(o.u),r:o=>hrPill(pp(o.u).hr)}],rows,{sort:0,dir:1,go:o=>"#@/all/person/"+enc(o.u)});
 }
-let prF="all",prQ="";
+/* Projects tab extras (16/11/2026). From PROJECTMASTER: pm[id]=[PTYPE (Work Flow Approval Type), close 1/0, company code, created];
+   pa[id]=[last MR, MRs 90 days, MRs total, last issue, issues 90 days]; ap = Transactionwise Approval Controller rows;
+   qt = QAQC Project Details (Project Team Mail) rows. Status: Running = an MR or an Issue in the last 90 days. */
+const PTYPES=["pqs","project","qs","store"];
+const pmeta=id=>((ATLAS.proj.pm||{})[id])||[null,0,null,null];
+const pact=id=>((ATLAS.proj.pa||{})[id])||[null,0,0,null,0];
+const dkey=d=>d?d.slice(6,10)+d.slice(3,5)+d.slice(0,2):"";
+const pStat=id=>pmeta(id)[1]?"closed":(pact(id)[1]||pact(id)[4])?"run":pact(id)[2]||pact(id)[3]?"idle":"never";
+const STAT={run:["Running","st-green"],idle:["Open, idle","st-amber"],never:["Never used","st-grey"],closed:["Closed","st-grey"]};
+const statPill=id=>{const s=STAT[pStat(id)];return '<span class="st '+s[1]+'">'+s[0]+'<\/span>';};
+const lastUse=id=>{const a=pact(id),m=dkey(a[0]),i=dkey(a[3]);return m>i?a[0]:a[3]||a[0]||"";};
+function apIndex(){
+  if(PJ&&PJ.ap)return PJ.ap;const A={by:{},ty:{}};
+  (ATLAS.proj.ap||[]).forEach(r=>{if(r[1]!=="0")(A.by[r[1]]=A.by[r[1]]||[]).push(r);else if(r[3])(A.ty[r[3]]=A.ty[r[3]]||[]).push(r);});
+  const Q={};(ATLAS.proj.qt||[]).forEach(r=>(Q[r[1]]=Q[r[1]]||[]).push(r));A.qt=Q;
+  return (projIndex().ap=A);
+}
+let prF="all",prQ="",prS="run",prT="",prCo="";
 function vProjects(){
-  const I=projIndex(),X=ATLAS.proj,ids=Object.keys(X.proj).filter(id=>I.by[id]);
-  const act=id=>I.by[id].filter(r=>r[4]),lft=id=>act(id).filter(r=>pLeft(r[0]));
+  const I=projIndex(),A=apIndex(),X=ATLAS.proj,ids=Object.keys(X.proj);
+  const act=id=>(I.by[id]||[]).filter(r=>r[4]),lft=id=>act(id).filter(r=>pLeft(r[0]));
   const hasRole=(id,role)=>act(id).some(r=>r[2]===role&&!pLeft(r[0]));
-  const chips=[["all","All projects",()=>true],["left","Leavers still active",id=>lft(id).length],["nopm","No working PM",id=>!hasRole(id,"PM")],["noqs","No working QS",id=>!hasRole(id,"QS")]];
+  const apN=id=>new Set((A.by[id]||[]).map(r=>r[0])).size,qtN=id=>(A.qt[id]||[]).filter(r=>r[7]).length;
+  const co=id=>pmeta(id)[2]||"–",coName=id=>X.proj[id][2]||"–";
+  const stChips=[["run","Running"],["idle","Open, idle"],["never","Never used"],["closed","Closed"],["all","All"]];
+  const chips=[["all","Any",()=>true],["left","Leavers still active",id=>lft(id).length],["nopm","No working PM",id=>!hasRole(id,"PM")],["noqs","No working QS",id=>!hasRole(id,"QS")],["noap","No approval controller",id=>!apN(id)]];
   const allAct=X.pu.filter(r=>r[4]),allLeft=allAct.filter(r=>pLeft(r[0]));
   const draw=()=>{
     const fn=chips.find(c=>c[0]===prF)[2];
-    const L=ids.filter(id=>fn(id)&&(!prQ||(X.proj[id].join(" ")).toLowerCase().includes(prQ)));
-    let h='<div class="ph"><div><h1>Project access<\/h1><p>From <b>Project User Details<\/b> (<span class="mono">puser<\/span> · PROJECTUSERDET): which user sees which project, in which role, at which approval level. Approvals follow these rows.<\/p><\/div><\/div>';
-    h+='<div class="kpis">'+kpi("tree","var(--blue)","Projects with users",ids.length,fmt(Object.keys(X.proj).length)+" in PROJECTMASTER","")+kpi("people","var(--green)","Active assignments",allAct.length,fmt(new Set(allAct.map(r=>r[0])).size)+" users","")+
-       kpi("leave","var(--red)","Left, still active",allLeft.length,fmt(new Set(allLeft.map(r=>r[0])).size)+" people, project rows","")+kpi("key","var(--purple)","Approval levels",new Set(allAct.map(r=>r[5]).filter(Boolean)).size,"APPLEVEL 1 to "+Math.max(0,...allAct.map(r=>r[5]||0)),"")+'<\/div>';
-    h+='<div class="tool"><div class="chips">'+chips.map(c=>'<button class="chip'+(prF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+fmt(ids.filter(c[2]).length)+'<\/span><\/button>').join("")+'<\/div>'+
-       '<label class="field">'+ico("tree")+'<input id="prq" placeholder="Project code, name or company" value="'+esc(prQ)+'"><\/label><span class="cnt">'+fmt(L.length)+'<\/span><button class="btn" id="prx">'+ico("dl")+'CSV<\/button><\/div>';
-    h+='<section class="card">'+table("projects",[
+    const base=ids.filter(id=>(prS==="all"||pStat(id)===prS)&&(!prT||pmeta(id)[0]===prT)&&(!prQ||(X.proj[id].join(" ")+" "+co(id)).toLowerCase().includes(prQ)));
+    const L=base.filter(id=>(!prCo||co(id)===prCo)&&fn(id));
+    const sn=s=>ids.filter(id=>s==="all"||pStat(id)===s).length;
+    // company summary for the current status / type / search (before the company filter)
+    const cs={};base.forEach(id=>{const c=co(id),o=cs[c]||(cs[c]={c,n:coName(id),t:0,ty:{}});o.t++;const t=pmeta(id)[0]||"–";o.ty[t]=(o.ty[t]||0)+1;});
+    const csl=Object.values(cs).sort((a,b)=>b.t-a.t),cmax=Math.max(1,...csl.map(o=>o.t));
+    const TC={pqs:"var(--blue)",project:"var(--purple)",qs:"var(--teal)",store:"var(--amber)","–":"var(--grey)"};
+    let h='<div class="ph"><div><h1>Projects<\/h1><p>Every project in <b>Project Master<\/b> (<span class="mono">proj<\/span> · PROJECTMASTER) with its company, <b>Work Flow Approval Type<\/b>, activity, users (<span class="mono">puser<\/span>), approval controller (<span class="mono">oactr<\/span>) and QAQC team (<span class="mono">qaems<\/span>). <b>Running<\/b> = an MR or an Issue in the last 90 days. Project Master has no warehouse / office / plant / farm field.<\/p><\/div><\/div>';
+    h+='<div class="kpis">'+kpi("tree","var(--green)","Running",sn("run"),"MR or Issue in 90 days","")+kpi("hist","var(--amber)","Open, idle",sn("idle"),"Close = No, no activity in 90 days","")+
+       kpi("people","var(--blue)","Active assignments",allAct.length,fmt(new Set(allAct.map(r=>r[0])).size)+" users","")+kpi("leave","var(--red)","Left, still active",allLeft.length,fmt(new Set(allLeft.map(r=>r[0])).size)+" people, project rows","")+'<\/div>';
+    h+='<div class="tool"><div class="chips">'+stChips.map(c=>'<button class="chip'+(prS===c[0]?" on":"")+'" data-s="'+c[0]+'">'+c[1]+' <span class="n">'+fmt(sn(c[0]))+'<\/span><\/button>').join("")+'<\/div><\/div>';
+    h+='<div class="tool"><label class="field"><select id="prt"><option value="">All approval types<\/option>'+PTYPES.map(t=>'<option value="'+t+'"'+(prT===t?" selected":"")+'>'+t+'<\/option>').join("")+'<\/select><\/label>'+
+       '<label class="field"><select id="prco"><option value="">All companies<\/option>'+csl.map(o=>'<option value="'+esc(o.c)+'"'+(prCo===o.c?" selected":"")+'>'+esc(o.c+" · "+o.n)+' ('+o.t+')<\/option>').join("")+(prCo&&!cs[prCo]?'<option selected value="'+esc(prCo)+'">'+esc(prCo)+' (0)<\/option>':"")+'<\/select><\/label>'+
+       '<label class="field">'+ico("tree")+'<input id="prq" placeholder="Project code, name or company" value="'+esc(prQ)+'"><\/label><\/div>';
+    h+='<div class="bento"><div class="c4">'+card("By company · "+fmt(base.length),"Colour = Work Flow Approval Type. Tap a company to filter.",
+        csl.slice(0,14).map(o=>'<div class="hb'+(prCo===o.c?" on":"")+'" data-co="'+esc(o.c)+'" style="cursor:pointer'+(prCo===o.c?";background:var(--surf2)":"")+'" title="'+esc(o.n+" · "+Object.entries(o.ty).map(e=>e[0]+" "+e[1]).join(", "))+'"><span class="l"><b>'+esc(o.c)+'<\/b> <small class="dim">'+esc(o.n)+'<\/small><\/span><span class="track">'+
+          Object.keys(TC).filter(t=>o.ty[t]).map(t=>'<span style="width:'+(o.ty[t]/cmax*100)+'%;background:'+TC[t]+'"><\/span>').join("")+'<\/span><span class="v">'+fmt(o.t)+'<\/span><\/div>').join("")+
+        (csl.length>14?'<div class="dim" style="padding:6px">+ '+(csl.length-14)+' more in the company list<\/div>':"")+
+        '<div class="legend" style="margin-top:10px">'+Object.keys(TC).filter(t=>t!=="–").map(t=>'<span><i class="sw" style="background:'+TC[t]+'"><\/i>'+t+'<\/span>').join("")+'<\/div>')+'<\/div>'+
+      '<div class="c8"><section class="card"><div class="tool" style="padding:12px 12px 0"><div class="chips">'+chips.map(c=>'<button class="chip'+(prF===c[0]?" on":"")+'" data-f="'+c[0]+'">'+c[1]+' <span class="n">'+fmt(base.filter(id=>(!prCo||co(id)===prCo)&&c[2](id)).length)+'<\/span><\/button>').join("")+'<\/div>'+
+        '<span class="cnt">'+fmt(L.length)+'<\/span><button class="btn" id="prx">'+ico("dl")+'CSV<\/button><\/div>'+table("projects",[
       {h:"Project",k:id=>X.proj[id][0],r:id=>'<b>'+esc(X.proj[id][0])+'<\/b><span class="sub" style="font-family:var(--font)">'+esc(X.proj[id][1])+'<\/span>'},
-      {h:"Company",k:id=>X.proj[id][2]||"",r:id=>'<span class="dim">'+esc(X.proj[id][2]||"–")+'<\/span>'},
-      {h:"Active users",num:1,k:id=>act(id).length,r:id=>act(id).length},
-      {h:"Leavers active",num:1,k:id=>lft(id).length,r:id=>lft(id).length?'<span class="st st-red">'+lft(id).length+'<\/span>':'<span class="dim">0<\/span>'},
-      {h:"Working PM",k:id=>hasRole(id,"PM")?1:0,r:id=>hasRole(id,"PM")?'<span class="st st-green">Yes<\/span>':'<span class="st st-amber">No<\/span>'},
-      {h:"Top level",num:1,k:id=>Math.max(0,...act(id).map(r=>r[5]||0)),r:id=>Math.max(0,...act(id).map(r=>r[5]||0))||"–"}],L,{sort:2,go:id=>"#@/all/project/"+id})+'<\/section>';
+      {h:"Company",k:co,r:id=>'<span title="'+esc(coName(id))+'">'+esc(co(id))+'<\/span>'},
+      {h:"Type",k:id=>pmeta(id)[0]||"",r:id=>'<span class="mono">'+esc(pmeta(id)[0]||"–")+'<\/span>'},
+      {h:"Status",k:id=>pStat(id),r:statPill},
+      {h:"Last MR / Issue",k:id=>dkey(lastUse(id)),r:id=>'<span class="mono" style="font-size:12px">'+esc(lastUse(id)||"–")+'<\/span>'},
+      {h:"MR 90d",num:1,k:id=>pact(id)[1],r:id=>pact(id)[1]||'<span class="dim">0<\/span>'},
+      {h:"Users",num:1,k:id=>act(id).length,r:id=>act(id).length+(lft(id).length?' <span class="st st-red" title="left the company, still active">'+lft(id).length+'<\/span>':"")},
+      {h:"Approvals",num:1,k:apN,r:id=>apN(id)||'<span class="dim">0<\/span>'},
+      {h:"QAQC team",num:1,k:qtN,r:id=>qtN(id)||'<span class="dim">0<\/span>'}],L,{sort:4,go:id=>"#@/all/project/"+id})+'<\/section><\/div><\/div>';
     $("#view").innerHTML=h;countUp($("#view"));
-    $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{prF=b.dataset.f;draw();});
+    $$("[data-s]",$("#view")).forEach(b=>b.onclick=()=>{prS=b.dataset.s;draw();});
+    $$("[data-f]",$("#view")).forEach(b=>b.onclick=()=>{prF=b.dataset.f;draw();});
+    $$("[data-co]",$("#view")).forEach(b=>b.onclick=()=>{prCo=prCo===b.dataset.co?"":b.dataset.co;draw();});
+    $("#prt").onchange=e=>{prT=e.target.value;draw();};
+    $("#prco").onchange=e=>{prCo=e.target.value;draw();};
     $("#prq").oninput=e=>{prQ=e.target.value.trim().toLowerCase();draw();keepFocus("prq");};
-    $("#prx").onclick=()=>csv("atlas_projects",["Code","Project","Company","Active users","Leavers active","Working PM"],L.map(id=>[X.proj[id][0],X.proj[id][1],X.proj[id][2],act(id).length,lft(id).length,hasRole(id,"PM")?"Y":""]));
+    $("#prx").onclick=()=>csv("atlas_projects",["Code","Project","Company code","Company","Approval type","Status","Last MR","MRs 90 days","Last issue","Issues 90 days","Active users","Leavers active","Working PM","Approval controllers","QAQC team"],
+      L.map(id=>{const a=pact(id);return [X.proj[id][0],X.proj[id][1],co(id),coName(id),pmeta(id)[0],STAT[pStat(id)][0],a[0],a[1],a[3],a[4],act(id).length,lft(id).length,hasRole(id,"PM")?"Y":"",apN(id),qtN(id)];}));
     bindTables($("#view"),draw);
   };
   draw();
 }
 
+/* approval controller + QAQC team cards for one project */
+function apCards(id){
+  const A=apIndex(),code=pname(id),own=A.by[id]||[],byType=A.ty[code]||[],qt=A.qt[id]||[];
+  const docs=rs=>{const D={};rs.forEach(r=>{const d=D[r[0]]||(D[r[0]]={doc:r[0],ty:r[3],tr:r[4],tid:r[5],chk:r[6],co:r[2],lv:{}});(d.lv[r[7]]=d.lv[r[7]]||[]).push(r);});
+    return Object.values(D).sort((a,b)=>String(a.tr).localeCompare(String(b.tr))||String(a.chk||"").localeCompare(String(b.chk||"")));};
+  const who=r=>{const x=pp(r[8]),left=pLeft(r[8]);return '<a class="st '+(!r[9]?"st-grey":left?"st-red":"st-teal")+'" style="text-decoration:'+(r[9]?"none":"line-through")+';cursor:pointer" data-go="#@/all/person/'+enc(r[8])+'" title="'+esc((x.nm||r[8])+" · "+r[8]+(r[9]?"":" · Active = NO")+(left?" · left the company":""))+'">'+esc(String(x.nm||r[8]).split(" ").slice(0,2).join(" "))+'<\/a>';};
+  const apTable=(tid,rs)=>{const D=docs(rs);return table(tid,[
+    {h:"Transaction",k:d=>String(d.tr||""),r:d=>'<b>'+esc(d.tr||"–")+'<\/b><span class="sub">'+esc((d.tid||"")+(d.ty?" · "+d.ty:""))+'<\/span>'+(d.chk?'<span class="sub" style="font-family:var(--font)">'+esc(d.chk)+'<\/span>':"")},
+    ...[1,2,3,4,5].filter(n=>D.some(d=>d.lv[n])).map(n=>({h:"Level "+n,k:d=>(d.lv[n]||[]).filter(r=>r[9]).length,r:d=>'<div class="rl">'+((d.lv[n]||[]).sort((a,b)=>b[9]-a[9]).map(who).join(" ")||'<span class="dim">–<\/span>')+'<\/div>'})),
+    {h:"Doc",k:d=>d.doc,r:d=>'<span class="mono dim" style="font-size:12px">'+esc(d.doc)+'<\/span>'}],D,{sort:0,dir:1});};
+  const leftAp=own.concat(byType).filter(r=>r[9]&&pLeft(r[8]));
+  let h='<div style="height:16px"><\/div>'+card(ico("key")+"Approval controller · "+new Set(own.map(r=>r[0])).size,"Transactionwise Approval Controller (oactr): who approves each transaction at each level. Teal = active, red = left the company, struck out = Active NO. MR approvals follow the user levels above, not this.",
+    (leftAp.length?'<div class="note red" style="margin-bottom:10px">'+ico("warn")+'<div><b>'+leftAp.length+' active approver rows<\/b> point to people who left the company. Documents routed to them will wait.<\/div><\/div>':"")+
+    (own.length?apTable("ap_"+id,own):'<div class="empty">No approval controller row has this project code.<\/div>'));
+  if(byType.length)h+='<div style="height:16px"><\/div>'+card(ico("key")+"Checklist approvals for Screen Type "+esc(code)+" · "+new Set(byType.map(r=>r[0])).size,"These controller rows have no project code; they are matched to this project only because their Screen Type (TTYPE) is "+esc(code)+".",apTable("apt_"+id,byType));
+  const qa=qt.filter(r=>r[7]);
+  h+='<div style="height:16px"><\/div>'+card(ico("ok")+"QAQC team · "+qa.length+" active","QAQC Project Details (qaems, Project Team Mail"+(qt[0]?" · doc "+esc(qt[0][0])+(qt[0][12]?" · header In Active":""):"")+"): who issues, receives and approves SOR / NCR, WIR / MIR and QTBT / MOM. SOR needs a row here with Team not General.",
+    qt.length?table("qt_"+id,[{h:"Person",k:r=>String(r[3]||r[2]||"").toLowerCase(),r:r=>r[2]?pwho(r[2]):esc(r[3]||"–")},{h:"Team",k:r=>r[4]||"",r:r=>'<b>'+esc(r[4]||"–")+'<\/b><span class="sub" style="font-family:var(--font)">'+esc([r[5],r[6]].filter(Boolean).join(" · "))+'<\/span>'},
+      {h:"SOR & NCR",k:r=>r[8]||"",r:r=>esc(r[8]||"–")},{h:"WIR & MIR",k:r=>r[9]||"",r:r=>esc(r[9]||"–")},{h:"QTBT & MOM",k:r=>r[10]||"",r:r=>esc(r[10]||"–")},
+      {h:"Levels 1-5",k:r=>r[11],r:r=>'<span class="mono" title="Y = YES, N = NO, - = blank">'+esc(r[11])+'<\/span>'},{h:"Row",k:r=>r[7],r:r=>actPill(r[7])},{h:"HR",k:r=>r[2]?ppHr(r[2]):"",r:r=>r[2]?hrPill(pp(r[2]).hr):""}],qt,{sort:6,go:r=>r[2]?"#@/all/person/"+enc(r[2]):""}):'<div class="empty">No QAQC Project Details row for this project, so it will not appear in SOR.<\/div>');
+  return h;
+}
+
 let pjF="act";
 function vProject(id){
-  const I=projIndex(),X=ATLAS.proj,P=X.proj[id],rows=I.by[id]||[];
+  const I=projIndex(),X=ATLAS.proj,P=ownKey(X.proj,id)?X.proj[id]:null,rows=ownKey(I.by,id)?I.by[id]:[];
   if(!P&&!rows.length){$("#view").innerHTML='<div class="empty">'+ico("info")+'Project not found.<\/div>';return;}
   const act=rows.filter(r=>r[4]),lft=act.filter(r=>pLeft(r[0]));
   const levels=[...new Set(act.map(r=>r[5]||0))].sort((a,b)=>a-b);
-  let h='<div class="crumbs"><a data-go="#@/all/projects">Project access<\/a>'+ico("chev")+'<span>'+esc(pname(id))+'<\/span><\/div>';
-  h+='<section class="card hero spot" style="--k:var(--blue);margin-top:12px"><span class="big">'+ico("tree")+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(plong(id))+'<\/h2><div class="meta"><code>'+esc(pname(id))+'<\/code><span>'+esc(P?P[2]||"–":"–")+'<\/span><span>PROJECTMASTERID <code>'+esc(id)+'<\/code><\/span><\/div><\/div><\/section>';
+  const m=pmeta(id),a=pact(id);
+  let h='<div class="crumbs"><a data-go="#@/all/projects">Projects<\/a>'+ico("chev")+'<span>'+esc(pname(id))+'<\/span><\/div>';
+  h+='<section class="card hero spot" style="--k:var(--blue);margin-top:12px"><span class="big">'+ico("tree")+'<\/span><div style="flex:1;min-width:0"><h2>'+esc(plong(id))+'<\/h2><div class="meta"><code>'+esc(pname(id))+'<\/code>'+statPill(id)+'<span>'+esc((m[2]?m[2]+" · ":"")+(P?P[2]||"–":"–"))+'<\/span><span>Approval type <code>'+esc(m[0]||"–")+'<\/code><\/span><span>PROJECTMASTERID <code>'+esc(id)+'<\/code><\/span><\/div><\/div><\/section>';
   if(lft.length)h+='<div class="note red" style="margin-top:16px">'+ico("warn")+'<div><b>'+lft.length+' people who left the company<\/b> are still ACTIVE on this project. Approvals routed to them will wait.<\/div><\/div>';
+  h+='<div style="height:16px"><\/div>'+card(ico("info")+"Project details","From Project Master, MR (MREQBASIC) and Issue (ISSUEBASIC). Running = an MR or an Issue in the last 90 days.",
+    '<div class="kv" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px">'+[["Company",(m[2]?m[2]+" · ":"")+(P?P[2]||"–":"–")],["Work Flow Approval Type",m[0]||"–"],["Close",m[1]?"Yes":"No"],["Created",m[3]||"–"],
+      ["Last MR",a[0]||"–"],["MRs, last 90 days",fmt(a[1]||0)],["MRs, all time",fmt(a[2]||0)],["Last Issue",a[3]||"–"],["Issues, last 90 days",fmt(a[4]||0)]].map(x=>'<div><small class="dim">'+esc(x[0])+'<\/small><div><b style="font-weight:500">'+esc(String(x[1]))+'<\/b><\/div><\/div>').join("")+'<\/div>');
   h+='<div class="kpis" style="margin-top:16px">'+kpi("people","var(--green)","Active users",act.length,(rows.length-act.length)+" inactive rows","")+kpi("leave","var(--red)","Left, still active",lft.length,"approvals may wait","")+
      kpi("key","var(--purple)","Approval levels",levels.filter(Boolean).length,"levels in use","")+kpi("tree","var(--blue)","Roles",new Set(act.map(r=>r[2])).size,"distinct roles","")+'<\/div>';
   h+=card("Approval chain","Active users grouped by Work Flow Level (APPLEVEL). Level 0 = no approval step. Red = left the company.",
@@ -1849,6 +1943,7 @@ function vProject(id){
       {h:"Category",k:r=>String(r[3]==null?"":r[3]),r:r=>typeof r[3]==="number"?'<span class="mono dim" title="Category name not available yet (ITEMCATEGORY)">#'+r[3]+'<\/span>':esc(r[3]||"–")},{h:"Row",k:r=>r[4],r:r=>actPill(r[4])},{h:"HR",k:r=>ppHr(r[0]),r:r=>hrPill(pp(r[0]).hr)},
       {h:"Doc",k:r=>r[7]||"",r:r=>'<span class="mono dim" style="font-size:12px">'+esc(r[7]||"")+'<\/span>'}],L,{sort:2,dir:1,go:r=>"#@/all/person/"+enc(r[0])}),
     '<button class="btn" id="pjx">'+ico("dl")+'CSV<\/button>');
+  h+=apCards(id);
   $("#view").innerHTML=h;countUp($("#view"));
   $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{pjF=b.dataset.f;vProject(id);});
   $("#pjx").onclick=()=>csv("atlas_project_"+pname(id),["EmpID","Name","Role","Level","Category","Active","HR status","Doc"],L.map(r=>[r[0],pp(r[0]).nm,r[2],r[5],r[3],r[4]?"ACTIVE":"INACTIVE",pp(r[0]).hr,r[7]]));
@@ -1874,7 +1969,7 @@ function vCompanies(){
 
 let cuF="all";
 function vCompany(c){
-  const I=projIndex(),us=I.co[c]||[];
+  const I=projIndex(),us=ownKey(I.co,c)?I.co[c]:[];
   const chips=[["all","Everyone",()=>true],["left","Left company",pLeft],["off","Login off",u=>!pp(u).ax]];
   const L=us.filter(chips.find(x=>x[0]===cuF)[2]);
   let h='<div class="crumbs"><a data-go="#@/all/companies">Company access<\/a>'+ico("chev")+'<span>'+esc(c)+'<\/span><\/div>';
@@ -1884,7 +1979,7 @@ function vCompany(c){
       {h:"Login",k:u=>pp(u).ax?1:0,r:u=>pp(u).ax?'<span class="st st-green">On<\/span>':'<span class="st st-grey">Off<\/span>'},{h:"Companies",num:1,k:u=>ATLAS.proj.ca[u].length,r:u=>ATLAS.proj.ca[u].length},
       {h:"Doc / changed",k:u=>((ATLAS.proj.cad||{})[u]||[])[1]||"",r:u=>{const d=(ATLAS.proj.cad||{})[u];return d?'<span class="mono" style="font-size:12px">'+esc(d[0])+'<\/span><span class="sub">'+esc(d[1].slice(0,10))+' · '+esc(d[2]||"?")+'<\/span>':'<span class="dim">–<\/span>';}}],L,{sort:2,dir:1,go:u=>"#@/all/person/"+enc(u)}),
     '<button class="btn" id="cux">'+ico("dl")+'CSV<\/button>');
-  const fbr=I.fbCo[c]||[];
+  const fbr=ownKey(I.fbCo,c)?I.fbCo[c]:[];
   if(fbr.length)h+='<div style="height:16px"><\/div>'+card(ico("report")+"Finance reports for this company · "+fbr.length,"From User Wise Branch Access (Finance), transid ruba: which user may run which Finance report for this company",fbTable("cofb_"+c,fbr,false));
   $("#view").innerHTML=h;
   $$(".chip",$("#view")).forEach(b=>b.onclick=()=>{cuF=b.dataset.f;vCompany(c);});
@@ -2146,15 +2241,20 @@ function gxWalk(g,R,kind){
 function scGalaxy(s,body){
   body.innerHTML='<div class="loading"><div class="spin"><\/div>Loading Galaxy…<\/div>';
   const n=s.n.toLowerCase();
-  gxLoad(n,"data/gx/"+n+".js").then(()=>gxProofLoad(n)).then(()=>gxRender(s,body,GXD.scr[n]),()=>{body.innerHTML='<div class="empty">'+ico("info")+'No Galaxy data for <code class="mono">'+esc(s.n)+'<\/code> yet. On the server run <code class="mono">python galaxy\\build_gx.py '+esc(n)+'<\/code>.<\/div>';});
+  /* a load error says the data is missing; an error while drawing says so instead of leaving the spinner */
+  gxLoad(n,"data/gx/"+n+".js").then(()=>gxProofLoad(n)).then(()=>{try{gxRender(s,body,GXD.scr[n]);}catch(e){body.innerHTML='<div class="empty">'+ico("warn")+'Galaxy data for <code class="mono">'+esc(s.n)+'<\/code> is here, but the page could not be drawn: '+esc(e.message)+'<\/div>';}},
+    ()=>{body.innerHTML='<div class="empty">'+ico("info")+'No Galaxy data for <code class="mono">'+esc(s.n)+'<\/code> yet. On the server run <code class="mono">python galaxy\\build_gx.py '+esc(n)+'<\/code>.<\/div>';});
 }
 function gxRender(s,body,g){
+  if(GXS.t!==g.t){GXS.t=g.t;GXS.open=null;}   /* another screen: the open rule index of the last one means nothing here */
+  GXS.walk=null;   /* the walk panel below starts empty, so no walk is running */
   if(!GXSK[g.t]){GXSK[g.t]="seen";gxSkSave();}
   const R=g.rules.map((r,i)=>Object.assign(r,{i})),c={FLOW:0,VALIDATION:0,CHECK:0};R.forEach(r=>c[r.k]++);
   const PF=GXD.proof&&GXD.proof[g.t];if(PF)gxProofMark(R,PF);   /* proof from the live data (pilot 11/11/2026) */
   const u=g.usage||{},own=[...new Set(g.dcs.map(d=>d.tb).filter(Boolean))],wr=[...new Set(g.maps.map(m=>m.table).filter(Boolean))];
   const chk=R.filter(r=>r.k==="CHECK");
-  const msg=sessionStorage.getItem("gx-msg");if(msg){sessionStorage.removeItem("gx-msg");const hit=R.find(r=>(r.m||"").includes(msg));if(hit)GXS.open=hit.i;}
+  let msg=null;try{msg=sessionStorage.getItem("gx-msg");if(msg)sessionStorage.removeItem("gx-msg");}catch(e){}   /* storage can be blocked */
+  if(msg){const hit=R.find(r=>(r.m||"").includes(msg));if(hit)GXS.open=hit.i;}
   let h='<div class="kpis">'+kpi("ok","var(--green)","Flow",c.FLOW,"what normally happens","")+kpi("warn","var(--amber)","Validation",c.VALIDATION,"can stop the user","")+kpi("health","var(--red)","Check",c.CHECK,"look here first","")+
     (u.docs12!=null?kpi("form","var(--blue)","Documents",u.docs12,(u.cancel12||0)+" cancelled · 12 months",""):"")+kpi("apps","var(--purple)","Read by",g.readers.length,"other screens use its data","")+'<\/div>';
   h=gxLesson(s,g,R,PF)+'<div class="lsdev"><h3>For developers: every rule in detail<\/h3><p>The same screen, rule by rule, with the real code.<\/p><\/div>'+
@@ -2233,7 +2333,7 @@ function vGalaxyDraw(){
   h+='<div class="kpis">'+kpi("orbit","var(--blue)","Screens explained",L.length,"every form of this module","")+kpi("health","var(--red)","Weak points",checks,"CHECK items to look at first","")+
     kpi("warn","var(--amber)","Error messages",msgs,"searchable below","")+kpi("ok","var(--green)","You understand",ok,no+" not clear · "+seen+" opened","")+'<\/div>';
   h+='<div class="bento"><div class="c7">'+card(ico("warn")+"Find an error message","Paste what the user saw: you get the screen and the exact rule",'<input class="gxin big" id="gxm" placeholder="e.g. Stock Will Go Negative" value="'+esc(gxF.q)+'"><div id="gxmr"><\/div>')+'<\/div><div class="c5">'+
-    card("Weak points by type","Tap a bar to filter the list",hbars(GXCAT.map(c=>({l:c[1],v:L.filter(x=>x.cats.includes(c[0])).length,c:c[0]==="nosave"?"var(--grey)":"var(--red)",go:"gxcat:"+c[0]}))))+'<\/div><\/div>';
+    card("Weak points by type","Tap a bar to filter the list",dBars(GXCAT.map(c=>({l:c[1],v:L.filter(x=>x.cats.includes(c[0])).length,c:c[0]==="nosave"?"var(--grey)":"var(--red)",go:"gxcat:"+c[0]}))))+'<\/div><\/div>';
   const F=L.filter(x=>!gxF.cat||x.cats.includes(gxF.cat)).sort((a,b)=>b.score-a.score);
   h+='<div style="height:16px"><\/div><section class="card"><div class="ch"><h3>Look here first<\/h3><div class="hint">'+(gxF.cat?'Filter: <b>'+esc(GXCAT.find(c=>c[0]===gxF.cat)[1])+'<\/b> · <a class="lnk" id="gxclr">clear<\/a> · ':"")+'ranked by weak points × documents in 12 months<\/div><\/div><div class="cb">'+
     table("gx",[{h:"Screen",k:x=>(x.cap||"").toLowerCase(),r:x=>'<b>'+esc(x.cap)+'<\/b><span class="sub mono">'+esc(x.t)+'<\/span>'},
@@ -2249,7 +2349,7 @@ function vGalaxyDraw(){
   const mr=()=>{const q=gxF.q.trim().toLowerCase(),out=[];
     if(q.length>2)GXD.idx.screens.forEach(x=>(x.msgs||[]).forEach(m=>{if(m.toLowerCase().includes(q))out.push([x,m]);}));
     $("#gxmr").innerHTML=q.length<3?'<div class="dim" style="font-size:13px;margin-top:10px">Searches every module, not only '+esc(M.module)+'.<\/div>':out.length?'<div class="gxsl" style="margin-top:10px">'+out.slice(0,30).map(([x,m],i)=>'<a class="lnk" data-m="'+i+'">“'+esc(m)+'”<small>'+esc(x.cap)+' · '+esc(x.mod)+'<\/small><\/a>').join("")+'<\/div>':'<div class="dim" style="font-size:13px;margin-top:10px">Not found in any structure. It may come from a procedure or the Android app: ask in chat.<\/div>';
-    $$("[data-m]",$("#gxmr")).forEach(a=>a.onclick=()=>{const [x,m]=out[+a.dataset.m];sessionStorage.setItem("gx-msg",m);GXS.open=null;
+    $$("[data-m]",$("#gxmr")).forEach(a=>a.onclick=()=>{const [x,m]=out[+a.dataset.m];try{sessionStorage.setItem("gx-msg",m);}catch(e){}GXS.open=null;
       const mod=(ATLAS.mods.find(z=>z.name===x.mod)||{}).slug||CUR;location.hash="#/"+mod+"/screen/t:"+x.t+"/galaxy";});};
   $("#gxm").oninput=e=>{gxF.q=e.target.value;mr();};mr();
 }
@@ -2863,8 +2963,10 @@ let JS={f:0,t:null,i:0,play:false,timer:null};
 
 function vJourney(){
   $("#view").innerHTML='<div class="loading"><div class="spin"><\/div>Loading item journeys…<\/div>';
-  load("journey/flows").then(()=>{if(!GXD.jr)throw new Error("no data");jDraw();},
-    ()=>{$("#view").innerHTML='<div class="empty">'+ico("info")+'No journey data yet. Run <code class="mono">python galaxy\\build_journeys.py<\/code>.<\/div>';});
+  /* errors inside the success handler are not seen by its own error handler: handle them here so the spinner always stops */
+  const none=()=>{$("#view").innerHTML='<div class="empty">'+ico("info")+'No journey data yet. Run <code class="mono">python galaxy\\build_journeys.py<\/code>.<\/div>';};
+  load("journey/flows").then(()=>{if(!GXD.jr)return none();
+    try{jDraw();}catch(e){$("#view").innerHTML='<div class="empty">'+ico("warn")+'The journey data is here, but the page could not be drawn: '+esc(e.message)+'<\/div>';}},none);
 }
 function jdays(a,b){
   const p=s=>{const m=(s||"").match(/(\d\d)\/(\d\d)\/(\d{4})/);return m?new Date(+m[3],m[2]-1,+m[1]):null;};
@@ -2998,12 +3100,14 @@ function vDash(name) {
   ({ purchase: dPurchase, stock: dStock, ostock: dOStock })[name](D);
 }
 
-/* ---------- small chart kit ---------- */
-function hbars(rows, opt) {        /* rows: [{l, v, sub, c}] -> horizontal bars, HTML */
+/* ---------- small chart kit ----------
+   Named dBars / dDonut (and the wrapper class hbw) so they do not replace hbars / donut and .hb of app.js:
+   all the JS files share one script. */
+function dBars(rows, opt) {        /* rows: [{l, v, sub, c, go}] -> horizontal bars, HTML */
   const mx = Math.max(1, ...rows.map(r => r.v));
-  return '<div class="hb">' + rows.map(r => '<div class="hbr"' + (r.go ? ' data-go="' + r.go + '"' : "") + '><div class="hbl">' + esc(r.l) + '<\/div><div class="hbt"><span style="width:' + Math.max(0.6, r.v * 100 / mx) + '%;background:' + (r.c || "var(--blue)") + '"><\/span><\/div><div class="hbv num">' + nf(r.v, opt && opt.dec) + (r.sub ? '<small>' + r.sub + '<\/small>' : "") + '<\/div><\/div>').join("") + '<\/div>';
+  return '<div class="hbw">' + rows.map(r => '<div class="hbr"' + (r.go ? ' data-go="' + r.go + '"' : "") + '><div class="hbl">' + esc(r.l) + '<\/div><div class="hbt"><span style="width:' + Math.max(0.6, r.v * 100 / mx) + '%;background:' + (r.c || "var(--blue)") + '"><\/span><\/div><div class="hbv num">' + nf(r.v, opt && opt.dec) + (r.sub ? '<small>' + r.sub + '<\/small>' : "") + '<\/div><\/div>').join("") + '<\/div>';
 }
-function donut(parts, label, sub) {   /* parts: [{l, v, c}] */
+function dDonut(parts, label, sub) {   /* parts: [{l, v, c}] */
   const T = parts.reduce((a, p) => a + p.v, 0) || 1, R = 52, C = 2 * Math.PI * R;
   let off = 0;
   const seg = parts.map(p => { const L = p.v / T * C, s = '<circle r="' + R + '" cx="70" cy="70" fill="none" stroke="' + p.c + '" stroke-width="20" stroke-dasharray="' + L + ' ' + (C - L) + '" stroke-dashoffset="' + (-off) + '"><title>' + esc(p.l) + ': ' + nf(p.v) + '<\/title><\/circle>'; off += L; return s; }).join("");
@@ -3063,13 +3167,13 @@ function dPurchase(D) {
   }).join("");
   h += '<div class="dgrid g2">' + sec("The road: MR line to purchase bill", "Credit-purchase lines only. Bar = lines that reached the step. Small red = lines that did not get to it (yet).", '<div class="fun">' + fun + '<\/div>') +
     sec("Which way each MR line went", "Every approved line takes one route. Only the blue route goes to PO, GRN and bill.",
-      donut(D.routes.map(r => ({ l: r[0], v: r[1], c: routeC[r[0]] || "var(--grey)" })), "MR lines")) + '<\/div>';
+      dDonut(D.routes.map(r => ({ l: r[0], v: r[1], c: routeC[r[0]] || "var(--grey)" })), "MR lines")) + '<\/div>';
   /* waiting heatmap */
   const mxc = Math.max(1, ...D.pipe.flatMap(p => p.b));
   const pipe = D.pipe.filter(p => p.b.some(x => x));
   h += sec("Waiting now · where and for how long", "Open credit-purchase lines by the last step they reached and days since that step. Darker = more lines. Over 90 days at PO issued usually means the supplier has not delivered or the GRN was not made.",
     '<div class="tw"><table class="heat"><thead><tr><th>Stuck after<\/th>' + D.ages.map(a => '<th class="num">' + a + '<\/th>').join("") + '<th class="num">Total<\/th><\/tr><\/thead><tbody>' +
-    pipe.map(p => '<tr><td><b>' + esc(p.name) + '<\/b><\/td>' + p.b.map((v, i) => '<td class="num hc" style="--a:' + (v / mxc).toFixed(3) + ';--hc:' + (i >= 2 ? "var(--red)" : "var(--amber)") + '">' + (v ? nf(v) : "·") + '<\/td>').join("") + '<td class="num"><b>' + nf(p.b.reduce((a, b) => a + b, 0)) + '<\/b><\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>');
+    pipe.map(p => '<tr><td data-l="Stuck after"><b>' + esc(p.name) + '<\/b><\/td>' + p.b.map((v, i) => '<td data-l="' + esc(D.ages[i]) + '" class="num hc" style="--a:' + (v / mxc).toFixed(3) + ';--hc:' + (i >= 2 ? "var(--red)" : "var(--amber)") + '">' + (v ? nf(v) : "·") + '<\/td>').join("") + '<td data-l="Total" class="num"><b>' + nf(p.b.reduce((a, b) => a + b, 0)) + '<\/b><\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>');
   /* monthly cohort */
   h += '<div class="dgrid g2w">' + sec("Month by month", "MR lines raised each month, and how many of those lines have by now reached PO, GRN and bill. Recent months are naturally lower: they are still moving.",
     cols(D.months, [{ k: "mr", l: "MR lines", c: "var(--line2)" }, { k: "po", l: "PO issued", c: "var(--blue)" }, { k: "grn", l: "GRN", c: "var(--teal)" }, { k: "pb", l: "Billed", c: "var(--green)" }])) +
@@ -3114,15 +3218,15 @@ function dStock(D) {
   /* categories + locations */
   const CC = ["var(--blue)", "var(--green)", "var(--purple)", "var(--teal)", "var(--amber)", "#e37400", "#a142f4", "var(--grey)", "#1e8e3e", "#d01884"];
   h += '<div class="dgrid g2">' + sec("By category", "Category from the pharmacy item master.",
-    donut(D.cats.map((c, i) => ({ l: c.c, v: c.qty, c: CC[i % CC.length] })), "units") +
+    dDonut(D.cats.map((c, i) => ({ l: c.c, v: c.qty, c: CC[i % CC.length] })), "units") +
     '<div class="tw" style="margin-top:12px"><table><thead><tr><th>Category<\/th><th class="num">Items<\/th><th class="num">Batches<\/th><th class="num">Expired<\/th><th class="num">≤ 90 days<\/th><\/tr><\/thead><tbody>' +
-    D.cats.map(c => '<tr><td>' + esc(c.c) + '<\/td><td class="num">' + nf(c.items) + '<\/td><td class="num">' + nf(c.batches) + '<\/td><td class="num"' + (c.expired ? ' style="color:var(--red);font-weight:600"' : "") + '>' + nf(c.expired) + '<\/td><td class="num"' + (c.soon ? ' style="color:var(--amber);font-weight:600"' : "") + '>' + nf(c.soon) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>') +
-    sec("By location", "Where the units are.", hbars(D.locs.map(l => ({ l: l.code, v: l.qty, sub: nf(l.items) + " items · " + nf(l.batches) + " batches" + (l.expired ? " · " + l.expired + " expired" : ""), c: "var(--teal)" }))) +
+    D.cats.map(c => '<tr><td data-l="Category">' + esc(c.c) + '<\/td><td data-l="Items" class="num">' + nf(c.items) + '<\/td><td data-l="Batches" class="num">' + nf(c.batches) + '<\/td><td data-l="Expired" class="num"' + (c.expired ? ' style="color:var(--red);font-weight:600"' : "") + '>' + nf(c.expired) + '<\/td><td data-l="≤ 90 days" class="num"' + (c.soon ? ' style="color:var(--amber);font-weight:600"' : "") + '>' + nf(c.soon) + '<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>') +
+    sec("By location", "Where the units are.", dBars(D.locs.map(l => ({ l: l.code, v: l.qty, sub: nf(l.items) + " items · " + nf(l.batches) + " batches" + (l.expired ? " · " + l.expired + " expired" : ""), c: "var(--teal)" }))) +
       '<div class="locn">' + D.locs.map(l => '<div><b>' + esc(l.code) + '<\/b> ' + esc(l.name) + '<\/div>').join("") + '<\/div>') + '<\/div>';
   /* movement */
   h += '<div class="dgrid g2w">' + sec("Units in and out, month by month", "All stock movements. Transfers between locations count both in and out.",
     cols(D.months, [{ k: "i", l: "In", c: "var(--green)" }, { k: "o", l: "Out", c: "var(--blue)" }])) +
-    sec("What moved the stock", "Stock rows in 12 months by document type.", hbars(D.mix.slice(0, 12).map(m => ({ l: m.doc + " · " + m.dir, v: m.n, c: m.dir === "In" ? "var(--green)" : "var(--blue)" })))) + '<\/div>';
+    sec("What moved the stock", "Stock rows in 12 months by document type.", dBars(D.mix.slice(0, 12).map(m => ({ l: m.doc + " · " + m.dir, v: m.n, c: m.dir === "In" ? "var(--green)" : "var(--blue)" })))) + '<\/div>';
   /* lists */
   const ex = [{ h: "Item", k: r => r.item, r: r => '<b>' + esc(r.item) + '<\/b><div class="sub mono">' + esc(r.code || "") + ' · ' + esc(r.cat) + '<\/div>' },
     { h: "Batch", k: r => r.batch, r: r => '<span class="mono">' + esc(r.batch) + '<\/span>' }, { h: "Location", k: r => r.loc, r: r => esc(r.loc) },
@@ -3152,7 +3256,7 @@ function dStock(D) {
 function dashCards() {
   const L = DASHES[SITE()] || [];
   if (!L.length) return "";
-  L.forEach(d => { if (!ATLAS.dash[d[0]]) load("dash_" + d[0]).then(() => { if (navNow === "home") route(); }, () => { }); });
+  L.forEach(d => { if (!ATLAS.dash[d[0]]) load("dash_" + d[0]).then(() => { if (navNow === "home" && ATLAS.dash[d[0]]) route(); }, () => { }); });   /* a file that defines nothing must not redraw home again and again */
   const line = n => { const D = ATLAS.dash[n]; if (!D) return '<span class="sub">Loading…<\/span>';
     if (n === "purchase") return '<div class="dcn"><span><b class="num">' + nf(D.lines) + '<\/b>MR lines<\/span><span><b class="num">' + nf(D.steps[7].n) + '<\/b>billed<\/span><span><b class="num" style="color:var(--red)">' + nf(D.stuck_total) + '<\/b>waiting<\/span><\/div>';
     if (n === "ostock") { const P = osPrep(D); return '<div class="dcn"><span><b class="num">' + nf(P.itemsIn) + '<\/b>items in stock<\/span><span><b class="num">' + nf(P.pos) + '<\/b>stock lines<\/span><span><b class="num" style="color:var(--red)">' + nf(P.neg) + '<\/b>negative<\/span><\/div>'; }
@@ -3257,13 +3361,13 @@ function osMain(D, P, S) {
   /* movement */
   h += '<div class="dgrid g2w">' + sec("Stock movements, month by month", "Stock rows written in and out each month, all companies. Rows, not quantity: kilos, metres and pieces cannot be added together.",
     cols(M.months, [{ k: "i", l: "Rows in", c: "var(--green)" }, { k: "o", l: "Rows out", c: "var(--blue)" }])) +
-    sec("Which screens move the stock", "Stock rows in 12 months by the screen that wrote them.", hbars(M.mix.slice(0, 12).map(m => ({ l: m.doc + " · " + m.dir, v: m.n, c: m.dir === "In" ? "var(--green)" : "var(--blue)" })))) + '<\/div>';
+    sec("Which screens move the stock", "Stock rows in 12 months by the screen that wrote them.", dBars(M.mix.slice(0, 12).map(m => ({ l: m.doc + " · " + m.dir, v: m.n, c: m.dir === "In" ? "var(--green)" : "var(--blue)" })))) + '<\/div>';
   /* category + lifecycle */
   const cats = P.cats.filter(c => c.lines).sort((a, b) => b.lines - a.lines);
   h += '<div class="dgrid g2">' + sec("By item category", "Stock lines by the item's category (ITEM master). Click to filter the list.",
     osBars(cats.slice(0, 12).map(c => ({ k: c.i, l: c.l, sub: nf(c.items.size) + " items", v: c.lines, c: "var(--purple)", on: S.cat === c.i })), "cat")) +
     sec("Every line Axpert has ever used", "Item × project × store combinations in STOCKVALUE. Most went back to zero - only the green part is stock today.",
-      donut([{ l: "In stock now", v: P.pos, c: "var(--green)" }, { l: "Back to zero", v: M.lines_all - P.pos - P.neg, c: "var(--line2)" }, { l: "Negative", v: P.neg, c: "var(--red)" }], "lines")) + '<\/div>';
+      dDonut([{ l: "In stock now", v: P.pos, c: "var(--green)" }, { l: "Back to zero", v: M.lines_all - P.pos - P.neg, c: "var(--line2)" }, { l: "Negative", v: P.neg, c: "var(--red)" }], "lines")) + '<\/div>';
   return h;
 }
 function osItemCell(D, i) {
@@ -3306,7 +3410,8 @@ const osTabs = (tabs, T, act, q, ph) => '<div class="dtabs">' + tabs.map(t => '<
 function osTrust(D, P) {
   const M = D.main, X = D.dict, R = M.rebuild;
   const card = (state, title, count, body, wide, id) => '<details class="card ostr ostr-' + state + (wide ? " wide" : "") + '"' + (id ? ' id="' + id + '"' : "") + '><summary><span class="osdot"><\/span><b>' + title + '<\/b><span class="num ostc">' + count + '<\/span>' + ico("chev") + '<\/summary><div class="ostb">' + body + '<\/div><\/details>';
-  const sm = (head, rows) => '<div class="tw"><table><thead><tr>' + head.map(x => '<th' + (x[1] ? ' class="num"' : "") + '>' + x[0] + '<\/th>').join("") + '<\/tr><\/thead><tbody>' + rows.join("") + '<\/tbody><\/table><\/div>';
+  const sm = (head, rows) => '<div class="tw"><table><thead><tr>' + head.map(x => '<th' + (x[1] ? ' class="num"' : "") + '>' + x[0] + '<\/th>').join("") + '<\/tr><\/thead><tbody>' +
+    rows.map(r => { let i = 0; return r.replace(/<td(?=[\s>])/g, () => '<td data-l="' + esc((head[i++] || [""])[0]) + '"'); }).join("") + '<\/tbody><\/table><\/div>';   /* data-l = column name on the phone cards */
   let h = '<div class="dsh" style="margin:24px 0 10px"><h2>Can I trust these numbers?<\/h2><p>Every known weakness of the stock ledger, rechecked at every refresh. Green = checked and fine · amber = known, read with care · red = wrong data that moves a balance · grey = not shown on purpose.<\/p><\/div><div class="ostrust">';
   h += card("green", "Same formula as Axpert's own stock reports", "49 of 51", '<p>Balance = <code>SUM(DECODE(PLUSORMINUS,\'P\',QTY,-QTY)) WHERE CANCEL = \'F\'<\/code>. 49 of Axpert\'s 51 stock reports use exactly this; the other two (ngtstk, wipst) also count cancelled rows. ' + nf(M.cancelled) + ' cancelled rows are left out here.<\/p>');
   h += card(P.neg ? "red" : "green", "Negative balances", nf(P.neg) + " lines", '<p>A store cannot hold less than nothing. The stock went out before it came in, or a receipt was cancelled after the issue. Axpert holds these balances as they are; they are listed, not netted off.<\/p><button class="btn" data-act="list:neg">List the ' + nf(P.neg) + ' lines<\/button>');
@@ -3780,11 +3885,13 @@ document.addEventListener("click", e => {
    Route: #/all/learn/<module>. One page per core module, same shape for all.
    Links: data-go = Atlas routes (screens, modules, other Learn pages, dashboards); data-jump = a section on this page
    (no #anchors - the hash is the router). Download = a standalone .html of the page; Print = browser print / PDF. */
-ATLAS.learn = {};
+ATLAS.learn = {}; ATLAS.learnFields = {};
 ATLAS.learnLoaded = function (n, d) { this.learn[n] = d; };
-const LEARN = [["admin", "Admin"], ["payroll", "Payroll"], ["purchase", "Purchase"], ["finance", "Finance"], ["timecard", "Time Card"],
-  ["tools", "Tools & Equipment"], ["inventory", "Inventory"], ["asset", "Asset"], ["production", "Production"]];
-const LREADY = ["admin", "payroll", "purchase", "finance", "timecard", "tools", "inventory", "asset", "production"];
+ATLAS.learnFieldsLoaded = function (n, d) { this.learnFields[n] = d; };
+const LEARN = [["admin", "Admin · Employee life"], ["payroll", "Payroll"], ["purchase", "Purchase"], ["finance", "Finance"], ["qaqc", "QAQC"],
+  ["production", "Production"], ["timecard", "Time Card"], ["tools", "Tools & Equipment"], ["asset", "Asset"], ["inventory", "Inventory"],
+  ["service", "Service Module"], ["sales", "Sales"]];
+const LREADY = ["admin", "payroll", "purchase", "finance", "qaqc", "production", "timecard", "tools", "asset", "inventory", "service", "sales"];
 
 function learnNav(cur) {
   if (SITE() !== "oman") return "";
@@ -3794,7 +3901,7 @@ function learnNav(cur) {
 }
 
 const lModSlug = m => { const x = (ATLAS.mods || []).find(z => z.name === m); return x ? x.slug : null; };
-const lScrHref = s => { if (!s || !s.mod) return null; const sl = lModSlug(s.mod); return sl ? "#@/" + sl + "/screen/t:" + s.t : null; };
+const lScrHref = s => { if (!s || !s.mod) return null; const sl = lModSlug(s.mod); return sl ? "#@/" + sl + "/screen/" + (s.k || "t") + ":" + s.t : null; };
 const lGo = (href, text, cls) => href
   ? (href.charAt(0) === "#" && href.charAt(1) !== "@" && href.charAt(1) !== "/" ? '<a class="lk ' + (cls || "") + '" data-jump="' + esc(href.slice(1)) + '">' + text + '<\/a>'
      : '<a class="lk ' + (cls || "") + '" data-go="' + esc(href) + '">' + text + '<\/a>')
@@ -3811,7 +3918,7 @@ function lRules(s) {
 }
 
 function vLearn(name) {
-  const D = ATLAS.learn[name];
+  const D = ownKey(ATLAS.learn, name) ? ATLAS.learn[name] : null;
   if (!D) { $("#view").innerHTML = '<div class="empty">' + ico("warn") + 'This module is not written yet.<\/div>'; return; }
   const secs = D.sections.map((S, i) => Object.assign({ id: S.id || "s" + i }, S));
   let h = '<section class="card hero-home spot dhero lhero" style="margin-top:14px"><span class="logo" style="width:56px;height:56px;border-radius:16px"><span style="width:42px;height:42px;border-radius:12px">' + ico("info") + '<\/span><\/span>' +
@@ -3829,9 +3936,9 @@ function vLearn(name) {
       (S.why ? '<div class="lwhy">' + ico("info") + '<span><b>Why it matters · <\/b>' + esc(S.why) + '<\/span><\/div>' : "");
     let b = "";
     if (S.type === "bars") { const tot = S.rows.reduce((a, x) => a + x.v, 0);
-      b = hbars(S.rows.map(r => ({ l: r.l + (r.go ? " ›" : ""), v: r.v, c: r.c, sub: pct(r.v, tot) + "%", go: r.go }))); }
+      b = dBars(S.rows.map(r => ({ l: r.l + (r.go ? " ›" : ""), v: r.v, c: r.c, sub: pct(r.v, tot) + "%", go: r.go }))); }
     else if (S.type === "table") b = '<div class="tw"><table><thead><tr>' + S.cols.map((c, i) => '<th>' + esc(c) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' +
-      S.rows.map(r => '<tr>' + r.map((c, i) => '<td' + (typeof c === "number" ? ' class="num"' : "") + '>' +
+      S.rows.map(r => '<tr>' + r.map((c, i) => '<td data-l="' + esc(S.cols[i]) + '"' + (typeof c === "number" ? ' class="num"' : "") + '>' +
         (Array.isArray(c) ? c.map(x => lScr(x.scr, esc(x.t))).join('<span class="lsep"> · <\/span>') : i === 0 ? '<b class="mono">' + esc(c) + '<\/b>' : typeof c === "number" ? nf(c) : esc(c)) + '<\/td>').join("") + '<\/tr>').join("") + '<\/tbody><\/table><\/div>';
     else if (S.type === "concepts") b = '<div class="lcards">' + S.cards.map(c => '<div class="lcard"><h3>' + esc(c.t) + '<\/h3><p>' + esc(c.b) + '<\/p><div class="lfact">' + ico("ok") + '<span>' + esc(c.f) +
       (c.go ? ' ' + lGo(c.go, "See ›") : "") + '<\/span><\/div><\/div>').join("") + '<\/div>';
@@ -3843,8 +3950,8 @@ function vLearn(name) {
         '<div class="lsfoot">' + esc(c.mod || "") + (href ? ' · open in Atlas ›' : "") + '<\/div><\/div>'; }).join("") + '<\/div>';
     else if (S.type === "approval") b = '<div class="lcards">' + S.cards.map(c => '<div class="lcard' + (c.bad ? " lbad" : "") + '"><h3>' + esc(c.t) + '<\/h3><p>' + esc(c.b) + '<\/p><div class="lfact">' + ico(c.bad ? "warn" : "ok") + '<span>' + esc(c.f) + '<\/span><\/div><\/div>').join("") + '<\/div>' +
       '<div class="dgrid g2w" style="margin-top:14px"><div class="tw"><table><thead><tr>' + S.cols.map(c => '<th>' + esc(c) + '<\/th>').join("") + '<\/tr><\/thead><tbody>' +
-      S.rows.map(r => '<tr><td><b class="mono">' + esc(r[0]) + '<\/b><\/td><td>' + esc(r[1]) + '<\/td><td class="num">' + nf(r[2]) + '<\/td><td class="mono">' + esc(r[3]) + '<\/td><td class="num"' + (r[4] < 100 ? ' style="color:var(--red);font-weight:600"' : "") + '>' + r[4] + '%<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>' +
-      '<div><div class="lrelh">Who authorised the most vouchers (12 months)<\/div>' + hbars(S.top.map(t => ({ l: t.u + (t.nm ? " · " + t.nm : ""), v: t.n, c: "var(--purple)" }))) + '<\/div><\/div>';
+      S.rows.map(r => '<tr><td data-l="' + esc(S.cols[0]) + '"><b class="mono">' + esc(r[0]) + '<\/b><\/td><td data-l="' + esc(S.cols[1]) + '">' + esc(r[1]) + '<\/td><td data-l="' + esc(S.cols[2]) + '" class="num">' + nf(r[2]) + '<\/td><td data-l="' + esc(S.cols[3]) + '" class="mono">' + esc(r[3]) + '<\/td><td data-l="' + esc(S.cols[4]) + '" class="num"' + (r[4] < 100 ? ' style="color:var(--red);font-weight:600"' : "") + '>' + r[4] + '%<\/td><\/tr>').join("") + '<\/tbody><\/table><\/div>' +
+      '<div><div class="lrelh">Who authorised the most vouchers (12 months)<\/div>' + dBars(S.top.map(t => ({ l: t.u + (t.nm ? " · " + t.nm : ""), v: t.n, c: "var(--purple)" }))) + '<\/div><\/div>';
     else if (S.type === "flow") b = '<div class="lflow">' + S.steps.map((s, i) => '<div class="lstep"><div class="lrail"><span>' + (i + 1) + '<\/span><\/div><div class="lbody">' +
       '<div class="lsh"><h3>' + esc(s.name) + '<\/h3><span class="tag mono">' + esc(s.chip) + '<\/span><\/div>' +
       '<p class="lwhat">' + esc(s.what) + '<\/p>' + (s.out ? '<div class="lout"><b>Writes:<\/b> ' + esc(s.out) + '<\/div>' : "") + lRules(s) +
@@ -3862,14 +3969,50 @@ function vLearn(name) {
       w.levels.map((l, i) => '<span class="lst">' + (i + 1) + ' · ' + esc(l) + '<\/span>').join('<i>›<\/i>') + '<\/div><\/div>').join("");
     else if (S.type === "trouble") b = S.items.map(t => '<div class="ltr"><h3>' + ico("warn") + esc(t.q) + '<\/h3><p>' + esc(t.a) + (t.go ? ' ' + lGo(t.go, "More ›") : "") + '<\/p>' + (t.sql ? '<pre class="lsql">' + esc(t.sql) + '<\/pre>' : "") + '<\/div>').join("");
     else if (S.type === "note") b = '<ul class="lnotes">' + S.items.map(x => '<li>' + esc(x) + '<\/li>').join("") + '<\/ul>';
+    else if (S.type === "remember") b = '<ol class="lrem">' + S.items.map(x => '<li><b>' + esc(x.t) + '<\/b><span>' + esc(x.b) + '<\/span><\/li>').join("") + '<\/ol>';
+    else if (S.type === "fieldbook") b = '<div class="lfb"><button class="btn pri noprint" data-fb="' + esc(S.file) + '">' + ico("field") + 'Show every field (' + nf(S.fields) + ' in ' + nf(S.screens) + ' screens)<\/button><\/div>';
     h += '<section class="card dsec' + (S.type === "note" ? " lnotesec" : "") + '" id="ls_' + esc(S.id) + '">' + head + b + '<div class="ltop noprint"><a class="lk" data-jump="top">↑ Top<\/a><\/div><\/section>';
   });
   $("#view").innerHTML = h;
   $$("[data-jump]", $("#view")).forEach(a => a.onclick = e => { e.preventDefault();
     const id = a.dataset.jump, el = id === "top" ? $("#view") : $("#ls_" + id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); });
+  $$("[data-fb]", $("#view")).forEach(btn => btn.onclick = () => {
+    const file = btn.dataset.fb, key = file.replace(/^learn_/, "").replace(/_fields$/, ""), box = btn.parentNode;
+    box.innerHTML = '<div class="loading"><div class="spin"><\/div>Loading every field…<\/div>';
+    load(file).then(() => ownKey(ATLAS.learnFields, key) ? lFieldBook(box, ATLAS.learnFields[key]) : (box.innerHTML = '<div class="empty">' + ico("warn") + 'The field list is not in this copy yet.<\/div>'),
+      () => { box.innerHTML = '<div class="empty">' + ico("warn") + 'Could not load data/' + esc(file) + '.js<\/div>'; });
+  });
   $("#ldl").onclick = () => learnDownload(D);
   $("#lpr").onclick = () => window.print();
+}
+
+/* Every screen, every field of a module: one collapsible block per screen, its table filled only when opened (big modules
+   have thousands of fields). Row = [field, caption, part of the screen, where the value comes from, must fill, saved in, read next by]. */
+function lFieldBook(el, D) {
+  let q = "", timer = 0;
+  const row = r => '<tr><td data-l="Field"><b>' + esc(r[1] || r[0]) + '<\/b><div class="dim mono">' + esc(r[0]) + (r[2] ? ' · ' + esc(r[2]) : "") + '<\/div><\/td>' +
+    '<td data-l="Where the value comes from">' + esc(r[3]) + '<\/td>' +
+    '<td data-l="Must fill">' + (r[4] ? '<span class="tag">must fill<\/span>' : '<span class="dim">–<\/span>') + '<\/td>' +
+    '<td data-l="Saved in" class="mono">' + (r[5] ? esc(r[5]) : '<span class="dim">not saved<\/span>') + '<\/td>' +
+    '<td data-l="Read next by">' + (r[6].length ? r[6].map(s => { const L = D.links[s] || [s, ""]; return lScr({ t: s, mod: L[1], cap: L[0] }, esc(L[0])); }).join('<span class="lsep"> · <\/span>') : '<span class="dim">–<\/span>') + '<\/td><\/tr>';
+  const draw = () => {
+    const ql = q.toLowerCase();
+    const shown = D.screens.map(s => ({ s, rows: ql ? s.fields.filter(r => (r[0] + " " + r[1] + " " + r[2] + " " + r[3] + " " + r[5]).toLowerCase().includes(ql)) : s.fields })).filter(x => x.rows.length);
+    el.innerHTML = '<div class="tool"><label class="field">' + ico("field") + '<input class="lfbq" placeholder="Find a field: name, caption, table" value="' + esc(q) + '"><\/label>' +
+      '<span class="cnt">' + nf(shown.reduce((a, x) => a + x.rows.length, 0)) + ' of ' + nf(D.total) + ' fields<\/span><\/div>' +
+      shown.map(x => '<details class="lfbs"' + (ql ? " open" : "") + '><summary><b>' + esc(x.s.cap) + '<\/b> <span class="tag mono">' + esc(x.s.t) + '<\/span>' +
+        '<span class="dim"> · ' + nf(x.s.fields.length) + ' fields · ' + nf(x.s.must) + ' must fill' + (x.s.docs ? ' · ' + nf(x.s.docs) + ' documents in 12 months' : "") + '<\/span><\/summary>' +
+        '<div class="tw"><table><thead><tr><th>Field<\/th><th>Where the value comes from<\/th><th>Must fill<\/th><th>Saved in<\/th><th>Read next by<\/th><\/tr><\/thead><tbody><\/tbody><\/table><\/div><\/details>').join("");
+    $$("details.lfbs", el).forEach((d, i) => {
+      const fill = () => { const tb = d.querySelector("tbody"); if (!tb.dataset.done) { tb.innerHTML = shown[i].rows.map(row).join(""); tb.dataset.done = "1"; bindGo(tb); } };
+      if (d.open) fill();
+      d.addEventListener("toggle", () => { if (d.open) fill(); });
+    });
+    const inp = el.querySelector(".lfbq");
+    inp.oninput = () => { clearTimeout(timer); timer = setTimeout(() => { q = inp.value.trim(); draw(); const n = el.querySelector(".lfbq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 250); };
+  };
+  draw();
 }
 
 function learnDownload(D) {
@@ -4025,10 +4168,13 @@ function vBlob(id, tab) {
     drawF();
   } else if (tab === "dcs") {
     const cnt = {}; d.fields.forEach(x => { cnt[x.dc] = (cnt[x.dc] || 0) + 1; });
-    body.innerHTML = '<section class="card">' + table("blobd_" + id, [
-      { h: "DC", k: x => x.n, r: x => '<b class="mono">' + esc(x.n) + '<\/b>' }, { h: "Caption", k: x => x.cap.toLowerCase(), r: x => esc(x.cap) },
-      { h: "Table", k: x => x.tb, r: x => '<span class="mono">' + esc(x.tb) + '<\/span>' }, { h: "Fields", k: x => cnt[x.n] || 0, num: 1, r: x => fmt(cnt[x.n] || 0) }], d.dcs, { sort: 0, dir: 1 }) + '<\/section>';
-    bindTables(body, () => vBlob(id, "dcs"));
+    const drawD = () => {   /* a sort redraws only this body: the crumbs, tabs and buttons above keep their clicks */
+      body.innerHTML = '<section class="card">' + table("blobd_" + id, [
+        { h: "DC", k: x => x.n, r: x => '<b class="mono">' + esc(x.n) + '<\/b>' }, { h: "Caption", k: x => x.cap.toLowerCase(), r: x => esc(x.cap) },
+        { h: "Table", k: x => x.tb, r: x => '<span class="mono">' + esc(x.tb) + '<\/span>' }, { h: "Fields", k: x => cnt[x.n] || 0, num: 1, r: x => fmt(cnt[x.n] || 0) }], d.dcs, { sort: 0, dir: 1 }) + '<\/section>';
+      bindTables(body, drawD);
+    };
+    drawD();
   } else {
     body.innerHTML = '<div class="code-wrap card" style="padding:4px"><button class="btn" id="bcx">' + ico("copy") + 'Copy XML<\/button><pre class="sql">' + esc(d.xml) + '<\/pre><\/div>';
     $("#bcx").onclick = () => copy(d.xml, "XML");

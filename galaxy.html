@@ -129,7 +129,7 @@ canvas.drag{cursor:grabbing}
   </div>
 </div>
 
-<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "dRk6EfKiLET/CaaAtJBJZiq24KcmvLz3UbZz2PgBoVXVKafT"};</script>
+<script>window.ATLAS_LOCK={"salt": "XcsLEjCISX4aCar61XTNsg==", "iter": 310000, "check": "rCy3kB4AMMP8fSzdlQ1JL1og+g5pzC4UL5Ojw4DrQPmoZLPa"};</script>
 <script>
 (function(){
   var L = window.ATLAS_LOCK, KEY = null, IDLE = 15, ready = null;
@@ -143,9 +143,17 @@ canvas.drag{cursor:grabbing}
   function saved(){
     var j = null;
     try { j = JSON.parse(sessionStorage.getItem('atlas-skey') || 'null'); } catch (e) {}
-    if (j && j.s === L.salt) return j;
+    if (j && j.s === L.salt) {
+      // the tab key carries the last activity time (a); a tab left idle, or reloaded after the browser discarded it, locks
+      if (j.a && Date.now() - j.a <= IDLE * 60000) return j;
+      back('Locked after ' + IDLE + ' minutes without activity. Enter the password again.'); return null;
+    }
     try { j = JSON.parse(localStorage.getItem('atlas-key') || 'null'); } catch (e) { j = null; }
-    return (j && j.s === L.salt && j.t > Date.now()) ? j : null;
+    if (j && j.s === L.salt && j.t > Date.now()) {
+      try { sessionStorage.setItem('atlas-skey', JSON.stringify({k: j.k, s: j.s, a: Date.now()})); } catch (e) {}
+      return j;
+    }
+    return null;
   }
   function key(){
     if (ready) return ready;
@@ -166,8 +174,14 @@ canvas.drag{cursor:grabbing}
       .then(function(p){ return new Response(new Blob([p]).stream().pipeThrough(new DecompressionStream('deflate'))).text(); })
       .then(function(t){ new Function(t)(); });
   };
-  var last = Date.now();
-  function touch(){ last = Date.now(); }
+  var last = Date.now(), stamped = 0;
+  function touch(){
+    last = Date.now();
+    if (last - stamped < 10000) return;            // keep the tab key's activity time fresh, at most every 10 s
+    stamped = last;
+    try { var j = JSON.parse(sessionStorage.getItem('atlas-skey') || 'null');
+          if (j) { j.a = last; sessionStorage.setItem('atlas-skey', JSON.stringify(j)); } } catch (e) {}
+  }
   ['pointerdown', 'pointermove', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach(function(ev){
     addEventListener(ev, touch, {passive: true, capture: true});
   });
